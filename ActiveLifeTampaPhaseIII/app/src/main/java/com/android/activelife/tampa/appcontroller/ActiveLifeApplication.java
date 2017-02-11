@@ -11,21 +11,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by vsatrasala on 2/8/2017.
  */
 
-public class ActiveLifeApplication extends Application{
+public class ActiveLifeApplication extends Application {
 
     public Retrofit jRetrofit;
     public ApiRequest jApiRequestService;
-    public static String BASE_URL="https://api.github.com/";
+    public static String BASE_URL = "https://api.github.com/";
+
     @Override
     public void onCreate() {
         super.onCreate();
-
-
-
     }
 
-    public Retrofit getRetrofit(String url){
-        if(jRetrofit==null){
+    public Retrofit getRetrofit(String url) {
+        if (jRetrofit == null) {
             jRetrofit = new Retrofit.Builder()
                     .baseUrl(url)
                     .addConverterFactory(GsonConverterFactory.create())
@@ -34,8 +32,8 @@ public class ActiveLifeApplication extends Application{
         return jRetrofit;
     }
 
-    public ApiRequest getApiRequest(String url){
-        if(jApiRequestService==null) {
+    public ApiRequest getApiRequest(String url) {
+        if (jApiRequestService == null) {
             jApiRequestService = getRetrofit(url).create(ApiRequest.class);
         }
         return jApiRequestService;
