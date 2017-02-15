@@ -1,8 +1,6 @@
 package com.android.activelife.tampa.ui;
 
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -12,14 +10,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
 
 import com.android.activelife.tampa.R;
+import com.android.activelife.tampa.fragments.MemberDetailsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -73,6 +70,16 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(2).setIcon(tabIcons[2]);
         tabLayout.getTabAt(3).setIcon(tabIcons[3]);
         tabLayout.getTabAt(4).setIcon(tabIcons[4]);
+//        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+////            int tabIndex = 0;
+////            LinearLayout layout = ((LinearLayout) ((LinearLayout) tabLayout.getChildAt(i)).getChildAt(tabIndex));
+////            layout.setPadding(30, 30, 30, 30);
+//            View tab = ((ViewGroup) tabLayout.getChildAt(0)).getChildAt(i);
+//            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) tab.getLayoutParams();
+//            p.setMargins(0, 0, 0, 0);
+//            tab.requestLayout();
+//            tab.setPadding(100, 100, 100, 100);
+//        }
     }
 
 
@@ -125,7 +132,21 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            switch (position) {
+                case 0:
+                    return PlaceholderFragment.newInstance(position + 1);
+                case 1:
+                    return PlaceholderFragment.newInstance(position + 1);
+                case 2:
+                    return MemberDetailsFragment.newInstance(null, null);
+                case 3:
+                    return PlaceholderFragment.newInstance(position + 1);
+                case 4:
+                    return PlaceholderFragment.newInstance(position + 1);
+                default:
+                    return PlaceholderFragment.newInstance(position + 1);
+            }
+
         }
 
         @Override

@@ -9,4 +9,6 @@
     <dimen name="padding_select_branch_text_size">20sp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="member_contact_name">24sp</dimen>
+    <dimen name="member_contact">15sp</dimen>
 </resources>
