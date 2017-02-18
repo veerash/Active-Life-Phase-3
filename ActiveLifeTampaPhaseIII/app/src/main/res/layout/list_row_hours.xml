@@ -35,7 +35,7 @@
                 android:layout_marginBottom="10sp"
                 android:layout_marginTop="10sp"
                 android:text="Monday - Thursday"
-                android:textColor="@android:color/black"
+                android:textColor="@color/grey_text"
                 android:textSize="15sp" />
 
             <com.android.activelife.tampa.customviews.CachetProRegularTextView
@@ -45,7 +45,7 @@
                 android:layout_marginBottom="10sp"
                 android:layout_marginTop="10sp"
                 android:text="8-12:30, 3:30-8:30p"
-                android:textColor="@android:color/black"
+                android:textColor="@color/grey_text"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -62,7 +62,7 @@
                 android:layout_marginBottom="10sp"
                 android:layout_marginTop="10sp"
                 android:text="Friday"
-                android:textColor="@android:color/black"
+                android:textColor="@color/grey_text"
                 android:textSize="15sp" />
 
             <com.android.activelife.tampa.customviews.CachetProRegularTextView
@@ -72,7 +72,7 @@
                 android:layout_marginBottom="10sp"
                 android:layout_marginTop="10sp"
                 android:text="8-12:30, 3:30-7p"
-                android:textColor="@android:color/black"
+                android:textColor="@color/grey_text"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
@@ -97,7 +97,7 @@
                 android:layout_marginBottom="10sp"
                 android:layout_marginTop="10sp"
                 android:text="Saturday"
-                android:textColor="@android:color/black"
+                android:textColor="@color/grey_text"
                 android:textSize="15sp" />
 
             <com.android.activelife.tampa.customviews.CachetProRegularTextView
@@ -107,7 +107,7 @@
                 android:layout_marginBottom="10sp"
                 android:layout_marginTop="10sp"
                 android:text="8:00-12:30p"
-                android:textColor="@android:color/black"
+                android:textColor="@color/grey_text"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -124,7 +124,7 @@
                 android:layout_marginBottom="10sp"
                 android:layout_marginTop="10sp"
                 android:text="Sunday"
-                android:textColor="@android:color/black"
+                android:textColor="@color/grey_text"
                 android:textSize="15sp" />
 
             <com.android.activelife.tampa.customviews.CachetProRegularTextView
@@ -134,7 +134,7 @@
                 android:layout_marginBottom="10sp"
                 android:layout_marginTop="10sp"
                 android:text="1:00-4:00p"
-                android:textColor="@android:color/black"
+                android:textColor="@color/grey_text"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>

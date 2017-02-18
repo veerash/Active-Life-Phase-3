@@ -16,7 +16,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.activelife.tampa.R;
+import com.android.activelife.tampa.fragments.LocationsFragment;
 import com.android.activelife.tampa.fragments.MemberDetailsFragment;
+import com.android.activelife.tampa.fragments.MemberFragment;
+import com.android.activelife.tampa.fragments.MemberSettingsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     private int[] tabIcons = {
             R.drawable.tab_icon_location,
-            R.drawable.tab_icon_messages,
+            R.drawable.tab_contact_member,
             R.drawable.tab_icon_contact,
             R.drawable.tab_icon_schedules,
             R.drawable.tab_icon_membership
@@ -51,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle(""+getIntent().getExtras().getString("title"));
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -64,22 +68,18 @@ public class MainActivity extends AppCompatActivity {
         setupTabIcons();
     }
 
+    @Override
+    public void setTitle(CharSequence title) {
+        super.setTitle(title);
+
+    }
+
     private void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(tabIcons[0]);
         tabLayout.getTabAt(1).setIcon(tabIcons[1]);
         tabLayout.getTabAt(2).setIcon(tabIcons[2]);
         tabLayout.getTabAt(3).setIcon(tabIcons[3]);
         tabLayout.getTabAt(4).setIcon(tabIcons[4]);
-//        for (int i = 0; i < tabLayout.getTabCount(); i++) {
-////            int tabIndex = 0;
-////            LinearLayout layout = ((LinearLayout) ((LinearLayout) tabLayout.getChildAt(i)).getChildAt(tabIndex));
-////            layout.setPadding(30, 30, 30, 30);
-//            View tab = ((ViewGroup) tabLayout.getChildAt(0)).getChildAt(i);
-//            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) tab.getLayoutParams();
-//            p.setMargins(0, 0, 0, 0);
-//            tab.requestLayout();
-//            tab.setPadding(100, 100, 100, 100);
-//        }
     }
 
 
@@ -134,15 +134,15 @@ public class MainActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    return PlaceholderFragment.newInstance(position + 1);
+                    return LocationsFragment.newInstance(null, null);
                 case 1:
-                    return PlaceholderFragment.newInstance(position + 1);
+                    return MemberSettingsFragment.newInstance(null, null);
                 case 2:
                     return MemberDetailsFragment.newInstance(null, null);
                 case 3:
                     return PlaceholderFragment.newInstance(position + 1);
                 case 4:
-                    return PlaceholderFragment.newInstance(position + 1);
+                    return MemberFragment.newInstance(position + 1);
                 default:
                     return PlaceholderFragment.newInstance(position + 1);
             }

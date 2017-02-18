@@ -17,17 +17,17 @@
         android:weightSum="5">
 
         <com.android.activelife.tampa.customviews.CachetProRegularRadioButton
-            android:id="@+id/settings"
+            android:id="@+id/messages"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/member_details_rb_selector"
             android:button="@null"
             android:drawablePadding="5dp"
-            android:drawableTop="@drawable/member_details_settings_icon"
+            android:drawableTop="@drawable/member_details_messages_icon"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Settings"
+            android:text="Messages"
             android:textColor="@android:color/white" />
 
         <com.android.activelife.tampa.customviews.CachetProRegularRadioButton

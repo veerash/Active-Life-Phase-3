@@ -17,7 +17,7 @@
         android:layout_marginRight="@dimen/activity_vertical_margin"
         android:gravity="center"
         android:text="BOB SIERRA NORTH TAMPA FAMILY YMCA"
-        android:textColor="@android:color/black"
+        android:textColor="@color/grey_text"
         android:textSize="@dimen/member_contact_name" />
 
     <com.android.activelife.tampa.customviews.CachetProRegularTextView
@@ -28,9 +28,11 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_vertical_margin"
-        android:gravity="center"
-        android:text="TextView"
-        android:textColor="@android:color/black"
+        android:drawableLeft="@drawable/member_details_contact_address"
+        android:drawablePadding="10sp"
+        android:gravity="center|bottom"
+        android:text="4092 Northdale Blvd.,\nTampa, FL33624"
+        android:textColor="@color/grey_text"
         android:textSize="@dimen/member_contact" />
 
     <com.android.activelife.tampa.customviews.CachetProRegularTextView
@@ -41,11 +43,11 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_vertical_margin"
-        android:drawableLeft="@mipmap/ic_launcher"
+        android:drawableLeft="@drawable/member_details_contact_phone"
         android:drawablePadding="10sp"
         android:gravity="center"
-        android:text="TextView"
-        android:textColor="@android:color/black"
+        android:text="(813) 962-3200"
+        android:textColor="@color/grey_text"
         android:textSize="@dimen/member_contact" />
 
     <com.android.activelife.tampa.customviews.CachetProRegularTextView
@@ -56,7 +58,10 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:drawableLeft="@drawable/member_details_contact_email"
+        android:drawablePadding="10sp"
         android:gravity="center"
-        android:textColor="@android:color/black"
+        android:text="Adam.Kluttsi@tampaymca.org"
+        android:textColor="@color/grey_text"
         android:textSize="@dimen/member_contact" />
 </LinearLayout>

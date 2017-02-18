@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:name="com.android.activelife.tampa.fragments.MemberFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:padding="16dp"
+    app:layoutManager="LinearLayoutManager"
+    tools:context="com.android.activelife.tampa.fragments.MemberFragment"
+    tools:listitem="@layout/fragment_member">
+
+    <ListView
+        android:id="@+id/members_list"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:divider="@color/statusBarColor"
+        android:dividerHeight="2sp"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none"
+        android:layout_height="match_parent" />
+</RelativeLayout>

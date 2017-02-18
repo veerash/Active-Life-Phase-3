@@ -9,4 +9,18 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="loc_mes"><b>Location:</b> Front parking lot of every branch.</string>
+    <string name="date_mes"><b>Date:</b> August 12th, September.</string>
+    <string name="time_mes"><b>Time:</b> 12:00 PM.</string>
+    <string name="default_location">Default Location</string>
+    <string name="messages">Messages</string>
+    <string name="general">General</string>
+    <string name="schedules">Schedules</string>
+    <string name="programs">Programs</string>
+
+    <string-array name="locations">
+        <item>Location 1</item>
+        <item>Location 2</item>
+        <item>Location 3</item>
+    </string-array>
 </resources>

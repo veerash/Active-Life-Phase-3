@@ -11,4 +11,5 @@
     <dimen name="appbar_padding_top">8dp</dimen>
     <dimen name="member_contact_name">24sp</dimen>
     <dimen name="member_contact">15sp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

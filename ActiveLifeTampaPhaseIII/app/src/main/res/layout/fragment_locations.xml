@@ -1,0 +1,17 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_green"
+    tools:context="com.android.activelife.tampa.fragments.LocationsFragment">
+
+    <ListView
+        android:id="@+id/select_branch_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:divider="@color/colorPrimaryDark"
+        android:dividerHeight="1sp"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none" />
+</FrameLayout>

@@ -1,13 +1,13 @@
 package com.android.activelife.tampa.fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 
 import com.android.activelife.tampa.R;
 import com.android.activelife.tampa.adpater.HoursSceduleListAdapter;
+import com.android.activelife.tampa.adpater.MessagesListAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,7 +30,7 @@ public class MemberDetailsFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private RadioGroup mDetailsRG;
-    private RadioButton mSettingsRB, mDonateRB, mHoursRB, mContactRB, mProgramsRB;
+    private RadioButton mMessagessRB, mDonateRB, mHoursRB, mContactRB, mProgramsRB;
     private RelativeLayout mLayoutContainer;
 
     // TODO: Rename and change types of parameters
@@ -74,7 +75,7 @@ public class MemberDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_member_details, container, false);
         mDetailsRG = (RadioGroup) view.findViewById(R.id.member_details_rg);
-        mSettingsRB = (RadioButton) view.findViewById(R.id.settings);
+        mMessagessRB = (RadioButton) view.findViewById(R.id.messages);
         mDonateRB = (RadioButton) view.findViewById(R.id.donate);
         mHoursRB = (RadioButton) view.findViewById(R.id.hours);
         mContactRB = (RadioButton) view.findViewById(R.id.contact);
@@ -84,12 +85,7 @@ public class MemberDetailsFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    mLayoutContainer.removeAllViews();
-                    View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_programs_donate, null);
-                    mLayoutContainer.addView(child);
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT);
-                    child.setLayoutParams(params);
-
+                    setProgramDetails(savedInstanceState);
                 }
             }
         });
@@ -97,25 +93,15 @@ public class MemberDetailsFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    mLayoutContainer.removeAllViews();
-                    View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_programs_donate, null);
-                    mLayoutContainer.addView(child);
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT);
-                    child.setLayoutParams(params);
-
+                    setDonateDetails(savedInstanceState);
                 }
             }
         });
-        mSettingsRB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mMessagessRB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    mLayoutContainer.removeAllViews();
-                    View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_settings, null);
-                    mLayoutContainer.addView(child);
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT);
-                    child.setLayoutParams(params);
-
+                    setMessagesList(savedInstanceState);
                 }
             }
         });
@@ -123,11 +109,7 @@ public class MemberDetailsFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    mLayoutContainer.removeAllViews();
-                    View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_contact, null);
-                    mLayoutContainer.addView(child);
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT);
-                    child.setLayoutParams(params);
+                    setContactData(savedInstanceState);
                 }
             }
         });
@@ -135,18 +117,64 @@ public class MemberDetailsFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    mLayoutContainer.removeAllViews();
-                    View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_hours, null);
-                    mLayoutContainer.addView(child);
-                    ListView hoursList=(ListView)child.findViewById(R.id.hours_list);
-                    hoursList.setAdapter(new HoursSceduleListAdapter(getActivity()));
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT);
-                    child.setLayoutParams(params);
-
+                    setHoursList(savedInstanceState);
                 }
             }
         });
+        mMessagessRB.setChecked(true);
         return view;
     }
 
+    public void setProgramDetails(final Bundle savedInstanceState) {
+        View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_programs_donate, null);
+        setLayoutParams(child);
+    }
+
+    public void setDonateDetails(final Bundle savedInstanceState) {
+        View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_programs_donate, null);
+        setLayoutParams(child);
+    }
+
+    public void setContactData(final Bundle savedInstanceState) {
+        View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_contact, null);
+        setLayoutParams(child);
+    }
+
+    public void setHoursList(final Bundle savedInstanceState) {
+        View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_hours, null);
+        setLayoutParams(child);
+        ListView hoursList = (ListView) child.findViewById(R.id.hours_list);
+        hoursList.setAdapter(new HoursSceduleListAdapter(getActivity()));
+
+    }
+
+    public void setMessagesList(final Bundle savedInstanceState) {
+        View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_messages, null);
+        setLayoutParams(child);
+        ListView messagesList = (ListView) child.findViewById(R.id.messages_list);
+        messagesList.setAdapter(new MessagesListAdapter(getActivity()));
+
+        messagesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_message_details, null);
+                setLayoutParams(child);
+                ImageView backButton = (ImageView) child.findViewById(R.id.back_button);
+                backButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        setMessagesList(savedInstanceState);
+                    }
+                });
+
+            }
+        });
+    }
+
+    public void setLayoutParams(View child) {
+        mLayoutContainer.removeAllViews();
+        mLayoutContainer.addView(child);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT);
+        child.setLayoutParams(params);
+    }
 }
