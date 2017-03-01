@@ -8,9 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.android.activelife.tampa.R;
-import com.android.activelife.tampa.adpater.MembersListAdapter;
-
-import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -49,10 +46,10 @@ public class MemberFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_member, container, false);
+        View view = inflater.inflate(R.layout.schedule_content, container, false);
 
-        mMembersListView = (ListView) view.findViewById(R.id.members_list);
-        mMembersListView.setAdapter(new MembersListAdapter(getActivity()));
+//        mMembersListView = (ListView) view.findViewById(R.id.members_list);
+//        mMembersListView.setAdapter(new MembersListAdapter(getActivity()));
         return view;
     }
 
