@@ -47,10 +47,10 @@ public class MemberFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.schedules_time, container, false);
+        View view = inflater.inflate(R.layout.fragment_member, container, false);
 
-//        mMembersListView = (ListView) view.findViewById(R.id.members_list);
-//        mMembersListView.setAdapter(new MembersListAdapter(getActivity()));
+        mMembersListView = (ListView) view.findViewById(R.id.members_list);
+        mMembersListView.setAdapter(new MembersListAdapter(getActivity()));
         return view;
     }
 

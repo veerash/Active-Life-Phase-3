@@ -1,9 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              tools:context="com.android.activelife.tampa.ui.MainActivity$PlaceholderFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
     <!-- https://android-arsenal.com/details/1/5087 for Horizontal calender-->
@@ -12,8 +11,7 @@
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        />
+        android:background="@color/colorPrimary" />
 
     <TextView
         android:id="@+id/section_label"
@@ -26,12 +24,16 @@
         android:padding="@dimen/ten_dip"
         android:text="My Horizontal Calender"
         android:textColor="@color/white"
-        android:textSize="@dimen/twenty_sp"/>
+        android:textSize="@dimen/twenty_sp" />
 
-    <include layout="@layout/calender_date_list_row"></include>
+    <include
+        android:id="@+id/schedule_row_one"
+        layout="@layout/calender_date_list_row"></include>
 
 
-    <include layout="@layout/calender_date_list_row"></include>
+    <include
+        android:id="@+id/schedule_row_two"
+        layout="@layout/calender_date_list_row"></include>
 
     <TextView
         android:id="@+id/section_label2"
@@ -44,12 +46,16 @@
         android:padding="@dimen/ten_dip"
         android:text="Friday / Augest 19"
         android:textColor="@color/white"
-        android:textSize="@dimen/twenty_sp"/>
+        android:textSize="@dimen/twenty_sp" />
 
-    <include layout="@layout/calender_date_list_row"></include>
+    <include
+        android:id="@+id/schedule_row_three"
+        layout="@layout/calender_date_list_row"></include>
 
 
-    <include layout="@layout/calender_date_list_row"></include>
+    <include
+        android:id="@+id/schedule_row_four"
+        layout="@layout/calender_date_list_row"></include>
 
 
 </LinearLayout>

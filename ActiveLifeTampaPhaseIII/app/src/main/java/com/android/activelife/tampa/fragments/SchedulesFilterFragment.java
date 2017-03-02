@@ -3,12 +3,15 @@ package com.android.activelife.tampa.fragments;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.activelife.tampa.R;
+import com.android.activelife.tampa.ui.MainActivity;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -52,7 +55,35 @@ public class SchedulesFilterFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-
+        View includedView=rootView.findViewById(R.id.schedule_row_one);
+        View includedView1=rootView.findViewById(R.id.schedule_row_two);
+        View includedView2=rootView.findViewById(R.id.schedule_row_three);
+        View includedView3=rootView.findViewById(R.id.schedule_row_four);
+        includedView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ScheduleContentFragment.newInstance(null, null);
+            }
+        });
+        includedView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)getActivity()).jSectionsPagerAdapter.getItem(5);
+                ScheduleContentFragment.newInstance(null, null);
+            }
+        });
+        includedView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ScheduleContentFragment.newInstance(null, null);
+            }
+        });
+        includedView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ScheduleContentFragment.newInstance(null, null);
+            }
+        });
         /** end after 1 month from now */
         Calendar endDate = Calendar.getInstance();
         endDate.add(Calendar.MONTH, 1);

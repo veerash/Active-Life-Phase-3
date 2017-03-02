@@ -14,6 +14,7 @@ import com.android.activelife.tampa.fragments.LocationsFragment;
 import com.android.activelife.tampa.fragments.MemberDetailsFragment;
 import com.android.activelife.tampa.fragments.MemberFragment;
 import com.android.activelife.tampa.fragments.MemberSettingsFragment;
+import com.android.activelife.tampa.fragments.ScheduleContentFragment;
 import com.android.activelife.tampa.fragments.SchedulesFilterFragment;
 import com.android.activelife.tampa.fragments.SchedulesFragment;
 
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    public SectionsPagerAdapter jSectionsPagerAdapter;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -53,11 +54,11 @@ public class MainActivity extends AppCompatActivity {
         setTitle("" + getIntent().getExtras().getString("title"));
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        jSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setAdapter(jSectionsPagerAdapter);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
@@ -105,8 +106,10 @@ public class MainActivity extends AppCompatActivity {
                     return SchedulesFilterFragment.newInstance(position + 1);
                 case 4:
                     return MemberFragment.newInstance(position + 1);
+                case 5:
+                    return ScheduleContentFragment.newInstance(null, null);
                 default:
-                    return SchedulesFragment.newInstance(position + 1);
+                    return SchedulesFilterFragment.newInstance(position + 1);
             }
 
         }
