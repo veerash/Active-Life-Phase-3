@@ -1,5 +1,6 @@
 package com.android.activelife.tampa.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.RelativeLayout;
 import com.android.activelife.tampa.R;
 import com.android.activelife.tampa.adpater.HoursSceduleListAdapter;
 import com.android.activelife.tampa.adpater.MessagesListAdapter;
+import com.android.activelife.tampa.ui.MessageDetailsActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -157,15 +159,7 @@ public class MemberDetailsFragment extends Fragment {
         messagesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_message_details, null);
-                setLayoutParams(child);
-                ImageView backButton = (ImageView) child.findViewById(R.id.back_button);
-                backButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        setMessagesList(savedInstanceState);
-                    }
-                });
+               startActivity(new Intent(getActivity(), MessageDetailsActivity.class));
 
             }
         });

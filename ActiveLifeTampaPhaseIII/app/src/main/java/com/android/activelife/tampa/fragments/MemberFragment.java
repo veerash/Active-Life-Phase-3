@@ -21,6 +21,10 @@ public class MemberFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private ListView mMembersListView;
+    private String mParam1;
+    private String mParam2;
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -31,10 +35,11 @@ public class MemberFragment extends Fragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static MemberFragment newInstance(int columnCount) {
+    public static MemberFragment newInstance(String param1, String param2) {
         MemberFragment fragment = new MemberFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
