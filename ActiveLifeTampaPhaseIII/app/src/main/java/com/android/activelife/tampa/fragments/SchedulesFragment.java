@@ -152,7 +152,7 @@ public class SchedulesFragment extends Fragment {
             @Override
             public void onDateSelected(Date date, int position) {
                 DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-                textView.setText("Selected Date : " + df.format(date));
+//                textView.setText("Selected Date : " + df.format(date));
             }
 
             @Override
