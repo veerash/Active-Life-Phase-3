@@ -14,8 +14,8 @@ import com.android.activelife.tampa.fragments.LocationsFragment;
 import com.android.activelife.tampa.fragments.MemberDetailsFragment;
 import com.android.activelife.tampa.fragments.MemberFragment;
 import com.android.activelife.tampa.fragments.MemberSettingsFragment;
-import com.android.activelife.tampa.fragments.SchedulesFilterFragment;
 import com.android.activelife.tampa.fragments.SchedulesFragment;
+import com.android.activelife.tampa.util.Utilities;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    public SectionsPagerAdapter jSectionsPagerAdapter;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -50,14 +50,14 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("" + getIntent().getExtras().getString("title"));
+        setTitle("" + Utilities.getSharedPrefernceData().retreiveValueFromSharedPreference(getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_NAME));
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        jSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setAdapter(jSectionsPagerAdapter);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
@@ -102,11 +102,11 @@ public class MainActivity extends AppCompatActivity {
                 case 2:
                     return MemberDetailsFragment.newInstance(null, null);
                 case 3:
-                    return SchedulesFilterFragment.newInstance(position + 1);
+                    return SchedulesFragment.newInstance(null, null);
                 case 4:
-                    return MemberFragment.newInstance(position + 1);
+                    return MemberFragment.newInstance(null, null);
                 default:
-                    return SchedulesFragment.newInstance(position + 1);
+                    return SchedulesFragment.newInstance(null, null);
             }
 
         }

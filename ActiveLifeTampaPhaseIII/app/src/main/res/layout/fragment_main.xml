@@ -1,55 +1,191 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              tools:context="com.android.activelife.tampa.ui.MainActivity$PlaceholderFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-
-    <!-- https://android-arsenal.com/details/1/5087 for Horizontal calender-->
-
-    <devs.mulham.horizontalcalendar.HorizontalCalendarView
-        android:id="@+id/calendarView"
+    <LinearLayout
+        android:id="@+id/ll_filter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        />
+        android:layout_weight="0"
+        android:background="@color/light_green"
+        android:orientation="horizontal"
+        android:padding="@dimen/five_dip">
 
-    <TextView
-        android:id="@+id/section_label"
+        <TextView
+            android:id="@+id/tv_schedule_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="Schedule"
+            android:textColor="@color/white"
+            android:textSize="@dimen/twenty_sp" />
+
+        <CheckBox
+            android:id="@+id/img_schedule_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:checked="false"
+            android:layout_marginRight="@dimen/five_dip"
+            android:button="@drawable/filter" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/filter_schedules"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="@dimen/five_dip"
-        android:layout_marginTop="@dimen/five_dip"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:padding="@dimen/ten_dip"
-        android:text="My Horizontal Calender"
-        android:textColor="@color/white"
-        android:textSize="@dimen/twenty_sp"/>
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:orientation="vertical">
 
-    <include layout="@layout/calender_date_list_row"></include>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/ten_dip"
+            android:layout_weight="0.25"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/spinner_1"
+                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ten_dip"
+                android:layout_weight="1"
+                android:padding="@dimen/twenty_dip" />
 
 
-    <include layout="@layout/calender_date_list_row"></include>
+            <Spinner
+                android:id="@+id/spinner_2"
+                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ten_dip"
+                android:layout_weight="1"
+                android:padding="@dimen/twenty_dip" />
 
-    <TextView
-        android:id="@+id/section_label2"
+
+            <Spinner
+                android:id="@+id/spinner_3"
+                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ten_dip"
+                android:layout_weight="1"
+                android:padding="@dimen/twenty_dip" />
+
+            <!--<SeekBar-->
+            <!--android:id="@+id/sbBatteryLevel"-->
+            <!--style="@style/CustomSeekBar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:enabled="false"-->
+            <!--android:max="100"-->
+            <!--android:progress="85"/>-->
+
+            <org.florescu.android.rangeseekbar.RangeSeekBar
+                android:id="@+id/rangeSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ten_dip"
+                android:layout_weight="1"
+                rsb:absoluteMaxValue="100"
+                rsb:absoluteMinValue="10"
+                rsb:activateOnDefaultValues="true"
+                rsb:activeColor="@color/DeepSkyBlue"
+                rsb:barHeight="@dimen/ten_dip"
+                rsb:textAboveThumbsColor="@android:color/holo_blue_light"
+                rsb:thumbDisabled="@drawable/custom_range_slider_thumb"
+                rsb:thumbNormal="@drawable/custom_range_slider_thumb"
+                rsb:thumbPressed="@drawable/custom_range_slider_thumb"
+                rsb:thumbShadow="true"
+                rsb:thumbShadowBlur="1dp"
+                rsb:thumbShadowColor="@color/primary_material_light"
+                rsb:thumbShadowXOffset="1dp"
+                rsb:thumbShadowYOffset="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.75"
+            android:gravity="top"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_apply_filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/light_gren"
+                android:text="Apply Filter" />
+        </LinearLayout>
+    </LinearLayout>
+    <!-- https://android-arsenal.com/details/1/5087 for Horizontal calender-->
+    <LinearLayout
+        android:id="@+id/main_schedules"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="@dimen/five_dip"
-        android:layout_marginTop="@dimen/five_dip"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:padding="@dimen/ten_dip"
-        android:text="Friday / Augest 19"
-        android:textColor="@color/white"
-        android:textSize="@dimen/twenty_sp"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible">
 
-    <include layout="@layout/calender_date_list_row"></include>
+        <devs.mulham.horizontalcalendar.HorizontalCalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            app:selectedDateBackground="@color/light_green"/>
+
+        <TextView
+            android:id="@+id/section_label"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="@dimen/five_dip"
+            android:layout_marginTop="@dimen/five_dip"
+            android:background="@color/light_green"
+            android:gravity="center"
+            android:padding="@dimen/ten_dip"
+            android:text="Friday / August 19"
+            android:textColor="@color/white"
+            android:textSize="@dimen/twenty_sp" />
+
+        <include
+            android:id="@+id/schedule_row_one"
+            layout="@layout/calender_date_list_row"></include>
 
 
-    <include layout="@layout/calender_date_list_row"></include>
+        <include
+            android:id="@+id/schedule_row_two"
+            layout="@layout/calender_date_list_row"></include>
 
+        <TextView
+            android:id="@+id/section_label2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="@dimen/five_dip"
+            android:layout_marginTop="@dimen/five_dip"
+            android:background="@color/light_green"
+            android:gravity="center"
+            android:padding="@dimen/ten_dip"
+            android:text="Friday / August 19"
+            android:textColor="@color/white"
+            android:textSize="@dimen/twenty_sp" />
+
+        <include
+            android:id="@+id/schedule_row_three"
+            layout="@layout/calender_date_list_row"></include>
+
+
+        <include
+            android:id="@+id/schedule_row_four"
+            layout="@layout/calender_date_list_row"></include>
+    </LinearLayout>
 
 </LinearLayout>

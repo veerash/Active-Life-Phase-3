@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimaryDark">#003d52</color>
-    <color name="colorPrimary">#20bdbd</color>
+    <color name="colorPrimary">#02a38e</color>
     <color name="colorAccent">#ffffff</color>
     <color name="statusBarColor">#b0b0b0</color>
-    <color name="light_green">#269cbd</color>
+    <color name="light_green">#20bdbd</color>
     <color name="light_gren">#28ace0</color>
     <color name="thick_green">#0a63ab</color>
     <color name="grey_text">#575759</color>

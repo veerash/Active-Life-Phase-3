@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import com.android.activelife.tampa.R;
 import com.android.activelife.tampa.adpater.SelectBranchListAdapter;
+import com.android.activelife.tampa.util.Utilities;
 
 public class SelectBranchActivity extends AppCompatActivity {
 
@@ -26,6 +27,7 @@ public class SelectBranchActivity extends AppCompatActivity {
                 Intent mainIntent = new Intent(SelectBranchActivity.this, MainActivity.class);
                 mainIntent.putExtra("title","Location "+(i+1));
                 startActivity(mainIntent);
+                Utilities.getSharedPrefernceData().storeValueIntoSharedPreference(getApplicationContext(),Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_NAME,"Location "+(i+1));
                 finish();
             }
         });

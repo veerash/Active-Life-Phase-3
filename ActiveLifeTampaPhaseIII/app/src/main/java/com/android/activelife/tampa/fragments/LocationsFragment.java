@@ -14,6 +14,7 @@ import com.android.activelife.tampa.R;
 import com.android.activelife.tampa.adpater.SelectBranchListAdapter;
 import com.android.activelife.tampa.ui.MainActivity;
 import com.android.activelife.tampa.ui.SelectBranchActivity;
+import com.android.activelife.tampa.util.Utilities;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,6 +77,7 @@ public class LocationsFragment extends Fragment {
                 Intent mainIntent = new Intent(getActivity(), MainActivity.class);
                 mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 mainIntent.putExtra("title", "Location " + (i + 1));
+                Utilities.getSharedPrefernceData().storeValueIntoSharedPreference(getActivity().getApplicationContext(),Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_NAME,"Location "+(i+1));
                 startActivity(mainIntent);
                 getActivity().finish();
             }

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/ten_dip"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Body Combat"
+                android:textColor="@color/black"
+                android:textSize="@dimen/thirty_sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/five_dip"
+                android:gravity="center_horizontal"
+                android:text="August 18 th"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/twenty_sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/twenty_dip"
+        android:background="@drawable/schedule_content_bg"
+        android:orientation="horizontal"
+        android:padding="@dimen/ten_dip">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="JIM DAVIS"
+                android:textColor="@color/white"
+                android:textSize="@dimen/twenty_sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/five_dip"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="5:05 AM - 6:05 PM"
+                android:textColor="@color/white"
+                android:textSize="@dimen/twenty_sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/five_dip"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="Activity Room, 101"
+                android:textColor="@color/white"
+                android:textSize="@dimen/twenty_sp"
+                />
+
+        </LinearLayout>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/five_dip"
+            android:src="@drawable/schedule_add"
+            android:background="@android:color/transparent"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/twenty_dip"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/btn_apply_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/ten_dip"
+            android:text="@string/schedule_message"
+            android:textSize="@dimen/fifteen_sp"
+            android:textStyle="italic"/>
+    </LinearLayout>
+</LinearLayout>
