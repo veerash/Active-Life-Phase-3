@@ -11,6 +11,9 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorAccent"
         android:gravity="center"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:layout_gravity="left|center_vertical"
         android:textSize="@dimen/select_branch_text_size" />
 </LinearLayout>

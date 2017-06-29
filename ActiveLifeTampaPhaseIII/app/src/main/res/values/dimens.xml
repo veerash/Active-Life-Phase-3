@@ -9,7 +9,7 @@
     <dimen name="splash_text_footer_size">12dp</dimen>
 
     //Select Branch Screen
-    <dimen name="select_branch_text_size">20dp</dimen>
+    <dimen name="select_branch_text_size">18dp</dimen>
     <dimen name="padding_select_branch_text_size">20dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>

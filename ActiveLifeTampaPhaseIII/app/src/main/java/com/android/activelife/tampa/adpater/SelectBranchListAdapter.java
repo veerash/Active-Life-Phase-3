@@ -8,6 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.android.activelife.tampa.R;
+import com.android.activelife.tampa.services.response.LocationData.LocationDataResponse;
+
+import java.util.List;
 
 /**
  * Created by vsatrasala on 2/11/2017.
@@ -16,14 +19,16 @@ import com.android.activelife.tampa.R;
 public class SelectBranchListAdapter extends BaseAdapter {
 
     public Context jContext;
+    private List<LocationDataResponse> locationDataResponsesList;
 
-    public SelectBranchListAdapter(Context ctx) {
+    public SelectBranchListAdapter(Context ctx,List<LocationDataResponse> locationDataResponsesList) {
         this.jContext = ctx;
+        this.locationDataResponsesList=locationDataResponsesList;
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return locationDataResponsesList.size();
     }
 
     @Override
@@ -48,7 +53,7 @@ public class SelectBranchListAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.locationName.setText("Location " + (position + 1));
+        holder.locationName.setText(""+locationDataResponsesList.get(position).getName());
         return convertView;
     }
 

@@ -17,7 +17,7 @@ import com.android.activelife.tampa.fragments.MemberSettingsFragment;
 import com.android.activelife.tampa.fragments.SchedulesFragment;
 import com.android.activelife.tampa.util.Utilities;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide

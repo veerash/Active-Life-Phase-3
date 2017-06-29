@@ -1,7 +1,9 @@
 package com.android.activelife.tampa.adpater;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,9 +16,15 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.android.activelife.tampa.R;
+import com.android.activelife.tampa.services.response.instructordata.InstructorDataResponse;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.squareup.picasso.Picasso;
 
 import java.net.URLEncoder;
+import java.util.List;
 
 /**
  * Created by vsatrasala on 2/11/2017.
@@ -25,14 +33,16 @@ import java.net.URLEncoder;
 public class MembersListAdapter extends BaseAdapter {
 
     public Context jContext;
+    private List<InstructorDataResponse> instructorDataResponse;
 
-    public MembersListAdapter(Context ctx) {
+    public MembersListAdapter(Context ctx, List<InstructorDataResponse> instructorDataResponse) {
         this.jContext = ctx;
+        this.instructorDataResponse=instructorDataResponse;
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return instructorDataResponse.size();
     }
 
     @Override
@@ -65,89 +75,115 @@ public class MembersListAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        String barCode = "257962";
-        String astrticksBarcode = "*" + barCode + "*";
-        Typeface typeface = Typeface.createFromAsset(jContext.getAssets(),
-                "fonts/IDAutomationHC39M_FREE.otf");
-        holder.memmberBarCodeId.setTypeface(typeface);
-        holder.memmberBarCodeId.setText(astrticksBarcode);
-        String sizeofQRCode = "300x300";
-        String url = "https://chart.googleapis.com/chart?chs=" + sizeofQRCode
-                + "&cht=qr&chl=" + URLEncoder.encode(barCode);
-        Picasso.with(jContext)
-                .load(url)
-                .into(holder.barCodeImage);
-        holder.addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.memberDetailsLayout.setVisibility(View.GONE);
-                holder.memberId.setVisibility(View.VISIBLE);
-                holder.cardView.setVisibility(View.GONE);
-            }
-        });
-        holder.updateDetails
-                .setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        // Creating the instance of PopupMenu
-                        // Context wrapper = new
-                        // ContextThemeWrapper(context,
-                        // R.style.MyPopupMenu);
-                        final PopupMenu popup = new PopupMenu(jContext, v);
-                        // Inflating the Popup using xml file
-                        popup.getMenuInflater().inflate(R.menu.popup_menu,
-                                popup.getMenu());
-
-                        // registering popup with OnMenuItemClickListener
-                        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                            public boolean onMenuItemClick(MenuItem item) {
-                                if (item.getTitle().equals("Edit")) {
-                                    holder.memberDetailsLayout.setVisibility(View.GONE);
-                                    holder.memberId.setVisibility(View.GONE);
-                                    holder.cardView.setVisibility(View.VISIBLE);
-                                } else {
-                                    popup.dismiss();
-                                }
-                                return true;
-                            }
-                        });
-
-                        popup.show();
-                    }
-                });
-        holder.memberId.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.memberDetailsLayout.setVisibility(View.VISIBLE);
-                holder.memberId.setVisibility(View.GONE);
-                holder.cardView.setVisibility(View.GONE);
-            }
-        });
-        holder.memberDetailsLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.memberDetailsLayout.setVisibility(View.GONE);
-                holder.memberId.setVisibility(View.VISIBLE);
-                holder.cardView.setVisibility(View.GONE);
-            }
-        });
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.memberDetailsLayout.setVisibility(View.VISIBLE);
-                holder.memberId.setVisibility(View.GONE);
-                holder.cardView.setVisibility(View.GONE);
-            }
-        });
-        holder.addDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.memberDetailsLayout.setVisibility(View.GONE);
-                holder.memberId.setVisibility(View.GONE);
-                holder.cardView.setVisibility(View.VISIBLE);
-            }
-        });
+        holder.memberId.setText(""+instructorDataResponse.get(position).getName());
+//        String barCode = "257962";
+//        String astrticksBarcode = "*" + barCode + "*";
+//        Typeface typeface = Typeface.createFromAsset(jContext.getAssets(),
+//                "fonts/IDAutomationHC39M_FREE.otf");
+//        holder.memmberBarCodeId.setTypeface(typeface);
+//        holder.memmberBarCodeId.setText(astrticksBarcode);
+//        String sizeofQRCode = "300x300";
+//        String url = "https://chart.googleapis.com/chart?chs=" + sizeofQRCode
+//                + "&cht=qr&chl=" + URLEncoder.encode(barCode);
+//        Log.i("Url",url);
+//        try {
+//            DisplayImageOptions options = new DisplayImageOptions.Builder()
+//                    .showStubImage(R.drawable.chart).cacheOnDisc()
+//                    .build();
+//            ImageLoader imageLoader = ImageLoader.getInstance();
+//            imageLoader.displayImage(url, holder.barCodeImage, options, new ImageLoadingListener() {
+//                @Override
+//                public void onLoadingStarted(String imageUri, View view) {
+//
+//                }
+//
+//                @Override
+//                public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+//                }
+//
+//                @Override
+//                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+//
+//                }
+//
+//                @Override
+//                public void onLoadingCancelled(String imageUri, View view) {
+//                }
+//            });
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        holder.addButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                holder.memberDetailsLayout.setVisibility(View.GONE);
+//                holder.memberId.setVisibility(View.VISIBLE);
+//                holder.cardView.setVisibility(View.GONE);
+//            }
+//        });
+//        holder.updateDetails
+//                .setOnClickListener(new View.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(View v) {
+//                        // Creating the instance of PopupMenu
+//                        // Context wrapper = new
+//                        // ContextThemeWrapper(context,
+//                        // R.style.MyPopupMenu);
+//                        final PopupMenu popup = new PopupMenu(jContext, v);
+//                        // Inflating the Popup using xml file
+//                        popup.getMenuInflater().inflate(R.menu.popup_menu,
+//                                popup.getMenu());
+//
+//                        // registering popup with OnMenuItemClickListener
+//                        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                            public boolean onMenuItemClick(MenuItem item) {
+//                                if (item.getTitle().equals("Edit")) {
+//                                    holder.memberDetailsLayout.setVisibility(View.GONE);
+//                                    holder.memberId.setVisibility(View.GONE);
+//                                    holder.cardView.setVisibility(View.VISIBLE);
+//                                } else {
+//                                    popup.dismiss();
+//                                }
+//                                return true;
+//                            }
+//                        });
+//
+//                        popup.show();
+//                    }
+//                });
+//        holder.memberId.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                holder.memberDetailsLayout.setVisibility(View.VISIBLE);
+//                holder.memberId.setVisibility(View.GONE);
+//                holder.cardView.setVisibility(View.GONE);
+//            }
+//        });
+//        holder.memberDetailsLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                holder.memberDetailsLayout.setVisibility(View.GONE);
+//                holder.memberId.setVisibility(View.VISIBLE);
+//                holder.cardView.setVisibility(View.GONE);
+//            }
+//        });
+//        holder.cardView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                holder.memberDetailsLayout.setVisibility(View.VISIBLE);
+//                holder.memberId.setVisibility(View.GONE);
+//                holder.cardView.setVisibility(View.GONE);
+//            }
+//        });
+//        holder.addDetails.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                holder.memberDetailsLayout.setVisibility(View.GONE);
+//                holder.memberId.setVisibility(View.GONE);
+//                holder.cardView.setVisibility(View.VISIBLE);
+//            }
+//        });
 
         return convertView;
     }
