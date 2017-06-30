@@ -6,6 +6,8 @@ import android.util.Log;
 import com.android.activelife.tampa.services.response.LocationData.LocationDataResponse;
 import com.android.activelife.tampa.services.response.classdata.ClassDataResponse;
 import com.android.activelife.tampa.services.response.instructordata.InstructorDataResponse;
+import com.android.activelife.tampa.services.response.scheduledatedata.ScheduleDateDataResponse;
+import com.android.activelife.tampa.services.response.schedulesdata.SchedulesDataResponse;
 
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -22,6 +24,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 import static com.android.activelife.tampa.constants.StaticValuesConstants.BASE_URL;
 
@@ -54,5 +57,17 @@ public interface ApiRequest {
      **/
     @GET("instructors")
     Call<List<InstructorDataResponse>> getInstructors();
+
+    /**
+     * Schedule Date API
+     **/
+    @GET("schedules/{date}")
+    Call<List<ScheduleDateDataResponse>> getScheduleDate(@Path("date") String date);
+
+    /**
+     * Schedules API
+     **/
+    @GET("schedules/{date}")
+    Call<List<SchedulesDataResponse>> getSchedules();
 
 }

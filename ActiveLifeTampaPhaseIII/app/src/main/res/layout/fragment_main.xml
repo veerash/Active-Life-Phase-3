@@ -1,7 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:rsb="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -30,17 +29,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:checked="false"
             android:layout_marginRight="@dimen/five_dip"
-            android:button="@drawable/filter" />
+            android:button="@drawable/filter"
+            android:checked="false" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/filter_schedules"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -132,7 +131,7 @@
     <LinearLayout
         android:id="@+id/main_schedules"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="visible">
 
@@ -141,7 +140,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
-            app:selectedDateBackground="@color/light_green"/>
+            app:selectedDateBackground="@color/light_green" />
 
         <TextView
             android:id="@+id/section_label"
@@ -156,36 +155,43 @@
             android:textColor="@color/white"
             android:textSize="@dimen/twenty_sp" />
 
-        <include
-            android:id="@+id/schedule_row_one"
-            layout="@layout/calender_date_list_row"></include>
-
-
-        <include
-            android:id="@+id/schedule_row_two"
-            layout="@layout/calender_date_list_row"></include>
-
-        <TextView
-            android:id="@+id/section_label2"
+        <ListView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="@dimen/five_dip"
-            android:layout_marginTop="@dimen/five_dip"
-            android:background="@color/light_green"
-            android:gravity="center"
-            android:padding="@dimen/ten_dip"
-            android:text="Friday / August 19"
-            android:textColor="@color/white"
-            android:textSize="@dimen/twenty_sp" />
-
-        <include
-            android:id="@+id/schedule_row_three"
-            layout="@layout/calender_date_list_row"></include>
+            android:layout_height="match_parent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="10dp"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="none"></ListView>
+        <!--<include-->
+        <!--android:id="@+id/schedule_row_one"-->
+        <!--layout="@layout/calender_date_list_row"></include>-->
 
 
-        <include
-            android:id="@+id/schedule_row_four"
-            layout="@layout/calender_date_list_row"></include>
+        <!--<include-->
+        <!--android:id="@+id/schedule_row_two"-->
+        <!--layout="@layout/calender_date_list_row"></include>-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/section_label2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_marginBottom="@dimen/five_dip"-->
+        <!--android:layout_marginTop="@dimen/five_dip"-->
+        <!--android:background="@color/light_green"-->
+        <!--android:gravity="center"-->
+        <!--android:padding="@dimen/ten_dip"-->
+        <!--android:text="Friday / August 19"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="@dimen/twenty_sp" />-->
+
+        <!--<include-->
+        <!--android:id="@+id/schedule_row_three"-->
+        <!--layout="@layout/calender_date_list_row"></include>-->
+
+
+        <!--<include-->
+        <!--android:id="@+id/schedule_row_four"-->
+        <!--layout="@layout/calender_date_list_row"></include>-->
     </LinearLayout>
 
 </LinearLayout>
