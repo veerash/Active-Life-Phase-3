@@ -21,9 +21,55 @@ public class MyGenerator {
 
     private static void addTables(final Schema schema) {
         addScheduleDateDataEntities(schema);
+        addClassesEntities(schema);
+        addInstructorEntities(schema);
+        addScheduleDataEntities(schema);
+        addHoursDataEntities(schema);
         // addPhonesEntities(schema);
     }
+    private static Entity addClassesEntities(final Schema schema) {
+        Entity classData = schema.addEntity("ClassData");
+        classData.addIdProperty().primaryKey().autoincrement();
+        classData.addStringProperty("class_id");
+        classData.addStringProperty("class_name");
+        classData.addStringProperty("class_description");
+        return classData;
+    }
+    private static Entity addInstructorEntities(final Schema schema) {
+        Entity instructorData = schema.addEntity("InstructorData");
+        instructorData.addIdProperty().primaryKey().autoincrement();
+        instructorData.addStringProperty("instructor_id");
+        instructorData.addStringProperty("instructor_name");
+        return instructorData;
+    }
 
+    private static Entity addScheduleDataEntities(final Schema schema) {
+        Entity scheduleData = schema.addEntity("ScheduleData");
+        scheduleData.addIdProperty().primaryKey().autoincrement();
+        scheduleData.addStringProperty("schedule_type_id");
+        scheduleData.addStringProperty("schedule_type");
+        return  scheduleData;
+    }
+    private static Entity addHoursDataEntities(final Schema schema) {
+        Entity hoursData = schema.addEntity("HoursData");
+        hoursData.addIdProperty().primaryKey().autoincrement();
+        hoursData.addStringProperty("hours_name");
+        hoursData.addStringProperty("hour_monday_start_time");
+        hoursData.addStringProperty("hour_monday_end_time");
+        hoursData.addStringProperty("hour_tuesday_start_time");
+        hoursData.addStringProperty("hour_tuesday_end_time");
+        hoursData.addStringProperty("hour_wednesday_start_time");
+        hoursData.addStringProperty("hour_wednesday_end_time");
+        hoursData.addStringProperty("hour_thursday_start_time");
+        hoursData.addStringProperty("hour_thursday_end_time");
+        hoursData.addStringProperty("hour_friday_start_time");
+        hoursData.addStringProperty("hour_friday_end_time");
+        hoursData.addStringProperty("hour_saturday_start_time");
+        hoursData.addStringProperty("hour_saturday_end_time");
+        hoursData.addStringProperty("hour_sunday_start_time");
+        hoursData.addStringProperty("hour_sunday_end_time");
+        return  hoursData;
+    }
     // This is use to describe the colums of your table
     private static Entity addScheduleDateDataEntities(final Schema schema) {
         Entity scheduleDateData = schema.addEntity("ScheduleDateData");

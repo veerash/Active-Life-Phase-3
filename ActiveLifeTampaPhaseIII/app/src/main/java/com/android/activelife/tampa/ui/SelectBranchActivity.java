@@ -10,7 +10,9 @@ import com.android.activelife.tampa.R;
 import com.android.activelife.tampa.adpater.SelectBranchListAdapter;
 import com.android.activelife.tampa.appcontroller.ActiveLifeApplication;
 import com.android.activelife.tampa.services.request.ApiRequest;
+import com.android.activelife.tampa.services.response.LocationData.Hour;
 import com.android.activelife.tampa.services.response.LocationData.LocationDataResponse;
+import com.android.activelife.tampa.services.response.LocationData.Times;
 import com.android.activelife.tampa.util.Utilities;
 
 import org.json.JSONObject;
@@ -48,12 +50,33 @@ public class SelectBranchActivity extends BaseActivity {
                     hideProgressDialog(SelectBranchActivity.this);
                     if (response.isSuccessful()) {
                         mLocationDataResponsesList = response.body();
-                        mSelectBranchListView.setAdapter(new SelectBranchListAdapter(SelectBranchActivity.this,mLocationDataResponsesList));
+                        mSelectBranchListView.setAdapter(new SelectBranchListAdapter(SelectBranchActivity.this, mLocationDataResponsesList));
                         mSelectBranchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                                 Intent mainIntent = new Intent(SelectBranchActivity.this, MainActivity.class);
                                 mainIntent.putExtra("title", mLocationDataResponsesList.get(i).getName());
+                                for (int j = 0; i < mLocationDataResponsesList.get(i).getHours().size(); j++) {
+                                    Hour object = mLocationDataResponsesList.get(i).getHours().get(j);
+                                    String name = object.getName();
+                                    Times times = object.getTimes();
+                                    String monStartTime = times.get1().getStartTime();
+                                    String monEndTime = times.get1().getEndTime();
+                                    String tueStartTime = times.get2().getStartTime();
+                                    String tueEndTime = times.get2().getEndTime();
+                                    String wedStartTime = times.get3().getStartTime();
+                                    String wedEndTime = times.get3().getEndTime();
+                                    String thuStartTime = times.get4().getStartTime();
+                                    String thuEndTime = times.get4().getEndTime();
+                                    String friStartTime = times.get5().getStartTime();
+                                    String friEndTime = times.get5().getEndTime();
+                                    String satStartTime = times.get6().getStartTime();
+                                    String satEndTime = times.get6().getEndTime();
+                                    String sunStartTime = times.get7().getStartTime();
+                                    String sunEndTime = times.get7().getEndTime();
+                                    ActiveLifeApplication.getInstance().setUpDb().insertHoursDao(name, monStartTime, monEndTime, tueStartTime, tueEndTime, wedStartTime, wedEndTime, thuStartTime, thuEndTime, friStartTime, friEndTime, satStartTime, satEndTime, sunStartTime, sunEndTime);
+                                }
+
                                 startActivity(mainIntent);
                                 Utilities.getSharedPrefernceData().storeValueIntoSharedPreference(getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_NAME, mLocationDataResponsesList.get(i).getName());
                                 finish();

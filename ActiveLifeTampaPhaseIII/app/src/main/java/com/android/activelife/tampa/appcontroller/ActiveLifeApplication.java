@@ -5,6 +5,7 @@ import android.os.StrictMode;
 import android.util.Log;
 
 import com.android.activelife.tampa.constants.StaticValuesConstants;
+import com.android.activelife.tampa.db.DbOperations;
 import com.android.activelife.tampa.services.request.ApiRequest;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -35,6 +36,7 @@ public class ActiveLifeApplication extends Application {
     public Retrofit jRetrofit;
     public ApiRequest jApiRequestService;
     private static ActiveLifeApplication mInstance;
+    public DbOperations dbOperations;
 
     @Override
     public void onCreate() {
@@ -59,7 +61,14 @@ public class ActiveLifeApplication extends Application {
         ImageLoader.getInstance().init(config.build());
         jApiRequestService = getRetrofit().create(ApiRequest.class);
     }
+    public DbOperations setUpDb() {
+        if (dbOperations == null) {
+            dbOperations = new DbOperations();
+            dbOperations.setupDB(getApplicationContext());
+        }
 
+        return dbOperations;
+    }
     public Retrofit getRetrofit() {
         try {
             jRetrofit = new Retrofit.Builder()

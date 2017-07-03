@@ -6,6 +6,7 @@ import android.util.Log;
 import com.android.activelife.tampa.services.response.LocationData.LocationDataResponse;
 import com.android.activelife.tampa.services.response.classdata.ClassDataResponse;
 import com.android.activelife.tampa.services.response.instructordata.InstructorDataResponse;
+import com.android.activelife.tampa.services.response.messagesdata.MessagesDataResponse;
 import com.android.activelife.tampa.services.response.scheduledatedata.ScheduleDateDataResponse;
 import com.android.activelife.tampa.services.response.schedulesdata.SchedulesDataResponse;
 
@@ -25,6 +26,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 import static com.android.activelife.tampa.constants.StaticValuesConstants.BASE_URL;
 
@@ -67,7 +69,13 @@ public interface ApiRequest {
     /**
      * Schedules API
      **/
-    @GET("schedules/{date}")
+    @GET("schedules")
     Call<List<SchedulesDataResponse>> getSchedules();
+
+    /**
+     * Messages API
+     **/
+    @GET("messages/{offset}")
+    Call<List<MessagesDataResponse>> getMessages(@Path("offset") String offset, @Query("location") int location);
 
 }
