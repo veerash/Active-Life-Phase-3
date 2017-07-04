@@ -56,6 +56,7 @@ public class SelectBranchActivity extends BaseActivity {
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                                 Intent mainIntent = new Intent(SelectBranchActivity.this, MainActivity.class);
                                 mainIntent.putExtra("title", mLocationDataResponsesList.get(i).getName());
+                                ActiveLifeApplication.getInstance().setUpDb().deleteHours();
                                 for (int j = 0; i < mLocationDataResponsesList.get(i).getHours().size(); j++) {
                                     Hour object = mLocationDataResponsesList.get(i).getHours().get(j);
                                     String name = object.getName();
@@ -79,6 +80,7 @@ public class SelectBranchActivity extends BaseActivity {
 
                                 startActivity(mainIntent);
                                 Utilities.getSharedPrefernceData().storeValueIntoSharedPreference(getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_NAME, mLocationDataResponsesList.get(i).getName());
+                                Utilities.getSharedPrefernceData().storeIntValueIntoSharedPreference(getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_ID, mLocationDataResponsesList.get(i).getId());
                                 finish();
                             }
                         });

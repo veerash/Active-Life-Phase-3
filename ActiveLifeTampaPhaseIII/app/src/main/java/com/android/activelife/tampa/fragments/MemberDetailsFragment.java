@@ -2,13 +2,15 @@ package com.android.activelife.tampa.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -17,7 +19,22 @@ import android.widget.RelativeLayout;
 import com.android.activelife.tampa.R;
 import com.android.activelife.tampa.adpater.HoursSceduleListAdapter;
 import com.android.activelife.tampa.adpater.MessagesListAdapter;
+import com.android.activelife.tampa.appcontroller.ActiveLifeApplication;
+import com.android.activelife.tampa.services.request.ApiRequest;
+import com.android.activelife.tampa.services.response.messagesdata.MessagesDataResponse;
+import com.android.activelife.tampa.ui.MainActivity;
 import com.android.activelife.tampa.ui.MessageDetailsActivity;
+import com.android.activelife.tampa.util.Utilities;
+import com.android.activelife.tampa.util.Utils;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,8 +49,14 @@ public class MemberDetailsFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private RadioGroup mDetailsRG;
+    private ListView messagesList;
     private RadioButton mMessagessRB, mDonateRB, mHoursRB, mContactRB, mProgramsRB;
     private RelativeLayout mLayoutContainer;
+    private ApiRequest mApiInterface;
+    private int offset = 0;
+    private List<MessagesDataResponse> mMessagesDataResponseList;
+    private Handler mHandler = new Handler();
+    private ListView hoursList;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -145,24 +168,120 @@ public class MemberDetailsFragment extends Fragment {
     public void setHoursList(final Bundle savedInstanceState) {
         View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_hours, null);
         setLayoutParams(child);
-        ListView hoursList = (ListView) child.findViewById(R.id.hours_list);
-        hoursList.setAdapter(new HoursSceduleListAdapter(getActivity()));
+        hoursList = (ListView) child.findViewById(R.id.hours_list);
+        hoursList.setAdapter(new HoursSceduleListAdapter(getActivity(),ActiveLifeApplication.getInstance().setUpDb().getHours()));
 
     }
 
     public void setMessagesList(final Bundle savedInstanceState) {
         View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_messages, null);
         setLayoutParams(child);
-        ListView messagesList = (ListView) child.findViewById(R.id.messages_list);
-        messagesList.setAdapter(new MessagesListAdapter(getActivity()));
+        messagesList = (ListView) child.findViewById(R.id.messages_list);
+        mMessagesDataResponseList = new ArrayList<>();
+        messagesList.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
 
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (totalItemCount != 0) {
+                    if ((firstVisibleItem + visibleItemCount + 1) > (totalItemCount - 2)) {
+
+                        int remaining = totalItemCount % 20;
+                        Log.i("remaining: ", ": " + remaining);
+                        if (remaining == 0) {
+                            offset = totalItemCount;
+                            mHandler.removeCallbacks(sendUpdatesToUI);
+                            mHandler.postDelayed(sendUpdatesToUI, 1000 * 2);
+                        }
+                    } else {
+                        mHandler.removeCallbacks(sendUpdatesToUI);
+                    }
+                }
+            }
+        });
         messagesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-               startActivity(new Intent(getActivity(), MessageDetailsActivity.class));
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Intent messsageIntent = new Intent(getActivity(), MessageDetailsActivity.class);
+                messsageIntent.putExtra("title", mMessagesDataResponseList.get(position).getTitle());
+                messsageIntent.putExtra("desc", mMessagesDataResponseList.get(position).getMessage());
+                String location = null;
+                for (int i = 0; i < mMessagesDataResponseList.get(position).getLocations().size(); i++) {
+                    if (location != null && location.length() > 0) {
+                        location = location + ", " + mMessagesDataResponseList.get(position).getLocations().get(i).getName();
+                    } else {
+                        location = mMessagesDataResponseList.get(position).getLocations().get(i).getName();
+                    }
+
+                }
+                messsageIntent.putExtra("location", location);
+                String dateTime = mMessagesDataResponseList.get(position).getSendAt();
+                messsageIntent.putExtra("date", Utils.getApplyiedDateType(dateTime, "yyyy-MM-dd'T'HH:mm:ss-HH:mm", "MMM dd, EEE"));
+                messsageIntent.putExtra("time", Utils.getApplyiedDateType(dateTime, "yyyy-MM-dd'T'HH:mm:ss-HH:mm", "hh:mm a"));
+                startActivity(messsageIntent);
 
             }
         });
+    }
+
+    public void getMessagesList() {
+        if (((MainActivity) getActivity()).checkIfInternet(getActivity())) {
+            mApiInterface = ActiveLifeApplication.getInstance()
+                    .getApiRequest();
+            Call<List<MessagesDataResponse>> call = mApiInterface.getMessages(offset, Utilities.getSharedPrefernceData().retreiveIntValueFromSharedPreference(getActivity().getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_ID));
+            call.enqueue(new Callback<List<MessagesDataResponse>>() {
+                @Override
+                public void onResponse(Call<List<MessagesDataResponse>> call, Response<List<MessagesDataResponse>> response) {
+                    mMessagesDataResponseList.addAll(response.body());
+                    if (response.isSuccessful()) {
+                        messagesList.setAdapter(new MessagesListAdapter(getActivity(), mMessagesDataResponseList));
+                        ((MainActivity) getActivity()).hideProgressDialog(getActivity());
+                    } else {
+                        ((MainActivity) getActivity()).hideProgressDialog(getActivity());
+                        if (response.errorBody() != null) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response.errorBody().string());
+                                Utilities.showToast(getActivity(), "" + jsonObject.getString("message"));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
+
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<List<MessagesDataResponse>> call, Throwable t) {
+                    ((MainActivity) getActivity()).hideProgressDialog(getActivity());
+
+                }
+            });
+            ((MainActivity) getActivity()).showProgressDialog(getActivity());
+        }
+    }
+
+    Runnable sendUpdatesToUI = new Runnable() {
+        public void run() {
+
+            getMessagesList();
+
+        }
+    };
+
+    @Override
+    public void onDestroy() {
+        try {
+            mHandler.removeCallbacks(sendUpdatesToUI);
+        } catch (Exception e) {
+
+        }
+        super.onDestroy();
     }
 
     public void setLayoutParams(View child) {

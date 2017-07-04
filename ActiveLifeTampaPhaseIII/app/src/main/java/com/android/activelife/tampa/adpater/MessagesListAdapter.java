@@ -12,6 +12,9 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.android.activelife.tampa.R;
+import com.android.activelife.tampa.services.response.messagesdata.MessagesDataResponse;
+
+import java.util.List;
 
 /**
  * Created by vsatrasala on 2/11/2017.
@@ -20,14 +23,16 @@ import com.android.activelife.tampa.R;
 public class MessagesListAdapter extends BaseAdapter {
 
     public Context jContext;
+    private List<MessagesDataResponse> mMessagesDataResponseList;
 
-    public MessagesListAdapter(Context ctx) {
+    public MessagesListAdapter(Context ctx,List<MessagesDataResponse> mMessagesDataResponseList) {
         this.jContext = ctx;
+        this.mMessagesDataResponseList=mMessagesDataResponseList;
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return mMessagesDataResponseList.size();
     }
 
     @Override
@@ -47,16 +52,18 @@ public class MessagesListAdapter extends BaseAdapter {
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(jContext).inflate(R.layout.list_row_messages, parent, false);
+            holder.messageLabel=(TextView)convertView.findViewById(R.id.message_heading);
+            holder.messageDesc=(TextView)convertView.findViewById(R.id.message_desc);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        holder.messageLabel.setText(""+mMessagesDataResponseList.get(position).getTitle());
+        holder.messageDesc.setText(""+mMessagesDataResponseList.get(position).getMessage());
         return convertView;
     }
 
     class ViewHolder {
-        TextView memberName;
-        LinearLayout memberDetailsLayout;
-        ImageView updateDetails, addDetails;
+        TextView messageLabel, messageDesc;
     }
 }

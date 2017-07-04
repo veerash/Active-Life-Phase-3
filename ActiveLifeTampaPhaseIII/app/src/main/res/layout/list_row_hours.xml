@@ -11,11 +11,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10sp"
         android:layout_marginTop="10sp"
-        android:text="Kid Zone Hours (6 years - 7 Years)"
         android:textColor="@color/light_gren"
         android:textSize="20sp" />
 
     <LinearLayout
+        android:id="@+id/hour_one_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10sp"
@@ -23,61 +23,60 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/hour_one_one_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20sp"
             android:orientation="vertical">
 
             <com.android.activelife.tampa.customviews.CachetProMediumTextView
-                android:id="@+id/hours_mon_th"
+                android:id="@+id/hours_one"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10sp"
                 android:layout_marginTop="10sp"
-                android:text="Monday - Thursday"
                 android:textColor="@color/grey_text"
                 android:textSize="15sp" />
 
             <com.android.activelife.tampa.customviews.CachetProRegularTextView
-                android:id="@+id/hours_mon_th_ti"
+                android:id="@+id/hours_one_ti"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10sp"
                 android:layout_marginTop="10sp"
-                android:text="8-12:30, 3:30-8:30p"
                 android:textColor="@color/grey_text"
                 android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/hour_one_two_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <com.android.activelife.tampa.customviews.CachetProMediumTextView
-                android:id="@+id/hours_fri"
+                android:id="@+id/hours_two"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10sp"
                 android:layout_marginTop="10sp"
-                android:text="Friday"
                 android:textColor="@color/grey_text"
                 android:textSize="15sp" />
 
             <com.android.activelife.tampa.customviews.CachetProRegularTextView
-                android:id="@+id/hours_fri_ti"
+                android:id="@+id/hours_two_ti"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10sp"
                 android:layout_marginTop="10sp"
-                android:text="8-12:30, 3:30-7p"
                 android:textColor="@color/grey_text"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/hour_two_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10sp"
@@ -85,58 +84,177 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/hour_two_one_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20sp"
             android:orientation="vertical">
 
             <com.android.activelife.tampa.customviews.CachetProMediumTextView
-                android:id="@+id/hours_sat"
+                android:id="@+id/hours_three"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10sp"
                 android:layout_marginTop="10sp"
-                android:text="Saturday"
                 android:textColor="@color/grey_text"
                 android:textSize="15sp" />
 
             <com.android.activelife.tampa.customviews.CachetProRegularTextView
-                android:id="@+id/hours_sat_ti"
+                android:id="@+id/hours_three_ti"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10sp"
                 android:layout_marginTop="10sp"
-                android:text="8:00-12:30p"
                 android:textColor="@color/grey_text"
                 android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/hour_two_two_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <com.android.activelife.tampa.customviews.CachetProMediumTextView
-                android:id="@+id/hours_sun"
+                android:id="@+id/hours_four"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10sp"
                 android:layout_marginTop="10sp"
-                android:text="Sunday"
                 android:textColor="@color/grey_text"
                 android:textSize="15sp" />
 
             <com.android.activelife.tampa.customviews.CachetProRegularTextView
-                android:id="@+id/hours_sun_ti"
+                android:id="@+id/hours_four_ti"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10sp"
                 android:layout_marginTop="10sp"
-                android:text="1:00-4:00p"
                 android:textColor="@color/grey_text"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/hour_three_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10sp"
+        android:layout_marginTop="10sp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/hour_three_one_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20sp"
+            android:orientation="vertical">
+
+            <com.android.activelife.tampa.customviews.CachetProMediumTextView
+                android:id="@+id/hours_five"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10sp"
+                android:layout_marginTop="10sp"
+                android:textColor="@color/grey_text"
+                android:textSize="15sp" />
+
+            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+                android:id="@+id/hours_five_ti"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10sp"
+                android:layout_marginTop="10sp"
+                android:textColor="@color/grey_text"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/hour_three_two_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <com.android.activelife.tampa.customviews.CachetProMediumTextView
+                android:id="@+id/hours_six"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10sp"
+                android:layout_marginTop="10sp"
+                android:textColor="@color/grey_text"
+                android:textSize="15sp" />
+
+            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+                android:id="@+id/hours_six_ti"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10sp"
+                android:layout_marginTop="10sp"
+                android:textColor="@color/grey_text"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/hour_four_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10sp"
+        android:layout_marginTop="10sp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/hour_four_one_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20sp"
+            android:orientation="vertical">
+
+            <com.android.activelife.tampa.customviews.CachetProMediumTextView
+                android:id="@+id/hours_seven"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10sp"
+                android:layout_marginTop="10sp"
+                android:textColor="@color/grey_text"
+                android:textSize="15sp" />
+
+            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+                android:id="@+id/hours_seven_ti"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10sp"
+                android:layout_marginTop="10sp"
+                android:textColor="@color/grey_text"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/hour_four_two_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <com.android.activelife.tampa.customviews.CachetProMediumTextView
+                android:id="@+id/hours_eight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10sp"
+                android:layout_marginTop="10sp"
+                android:textColor="@color/grey_text"
+                android:textSize="15sp" />
+
+            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+                android:id="@+id/hours_eight_ti"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10sp"
+                android:layout_marginTop="10sp"
+                android:textColor="@color/grey_text"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

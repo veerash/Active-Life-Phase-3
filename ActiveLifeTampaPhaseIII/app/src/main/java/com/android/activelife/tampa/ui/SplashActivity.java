@@ -49,6 +49,7 @@ public class SplashActivity extends BaseActivity {
                 public void onResponse(Call<List<ClassDataResponse>> call, Response<List<ClassDataResponse>> response) {
                     getAllSchedules();
                     if (response.isSuccessful()) {
+                        ActiveLifeApplication.getInstance().setUpDb().deleteClass();
                         List<ClassDataResponse> cdr = response.body();
                         for (int i = 0; i < cdr.size(); i++) {
                             ActiveLifeApplication.getInstance().setUpDb().insertClasses("" + cdr.get(i).getId(), cdr.get(i).getName(), cdr.get(i).getDescription());
@@ -75,6 +76,7 @@ public class SplashActivity extends BaseActivity {
                 public void onResponse(Call<List<SchedulesDataResponse>> call, Response<List<SchedulesDataResponse>> response) {
                     getAllInstructors();
                     if (response.isSuccessful()) {
+                        ActiveLifeApplication.getInstance().setUpDb().deleteSchedules();
                         List<SchedulesDataResponse> cdr = response.body();
                         for (int i = 0; i < cdr.size(); i++) {
                             ActiveLifeApplication.getInstance().setUpDb().insertSchedules("" + cdr.get(i).getId(), cdr.get(i).getName());
@@ -100,6 +102,7 @@ public class SplashActivity extends BaseActivity {
                 @Override
                 public void onResponse(Call<List<InstructorDataResponse>> call, Response<List<InstructorDataResponse>> response) {
                     if (response.isSuccessful()) {
+                        ActiveLifeApplication.getInstance().setUpDb().deleteInstructors();
                         List<InstructorDataResponse> cdr = response.body();
                         for (int i = 0; i < cdr.size(); i++) {
                             ActiveLifeApplication.getInstance().setUpDb().insertInstructors("" + cdr.get(i).getId(), cdr.get(i).getName());

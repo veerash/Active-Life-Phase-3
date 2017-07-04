@@ -76,6 +76,6 @@ public interface ApiRequest {
      * Messages API
      **/
     @GET("messages/{offset}")
-    Call<List<MessagesDataResponse>> getMessages(@Path("offset") String offset, @Query("location") int location);
+    Call<List<MessagesDataResponse>> getMessages(@Path("offset") int offset, @Query("location") int location);
 
 }

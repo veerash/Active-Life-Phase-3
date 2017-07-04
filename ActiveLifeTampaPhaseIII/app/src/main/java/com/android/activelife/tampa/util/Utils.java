@@ -2,9 +2,11 @@ package com.android.activelife.tampa.util;
 
 import android.content.res.Resources;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by bruce on 14-11-6.
@@ -62,5 +64,20 @@ public final class Utils {
         String endDaString = formatter.format(enddate);
         System.out.println("...date..."+endDaString);
         return endDaString;
+    }
+
+    public static  String getApplyiedDateType(String millis, String originalformat, String requiredFormat) {
+//        SimpleDateFormat df = new SimpleDateFormat("dd MMM YYYY, hh:mm a");
+//        String formattedDate = df.format(millis);
+        DateFormat originalFormat = new SimpleDateFormat(originalformat, Locale.ENGLISH); //"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        DateFormat targetFormat = new SimpleDateFormat(requiredFormat ); //"dd MMM yyyy"
+        String formattedDate = null;
+        try {
+            Date date = originalFormat.parse(millis);
+            formattedDate = targetFormat.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return formattedDate;
     }
 }
