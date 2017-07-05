@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
 import com.android.activelife.tampa.R;
 import com.android.activelife.tampa.util.InternetConnectivity;
@@ -51,6 +52,16 @@ public class BaseActivity extends AppCompatActivity {
             Utilities.showToast(getApplicationContext(), getResources().getString(R.string.internet_connection_message));
         }
         return false;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
     }
 
 

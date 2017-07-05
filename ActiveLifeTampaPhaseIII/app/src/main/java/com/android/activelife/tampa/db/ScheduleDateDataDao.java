@@ -27,23 +27,27 @@ public class ScheduleDateDataDao extends AbstractDao<ScheduleDateData, Long> {
         public final static Property Schedule_name = new Property(2, String.class, "schedule_name", false, "SCHEDULE_NAME");
         public final static Property Class_id = new Property(3, String.class, "class_id", false, "CLASS_ID");
         public final static Property Class_name = new Property(4, String.class, "class_name", false, "CLASS_NAME");
-        public final static Property Schedule_type_id = new Property(5, String.class, "schedule_type_id", false, "SCHEDULE_TYPE_ID");
-        public final static Property Schedule_type = new Property(6, String.class, "schedule_type", false, "SCHEDULE_TYPE");
-        public final static Property Schedule_start_time = new Property(7, String.class, "schedule_start_time", false, "SCHEDULE_START_TIME");
-        public final static Property Schedule_end_time = new Property(8, String.class, "schedule_end_time", false, "SCHEDULE_END_TIME");
-        public final static Property Schedule_monday = new Property(9, Boolean.class, "schedule_monday", false, "SCHEDULE_MONDAY");
-        public final static Property Schedule_tuesday = new Property(10, Boolean.class, "schedule_tuesday", false, "SCHEDULE_TUESDAY");
-        public final static Property Schedule_wednesday = new Property(11, Boolean.class, "schedule_wednesday", false, "SCHEDULE_WEDNESDAY");
-        public final static Property Schedule_thursday = new Property(12, Boolean.class, "schedule_thursday", false, "SCHEDULE_THURSDAY");
-        public final static Property Schedule_friday = new Property(13, Boolean.class, "schedule_friday", false, "SCHEDULE_FRIDAY");
-        public final static Property Schedule_saturday = new Property(14, Boolean.class, "schedule_saturday", false, "SCHEDULE_SATURDAY");
-        public final static Property Schedule_sunday = new Property(15, Boolean.class, "schedule_sunday", false, "SCHEDULE_SUNDAY");
-        public final static Property Schedule_frequency = new Property(16, String.class, "schedule_frequency", false, "SCHEDULE_FREQUENCY");
-        public final static Property Is_cancelled = new Property(17, Boolean.class, "is_cancelled", false, "IS_CANCELLED");
-        public final static Property Instructor_id = new Property(18, String.class, "instructor_id", false, "INSTRUCTOR_ID");
-        public final static Property Instructor_name = new Property(19, String.class, "instructor_name", false, "INSTRUCTOR_NAME");
-        public final static Property Location_id = new Property(20, String.class, "location_id", false, "LOCATION_ID");
-        public final static Property Location_name = new Property(21, String.class, "location_name", false, "LOCATION_NAME");
+        public final static Property Class_desc = new Property(5, String.class, "class_desc", false, "CLASS_DESC");
+        public final static Property Schedule_type_id = new Property(6, String.class, "schedule_type_id", false, "SCHEDULE_TYPE_ID");
+        public final static Property Schedule_type = new Property(7, String.class, "schedule_type", false, "SCHEDULE_TYPE");
+        public final static Property Schedule_start_date = new Property(8, String.class, "schedule_start_date", false, "SCHEDULE_START_DATE");
+        public final static Property Schedule_start_time = new Property(9, String.class, "schedule_start_time", false, "SCHEDULE_START_TIME");
+        public final static Property Schedule_end_time = new Property(10, String.class, "schedule_end_time", false, "SCHEDULE_END_TIME");
+        public final static Property Schedule_start_time_long = new Property(11, Long.class, "schedule_start_time_long", false, "SCHEDULE_START_TIME_LONG");
+        public final static Property Schedule_end_time_long = new Property(12, Long.class, "schedule_end_time_long", false, "SCHEDULE_END_TIME_LONG");
+        public final static Property Schedule_monday = new Property(13, Boolean.class, "schedule_monday", false, "SCHEDULE_MONDAY");
+        public final static Property Schedule_tuesday = new Property(14, Boolean.class, "schedule_tuesday", false, "SCHEDULE_TUESDAY");
+        public final static Property Schedule_wednesday = new Property(15, Boolean.class, "schedule_wednesday", false, "SCHEDULE_WEDNESDAY");
+        public final static Property Schedule_thursday = new Property(16, Boolean.class, "schedule_thursday", false, "SCHEDULE_THURSDAY");
+        public final static Property Schedule_friday = new Property(17, Boolean.class, "schedule_friday", false, "SCHEDULE_FRIDAY");
+        public final static Property Schedule_saturday = new Property(18, Boolean.class, "schedule_saturday", false, "SCHEDULE_SATURDAY");
+        public final static Property Schedule_sunday = new Property(19, Boolean.class, "schedule_sunday", false, "SCHEDULE_SUNDAY");
+        public final static Property Schedule_frequency = new Property(20, String.class, "schedule_frequency", false, "SCHEDULE_FREQUENCY");
+        public final static Property Is_cancelled = new Property(21, Boolean.class, "is_cancelled", false, "IS_CANCELLED");
+        public final static Property Instructor_id = new Property(22, String.class, "instructor_id", false, "INSTRUCTOR_ID");
+        public final static Property Instructor_name = new Property(23, String.class, "instructor_name", false, "INSTRUCTOR_NAME");
+        public final static Property Location_id = new Property(24, String.class, "location_id", false, "LOCATION_ID");
+        public final static Property Location_name = new Property(25, String.class, "location_name", false, "LOCATION_NAME");
     }
 
 
@@ -64,23 +68,27 @@ public class ScheduleDateDataDao extends AbstractDao<ScheduleDateData, Long> {
                 "\"SCHEDULE_NAME\" TEXT," + // 2: schedule_name
                 "\"CLASS_ID\" TEXT," + // 3: class_id
                 "\"CLASS_NAME\" TEXT," + // 4: class_name
-                "\"SCHEDULE_TYPE_ID\" TEXT," + // 5: schedule_type_id
-                "\"SCHEDULE_TYPE\" TEXT," + // 6: schedule_type
-                "\"SCHEDULE_START_TIME\" TEXT," + // 7: schedule_start_time
-                "\"SCHEDULE_END_TIME\" TEXT," + // 8: schedule_end_time
-                "\"SCHEDULE_MONDAY\" INTEGER," + // 9: schedule_monday
-                "\"SCHEDULE_TUESDAY\" INTEGER," + // 10: schedule_tuesday
-                "\"SCHEDULE_WEDNESDAY\" INTEGER," + // 11: schedule_wednesday
-                "\"SCHEDULE_THURSDAY\" INTEGER," + // 12: schedule_thursday
-                "\"SCHEDULE_FRIDAY\" INTEGER," + // 13: schedule_friday
-                "\"SCHEDULE_SATURDAY\" INTEGER," + // 14: schedule_saturday
-                "\"SCHEDULE_SUNDAY\" INTEGER," + // 15: schedule_sunday
-                "\"SCHEDULE_FREQUENCY\" TEXT," + // 16: schedule_frequency
-                "\"IS_CANCELLED\" INTEGER," + // 17: is_cancelled
-                "\"INSTRUCTOR_ID\" TEXT," + // 18: instructor_id
-                "\"INSTRUCTOR_NAME\" TEXT," + // 19: instructor_name
-                "\"LOCATION_ID\" TEXT," + // 20: location_id
-                "\"LOCATION_NAME\" TEXT);"); // 21: location_name
+                "\"CLASS_DESC\" TEXT," + // 5: class_desc
+                "\"SCHEDULE_TYPE_ID\" TEXT," + // 6: schedule_type_id
+                "\"SCHEDULE_TYPE\" TEXT," + // 7: schedule_type
+                "\"SCHEDULE_START_DATE\" TEXT," + // 8: schedule_start_date
+                "\"SCHEDULE_START_TIME\" TEXT," + // 9: schedule_start_time
+                "\"SCHEDULE_END_TIME\" TEXT," + // 10: schedule_end_time
+                "\"SCHEDULE_START_TIME_LONG\" INTEGER," + // 11: schedule_start_time_long
+                "\"SCHEDULE_END_TIME_LONG\" INTEGER," + // 12: schedule_end_time_long
+                "\"SCHEDULE_MONDAY\" INTEGER," + // 13: schedule_monday
+                "\"SCHEDULE_TUESDAY\" INTEGER," + // 14: schedule_tuesday
+                "\"SCHEDULE_WEDNESDAY\" INTEGER," + // 15: schedule_wednesday
+                "\"SCHEDULE_THURSDAY\" INTEGER," + // 16: schedule_thursday
+                "\"SCHEDULE_FRIDAY\" INTEGER," + // 17: schedule_friday
+                "\"SCHEDULE_SATURDAY\" INTEGER," + // 18: schedule_saturday
+                "\"SCHEDULE_SUNDAY\" INTEGER," + // 19: schedule_sunday
+                "\"SCHEDULE_FREQUENCY\" TEXT," + // 20: schedule_frequency
+                "\"IS_CANCELLED\" INTEGER," + // 21: is_cancelled
+                "\"INSTRUCTOR_ID\" TEXT," + // 22: instructor_id
+                "\"INSTRUCTOR_NAME\" TEXT," + // 23: instructor_name
+                "\"LOCATION_ID\" TEXT," + // 24: location_id
+                "\"LOCATION_NAME\" TEXT);"); // 25: location_name
     }
 
     /** Drops the underlying database table. */
@@ -114,89 +122,109 @@ public class ScheduleDateDataDao extends AbstractDao<ScheduleDateData, Long> {
             stmt.bindString(5, class_name);
         }
  
+        String class_desc = entity.getClass_desc();
+        if (class_desc != null) {
+            stmt.bindString(6, class_desc);
+        }
+ 
         String schedule_type_id = entity.getSchedule_type_id();
         if (schedule_type_id != null) {
-            stmt.bindString(6, schedule_type_id);
+            stmt.bindString(7, schedule_type_id);
         }
  
         String schedule_type = entity.getSchedule_type();
         if (schedule_type != null) {
-            stmt.bindString(7, schedule_type);
+            stmt.bindString(8, schedule_type);
+        }
+ 
+        String schedule_start_date = entity.getSchedule_start_date();
+        if (schedule_start_date != null) {
+            stmt.bindString(9, schedule_start_date);
         }
  
         String schedule_start_time = entity.getSchedule_start_time();
         if (schedule_start_time != null) {
-            stmt.bindString(8, schedule_start_time);
+            stmt.bindString(10, schedule_start_time);
         }
  
         String schedule_end_time = entity.getSchedule_end_time();
         if (schedule_end_time != null) {
-            stmt.bindString(9, schedule_end_time);
+            stmt.bindString(11, schedule_end_time);
+        }
+ 
+        Long schedule_start_time_long = entity.getSchedule_start_time_long();
+        if (schedule_start_time_long != null) {
+            stmt.bindLong(12, schedule_start_time_long);
+        }
+ 
+        Long schedule_end_time_long = entity.getSchedule_end_time_long();
+        if (schedule_end_time_long != null) {
+            stmt.bindLong(13, schedule_end_time_long);
         }
  
         Boolean schedule_monday = entity.getSchedule_monday();
         if (schedule_monday != null) {
-            stmt.bindLong(10, schedule_monday ? 1L: 0L);
+            stmt.bindLong(14, schedule_monday ? 1L: 0L);
         }
  
         Boolean schedule_tuesday = entity.getSchedule_tuesday();
         if (schedule_tuesday != null) {
-            stmt.bindLong(11, schedule_tuesday ? 1L: 0L);
+            stmt.bindLong(15, schedule_tuesday ? 1L: 0L);
         }
  
         Boolean schedule_wednesday = entity.getSchedule_wednesday();
         if (schedule_wednesday != null) {
-            stmt.bindLong(12, schedule_wednesday ? 1L: 0L);
+            stmt.bindLong(16, schedule_wednesday ? 1L: 0L);
         }
  
         Boolean schedule_thursday = entity.getSchedule_thursday();
         if (schedule_thursday != null) {
-            stmt.bindLong(13, schedule_thursday ? 1L: 0L);
+            stmt.bindLong(17, schedule_thursday ? 1L: 0L);
         }
  
         Boolean schedule_friday = entity.getSchedule_friday();
         if (schedule_friday != null) {
-            stmt.bindLong(14, schedule_friday ? 1L: 0L);
+            stmt.bindLong(18, schedule_friday ? 1L: 0L);
         }
  
         Boolean schedule_saturday = entity.getSchedule_saturday();
         if (schedule_saturday != null) {
-            stmt.bindLong(15, schedule_saturday ? 1L: 0L);
+            stmt.bindLong(19, schedule_saturday ? 1L: 0L);
         }
  
         Boolean schedule_sunday = entity.getSchedule_sunday();
         if (schedule_sunday != null) {
-            stmt.bindLong(16, schedule_sunday ? 1L: 0L);
+            stmt.bindLong(20, schedule_sunday ? 1L: 0L);
         }
  
         String schedule_frequency = entity.getSchedule_frequency();
         if (schedule_frequency != null) {
-            stmt.bindString(17, schedule_frequency);
+            stmt.bindString(21, schedule_frequency);
         }
  
         Boolean is_cancelled = entity.getIs_cancelled();
         if (is_cancelled != null) {
-            stmt.bindLong(18, is_cancelled ? 1L: 0L);
+            stmt.bindLong(22, is_cancelled ? 1L: 0L);
         }
  
         String instructor_id = entity.getInstructor_id();
         if (instructor_id != null) {
-            stmt.bindString(19, instructor_id);
+            stmt.bindString(23, instructor_id);
         }
  
         String instructor_name = entity.getInstructor_name();
         if (instructor_name != null) {
-            stmt.bindString(20, instructor_name);
+            stmt.bindString(24, instructor_name);
         }
  
         String location_id = entity.getLocation_id();
         if (location_id != null) {
-            stmt.bindString(21, location_id);
+            stmt.bindString(25, location_id);
         }
  
         String location_name = entity.getLocation_name();
         if (location_name != null) {
-            stmt.bindString(22, location_name);
+            stmt.bindString(26, location_name);
         }
     }
 
@@ -225,89 +253,109 @@ public class ScheduleDateDataDao extends AbstractDao<ScheduleDateData, Long> {
             stmt.bindString(5, class_name);
         }
  
+        String class_desc = entity.getClass_desc();
+        if (class_desc != null) {
+            stmt.bindString(6, class_desc);
+        }
+ 
         String schedule_type_id = entity.getSchedule_type_id();
         if (schedule_type_id != null) {
-            stmt.bindString(6, schedule_type_id);
+            stmt.bindString(7, schedule_type_id);
         }
  
         String schedule_type = entity.getSchedule_type();
         if (schedule_type != null) {
-            stmt.bindString(7, schedule_type);
+            stmt.bindString(8, schedule_type);
+        }
+ 
+        String schedule_start_date = entity.getSchedule_start_date();
+        if (schedule_start_date != null) {
+            stmt.bindString(9, schedule_start_date);
         }
  
         String schedule_start_time = entity.getSchedule_start_time();
         if (schedule_start_time != null) {
-            stmt.bindString(8, schedule_start_time);
+            stmt.bindString(10, schedule_start_time);
         }
  
         String schedule_end_time = entity.getSchedule_end_time();
         if (schedule_end_time != null) {
-            stmt.bindString(9, schedule_end_time);
+            stmt.bindString(11, schedule_end_time);
+        }
+ 
+        Long schedule_start_time_long = entity.getSchedule_start_time_long();
+        if (schedule_start_time_long != null) {
+            stmt.bindLong(12, schedule_start_time_long);
+        }
+ 
+        Long schedule_end_time_long = entity.getSchedule_end_time_long();
+        if (schedule_end_time_long != null) {
+            stmt.bindLong(13, schedule_end_time_long);
         }
  
         Boolean schedule_monday = entity.getSchedule_monday();
         if (schedule_monday != null) {
-            stmt.bindLong(10, schedule_monday ? 1L: 0L);
+            stmt.bindLong(14, schedule_monday ? 1L: 0L);
         }
  
         Boolean schedule_tuesday = entity.getSchedule_tuesday();
         if (schedule_tuesday != null) {
-            stmt.bindLong(11, schedule_tuesday ? 1L: 0L);
+            stmt.bindLong(15, schedule_tuesday ? 1L: 0L);
         }
  
         Boolean schedule_wednesday = entity.getSchedule_wednesday();
         if (schedule_wednesday != null) {
-            stmt.bindLong(12, schedule_wednesday ? 1L: 0L);
+            stmt.bindLong(16, schedule_wednesday ? 1L: 0L);
         }
  
         Boolean schedule_thursday = entity.getSchedule_thursday();
         if (schedule_thursday != null) {
-            stmt.bindLong(13, schedule_thursday ? 1L: 0L);
+            stmt.bindLong(17, schedule_thursday ? 1L: 0L);
         }
  
         Boolean schedule_friday = entity.getSchedule_friday();
         if (schedule_friday != null) {
-            stmt.bindLong(14, schedule_friday ? 1L: 0L);
+            stmt.bindLong(18, schedule_friday ? 1L: 0L);
         }
  
         Boolean schedule_saturday = entity.getSchedule_saturday();
         if (schedule_saturday != null) {
-            stmt.bindLong(15, schedule_saturday ? 1L: 0L);
+            stmt.bindLong(19, schedule_saturday ? 1L: 0L);
         }
  
         Boolean schedule_sunday = entity.getSchedule_sunday();
         if (schedule_sunday != null) {
-            stmt.bindLong(16, schedule_sunday ? 1L: 0L);
+            stmt.bindLong(20, schedule_sunday ? 1L: 0L);
         }
  
         String schedule_frequency = entity.getSchedule_frequency();
         if (schedule_frequency != null) {
-            stmt.bindString(17, schedule_frequency);
+            stmt.bindString(21, schedule_frequency);
         }
  
         Boolean is_cancelled = entity.getIs_cancelled();
         if (is_cancelled != null) {
-            stmt.bindLong(18, is_cancelled ? 1L: 0L);
+            stmt.bindLong(22, is_cancelled ? 1L: 0L);
         }
  
         String instructor_id = entity.getInstructor_id();
         if (instructor_id != null) {
-            stmt.bindString(19, instructor_id);
+            stmt.bindString(23, instructor_id);
         }
  
         String instructor_name = entity.getInstructor_name();
         if (instructor_name != null) {
-            stmt.bindString(20, instructor_name);
+            stmt.bindString(24, instructor_name);
         }
  
         String location_id = entity.getLocation_id();
         if (location_id != null) {
-            stmt.bindString(21, location_id);
+            stmt.bindString(25, location_id);
         }
  
         String location_name = entity.getLocation_name();
         if (location_name != null) {
-            stmt.bindString(22, location_name);
+            stmt.bindString(26, location_name);
         }
     }
 
@@ -324,23 +372,27 @@ public class ScheduleDateDataDao extends AbstractDao<ScheduleDateData, Long> {
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // schedule_name
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // class_id
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // class_name
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // schedule_type_id
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // schedule_type
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // schedule_start_time
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // schedule_end_time
-            cursor.isNull(offset + 9) ? null : cursor.getShort(offset + 9) != 0, // schedule_monday
-            cursor.isNull(offset + 10) ? null : cursor.getShort(offset + 10) != 0, // schedule_tuesday
-            cursor.isNull(offset + 11) ? null : cursor.getShort(offset + 11) != 0, // schedule_wednesday
-            cursor.isNull(offset + 12) ? null : cursor.getShort(offset + 12) != 0, // schedule_thursday
-            cursor.isNull(offset + 13) ? null : cursor.getShort(offset + 13) != 0, // schedule_friday
-            cursor.isNull(offset + 14) ? null : cursor.getShort(offset + 14) != 0, // schedule_saturday
-            cursor.isNull(offset + 15) ? null : cursor.getShort(offset + 15) != 0, // schedule_sunday
-            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // schedule_frequency
-            cursor.isNull(offset + 17) ? null : cursor.getShort(offset + 17) != 0, // is_cancelled
-            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // instructor_id
-            cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19), // instructor_name
-            cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // location_id
-            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21) // location_name
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // class_desc
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // schedule_type_id
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // schedule_type
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // schedule_start_date
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // schedule_start_time
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // schedule_end_time
+            cursor.isNull(offset + 11) ? null : cursor.getLong(offset + 11), // schedule_start_time_long
+            cursor.isNull(offset + 12) ? null : cursor.getLong(offset + 12), // schedule_end_time_long
+            cursor.isNull(offset + 13) ? null : cursor.getShort(offset + 13) != 0, // schedule_monday
+            cursor.isNull(offset + 14) ? null : cursor.getShort(offset + 14) != 0, // schedule_tuesday
+            cursor.isNull(offset + 15) ? null : cursor.getShort(offset + 15) != 0, // schedule_wednesday
+            cursor.isNull(offset + 16) ? null : cursor.getShort(offset + 16) != 0, // schedule_thursday
+            cursor.isNull(offset + 17) ? null : cursor.getShort(offset + 17) != 0, // schedule_friday
+            cursor.isNull(offset + 18) ? null : cursor.getShort(offset + 18) != 0, // schedule_saturday
+            cursor.isNull(offset + 19) ? null : cursor.getShort(offset + 19) != 0, // schedule_sunday
+            cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // schedule_frequency
+            cursor.isNull(offset + 21) ? null : cursor.getShort(offset + 21) != 0, // is_cancelled
+            cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // instructor_id
+            cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // instructor_name
+            cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // location_id
+            cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25) // location_name
         );
         return entity;
     }
@@ -352,23 +404,27 @@ public class ScheduleDateDataDao extends AbstractDao<ScheduleDateData, Long> {
         entity.setSchedule_name(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setClass_id(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setClass_name(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setSchedule_type_id(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setSchedule_type(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setSchedule_start_time(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setSchedule_end_time(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setSchedule_monday(cursor.isNull(offset + 9) ? null : cursor.getShort(offset + 9) != 0);
-        entity.setSchedule_tuesday(cursor.isNull(offset + 10) ? null : cursor.getShort(offset + 10) != 0);
-        entity.setSchedule_wednesday(cursor.isNull(offset + 11) ? null : cursor.getShort(offset + 11) != 0);
-        entity.setSchedule_thursday(cursor.isNull(offset + 12) ? null : cursor.getShort(offset + 12) != 0);
-        entity.setSchedule_friday(cursor.isNull(offset + 13) ? null : cursor.getShort(offset + 13) != 0);
-        entity.setSchedule_saturday(cursor.isNull(offset + 14) ? null : cursor.getShort(offset + 14) != 0);
-        entity.setSchedule_sunday(cursor.isNull(offset + 15) ? null : cursor.getShort(offset + 15) != 0);
-        entity.setSchedule_frequency(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
-        entity.setIs_cancelled(cursor.isNull(offset + 17) ? null : cursor.getShort(offset + 17) != 0);
-        entity.setInstructor_id(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
-        entity.setInstructor_name(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
-        entity.setLocation_id(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
-        entity.setLocation_name(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
+        entity.setClass_desc(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setSchedule_type_id(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setSchedule_type(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setSchedule_start_date(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setSchedule_start_time(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setSchedule_end_time(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setSchedule_start_time_long(cursor.isNull(offset + 11) ? null : cursor.getLong(offset + 11));
+        entity.setSchedule_end_time_long(cursor.isNull(offset + 12) ? null : cursor.getLong(offset + 12));
+        entity.setSchedule_monday(cursor.isNull(offset + 13) ? null : cursor.getShort(offset + 13) != 0);
+        entity.setSchedule_tuesday(cursor.isNull(offset + 14) ? null : cursor.getShort(offset + 14) != 0);
+        entity.setSchedule_wednesday(cursor.isNull(offset + 15) ? null : cursor.getShort(offset + 15) != 0);
+        entity.setSchedule_thursday(cursor.isNull(offset + 16) ? null : cursor.getShort(offset + 16) != 0);
+        entity.setSchedule_friday(cursor.isNull(offset + 17) ? null : cursor.getShort(offset + 17) != 0);
+        entity.setSchedule_saturday(cursor.isNull(offset + 18) ? null : cursor.getShort(offset + 18) != 0);
+        entity.setSchedule_sunday(cursor.isNull(offset + 19) ? null : cursor.getShort(offset + 19) != 0);
+        entity.setSchedule_frequency(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
+        entity.setIs_cancelled(cursor.isNull(offset + 21) ? null : cursor.getShort(offset + 21) != 0);
+        entity.setInstructor_id(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
+        entity.setInstructor_name(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
+        entity.setLocation_id(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
+        entity.setLocation_name(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
      }
     
     @Override

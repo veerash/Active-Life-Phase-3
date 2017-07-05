@@ -149,7 +149,7 @@ public class LocationsFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<List<LocationDataResponse>> call, Throwable t) {
-
+                    ((MainActivity)getActivity()).hideProgressDialog(getActivity());
                 }
             });
             ((MainActivity)getActivity()).showProgressDialog(getActivity());

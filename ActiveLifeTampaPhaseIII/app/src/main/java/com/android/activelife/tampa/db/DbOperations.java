@@ -5,6 +5,7 @@ import android.content.Context;
 import org.greenrobot.greendao.database.Database;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by vsatrasala on 7/3/2017.
@@ -57,6 +58,28 @@ public class DbOperations {
         }
         return (ArrayList<ScheduleDateData>) jScheduleDateDataDao
                 .queryBuilder().build().list();
+    }
+
+    public ScheduleDateData getScheduleDateOfId(String schedule_id) {
+        try {
+            if (jScheduleDateDataDao == null) {
+                jScheduleDateDataDao = getDaoSession().getScheduleDateDataDao();
+
+            }
+            List<ScheduleDateData> list = jScheduleDateDataDao
+                    .queryBuilder()
+                    .where(ScheduleDateDataDao.Properties.Schedule_id
+                            .eq(schedule_id)).build().list();
+            if (list != null && list.size() > 0) {
+                return list.get(0);
+
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 
     public void deleteScheduleDate() {

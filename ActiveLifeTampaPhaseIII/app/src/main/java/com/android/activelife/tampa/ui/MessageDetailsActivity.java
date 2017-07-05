@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.android.activelife.tampa.R;
 
-public class MessageDetailsActivity extends AppCompatActivity {
+public class MessageDetailsActivity extends BaseActivity {
     private TextView mTitle, mMessage, mLocation, mDate, mTime;
 
     @Override
@@ -22,20 +22,13 @@ public class MessageDetailsActivity extends AppCompatActivity {
         mLocation = (TextView) findViewById(R.id.message_loc);
         mDate = (TextView) findViewById(R.id.message_date);
         mTime = (TextView) findViewById(R.id.message_time);
+        setTitle("" + getIntent().getStringExtra("title"));
         mTitle.setText("" + getIntent().getStringExtra("title"));
         mMessage.setText("" + getIntent().getStringExtra("desc"));
         mLocation.setText("Location: " + getIntent().getStringExtra("location"));
-        mDate.setText("Location: " + getIntent().getStringExtra("date"));
-        mTime.setText("Location: " + getIntent().getStringExtra("time"));
+        mDate.setText("Date: " + getIntent().getStringExtra("date"));
+        mTime.setText("Time: " + getIntent().getStringExtra("time"));
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
-        }
-        return true;
-    }
+
 }

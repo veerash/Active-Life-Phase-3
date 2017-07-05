@@ -19,10 +19,14 @@ public class ScheduleDateData {
     private String schedule_name;
     private String class_id;
     private String class_name;
+    private String class_desc;
     private String schedule_type_id;
     private String schedule_type;
+    private String schedule_start_date;
     private String schedule_start_time;
     private String schedule_end_time;
+    private Long schedule_start_time_long;
+    private Long schedule_end_time_long;
     private Boolean schedule_monday;
     private Boolean schedule_tuesday;
     private Boolean schedule_wednesday;
@@ -49,16 +53,20 @@ public class ScheduleDateData {
     }
 
     @Generated
-    public ScheduleDateData(Long id, int schedule_id, String schedule_name, String class_id, String class_name, String schedule_type_id, String schedule_type, String schedule_start_time, String schedule_end_time, Boolean schedule_monday, Boolean schedule_tuesday, Boolean schedule_wednesday, Boolean schedule_thursday, Boolean schedule_friday, Boolean schedule_saturday, Boolean schedule_sunday, String schedule_frequency, Boolean is_cancelled, String instructor_id, String instructor_name, String location_id, String location_name) {
+    public ScheduleDateData(Long id, int schedule_id, String schedule_name, String class_id, String class_name, String class_desc, String schedule_type_id, String schedule_type, String schedule_start_date, String schedule_start_time, String schedule_end_time, Long schedule_start_time_long, Long schedule_end_time_long, Boolean schedule_monday, Boolean schedule_tuesday, Boolean schedule_wednesday, Boolean schedule_thursday, Boolean schedule_friday, Boolean schedule_saturday, Boolean schedule_sunday, String schedule_frequency, Boolean is_cancelled, String instructor_id, String instructor_name, String location_id, String location_name) {
         this.id = id;
         this.schedule_id = schedule_id;
         this.schedule_name = schedule_name;
         this.class_id = class_id;
         this.class_name = class_name;
+        this.class_desc = class_desc;
         this.schedule_type_id = schedule_type_id;
         this.schedule_type = schedule_type;
+        this.schedule_start_date = schedule_start_date;
         this.schedule_start_time = schedule_start_time;
         this.schedule_end_time = schedule_end_time;
+        this.schedule_start_time_long = schedule_start_time_long;
+        this.schedule_end_time_long = schedule_end_time_long;
         this.schedule_monday = schedule_monday;
         this.schedule_tuesday = schedule_tuesday;
         this.schedule_wednesday = schedule_wednesday;
@@ -114,6 +122,14 @@ public class ScheduleDateData {
         this.class_name = class_name;
     }
 
+    public String getClass_desc() {
+        return class_desc;
+    }
+
+    public void setClass_desc(String class_desc) {
+        this.class_desc = class_desc;
+    }
+
     public String getSchedule_type_id() {
         return schedule_type_id;
     }
@@ -130,6 +146,14 @@ public class ScheduleDateData {
         this.schedule_type = schedule_type;
     }
 
+    public String getSchedule_start_date() {
+        return schedule_start_date;
+    }
+
+    public void setSchedule_start_date(String schedule_start_date) {
+        this.schedule_start_date = schedule_start_date;
+    }
+
     public String getSchedule_start_time() {
         return schedule_start_time;
     }
@@ -144,6 +168,22 @@ public class ScheduleDateData {
 
     public void setSchedule_end_time(String schedule_end_time) {
         this.schedule_end_time = schedule_end_time;
+    }
+
+    public Long getSchedule_start_time_long() {
+        return schedule_start_time_long;
+    }
+
+    public void setSchedule_start_time_long(Long schedule_start_time_long) {
+        this.schedule_start_time_long = schedule_start_time_long;
+    }
+
+    public Long getSchedule_end_time_long() {
+        return schedule_end_time_long;
+    }
+
+    public void setSchedule_end_time_long(Long schedule_end_time_long) {
+        this.schedule_end_time_long = schedule_end_time_long;
     }
 
     public Boolean getSchedule_monday() {

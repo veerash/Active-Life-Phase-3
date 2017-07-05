@@ -78,10 +78,14 @@ public class MyGenerator {
         scheduleDateData.addStringProperty("schedule_name");
         scheduleDateData.addStringProperty("class_id");
         scheduleDateData.addStringProperty("class_name");
+        scheduleDateData.addStringProperty("class_desc");
         scheduleDateData.addStringProperty("schedule_type_id");
         scheduleDateData.addStringProperty("schedule_type");
+        scheduleDateData.addStringProperty("schedule_start_date");
         scheduleDateData.addStringProperty("schedule_start_time");
         scheduleDateData.addStringProperty("schedule_end_time");
+        scheduleDateData.addLongProperty("schedule_start_time_long");
+        scheduleDateData.addLongProperty("schedule_end_time_long");
         scheduleDateData.addBooleanProperty("schedule_monday");
         scheduleDateData.addBooleanProperty("schedule_tuesday");
         scheduleDateData.addBooleanProperty("schedule_wednesday");

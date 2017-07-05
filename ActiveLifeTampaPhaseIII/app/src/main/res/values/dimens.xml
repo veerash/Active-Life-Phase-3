@@ -16,7 +16,9 @@
     <dimen name="member_contact_name">24dp</dimen>
     <dimen name="member_contact">15dp</dimen>
     <dimen name="text_margin">16dp</dimen>
-
+    <dimen name="margin_top_bottom">10dp</dimen>
+    <dimen name="negative_margin_top_bottom">-10dp</dimen>
+    <dimen name="margin_bottom_top_bottom">15dp</dimen>
     //Member Setting Screen
     <dimen name="default_location_header_text_size">15dp</dimen>
     <dimen name="settings_text_size">14dp</dimen>
