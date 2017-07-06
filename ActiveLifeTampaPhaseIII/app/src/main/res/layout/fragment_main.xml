@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,7 +49,7 @@
             android:orientation="vertical">
 
             <Spinner
-                android:id="@+id/spinner_1"
+                android:id="@+id/schedules_spinner"
                 style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
 
 
             <Spinner
-                android:id="@+id/spinner_2"
+                android:id="@+id/classes_spinner"
                 style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
 
 
             <Spinner
-                android:id="@+id/spinner_3"
+                android:id="@+id/instructors_spinner"
                 style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -89,12 +89,13 @@
 
             <org.florescu.android.rangeseekbar.RangeSeekBar
                 android:id="@+id/rangeSeekBar"
+                app:valuesAboveThumbs="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/ten_dip"
                 android:layout_weight="1"
-                rsb:absoluteMaxValue="100"
-                rsb:absoluteMinValue="10"
+                rsb:absoluteMaxValue="24"
+                rsb:absoluteMinValue="0"
                 rsb:activateOnDefaultValues="true"
                 rsb:activeColor="@color/DeepSkyBlue"
                 rsb:barHeight="@dimen/ten_dip"
@@ -106,6 +107,8 @@
                 rsb:thumbShadowBlur="1dp"
                 rsb:thumbShadowColor="@color/primary_material_light"
                 rsb:thumbShadowXOffset="1dp"
+                rsb:step="1"
+                rsb:valuesAboveThumbs="false"
                 rsb:thumbShadowYOffset="2dp" />
 
         </LinearLayout>
@@ -123,6 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:textColor="@android:color/white"
                 android:background="@color/light_gren"
                 android:text="Apply Filter" />
         </LinearLayout>

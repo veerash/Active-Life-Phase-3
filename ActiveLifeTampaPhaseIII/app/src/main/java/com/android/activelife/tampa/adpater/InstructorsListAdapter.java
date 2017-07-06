@@ -8,8 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.android.activelife.tampa.R;
-import com.android.activelife.tampa.db.ScheduleData;
-import com.android.activelife.tampa.services.response.LocationData.LocationDataResponse;
+import com.android.activelife.tampa.db.ClassData;
+import com.android.activelife.tampa.db.InstructorData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +18,12 @@ import java.util.List;
  * Created by vsatrasala on 2/11/2017.
  */
 
-public class SchedulesListAdapter extends BaseAdapter {
+public class InstructorsListAdapter extends BaseAdapter {
 
     public Context jContext;
-    private ArrayList<ScheduleData> locationDataResponsesList;
+    private ArrayList<InstructorData> locationDataResponsesList;
 
-    public SchedulesListAdapter(Context ctx, ArrayList<ScheduleData> locationDataResponsesList) {
+    public InstructorsListAdapter(Context ctx, ArrayList<InstructorData> locationDataResponsesList) {
         this.jContext = ctx;
         this.locationDataResponsesList=locationDataResponsesList;
     }
@@ -55,7 +55,7 @@ public class SchedulesListAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.locationName.setText(""+locationDataResponsesList.get(position).getSchedule_type());
+        holder.locationName.setText(""+locationDataResponsesList.get(position).getInstructor_name());
         return convertView;
     }
 

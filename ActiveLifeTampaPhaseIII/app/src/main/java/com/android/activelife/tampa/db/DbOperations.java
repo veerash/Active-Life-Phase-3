@@ -3,6 +3,7 @@ package com.android.activelife.tampa.db;
 import android.content.Context;
 
 import org.greenrobot.greendao.database.Database;
+import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +52,20 @@ public class DbOperations {
         return daoSession;
     }
 
+    public void insertSchedulesDate(int schedule_id, String schedule_name, String class_id, String class_name, String class_desc, String schedule_type_id, String schedule_type, String schedule_start_date, String schedule_start_time, String schedule_end_time, Long schedule_start_time_long, Long schedule_end_time_long, Boolean schedule_monday, Boolean schedule_tuesday, Boolean schedule_wednesday, Boolean schedule_thursday, Boolean schedule_friday, Boolean schedule_saturday, Boolean schedule_sunday, String schedule_frequency, Boolean is_cancelled, String instructor_id, String instructor_name, String location_id, String location_name) {
+        try {
+            if (jScheduleDateDataDao == null) {
+                jScheduleDateDataDao = getDaoSession().getScheduleDateDataDao();
+
+            }
+            jScheduleDateData = new ScheduleDateData(null, schedule_id, schedule_name, class_id, class_name, class_desc, schedule_type_id, schedule_type, schedule_start_date, schedule_start_time, schedule_end_time, schedule_start_time_long, schedule_end_time_long, schedule_monday, schedule_tuesday, schedule_wednesday, schedule_thursday, schedule_friday, schedule_saturday, schedule_sunday, schedule_frequency, is_cancelled, instructor_id, instructor_name, location_id, location_name);
+            jScheduleDateDataDao.insert(jScheduleDateData);
+        } catch (Exception e) {
+
+        }
+
+    }
+
     public ArrayList<ScheduleDateData> getScheduleDate() {
         if (jScheduleDateDataDao == null) {
             jScheduleDateDataDao = getDaoSession().getScheduleDateDataDao();
@@ -60,18 +75,116 @@ public class DbOperations {
                 .queryBuilder().build().list();
     }
 
-    public ScheduleDateData getScheduleDateOfId(String schedule_id) {
+    public List<ScheduleDateData> getScheduleDateOfId(String schedule_id, String class_id, String instructor_id, Long starttime, Long endtime) {
         try {
             if (jScheduleDateDataDao == null) {
                 jScheduleDateDataDao = getDaoSession().getScheduleDateDataDao();
 
             }
-            List<ScheduleDateData> list = jScheduleDateDataDao
-                    .queryBuilder()
-                    .where(ScheduleDateDataDao.Properties.Schedule_id
-                            .eq(schedule_id)).build().list();
+            QueryBuilder<ScheduleDateData> qb = jScheduleDateDataDao.queryBuilder();
+            List<ScheduleDateData> list = new ArrayList<>();
+            if (schedule_id != null & class_id != null && instructor_id != null && starttime != null && endtime != null) {
+                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                        qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
+            }
+            // four dimens
+            else if (schedule_id != null & class_id != null && instructor_id != null && starttime != null && endtime == null) {
+                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                        qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime)));
+            } else if (schedule_id != null & class_id != null && instructor_id != null && starttime == null && endtime != null) {
+                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                        qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
+            } else if (schedule_id != null & class_id != null && instructor_id == null && starttime != null && endtime != null) {
+                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                        qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
+            } else if (schedule_id != null & class_id == null && instructor_id != null && starttime != null && endtime != null) {
+                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                        qb.and(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
+            } else if (schedule_id == null & class_id != null && instructor_id != null && starttime != null && endtime != null) {
+                qb.where(ScheduleDateDataDao.Properties.Class_id.eq(class_id),
+                        qb.and(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
+            }
+            //Three dimens
+            else if (schedule_id != null & class_id != null && instructor_id != null && starttime == null && endtime == null) {
+                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                        qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id)));
+            } else if (schedule_id != null & class_id != null && instructor_id == null && starttime == null && endtime != null) {
+                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                        qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
+            } else if (schedule_id != null & class_id != null && instructor_id == null && starttime != null && endtime == null) {
+                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                        qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime)));
+            } else if (schedule_id != null & class_id == null && instructor_id != null && starttime != null && endtime == null) {
+                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                        qb.and(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime)));
+            } else if (schedule_id != null & class_id == null && instructor_id != null && starttime == null && endtime != null) {
+                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                        qb.and(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
+            } else if (schedule_id != null & class_id == null && instructor_id == null && starttime != null && endtime != null) {
+                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                        qb.and(ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
+            } else if (schedule_id == null & class_id == null && instructor_id != null && starttime != null && endtime != null) {
+                qb.where(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id),
+                        qb.and(ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
+            } else if (schedule_id == null & class_id != null && instructor_id == null && starttime != null && endtime != null) {
+                qb.where(ScheduleDateDataDao.Properties.Class_id.eq(class_id),
+                        qb.and(ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
+            } else if (schedule_id == null & class_id != null && instructor_id != null && starttime == null && endtime != null) {
+                qb.where(ScheduleDateDataDao.Properties.Class_id.eq(class_id),
+                        qb.and(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
+            } else if (schedule_id == null & class_id != null && instructor_id != null && starttime != null && endtime == null) {
+                qb.where(ScheduleDateDataDao.Properties.Class_id.eq(class_id),
+                        qb.and(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime)));
+            }
+            //two dimens
+            else if (schedule_id != null & class_id != null && instructor_id == null && starttime == null && endtime == null) {
+                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                        ScheduleDateDataDao.Properties.Class_id.eq(class_id));
+            } else if (schedule_id != null & class_id == null && instructor_id != null && starttime == null && endtime == null) {
+                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                        ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id));
+            } else if (schedule_id != null & class_id == null && instructor_id == null && starttime != null && endtime == null) {
+                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                        ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime));
+            } else if (schedule_id != null & class_id == null && instructor_id == null && starttime == null && endtime != null) {
+                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                        ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime));
+            } else if (schedule_id == null & class_id != null && instructor_id != null && starttime == null && endtime == null) {
+                qb.where(ScheduleDateDataDao.Properties.Class_id.eq(class_id),
+                        ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id));
+            } else if (schedule_id == null & class_id != null && instructor_id == null && starttime != null && endtime == null) {
+                qb.where(ScheduleDateDataDao.Properties.Class_id.eq(class_id),
+                        ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime));
+            } else if (schedule_id == null & class_id != null && instructor_id == null && starttime == null && endtime != null) {
+                qb.where(ScheduleDateDataDao.Properties.Class_id.eq(class_id),
+                        ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime));
+            } else if (schedule_id == null & class_id == null && instructor_id != null && starttime != null && endtime == null) {
+                qb.where(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id),
+                        ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime));
+            } else if (schedule_id == null & class_id == null && instructor_id != null && starttime == null && endtime != null) {
+                qb.where(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id),
+                        ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime));
+            } else if (schedule_id == null & class_id == null && instructor_id != null && starttime != null && endtime == null) {
+                qb.where(
+                        ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime));
+            }
+
+            //one dimens
+            else if (schedule_id != null & class_id == null && instructor_id == null && starttime == null && endtime == null) {
+                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id));
+            } else if (schedule_id == null & class_id != null && instructor_id == null && starttime == null && endtime == null) {
+                qb.where(ScheduleDateDataDao.Properties.Class_id.eq(class_id));
+            } else if (schedule_id == null & class_id == null && instructor_id != null && starttime == null && endtime == null) {
+                qb.where(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id));
+            } else if (schedule_id == null & class_id == null && instructor_id == null && starttime != null && endtime == null) {
+                qb.where(ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime));
+            } else if (schedule_id == null & class_id == null && instructor_id == null && starttime == null && endtime != null) {
+                qb.where(ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime));
+            }
+
+            list = qb.list();
             if (list != null && list.size() > 0) {
-                return list.get(0);
+                return list;
 
             } else {
                 return null;
@@ -93,6 +206,7 @@ public class DbOperations {
 
         }
     }
+
     public void insertSchedules(String schedule_type_id, String schedule_type) {
         try {
             if (jScheduleDataDao == null) {
@@ -106,6 +220,7 @@ public class DbOperations {
         }
 
     }
+
     public ArrayList<ScheduleData> getSchedules() {
         if (jScheduleDataDao == null) {
             jScheduleDataDao = getDaoSession().getScheduleDataDao();
@@ -126,6 +241,7 @@ public class DbOperations {
 
         }
     }
+
     public void insertInstructors(String instructor_id, String instructor_name) {
         try {
             if (jInstructorDataDao == null) {
@@ -139,6 +255,7 @@ public class DbOperations {
         }
 
     }
+
     public ArrayList<InstructorData> getInstructors() {
         if (jInstructorDataDao == null) {
             jInstructorDataDao = getDaoSession().getInstructorDataDao();
