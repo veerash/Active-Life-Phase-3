@@ -57,30 +57,32 @@ public class SelectBranchActivity extends BaseActivity {
                                 Intent mainIntent = new Intent(SelectBranchActivity.this, MainActivity.class);
                                 mainIntent.putExtra("title", mLocationDataResponsesList.get(i).getName());
                                 ActiveLifeApplication.getInstance().setUpDb().deleteHours();
-                                for (int j = 0; i < mLocationDataResponsesList.get(i).getHours().size(); j++) {
+                                for (int j = 0; j < mLocationDataResponsesList.get(i).getHours().size(); j++) {
                                     Hour object = mLocationDataResponsesList.get(i).getHours().get(j);
                                     String name = object.getName();
                                     Times times = object.getTimes();
-                                    String monStartTime = times.get1().getStartTime();
-                                    String monEndTime = times.get1().getEndTime();
-                                    String tueStartTime = times.get2().getStartTime();
-                                    String tueEndTime = times.get2().getEndTime();
-                                    String wedStartTime = times.get3().getStartTime();
-                                    String wedEndTime = times.get3().getEndTime();
-                                    String thuStartTime = times.get4().getStartTime();
-                                    String thuEndTime = times.get4().getEndTime();
-                                    String friStartTime = times.get5().getStartTime();
-                                    String friEndTime = times.get5().getEndTime();
-                                    String satStartTime = times.get6().getStartTime();
-                                    String satEndTime = times.get6().getEndTime();
-                                    String sunStartTime = times.get7().getStartTime();
-                                    String sunEndTime = times.get7().getEndTime();
+                                    String monStartTime = times.get1().get(0).getStartTime();
+                                    String monEndTime = times.get1().get(0).getEndTime();
+                                    String tueStartTime = times.get2().get(0).getStartTime();
+                                    String tueEndTime = times.get2().get(0).getEndTime();
+                                    String wedStartTime = times.get3().get(0).getStartTime();
+                                    String wedEndTime = times.get3().get(0).getEndTime();
+                                    String thuStartTime = times.get4().get(0).getStartTime();
+                                    String thuEndTime = times.get4().get(0).getEndTime();
+                                    String friStartTime = times.get5().get(0).getStartTime();
+                                    String friEndTime = times.get5().get(0).getEndTime();
+                                    String satStartTime = times.get6().get(0).getStartTime();
+                                    String satEndTime = times.get6().get(0).getEndTime();
+                                    String sunStartTime = times.get7().get(0).getStartTime();
+                                    String sunEndTime = times.get7().get(0).getEndTime();
                                     ActiveLifeApplication.getInstance().setUpDb().insertHoursDao(name, monStartTime, monEndTime, tueStartTime, tueEndTime, wedStartTime, wedEndTime, thuStartTime, thuEndTime, friStartTime, friEndTime, satStartTime, satEndTime, sunStartTime, sunEndTime);
                                 }
 
                                 startActivity(mainIntent);
                                 Utilities.getSharedPrefernceData().storeValueIntoSharedPreference(getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_NAME, mLocationDataResponsesList.get(i).getName());
                                 Utilities.getSharedPrefernceData().storeIntValueIntoSharedPreference(getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_ID, mLocationDataResponsesList.get(i).getId());
+                                Utilities.getSharedPrefernceData().storeValueIntoSharedPreference(getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_PROGRAM_LINK, mLocationDataResponsesList.get(i).getProgramLink());
+                                Utilities.getSharedPrefernceData().storeValueIntoSharedPreference(getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_DONATE_LINK, mLocationDataResponsesList.get(i).getDonationLink());
                                 finish();
                             }
                         });
@@ -102,7 +104,7 @@ public class SelectBranchActivity extends BaseActivity {
 
                 @Override
                 public void onFailure(Call<List<LocationDataResponse>> call, Throwable t) {
-
+                    hideProgressDialog(SelectBranchActivity.this);
                 }
             });
             showProgressDialog(SelectBranchActivity.this);

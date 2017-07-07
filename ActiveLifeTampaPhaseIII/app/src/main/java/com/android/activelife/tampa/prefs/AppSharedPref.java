@@ -51,6 +51,12 @@ public class AppSharedPref {
 
     // string to app default_location name
     public String APP_DEFAULT_LOCATION_NAME = "app_default|_location_name";
+
+    // string to program link
+    public String APP_DEFAULT_LOCATION_PROGRAM_LINK = "app_default|_program_link";
+
+    // string to donate link
+    public String APP_DEFAULT_LOCATION_DONATE_LINK = "app_default|_donate_link";
     /**
      *
      * @param context

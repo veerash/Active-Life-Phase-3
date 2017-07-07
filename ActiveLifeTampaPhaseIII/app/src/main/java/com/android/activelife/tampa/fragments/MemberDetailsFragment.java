@@ -225,6 +225,7 @@ public class MemberDetailsFragment extends Fragment {
 
             }
         });
+        getMessagesList();
     }
 
     public void getMessagesList() {

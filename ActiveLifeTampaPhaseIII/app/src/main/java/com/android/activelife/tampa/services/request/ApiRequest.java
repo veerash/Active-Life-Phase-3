@@ -69,7 +69,7 @@ public interface ApiRequest {
     /**
      * Schedules API
      **/
-    @GET("schedules")
+    @GET("schedule-types")
     Call<List<SchedulesDataResponse>> getSchedules();
 
     /**

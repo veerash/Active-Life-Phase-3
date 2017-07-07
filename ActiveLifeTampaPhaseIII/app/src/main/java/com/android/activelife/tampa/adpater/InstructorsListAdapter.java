@@ -49,7 +49,7 @@ public class InstructorsListAdapter extends BaseAdapter {
 
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = LayoutInflater.from(jContext).inflate(R.layout.list_row_select_branch, parent, false);
+            convertView = LayoutInflater.from(jContext).inflate(R.layout.list_row_spinner, parent, false);
             holder.locationName = (TextView) convertView.findViewById(R.id.list_row_select_branch_name);
             convertView.setTag(holder);
         } else {

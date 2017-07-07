@@ -25,10 +25,13 @@
             android:button="@null"
             android:drawablePadding="5dp"
             android:drawableTop="@drawable/member_details_messages_icon"
+            android:ellipsize="end"
             android:gravity="center"
             android:padding="10dp"
+            android:singleLine="true"
             android:text="Messages"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/ten_sp" />
 
         <com.android.activelife.tampa.customviews.CachetProRegularRadioButton
             android:id="@+id/donate"
@@ -39,10 +42,13 @@
             android:button="@null"
             android:drawablePadding="5dp"
             android:drawableTop="@drawable/member_details_donate_icon"
+            android:ellipsize="end"
             android:gravity="center"
             android:padding="10dp"
+            android:singleLine="true"
             android:text="Donate"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/ten_sp" />
 
         <com.android.activelife.tampa.customviews.CachetProRegularRadioButton
             android:id="@+id/hours"
@@ -53,10 +59,13 @@
             android:button="@null"
             android:drawablePadding="5dp"
             android:drawableTop="@drawable/member_details_hours_icon"
+            android:ellipsize="end"
             android:gravity="center"
             android:padding="10dp"
+            android:singleLine="true"
             android:text="Hours"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/ten_sp" />
 
         <com.android.activelife.tampa.customviews.CachetProRegularRadioButton
             android:id="@+id/contact"
@@ -67,10 +76,13 @@
             android:button="@null"
             android:drawablePadding="5dp"
             android:drawableTop="@drawable/member_details_contact_icon"
+            android:ellipsize="end"
             android:gravity="center"
             android:padding="10dp"
+            android:singleLine="true"
             android:text="Contact"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/ten_sp" />
 
         <com.android.activelife.tampa.customviews.CachetProRegularRadioButton
             android:id="@+id/programs"
@@ -81,10 +93,13 @@
             android:button="@null"
             android:drawablePadding="5dp"
             android:drawableTop="@drawable/member_details_programs_icon"
+            android:ellipsize="end"
             android:gravity="center"
             android:padding="10dp"
+            android:singleLine="true"
             android:text="Programs"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/ten_sp" />
     </RadioGroup>
 
     <RelativeLayout

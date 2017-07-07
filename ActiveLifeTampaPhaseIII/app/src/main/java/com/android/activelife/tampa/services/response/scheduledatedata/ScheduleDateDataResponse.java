@@ -41,31 +41,31 @@ public class ScheduleDateDataResponse {
     private String endTime;
     @SerializedName("monday")
     @Expose
-    private Boolean monday;
+    private Integer monday;
     @SerializedName("tuesday")
     @Expose
-    private Boolean tuesday;
+    private Integer tuesday;
     @SerializedName("wednesday")
     @Expose
-    private Boolean wednesday;
+    private Integer wednesday;
     @SerializedName("thursday")
     @Expose
-    private Boolean thursday;
+    private Integer thursday;
     @SerializedName("friday")
     @Expose
-    private Boolean friday;
+    private Integer friday;
     @SerializedName("saturday")
     @Expose
-    private Boolean saturday;
+    private Integer saturday;
     @SerializedName("sunday")
     @Expose
-    private Boolean sunday;
+    private Integer sunday;
     @SerializedName("frequency")
     @Expose
     private String frequency;
     @SerializedName("is_cancelled")
     @Expose
-    private Boolean isCancelled;
+    private Integer isCancelled;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
@@ -173,59 +173,59 @@ public class ScheduleDateDataResponse {
         this.endTime = endTime;
     }
 
-    public Boolean getMonday() {
+    public Integer getMonday() {
         return monday;
     }
 
-    public void setMonday(Boolean monday) {
+    public void setMonday(Integer monday) {
         this.monday = monday;
     }
 
-    public Boolean getTuesday() {
+    public Integer getTuesday() {
         return tuesday;
     }
 
-    public void setTuesday(Boolean tuesday) {
+    public void setTuesday(Integer tuesday) {
         this.tuesday = tuesday;
     }
 
-    public Boolean getWednesday() {
+    public Integer getWednesday() {
         return wednesday;
     }
 
-    public void setWednesday(Boolean wednesday) {
+    public void setWednesday(Integer wednesday) {
         this.wednesday = wednesday;
     }
 
-    public Boolean getThursday() {
+    public Integer getThursday() {
         return thursday;
     }
 
-    public void setThursday(Boolean thursday) {
+    public void setThursday(Integer thursday) {
         this.thursday = thursday;
     }
 
-    public Boolean getFriday() {
+    public Integer getFriday() {
         return friday;
     }
 
-    public void setFriday(Boolean friday) {
+    public void setFriday(Integer friday) {
         this.friday = friday;
     }
 
-    public Boolean getSaturday() {
+    public Integer getSaturday() {
         return saturday;
     }
 
-    public void setSaturday(Boolean saturday) {
+    public void setSaturday(Integer saturday) {
         this.saturday = saturday;
     }
 
-    public Boolean getSunday() {
+    public Integer getSunday() {
         return sunday;
     }
 
-    public void setSunday(Boolean sunday) {
+    public void setSunday(Integer sunday) {
         this.sunday = sunday;
     }
 
@@ -237,11 +237,11 @@ public class ScheduleDateDataResponse {
         this.frequency = frequency;
     }
 
-    public Boolean getIsCancelled() {
+    public Integer getIsCancelled() {
         return isCancelled;
     }
 
-    public void setIsCancelled(Boolean isCancelled) {
+    public void setIsCancelled(Integer isCancelled) {
         this.isCancelled = isCancelled;
     }
 
