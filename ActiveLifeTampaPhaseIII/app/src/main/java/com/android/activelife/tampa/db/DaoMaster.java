@@ -26,6 +26,8 @@ public class DaoMaster extends AbstractDaoMaster {
         InstructorDataDao.createTable(db, ifNotExists);
         ScheduleDataDao.createTable(db, ifNotExists);
         HoursDataDao.createTable(db, ifNotExists);
+        LocationDataDao.createTable(db, ifNotExists);
+        DefaultLocationDataDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -35,6 +37,8 @@ public class DaoMaster extends AbstractDaoMaster {
         InstructorDataDao.dropTable(db, ifExists);
         ScheduleDataDao.dropTable(db, ifExists);
         HoursDataDao.dropTable(db, ifExists);
+        LocationDataDao.dropTable(db, ifExists);
+        DefaultLocationDataDao.dropTable(db, ifExists);
     }
 
     /**
@@ -58,6 +62,8 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(InstructorDataDao.class);
         registerDaoClass(ScheduleDataDao.class);
         registerDaoClass(HoursDataDao.class);
+        registerDaoClass(LocationDataDao.class);
+        registerDaoClass(DefaultLocationDataDao.class);
     }
 
     public DaoSession newSession() {

@@ -88,17 +88,17 @@ public class LocationsFragment extends Fragment {
     }
 
     public void getAllLocationsData() {
-        if (((MainActivity)getActivity()).checkIfInternet(getActivity())) {
+        if (((MainActivity) getActivity()).checkIfInternet(getActivity())) {
             mApiInterface = ActiveLifeApplication.getInstance()
                     .getApiRequest();
             Call<List<LocationDataResponse>> call = mApiInterface.getLocations();
             call.enqueue(new Callback<List<LocationDataResponse>>() {
                 @Override
                 public void onResponse(Call<List<LocationDataResponse>> call, Response<List<LocationDataResponse>> response) {
-                    ((MainActivity)getActivity()).hideProgressDialog(getActivity());
+                    ((MainActivity) getActivity()).hideProgressDialog(getActivity());
                     if (response.isSuccessful()) {
                         mLocationDataResponsesList = response.body();
-                        mSelectBranchListView.setAdapter(new SelectBranchListAdapter(getActivity(),mLocationDataResponsesList));
+                        mSelectBranchListView.setAdapter(new SelectBranchListAdapter(getActivity(), mLocationDataResponsesList));
                         mSelectBranchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -126,10 +126,13 @@ public class LocationsFragment extends Fragment {
                                     ActiveLifeApplication.getInstance().setUpDb().insertHoursDao(name, monStartTime, monEndTime, tueStartTime, tueEndTime, wedStartTime, wedEndTime, thuStartTime, thuEndTime, friStartTime, friEndTime, satStartTime, satEndTime, sunStartTime, sunEndTime);
                                 }
                                 startActivity(mainIntent);
+                                ActiveLifeApplication.getInstance().setUpDb().deleteLocations();
+                                ActiveLifeApplication.getInstance().setUpDb().insertLocation("" + mLocationDataResponsesList.get(i).getId(), mLocationDataResponsesList.get(i).getName(), mLocationDataResponsesList.get(i).getAddress(), mLocationDataResponsesList.get(i).getCity(), mLocationDataResponsesList.get(i).getState(), mLocationDataResponsesList.get(i).getZipCode(), mLocationDataResponsesList.get(i).getPhone(), mLocationDataResponsesList.get(i).getEmail(), mLocationDataResponsesList.get(i).getProgramLink(), mLocationDataResponsesList.get(i).getDonationLink());
                                 Utilities.getSharedPrefernceData().storeIntValueIntoSharedPreference(getActivity().getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_ID, mLocationDataResponsesList.get(i).getId());
                                 Utilities.getSharedPrefernceData().storeValueIntoSharedPreference(getActivity().getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_NAME, mLocationDataResponsesList.get(i).getName());
                                 Utilities.getSharedPrefernceData().storeValueIntoSharedPreference(getActivity().getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_PROGRAM_LINK, mLocationDataResponsesList.get(i).getProgramLink());
                                 Utilities.getSharedPrefernceData().storeValueIntoSharedPreference(getActivity().getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_DONATE_LINK, mLocationDataResponsesList.get(i).getDonationLink());
+
                                 getActivity().finish();
                             }
                         });
@@ -151,10 +154,10 @@ public class LocationsFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<List<LocationDataResponse>> call, Throwable t) {
-                    ((MainActivity)getActivity()).hideProgressDialog(getActivity());
+                    ((MainActivity) getActivity()).hideProgressDialog(getActivity());
                 }
             });
-            ((MainActivity)getActivity()).showProgressDialog(getActivity());
+            ((MainActivity) getActivity()).showProgressDialog(getActivity());
         }
     }
 

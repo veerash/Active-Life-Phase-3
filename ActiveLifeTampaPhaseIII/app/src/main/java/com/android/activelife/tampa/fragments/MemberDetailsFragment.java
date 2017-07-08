@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
@@ -15,11 +17,13 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.android.activelife.tampa.R;
 import com.android.activelife.tampa.adpater.HoursSceduleListAdapter;
 import com.android.activelife.tampa.adpater.MessagesListAdapter;
 import com.android.activelife.tampa.appcontroller.ActiveLifeApplication;
+import com.android.activelife.tampa.db.LocationData;
 import com.android.activelife.tampa.services.request.ApiRequest;
 import com.android.activelife.tampa.services.response.messagesdata.MessagesDataResponse;
 import com.android.activelife.tampa.ui.MainActivity;
@@ -152,16 +156,98 @@ public class MemberDetailsFragment extends Fragment {
 
     public void setProgramDetails(final Bundle savedInstanceState) {
         View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_programs_donate, null);
+        WebView webview = (WebView) child.findViewById(R.id.programs_donate_wv);
+        List<LocationData> data = ActiveLifeApplication.getInstance().setUpDb().getLocations();
+        WebSettings settings = webview.getSettings();
+        settings.setJavaScriptEnabled(true);
+        webview.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+        if (data != null && data.size() > 0) {
+            webview.setVisibility(View.VISIBLE);
+            if (data.get(0).getLocation_donate_link() != null && data.get(0).getLocation_donate_link().length() > 0) {
+                webview.loadUrl(data.get(0).getLocation_program_link());
+            } else {
+                String htmlString = "<div id='MyEdit'><b>No Programs Available</b></div>";
+                webview.loadData(htmlString, "text/html; charset=utf-8", "UTF-8");
+            }
+        } else {
+            String htmlString = "<div id='MyEdit'><b>No Programs Available</b></div>";
+            webview.loadData(htmlString, "text/html; charset=utf-8", "UTF-8");
+        }
         setLayoutParams(child);
     }
 
     public void setDonateDetails(final Bundle savedInstanceState) {
         View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_programs_donate, null);
+        WebView webview = (WebView) child.findViewById(R.id.programs_donate_wv);
+        WebSettings settings = webview.getSettings();
+        settings.setJavaScriptEnabled(true);
+        webview.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+        List<LocationData> data = ActiveLifeApplication.getInstance().setUpDb().getLocations();
+        if (data != null && data.size() > 0) {
+            webview.setVisibility(View.VISIBLE);
+            if (data.get(0).getLocation_donate_link() != null && data.get(0).getLocation_donate_link().length() > 0) {
+                webview.loadUrl(data.get(0).getLocation_donate_link());
+            } else {
+                String htmlString = "<div id='MyEdit'><b>No Donations Link Available</b></div>";
+                webview.loadData(htmlString, "text/html; charset=utf-8", "UTF-8");
+            }
+        } else {
+            String htmlString = "<div id='MyEdit'><b>No Donations Link Available</b></div>";
+            webview.loadData(htmlString, "text/html; charset=utf-8", "UTF-8");
+        }
         setLayoutParams(child);
     }
 
+
+
     public void setContactData(final Bundle savedInstanceState) {
         View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_contact, null);
+        TextView ymcaName = (TextView) child.findViewById(R.id.member_name);
+        TextView ymcaAddress = (TextView) child.findViewById(R.id.member_address);
+        TextView ymcaPhone = (TextView) child.findViewById(R.id.member_phone);
+        TextView ymcaEmail = (TextView) child.findViewById(R.id.member_email);
+        List<LocationData> data = ActiveLifeApplication.getInstance().setUpDb().getLocations();
+        if (data != null && data.size() > 0) {
+            ymcaName.setVisibility(View.VISIBLE);
+            ymcaName.setText("" + data.get(0).getLocation_name());
+            String address = data.get(0).getLocation_address();
+            if (address != null && address.length() > 0) {
+                address = address + "\n " + data.get(0).getLocation_city() + " - " + data.get(0).getLocation_zip();
+            } else {
+                address = data.get(0).getLocation_city() + " - " + data.get(0).getLocation_zip();
+            }
+            if (address != null && address.length() > 0) {
+                address = address + ", " + data.get(0).getLocation_state();
+            } else {
+                address = data.get(0).getLocation_state();
+            }
+            if (address != null && address.length() > 0) {
+                ymcaAddress.setVisibility(View.VISIBLE);
+                ymcaAddress.setText(address);
+            } else {
+                ymcaAddress.setVisibility(View.GONE);
+            }
+            if (data.get(0).getLocation_phone() != null && data.get(0).getLocation_phone().length() > 0) {
+                ymcaPhone.setVisibility(View.VISIBLE);
+                ymcaPhone.setText(data.get(0).getLocation_phone());
+            } else {
+                ymcaPhone.setVisibility(View.GONE);
+            }
+            if (data.get(0).getLocation_email() != null && data.get(0).getLocation_email().length() > 0) {
+                ymcaEmail.setVisibility(View.VISIBLE);
+                ymcaEmail.setText(data.get(0).getLocation_email());
+            } else {
+                ymcaEmail.setVisibility(View.GONE);
+            }
+
+        } else {
+            ymcaName.setVisibility(View.GONE);
+            ymcaAddress.setVisibility(View.GONE);
+            ymcaPhone.setVisibility(View.GONE);
+            ymcaEmail.setVisibility(View.GONE);
+
+
+        }
         setLayoutParams(child);
     }
 
@@ -169,7 +255,7 @@ public class MemberDetailsFragment extends Fragment {
         View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_hours, null);
         setLayoutParams(child);
         hoursList = (ListView) child.findViewById(R.id.hours_list);
-        hoursList.setAdapter(new HoursSceduleListAdapter(getActivity(),ActiveLifeApplication.getInstance().setUpDb().getHours()));
+        hoursList.setAdapter(new HoursSceduleListAdapter(getActivity(), ActiveLifeApplication.getInstance().setUpDb().getHours()));
 
     }
 

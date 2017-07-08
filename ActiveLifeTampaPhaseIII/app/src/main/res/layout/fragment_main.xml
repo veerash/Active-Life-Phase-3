@@ -19,7 +19,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal"
+            android:gravity="center"
+            android:layout_gravity="center"
             android:text="Schedule"
             android:textColor="@color/white"
             android:textSize="@dimen/twenty_sp" />
@@ -31,6 +32,10 @@
             android:layout_gravity="center"
             android:layout_marginRight="@dimen/five_dip"
             android:button="@drawable/filter"
+            android:paddingLeft="@dimen/ten_sp"
+            android:paddingRight="@dimen/ten_sp"
+            android:paddingTop="@dimen/five_sp"
+            android:paddingBottom="@dimen/five_sp"
             android:checked="false" />
     </LinearLayout>
 
@@ -108,15 +113,6 @@
                 android:layout_weight="1"
                 android:padding="@dimen/twenty_dip" />
 
-            <!--<SeekBar-->
-            <!--android:id="@+id/sbBatteryLevel"-->
-            <!--style="@style/CustomSeekBar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:enabled="false"-->
-            <!--android:max="100"-->
-            <!--android:progress="85"/>-->
             <org.florescu.android.rangeseekbar.RangeSeekBar
                 android:id="@+id/rangeSeekBar"
                 android:layout_width="match_parent"
@@ -137,29 +133,6 @@
                 rsb:thumbShadowColor="@color/primary_material_light"
                 rsb:thumbShadowXOffset="1dp"
                 rsb:thumbShadowYOffset="2dp" />
-            <!--<org.florescu.android.rangeseekbar.RangeSeekBar-->
-            <!--android:id="@+id/rangeSeekBar"-->
-            <!--app:valuesAboveThumbs="true"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="@dimen/ten_dip"-->
-            <!--android:layout_weight="1"-->
-            <!--rsb:absoluteMaxValue="24"-->
-            <!--rsb:absoluteMinValue="0"-->
-            <!--rsb:activateOnDefaultValues="true"-->
-            <!--rsb:activeColor="@color/DeepSkyBlue"-->
-            <!--rsb:barHeight="@dimen/ten_dip"-->
-            <!--rsb:textAboveThumbsColor="@android:color/holo_blue_light"-->
-            <!--rsb:thumbDisabled="@drawable/custom_range_slider_thumb"-->
-            <!--rsb:thumbNormal="@drawable/custom_range_slider_thumb"-->
-            <!--rsb:thumbPressed="@drawable/custom_range_slider_thumb"-->
-            <!--rsb:thumbShadow="true"-->
-            <!--rsb:thumbShadowBlur="1dp"-->
-            <!--rsb:thumbShadowColor="@color/primary_material_light"-->
-            <!--rsb:thumbShadowXOffset="1dp"-->
-            <!--rsb:step="1"-->
-            <!--rsb:valuesAboveThumbs="false"-->
-            <!--rsb:thumbShadowYOffset="2dp" />-->
 
         </LinearLayout>
 
@@ -194,14 +167,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
-            app:selectedDateBackground="@android:color/transparent" />
+            app:selectedDateBackground="@android:color/white" />
 
         <com.android.activelife.tampa.customviews.CachetProRegularTextView
             android:id="@+id/section_label"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="@dimen/five_dip"
-            android:layout_marginTop="@dimen/five_dip"
             android:background="@color/light_green"
             android:gravity="center"
             android:padding="@dimen/ten_dip"

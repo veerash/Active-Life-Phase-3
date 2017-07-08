@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.android.activelife.tampa.R;
 import com.android.activelife.tampa.adpater.ClassesListAdapter;
 import com.android.activelife.tampa.adpater.InstructorsListAdapter;
+import com.android.activelife.tampa.adpater.SchedulesDateDbListAdapter;
 import com.android.activelife.tampa.adpater.SchedulesDateListAdapter;
 import com.android.activelife.tampa.adpater.SchedulesListAdapter;
 import com.android.activelife.tampa.appcontroller.ActiveLifeApplication;
@@ -76,7 +77,7 @@ public class SchedulesFragment extends Fragment {
     private ArrayList<ScheduleData> mScheduleDatas;
     private ArrayList<InstructorData> mInstructorDatas;
     private ArrayList<ClassData> mClassDatas;
-    private long startTime=000000,endTime=240000;
+    private long startTime = 000000, endTime = 240000;
     private RangeSeekBar mRangeSeekbar;
 
     public SchedulesFragment() {
@@ -100,12 +101,12 @@ public class SchedulesFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        data=new ArrayList<>();
+        data = new ArrayList<>();
         mScheduleDatas = new ArrayList<>();
         mInstructorDatas = new ArrayList<>();
         mClassDatas = new ArrayList<>();
-        mRangeSeekbar= (RangeSeekBar) rootView.findViewById(R.id.rangeSeekBar);
-        textView= (TextView) rootView.findViewById(R.id.section_label);
+        mRangeSeekbar = (RangeSeekBar) rootView.findViewById(R.id.rangeSeekBar);
+        textView = (TextView) rootView.findViewById(R.id.section_label);
         mFilterLayout = (LinearLayout) rootView.findViewById(R.id.filter_schedules);
         mScheduleLayout = (LinearLayout) rootView.findViewById(R.id.main_schedules);
         mSchedulesSpinner = (Spinner) rootView.findViewById(R.id.schedules_spinner);
@@ -133,9 +134,8 @@ public class SchedulesFragment extends Fragment {
         mRangeSeekbar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener() {
             @Override
             public void onRangeSeekBarValuesChanged(RangeSeekBar bar, Object minValue, Object maxValue) {
-                startTime=Long.parseLong(minValue.toString()+"0000");
-                endTime=Long.parseLong(maxValue.toString()+"0000");
-
+                startTime = Long.parseLong(minValue.toString() + "0000");
+                endTime = Long.parseLong(maxValue.toString() + "0000");
 
 
             }
@@ -143,19 +143,33 @@ public class SchedulesFragment extends Fragment {
         mApplyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mFilterImageView.setChecked(false);
-                if ((mScheduleId == null || mScheduleId.length() == 0) && (mClassId == null || mClassId.length() == 0) && (mInstructorId == null || mInstructorId.length() == 0)) {
+
+                if ((mScheduleId == null || mScheduleId.length() == 0) && (mClassId == null || mClassId.length() == 0) && (mInstructorId == null || mInstructorId.length() == 0) && startTime == 000000 && endTime == 240000) {
                     Utilities.showToast(getActivity(), "Please select a category to apply filter");
+                    mFilterImageView.setChecked(true);
                 } else {
-                    data=ActiveLifeApplication.getInstance().setUpDb().getScheduleDateOfId(mScheduleId, mClassId, mInstructorId, startTime, endTime);
-                    mSchedulesList.setAdapter(new SchedulesDateListAdapter(getActivity(), data));
+                    data = ActiveLifeApplication.getInstance().setUpDb().getScheduleDateOfId(mScheduleId, mClassId, mInstructorId, startTime, endTime);
+                    if (data == null)
+                        data = new ArrayList<ScheduleDateData>();
+                    mSchedulesList.setAdapter(new SchedulesDateDbListAdapter(getActivity(), data));
+                    startTime=000000;
+                    endTime=240000;
+                    mRangeSeekbar.setRangeValues(0,24);
+                    mClassSpinner.setSelection(0);
+                    mSchedulesSpinner.setSelection(0);
+                    mInstructorsSpinner.setSelection(0);
+                    mFilterImageView.setChecked(false);
                 }
             }
         });
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-        Date dt=new Date();
+        Date dt = new Date();
         textView.setText("" + Utils.getApplyiedDateType(df.format(dt), "MM/dd/yyyy HH:mm:ss", "EEEE MMM dd"));
         getScheduleDateData(Utils.getApplyiedDateType(df.format(dt), "MM/dd/yyyy HH:mm:ss", "yyyy-MM-dd"));
+        ScheduleData sd = new ScheduleData();
+        sd.setSchedule_type_id(null);
+        sd.setSchedule_type("Choose Schedule");
+        mScheduleDatas.add(0, sd);
         mSchedulesSpinner.setAdapter(new SchedulesListAdapter(getActivity(), mScheduleDatas));
         mSchedulesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -168,6 +182,11 @@ public class SchedulesFragment extends Fragment {
 
             }
         });
+        ClassData cd = new ClassData();
+        cd.setClass_id(null);
+        cd.setClass_name("Choose Class");
+        cd.setClass_description(null);
+        mClassDatas.add(0, cd);
         mClassSpinner.setAdapter(new ClassesListAdapter(getActivity(), mClassDatas));
         mClassSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -180,6 +199,10 @@ public class SchedulesFragment extends Fragment {
 
             }
         });
+        InstructorData id = new InstructorData();
+        id.setInstructor_id(null);
+        id.setInstructor_name("Choose Instructor");
+        mInstructorDatas.add(0, id);
         mInstructorsSpinner.setAdapter(new InstructorsListAdapter(getActivity(), mInstructorDatas));
         mInstructorsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -190,6 +213,15 @@ public class SchedulesFragment extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+        mSchedulesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent scheduleDetailIntent = new Intent(getActivity(), ScheduleContainerActivity.class);
+                scheduleDetailIntent.putExtra("schedule_id", data.get(position).getSchedule_id());
+                scheduleDetailIntent.putExtra("schedule_name", data.get(position).getSchedule_name());
+                startActivity(scheduleDetailIntent);
             }
         });
         /** end after 1 month from now */
@@ -210,10 +242,10 @@ public class SchedulesFragment extends Fragment {
         HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(rootView, R.id.calendarView)
                 .startDate(startDate.getTime())
                 .endDate(endDate.getTime())
-                .datesNumberOnScreen(5)   // Number of Dates cells shown on screen (Recommended 5)
+                .datesNumberOnScreen(5)
                 .dayFormat("EEE")     // WeekDay text format
-                .dayNumberFormat("dd")  // Date format
-                .textColor(Color.LTGRAY, Color.WHITE)    // Text color for none selected Dates, Text color for selected Date.
+                .dayNumberFormat("dd")
+                .textColor(Color.LTGRAY, Color.BLACK)
                 .selectedDateBackground(Color.TRANSPARENT)  // Background color of the selected date cell.
                 .selectorColor(Color.RED)   // Color of the selection indicator bar (default to colorAccent).
                 .build();
@@ -249,7 +281,7 @@ public class SchedulesFragment extends Fragment {
             call.enqueue(new Callback<List<ScheduleDateDataResponse>>() {
                 @Override
                 public void onResponse(Call<List<ScheduleDateDataResponse>> call, Response<List<ScheduleDateDataResponse>> response) {
-
+                    mSchedulesList.setAdapter(new SchedulesDateListAdapter(getActivity(), response.body()));
                     if (response.isSuccessful()) {
                         ActiveLifeApplication.getInstance().setUpDb().deleteScheduleDate();
 
@@ -260,38 +292,37 @@ public class SchedulesFragment extends Fragment {
                             endTime = endTime.replaceAll(":", "");
                             long start = Long.parseLong(startTime);
                             long end = Long.parseLong(endTime);
-                            boolean isMonday=false,isTuesday=false,isWednesday=false, isThursday=false, isFriday=false, isSaturday=false, isSunday =false, isCancelled=false;
-                            if(response.body().get(i).getMonday()==1){
-                                isMonday=true;
-                            }
-                            if(response.body().get(i).getTuesday()==1){
-                                isTuesday=true;
-                            }if(response.body().get(i).getWednesday()==1){
-                                isWednesday=true;
-                            }if(response.body().get(i).getThursday()==1){
-                                isThursday=true;
-                            }if(response.body().get(i).getFriday()==1){
-                                isFriday=true;
-                            }if(response.body().get(i).getSaturday()==1){
-                                isSaturday=true;
-                            }if(response.body().get(i).getSunday()==1){
-                                isSunday=true;
-                            }if(response.body().get(i).getIsCancelled()==1){
-                                isCancelled=true;
-                            }
-                            ActiveLifeApplication.getInstance().setUpDb().insertSchedulesDate(response.body().get(i).getId(), response.body().get(i).getGetClass().getName(), "" + response.body().get(i).getGetClass().getId(), response.body().get(i).getGetClass().getName(), response.body().get(i).getGetClass().getDescription(), "" + response.body().get(i).getScheduleTypeId(), response.body().get(i).getSchedule().getName(), response.body().get(i).getStartDate(), response.body().get(i).getStartTime(), response.body().get(i).getEndTime(), start, end, isMonday, isTuesday, isWednesday, isThursday, isFriday, isSaturday, isSunday, response.body().get(i).getFrequency(), isCancelled, "" + response.body().get(i).getInstructorId(), response.body().get(i).getInstructor().getName(), "" + response.body().get(i).getLocationId(), response.body().get(i).getLocation().getName());
+                            ScheduleDateData dateData = new ScheduleDateData();
+                            dateData.setSchedule_id(response.body().get(i).getId());
+                            dateData.setSchedule_name(response.body().get(i).getGetClass().getName());
+                            dateData.setClass_id("" + response.body().get(i).getGetClass().getId());
+                            dateData.setClass_name(response.body().get(i).getGetClass().getName());
+                            dateData.setClass_desc(response.body().get(i).getGetClass().getDescription());
+                            dateData.setSchedule_type_id("" + response.body().get(i).getScheduleTypeId());
+                            dateData.setSchedule_type(response.body().get(i).getSchedule().getName());
+                            dateData.setSchedule_start_date(response.body().get(i).getStartDate());
+                            dateData.setSchedule_start_time(response.body().get(i).getStartTime());
+                            dateData.setSchedule_end_time(response.body().get(i).getEndTime());
+                            dateData.setSchedule_start_time_long(start);
+                            dateData.setSchedule_end_time_long(end);
+                            dateData.setSchedule_monday(response.body().get(i).getMonday());
+                            dateData.setSchedule_tuesday(response.body().get(i).getTuesday());
+                            dateData.setSchedule_wednesday(response.body().get(i).getWednesday());
+                            dateData.setSchedule_thursday(response.body().get(i).getThursday());
+                            dateData.setSchedule_friday(response.body().get(i).getFriday());
+                            dateData.setSchedule_saturday(response.body().get(i).getSaturday());
+                            dateData.setSchedule_sunday(response.body().get(i).getSunday());
+                            dateData.setSchedule_frequency(response.body().get(i).getFrequency());
+                            dateData.setIs_cancelled(response.body().get(i).getIsCancelled());
+                            dateData.setInstructor_id("" + response.body().get(i).getInstructorId());
+                            dateData.setInstructor_name(response.body().get(i).getInstructor().getName());
+                            dateData.setLocation_id("" + response.body().get(i).getLocationId());
+                            dateData.setLocation_name(response.body().get(i).getLocation().getName());
+                            data.add(dateData);
+
                         }
-                        data=ActiveLifeApplication.getInstance().setUpDb().getScheduleDate();
-                        mSchedulesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                Intent scheduleDetailIntent = new Intent(getActivity(), ScheduleContainerActivity.class);
-                                scheduleDetailIntent.putExtra("schedule_id", data.get(position).getId());
-                                scheduleDetailIntent.putExtra("schedule_name", data.get(position).getSchedule_name());
-                                startActivity(scheduleDetailIntent);
-                            }
-                        });
-                        mSchedulesList.setAdapter(new SchedulesDateListAdapter(getActivity(), data));
+                        ActiveLifeApplication.getInstance().setUpDb().insertSchedulesDateList(data);
+
                         ((MainActivity) getActivity()).hideProgressDialog(getActivity());
                     } else {
                         ((MainActivity) getActivity()).hideProgressDialog(getActivity());

@@ -26,6 +26,10 @@ public class DbOperations {
     private ClassData jClassData;
     private HoursDataDao jHoursDataDao;
     private HoursData jHoursData;
+    private LocationDataDao jLocationDataDao;
+    private LocationData jLocationData;
+    private DefaultLocationDataDao jDefaultLocationDataDao;
+    private DefaultLocationData jDefaultLocationData;
 
     public void setupDB(Context ctx) {
         try {
@@ -38,6 +42,8 @@ public class DbOperations {
             jInstructorDataDao = daoSession.getInstructorDataDao();
             jClassDataDao = daoSession.getClassDataDao();
             jHoursDataDao = daoSession.getHoursDataDao();
+            jDefaultLocationDataDao = daoSession.getDefaultLocationDataDao();
+            jLocationDataDao = daoSession.getLocationDataDao();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -52,7 +58,7 @@ public class DbOperations {
         return daoSession;
     }
 
-    public void insertSchedulesDate(int schedule_id, String schedule_name, String class_id, String class_name, String class_desc, String schedule_type_id, String schedule_type, String schedule_start_date, String schedule_start_time, String schedule_end_time, Long schedule_start_time_long, Long schedule_end_time_long, Boolean schedule_monday, Boolean schedule_tuesday, Boolean schedule_wednesday, Boolean schedule_thursday, Boolean schedule_friday, Boolean schedule_saturday, Boolean schedule_sunday, String schedule_frequency, Boolean is_cancelled, String instructor_id, String instructor_name, String location_id, String location_name) {
+    public void insertSchedulesDate(int schedule_id, String schedule_name, String class_id, String class_name, String class_desc, String schedule_type_id, String schedule_type, String schedule_start_date, String schedule_start_time, String schedule_end_time, Long schedule_start_time_long, Long schedule_end_time_long, int schedule_monday, int schedule_tuesday, int schedule_wednesday, int schedule_thursday, int schedule_friday, int schedule_saturday, int schedule_sunday, String schedule_frequency, int is_cancelled, String instructor_id, String instructor_name, String location_id, String location_name) {
         try {
             if (jScheduleDateDataDao == null) {
                 jScheduleDateDataDao = getDaoSession().getScheduleDateDataDao();
@@ -64,6 +70,18 @@ public class DbOperations {
 
         }
 
+    }
+
+    public void insertSchedulesDateList(List<ScheduleDateData> list) {
+        try {
+            if (jScheduleDateDataDao == null) {
+                jScheduleDateDataDao = getDaoSession().getScheduleDateDataDao();
+
+            }
+            jScheduleDateDataDao.insertInTx(list);
+        } catch (Exception e) {
+
+        }
     }
 
     public ArrayList<ScheduleDateData> getScheduleDate() {
@@ -164,7 +182,7 @@ public class DbOperations {
             } else if (schedule_id == null & class_id == null && instructor_id != null && starttime == null && endtime != null) {
                 qb.where(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id),
                         ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime));
-            } else if (schedule_id == null & class_id == null && instructor_id != null && starttime != null && endtime == null) {
+            } else if (schedule_id == null & class_id == null && instructor_id == null && starttime != null && endtime != null) {
                 qb.where(
                         ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime));
             }
@@ -194,6 +212,7 @@ public class DbOperations {
         }
 
     }
+
     public ScheduleDateData getScheduleDateOfId(String schedule_id) {
         try {
             if (jScheduleDateDataDao == null) {
@@ -215,6 +234,7 @@ public class DbOperations {
         }
 
     }
+
     public void deleteScheduleDate() {
         try {
             if (jScheduleDateDataDao == null) {
@@ -261,6 +281,77 @@ public class DbOperations {
 
         }
     }
+
+    public void insertLocation(String location_id, String location_name, String location_address, String location_city, String location_state, String location_zip, String location_phone, String location_email, String location_program_link, String location_donate_link) {
+        try {
+            if (jLocationDataDao == null) {
+                jLocationDataDao = getDaoSession().getLocationDataDao();
+
+            }
+            jLocationData = new LocationData(null, location_id, location_name, location_address, location_city, location_state, location_zip, location_phone, location_email, location_program_link, location_donate_link);
+            jLocationDataDao.insert(jLocationData);
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    public ArrayList<LocationData> getLocations() {
+        if (jLocationDataDao == null) {
+            jLocationDataDao = getDaoSession().getLocationDataDao();
+
+        }
+        return (ArrayList<LocationData>) jLocationDataDao
+                .queryBuilder().build().list();
+    }
+
+    public void deleteLocations() {
+        try {
+            if (jLocationDataDao == null) {
+                jLocationDataDao = getDaoSession().getLocationDataDao();
+
+            }
+            jLocationDataDao.deleteAll();
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void insertDefaultLocation(int position,String location_id, String location_name, String location_address, String location_city, String location_state, String location_zip, String location_phone, String location_email, String location_program_link, String location_donate_link) {
+        try {
+            if (jDefaultLocationDataDao == null) {
+                jDefaultLocationDataDao = getDaoSession().getDefaultLocationDataDao();
+
+            }
+            jDefaultLocationData = new DefaultLocationData(null,position, location_id, location_name, location_address, location_city, location_state, location_zip, location_phone, location_email, location_program_link, location_donate_link);
+            jDefaultLocationDataDao.insert(jDefaultLocationData);
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    public ArrayList<DefaultLocationData> getDefaultLocations() {
+        if (jDefaultLocationDataDao == null) {
+            jDefaultLocationDataDao = getDaoSession().getDefaultLocationDataDao();
+
+        }
+        return (ArrayList<DefaultLocationData>) jDefaultLocationDataDao
+                .queryBuilder().build().list();
+    }
+
+    public void deleteDefaultLocations() {
+        try {
+            if (jDefaultLocationDataDao == null) {
+                jDefaultLocationDataDao = getDaoSession().getDefaultLocationDataDao();
+
+            }
+            jDefaultLocationDataDao.deleteAll();
+        } catch (Exception e) {
+
+        }
+    }
+
 
     public void insertInstructors(String instructor_id, String instructor_name) {
         try {

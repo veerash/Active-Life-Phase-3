@@ -28,9 +28,9 @@ import java.util.concurrent.TimeUnit;
 public class SchedulesDateListAdapter extends BaseAdapter {
 
     public Context jContext;
-    private List<ScheduleDateData> mMessagesDataResponseList;
+    private List<ScheduleDateDataResponse> mMessagesDataResponseList;
 
-    public SchedulesDateListAdapter(Context ctx, List<ScheduleDateData> mMessagesDataResponseList) {
+    public SchedulesDateListAdapter(Context ctx, List<ScheduleDateDataResponse> mMessagesDataResponseList) {
         this.jContext = ctx;
         this.mMessagesDataResponseList=mMessagesDataResponseList;
     }
@@ -62,22 +62,22 @@ public class SchedulesDateListAdapter extends BaseAdapter {
             holder.tvMins=(TextView)convertView.findViewById(R.id.tv_mins);
             holder.tvName=(TextView)convertView.findViewById(R.id.tv_name);
             holder.tvEvent=(TextView)convertView.findViewById(R.id.tv_event);
-            holder.reserveButton=(Button)convertView.findViewById(R.id.reserve);
+            holder.reserveButton=(TextView)convertView.findViewById(R.id.reserve);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.tvYmca.setText(""+mMessagesDataResponseList.get(position).getLocation_name());
-        holder.tvHours.setText(Utils.getApplyiedDateType(""+mMessagesDataResponseList.get(position).getSchedule_start_time(),"HH:mm:ss","hh:mm a"));
+        holder.tvYmca.setText(""+mMessagesDataResponseList.get(position).getLocation().getName());
+        holder.tvHours.setText(Utils.getApplyiedDateType(""+mMessagesDataResponseList.get(position).getStartTime(),"HH:mm:ss","hh:mm a"));
         DateFormat df = new SimpleDateFormat("HH:mm:ss");
         Date startDate=null, endDate=null;
         try {
-             startDate=df.parse(mMessagesDataResponseList.get(position).getSchedule_start_time());
+             startDate=df.parse(mMessagesDataResponseList.get(position).getStartTime());
         } catch (ParseException e) {
             e.printStackTrace();
         }
         try {
-            endDate=df.parse(mMessagesDataResponseList.get(position).getSchedule_end_time());
+            endDate=df.parse(mMessagesDataResponseList.get(position).getEndTime());
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -85,13 +85,12 @@ public class SchedulesDateListAdapter extends BaseAdapter {
 
         long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
         holder.tvMins.setText(""+diffInMinutes +"Mins");
-        holder.tvEvent.setText(""+mMessagesDataResponseList.get(position).getClass_name());
-        holder.tvName.setText(""+mMessagesDataResponseList.get(position).getInstructor_name());
+        holder.tvEvent.setText(""+mMessagesDataResponseList.get(position).getGetClass().getName());
+        holder.tvName.setText(""+mMessagesDataResponseList.get(position).getInstructor().getName());
         return convertView;
     }
 
     class ViewHolder {
-        TextView tvYmca,tvHours, tvMins, tvEvent, tvName;
-        Button reserveButton;
+        TextView tvYmca,tvHours, tvMins, tvEvent, tvName, reserveButton;
     }
 }

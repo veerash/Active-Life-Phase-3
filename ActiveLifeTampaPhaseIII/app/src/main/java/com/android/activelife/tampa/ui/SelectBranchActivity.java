@@ -79,10 +79,15 @@ public class SelectBranchActivity extends BaseActivity {
                                 }
 
                                 startActivity(mainIntent);
+                                ActiveLifeApplication.getInstance().setUpDb().deleteDefaultLocations();
+                                ActiveLifeApplication.getInstance().setUpDb().insertDefaultLocation(i,""+mLocationDataResponsesList.get(i).getId(),mLocationDataResponsesList.get(i).getName(), mLocationDataResponsesList.get(i).getAddress(),mLocationDataResponsesList.get(i).getCity(),mLocationDataResponsesList.get(i).getState(),mLocationDataResponsesList.get(i).getZipCode(),mLocationDataResponsesList.get(i).getPhone(),mLocationDataResponsesList.get(i).getEmail(),mLocationDataResponsesList.get(i).getProgramLink(),mLocationDataResponsesList.get(i).getDonationLink());
+                                ActiveLifeApplication.getInstance().setUpDb().deleteLocations();
+                                ActiveLifeApplication.getInstance().setUpDb().insertLocation(""+mLocationDataResponsesList.get(i).getId(),mLocationDataResponsesList.get(i).getName(), mLocationDataResponsesList.get(i).getAddress(),mLocationDataResponsesList.get(i).getCity(),mLocationDataResponsesList.get(i).getState(),mLocationDataResponsesList.get(i).getZipCode(),mLocationDataResponsesList.get(i).getPhone(),mLocationDataResponsesList.get(i).getEmail(),mLocationDataResponsesList.get(i).getProgramLink(),mLocationDataResponsesList.get(i).getDonationLink());
                                 Utilities.getSharedPrefernceData().storeValueIntoSharedPreference(getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_NAME, mLocationDataResponsesList.get(i).getName());
                                 Utilities.getSharedPrefernceData().storeIntValueIntoSharedPreference(getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_ID, mLocationDataResponsesList.get(i).getId());
                                 Utilities.getSharedPrefernceData().storeValueIntoSharedPreference(getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_PROGRAM_LINK, mLocationDataResponsesList.get(i).getProgramLink());
                                 Utilities.getSharedPrefernceData().storeValueIntoSharedPreference(getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_DONATE_LINK, mLocationDataResponsesList.get(i).getDonationLink());
+
                                 finish();
                             }
                         });

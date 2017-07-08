@@ -35,15 +35,15 @@ public class ScheduleDateDataDao extends AbstractDao<ScheduleDateData, Long> {
         public final static Property Schedule_end_time = new Property(10, String.class, "schedule_end_time", false, "SCHEDULE_END_TIME");
         public final static Property Schedule_start_time_long = new Property(11, Long.class, "schedule_start_time_long", false, "SCHEDULE_START_TIME_LONG");
         public final static Property Schedule_end_time_long = new Property(12, Long.class, "schedule_end_time_long", false, "SCHEDULE_END_TIME_LONG");
-        public final static Property Schedule_monday = new Property(13, Boolean.class, "schedule_monday", false, "SCHEDULE_MONDAY");
-        public final static Property Schedule_tuesday = new Property(14, Boolean.class, "schedule_tuesday", false, "SCHEDULE_TUESDAY");
-        public final static Property Schedule_wednesday = new Property(15, Boolean.class, "schedule_wednesday", false, "SCHEDULE_WEDNESDAY");
-        public final static Property Schedule_thursday = new Property(16, Boolean.class, "schedule_thursday", false, "SCHEDULE_THURSDAY");
-        public final static Property Schedule_friday = new Property(17, Boolean.class, "schedule_friday", false, "SCHEDULE_FRIDAY");
-        public final static Property Schedule_saturday = new Property(18, Boolean.class, "schedule_saturday", false, "SCHEDULE_SATURDAY");
-        public final static Property Schedule_sunday = new Property(19, Boolean.class, "schedule_sunday", false, "SCHEDULE_SUNDAY");
+        public final static Property Schedule_monday = new Property(13, Integer.class, "schedule_monday", false, "SCHEDULE_MONDAY");
+        public final static Property Schedule_tuesday = new Property(14, Integer.class, "schedule_tuesday", false, "SCHEDULE_TUESDAY");
+        public final static Property Schedule_wednesday = new Property(15, Integer.class, "schedule_wednesday", false, "SCHEDULE_WEDNESDAY");
+        public final static Property Schedule_thursday = new Property(16, Integer.class, "schedule_thursday", false, "SCHEDULE_THURSDAY");
+        public final static Property Schedule_friday = new Property(17, Integer.class, "schedule_friday", false, "SCHEDULE_FRIDAY");
+        public final static Property Schedule_saturday = new Property(18, Integer.class, "schedule_saturday", false, "SCHEDULE_SATURDAY");
+        public final static Property Schedule_sunday = new Property(19, Integer.class, "schedule_sunday", false, "SCHEDULE_SUNDAY");
         public final static Property Schedule_frequency = new Property(20, String.class, "schedule_frequency", false, "SCHEDULE_FREQUENCY");
-        public final static Property Is_cancelled = new Property(21, Boolean.class, "is_cancelled", false, "IS_CANCELLED");
+        public final static Property Is_cancelled = new Property(21, Integer.class, "is_cancelled", false, "IS_CANCELLED");
         public final static Property Instructor_id = new Property(22, String.class, "instructor_id", false, "INSTRUCTOR_ID");
         public final static Property Instructor_name = new Property(23, String.class, "instructor_name", false, "INSTRUCTOR_NAME");
         public final static Property Location_id = new Property(24, String.class, "location_id", false, "LOCATION_ID");
@@ -162,39 +162,39 @@ public class ScheduleDateDataDao extends AbstractDao<ScheduleDateData, Long> {
             stmt.bindLong(13, schedule_end_time_long);
         }
  
-        Boolean schedule_monday = entity.getSchedule_monday();
+        Integer schedule_monday = entity.getSchedule_monday();
         if (schedule_monday != null) {
-            stmt.bindLong(14, schedule_monday ? 1L: 0L);
+            stmt.bindLong(14, schedule_monday);
         }
  
-        Boolean schedule_tuesday = entity.getSchedule_tuesday();
+        Integer schedule_tuesday = entity.getSchedule_tuesday();
         if (schedule_tuesday != null) {
-            stmt.bindLong(15, schedule_tuesday ? 1L: 0L);
+            stmt.bindLong(15, schedule_tuesday);
         }
  
-        Boolean schedule_wednesday = entity.getSchedule_wednesday();
+        Integer schedule_wednesday = entity.getSchedule_wednesday();
         if (schedule_wednesday != null) {
-            stmt.bindLong(16, schedule_wednesday ? 1L: 0L);
+            stmt.bindLong(16, schedule_wednesday);
         }
  
-        Boolean schedule_thursday = entity.getSchedule_thursday();
+        Integer schedule_thursday = entity.getSchedule_thursday();
         if (schedule_thursday != null) {
-            stmt.bindLong(17, schedule_thursday ? 1L: 0L);
+            stmt.bindLong(17, schedule_thursday);
         }
  
-        Boolean schedule_friday = entity.getSchedule_friday();
+        Integer schedule_friday = entity.getSchedule_friday();
         if (schedule_friday != null) {
-            stmt.bindLong(18, schedule_friday ? 1L: 0L);
+            stmt.bindLong(18, schedule_friday);
         }
  
-        Boolean schedule_saturday = entity.getSchedule_saturday();
+        Integer schedule_saturday = entity.getSchedule_saturday();
         if (schedule_saturday != null) {
-            stmt.bindLong(19, schedule_saturday ? 1L: 0L);
+            stmt.bindLong(19, schedule_saturday);
         }
  
-        Boolean schedule_sunday = entity.getSchedule_sunday();
+        Integer schedule_sunday = entity.getSchedule_sunday();
         if (schedule_sunday != null) {
-            stmt.bindLong(20, schedule_sunday ? 1L: 0L);
+            stmt.bindLong(20, schedule_sunday);
         }
  
         String schedule_frequency = entity.getSchedule_frequency();
@@ -202,9 +202,9 @@ public class ScheduleDateDataDao extends AbstractDao<ScheduleDateData, Long> {
             stmt.bindString(21, schedule_frequency);
         }
  
-        Boolean is_cancelled = entity.getIs_cancelled();
+        Integer is_cancelled = entity.getIs_cancelled();
         if (is_cancelled != null) {
-            stmt.bindLong(22, is_cancelled ? 1L: 0L);
+            stmt.bindLong(22, is_cancelled);
         }
  
         String instructor_id = entity.getInstructor_id();
@@ -293,39 +293,39 @@ public class ScheduleDateDataDao extends AbstractDao<ScheduleDateData, Long> {
             stmt.bindLong(13, schedule_end_time_long);
         }
  
-        Boolean schedule_monday = entity.getSchedule_monday();
+        Integer schedule_monday = entity.getSchedule_monday();
         if (schedule_monday != null) {
-            stmt.bindLong(14, schedule_monday ? 1L: 0L);
+            stmt.bindLong(14, schedule_monday);
         }
  
-        Boolean schedule_tuesday = entity.getSchedule_tuesday();
+        Integer schedule_tuesday = entity.getSchedule_tuesday();
         if (schedule_tuesday != null) {
-            stmt.bindLong(15, schedule_tuesday ? 1L: 0L);
+            stmt.bindLong(15, schedule_tuesday);
         }
  
-        Boolean schedule_wednesday = entity.getSchedule_wednesday();
+        Integer schedule_wednesday = entity.getSchedule_wednesday();
         if (schedule_wednesday != null) {
-            stmt.bindLong(16, schedule_wednesday ? 1L: 0L);
+            stmt.bindLong(16, schedule_wednesday);
         }
  
-        Boolean schedule_thursday = entity.getSchedule_thursday();
+        Integer schedule_thursday = entity.getSchedule_thursday();
         if (schedule_thursday != null) {
-            stmt.bindLong(17, schedule_thursday ? 1L: 0L);
+            stmt.bindLong(17, schedule_thursday);
         }
  
-        Boolean schedule_friday = entity.getSchedule_friday();
+        Integer schedule_friday = entity.getSchedule_friday();
         if (schedule_friday != null) {
-            stmt.bindLong(18, schedule_friday ? 1L: 0L);
+            stmt.bindLong(18, schedule_friday);
         }
  
-        Boolean schedule_saturday = entity.getSchedule_saturday();
+        Integer schedule_saturday = entity.getSchedule_saturday();
         if (schedule_saturday != null) {
-            stmt.bindLong(19, schedule_saturday ? 1L: 0L);
+            stmt.bindLong(19, schedule_saturday);
         }
  
-        Boolean schedule_sunday = entity.getSchedule_sunday();
+        Integer schedule_sunday = entity.getSchedule_sunday();
         if (schedule_sunday != null) {
-            stmt.bindLong(20, schedule_sunday ? 1L: 0L);
+            stmt.bindLong(20, schedule_sunday);
         }
  
         String schedule_frequency = entity.getSchedule_frequency();
@@ -333,9 +333,9 @@ public class ScheduleDateDataDao extends AbstractDao<ScheduleDateData, Long> {
             stmt.bindString(21, schedule_frequency);
         }
  
-        Boolean is_cancelled = entity.getIs_cancelled();
+        Integer is_cancelled = entity.getIs_cancelled();
         if (is_cancelled != null) {
-            stmt.bindLong(22, is_cancelled ? 1L: 0L);
+            stmt.bindLong(22, is_cancelled);
         }
  
         String instructor_id = entity.getInstructor_id();
@@ -380,15 +380,15 @@ public class ScheduleDateDataDao extends AbstractDao<ScheduleDateData, Long> {
             cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // schedule_end_time
             cursor.isNull(offset + 11) ? null : cursor.getLong(offset + 11), // schedule_start_time_long
             cursor.isNull(offset + 12) ? null : cursor.getLong(offset + 12), // schedule_end_time_long
-            cursor.isNull(offset + 13) ? null : cursor.getShort(offset + 13) != 0, // schedule_monday
-            cursor.isNull(offset + 14) ? null : cursor.getShort(offset + 14) != 0, // schedule_tuesday
-            cursor.isNull(offset + 15) ? null : cursor.getShort(offset + 15) != 0, // schedule_wednesday
-            cursor.isNull(offset + 16) ? null : cursor.getShort(offset + 16) != 0, // schedule_thursday
-            cursor.isNull(offset + 17) ? null : cursor.getShort(offset + 17) != 0, // schedule_friday
-            cursor.isNull(offset + 18) ? null : cursor.getShort(offset + 18) != 0, // schedule_saturday
-            cursor.isNull(offset + 19) ? null : cursor.getShort(offset + 19) != 0, // schedule_sunday
+            cursor.isNull(offset + 13) ? null : cursor.getInt(offset + 13), // schedule_monday
+            cursor.isNull(offset + 14) ? null : cursor.getInt(offset + 14), // schedule_tuesday
+            cursor.isNull(offset + 15) ? null : cursor.getInt(offset + 15), // schedule_wednesday
+            cursor.isNull(offset + 16) ? null : cursor.getInt(offset + 16), // schedule_thursday
+            cursor.isNull(offset + 17) ? null : cursor.getInt(offset + 17), // schedule_friday
+            cursor.isNull(offset + 18) ? null : cursor.getInt(offset + 18), // schedule_saturday
+            cursor.isNull(offset + 19) ? null : cursor.getInt(offset + 19), // schedule_sunday
             cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // schedule_frequency
-            cursor.isNull(offset + 21) ? null : cursor.getShort(offset + 21) != 0, // is_cancelled
+            cursor.isNull(offset + 21) ? null : cursor.getInt(offset + 21), // is_cancelled
             cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // instructor_id
             cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // instructor_name
             cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // location_id
@@ -412,15 +412,15 @@ public class ScheduleDateDataDao extends AbstractDao<ScheduleDateData, Long> {
         entity.setSchedule_end_time(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
         entity.setSchedule_start_time_long(cursor.isNull(offset + 11) ? null : cursor.getLong(offset + 11));
         entity.setSchedule_end_time_long(cursor.isNull(offset + 12) ? null : cursor.getLong(offset + 12));
-        entity.setSchedule_monday(cursor.isNull(offset + 13) ? null : cursor.getShort(offset + 13) != 0);
-        entity.setSchedule_tuesday(cursor.isNull(offset + 14) ? null : cursor.getShort(offset + 14) != 0);
-        entity.setSchedule_wednesday(cursor.isNull(offset + 15) ? null : cursor.getShort(offset + 15) != 0);
-        entity.setSchedule_thursday(cursor.isNull(offset + 16) ? null : cursor.getShort(offset + 16) != 0);
-        entity.setSchedule_friday(cursor.isNull(offset + 17) ? null : cursor.getShort(offset + 17) != 0);
-        entity.setSchedule_saturday(cursor.isNull(offset + 18) ? null : cursor.getShort(offset + 18) != 0);
-        entity.setSchedule_sunday(cursor.isNull(offset + 19) ? null : cursor.getShort(offset + 19) != 0);
+        entity.setSchedule_monday(cursor.isNull(offset + 13) ? null : cursor.getInt(offset + 13));
+        entity.setSchedule_tuesday(cursor.isNull(offset + 14) ? null : cursor.getInt(offset + 14));
+        entity.setSchedule_wednesday(cursor.isNull(offset + 15) ? null : cursor.getInt(offset + 15));
+        entity.setSchedule_thursday(cursor.isNull(offset + 16) ? null : cursor.getInt(offset + 16));
+        entity.setSchedule_friday(cursor.isNull(offset + 17) ? null : cursor.getInt(offset + 17));
+        entity.setSchedule_saturday(cursor.isNull(offset + 18) ? null : cursor.getInt(offset + 18));
+        entity.setSchedule_sunday(cursor.isNull(offset + 19) ? null : cursor.getInt(offset + 19));
         entity.setSchedule_frequency(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
-        entity.setIs_cancelled(cursor.isNull(offset + 21) ? null : cursor.getShort(offset + 21) != 0);
+        entity.setIs_cancelled(cursor.isNull(offset + 21) ? null : cursor.getInt(offset + 21));
         entity.setInstructor_id(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
         entity.setInstructor_name(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
         entity.setLocation_id(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
