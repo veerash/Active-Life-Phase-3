@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="@dimen/activity_horizontal_margin">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,16 +16,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
+            <com.android.activelife.tampa.customviews.CachetProBoldTextView
                 android:id="@+id/tv_event"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:textColor="@color/black"
-                android:textSize="@dimen/thirty_sp"
-                android:textStyle="bold"/>
+                android:textSize="@dimen/twenty_sp"
+                android:textStyle="bold" />
 
-            <TextView
+            <com.android.activelife.tampa.customviews.CachetProMediumTextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -31,7 +33,7 @@
                 android:gravity="center_horizontal"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/twenty_sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>
@@ -40,28 +42,32 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/twenty_dip"
+        android:layout_marginBottom="@dimen/ten_sp"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/ten_sp"
         android:background="@drawable/schedule_content_bg"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:padding="@dimen/ten_dip">
+        android:padding="@dimen/activity_horizontal_margin">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
+            <com.android.activelife.tampa.customviews.CachetProRegularTextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:textColor="@color/white"
-                android:textSize="@dimen/twenty_sp"
-                />
+                android:textSize="@dimen/twenty_sp" />
 
-            <TextView
+            <com.android.activelife.tampa.customviews.CachetProRegularTextView
                 android:id="@+id/tv_start_end_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -69,10 +75,9 @@
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:textColor="@color/white"
-                android:textSize="@dimen/twenty_sp"
-                />
+                android:textSize="@dimen/twenty_sp" />
 
-            <TextView
+            <com.android.activelife.tampa.customviews.CachetProRegularTextView
                 android:id="@+id/tv_ymca"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -80,8 +85,7 @@
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:textColor="@color/white"
-                android:textSize="@dimen/twenty_sp"
-                />
+                android:textSize="@dimen/twenty_sp" />
 
         </LinearLayout>
 
@@ -90,24 +94,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginRight="@dimen/five_dip"
-            android:src="@drawable/schedule_add"
             android:background="@android:color/transparent"
-            />
+            android:padding="@dimen/five_sp"
+            android:src="@drawable/schedule_add" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/twenty_dip"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:padding="@dimen/activity_horizontal_margin"
         android:layout_weight="1">
 
-        <TextView
+        <com.android.activelife.tampa.customviews.CachetProRegularTextView
             android:id="@+id/tv_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/ten_dip"
             android:textSize="@dimen/fifteen_sp"
-            android:textStyle="italic"/>
+            android:textStyle="italic" />
     </LinearLayout>
 </LinearLayout>

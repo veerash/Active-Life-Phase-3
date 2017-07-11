@@ -27,15 +27,15 @@ public class ScheduleDateData {
     private String schedule_end_time;
     private Long schedule_start_time_long;
     private Long schedule_end_time_long;
-    private Boolean schedule_monday;
-    private Boolean schedule_tuesday;
-    private Boolean schedule_wednesday;
-    private Boolean schedule_thursday;
-    private Boolean schedule_friday;
-    private Boolean schedule_saturday;
-    private Boolean schedule_sunday;
+    private Integer schedule_monday;
+    private Integer schedule_tuesday;
+    private Integer schedule_wednesday;
+    private Integer schedule_thursday;
+    private Integer schedule_friday;
+    private Integer schedule_saturday;
+    private Integer schedule_sunday;
     private String schedule_frequency;
-    private Boolean is_cancelled;
+    private Integer is_cancelled;
     private String instructor_id;
     private String instructor_name;
     private String location_id;
@@ -53,7 +53,7 @@ public class ScheduleDateData {
     }
 
     @Generated
-    public ScheduleDateData(Long id, int schedule_id, String schedule_name, String class_id, String class_name, String class_desc, String schedule_type_id, String schedule_type, String schedule_start_date, String schedule_start_time, String schedule_end_time, Long schedule_start_time_long, Long schedule_end_time_long, Boolean schedule_monday, Boolean schedule_tuesday, Boolean schedule_wednesday, Boolean schedule_thursday, Boolean schedule_friday, Boolean schedule_saturday, Boolean schedule_sunday, String schedule_frequency, Boolean is_cancelled, String instructor_id, String instructor_name, String location_id, String location_name) {
+    public ScheduleDateData(Long id, int schedule_id, String schedule_name, String class_id, String class_name, String class_desc, String schedule_type_id, String schedule_type, String schedule_start_date, String schedule_start_time, String schedule_end_time, Long schedule_start_time_long, Long schedule_end_time_long, Integer schedule_monday, Integer schedule_tuesday, Integer schedule_wednesday, Integer schedule_thursday, Integer schedule_friday, Integer schedule_saturday, Integer schedule_sunday, String schedule_frequency, Integer is_cancelled, String instructor_id, String instructor_name, String location_id, String location_name) {
         this.id = id;
         this.schedule_id = schedule_id;
         this.schedule_name = schedule_name;
@@ -186,59 +186,59 @@ public class ScheduleDateData {
         this.schedule_end_time_long = schedule_end_time_long;
     }
 
-    public Boolean getSchedule_monday() {
+    public Integer getSchedule_monday() {
         return schedule_monday;
     }
 
-    public void setSchedule_monday(Boolean schedule_monday) {
+    public void setSchedule_monday(Integer schedule_monday) {
         this.schedule_monday = schedule_monday;
     }
 
-    public Boolean getSchedule_tuesday() {
+    public Integer getSchedule_tuesday() {
         return schedule_tuesday;
     }
 
-    public void setSchedule_tuesday(Boolean schedule_tuesday) {
+    public void setSchedule_tuesday(Integer schedule_tuesday) {
         this.schedule_tuesday = schedule_tuesday;
     }
 
-    public Boolean getSchedule_wednesday() {
+    public Integer getSchedule_wednesday() {
         return schedule_wednesday;
     }
 
-    public void setSchedule_wednesday(Boolean schedule_wednesday) {
+    public void setSchedule_wednesday(Integer schedule_wednesday) {
         this.schedule_wednesday = schedule_wednesday;
     }
 
-    public Boolean getSchedule_thursday() {
+    public Integer getSchedule_thursday() {
         return schedule_thursday;
     }
 
-    public void setSchedule_thursday(Boolean schedule_thursday) {
+    public void setSchedule_thursday(Integer schedule_thursday) {
         this.schedule_thursday = schedule_thursday;
     }
 
-    public Boolean getSchedule_friday() {
+    public Integer getSchedule_friday() {
         return schedule_friday;
     }
 
-    public void setSchedule_friday(Boolean schedule_friday) {
+    public void setSchedule_friday(Integer schedule_friday) {
         this.schedule_friday = schedule_friday;
     }
 
-    public Boolean getSchedule_saturday() {
+    public Integer getSchedule_saturday() {
         return schedule_saturday;
     }
 
-    public void setSchedule_saturday(Boolean schedule_saturday) {
+    public void setSchedule_saturday(Integer schedule_saturday) {
         this.schedule_saturday = schedule_saturday;
     }
 
-    public Boolean getSchedule_sunday() {
+    public Integer getSchedule_sunday() {
         return schedule_sunday;
     }
 
-    public void setSchedule_sunday(Boolean schedule_sunday) {
+    public void setSchedule_sunday(Integer schedule_sunday) {
         this.schedule_sunday = schedule_sunday;
     }
 
@@ -250,11 +250,11 @@ public class ScheduleDateData {
         this.schedule_frequency = schedule_frequency;
     }
 
-    public Boolean getIs_cancelled() {
+    public Integer getIs_cancelled() {
         return is_cancelled;
     }
 
-    public void setIs_cancelled(Boolean is_cancelled) {
+    public void setIs_cancelled(Integer is_cancelled) {
         this.is_cancelled = is_cancelled;
     }
 

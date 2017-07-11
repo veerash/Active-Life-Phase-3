@@ -3,14 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:descendantFocusability="blocksDescendants"
     android:padding="@dimen/ten_dip">
 
-    <TextView
+    <com.android.activelife.tampa.customviews.CachetProMediumTextView
         android:id="@+id/tv_ymca"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/five_dip"
+        android:clickable="false"
         android:textColor="@color/black"
         android:textSize="@dimen/twenty_sp" />
 
@@ -26,22 +26,24 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/five_dip"
             android:orientation="vertical"
+            android:clickable="false"
             android:padding="@dimen/two_dip">
 
-            <TextView
+            <com.android.activelife.tampa.customviews.CachetProRegularTextView
                 android:id="@+id/tv_hours"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="@dimen/twenty_sp" />
+                android:clickable="false"
+                android:textSize="@dimen/sixteen_sp" />
 
-            <TextView
+            <com.android.activelife.tampa.customviews.CachetProRegularTextView
                 android:id="@+id/tv_mins"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/five_dip"
                 android:textColor="@color/thick_green"
-                android:textSize="@dimen/twenty_sp" />
+                android:textSize="@dimen/sixteen_sp" />
 
 
         </LinearLayout>
@@ -52,31 +54,33 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/five_dip"
             android:layout_weight="1"
-            android:clickable="true"
+            android:clickable="false"
             android:orientation="vertical"
             android:padding="@dimen/two_dip">
 
-            <TextView
+            <com.android.activelife.tampa.customviews.CachetProRegularTextView
                 android:id="@+id/tv_event"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:textColor="@color/black"
-                android:textSize="@dimen/twenty_sp" />
+                android:clickable="false"
+                android:textSize="@dimen/sixteen_sp" />
 
-            <TextView
+            <com.android.activelife.tampa.customviews.CachetProRegularTextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/five_dip"
                 android:gravity="center_horizontal"
                 android:textColor="@color/black"
-                android:textSize="@dimen/twenty_sp" />
+                android:clickable="false"
+                android:textSize="@dimen/sixteen_sp" />
 
 
         </LinearLayout>
 
-        <Button
+        <TextView
             android:id="@+id/reserve"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -84,6 +88,8 @@
             android:layout_marginRight="@dimen/five_dip"
             android:background="@drawable/reserve_button_bg"
             android:text="Reserve"
+            android:clickable="true"
+            android:padding="@dimen/activity_horizontal_margin"
             android:textColor="@android:color/white"
             android:textSize="@dimen/twelve_sp" />
 

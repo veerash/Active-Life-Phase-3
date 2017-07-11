@@ -25,7 +25,41 @@ public class MyGenerator {
         addInstructorEntities(schema);
         addScheduleDataEntities(schema);
         addHoursDataEntities(schema);
-        // addPhonesEntities(schema);
+         addLocationEntities(schema);
+        addDefaultLocationEntities(schema);
+    }
+    private static Entity addLocationEntities(final Schema schema) {
+        Entity locationData = schema.addEntity("LocationData");
+        locationData.addIdProperty().primaryKey().autoincrement();
+        locationData.addStringProperty("location_id");
+        locationData.addStringProperty("location_name");
+        locationData.addStringProperty("location_address");
+        locationData.addStringProperty("location_city");
+        locationData.addStringProperty("location_state");
+        locationData.addStringProperty("location_zip");
+        locationData.addStringProperty("location_phone");
+        locationData.addStringProperty("location_email");
+        locationData.addStringProperty("location_program_link");
+        locationData.addStringProperty("location_donate_link");
+
+        return locationData;
+    }
+    private static Entity addDefaultLocationEntities(final Schema schema) {
+        Entity locationData = schema.addEntity("DefaultLocationData");
+        locationData.addIdProperty().primaryKey().autoincrement();
+        locationData.addIntProperty("postion");
+        locationData.addStringProperty("location_id");
+        locationData.addStringProperty("location_name");
+        locationData.addStringProperty("location_address");
+        locationData.addStringProperty("location_city");
+        locationData.addStringProperty("location_state");
+        locationData.addStringProperty("location_zip");
+        locationData.addStringProperty("location_phone");
+        locationData.addStringProperty("location_email");
+        locationData.addStringProperty("location_program_link");
+        locationData.addStringProperty("location_donate_link");
+
+        return locationData;
     }
     private static Entity addClassesEntities(final Schema schema) {
         Entity classData = schema.addEntity("ClassData");
@@ -86,15 +120,15 @@ public class MyGenerator {
         scheduleDateData.addStringProperty("schedule_end_time");
         scheduleDateData.addLongProperty("schedule_start_time_long");
         scheduleDateData.addLongProperty("schedule_end_time_long");
-        scheduleDateData.addBooleanProperty("schedule_monday");
-        scheduleDateData.addBooleanProperty("schedule_tuesday");
-        scheduleDateData.addBooleanProperty("schedule_wednesday");
-        scheduleDateData.addBooleanProperty("schedule_thursday");
-        scheduleDateData.addBooleanProperty("schedule_friday");
-        scheduleDateData.addBooleanProperty("schedule_saturday");
-        scheduleDateData.addBooleanProperty("schedule_sunday");
+        scheduleDateData.addIntProperty("schedule_monday");
+        scheduleDateData.addIntProperty("schedule_tuesday");
+        scheduleDateData.addIntProperty("schedule_wednesday");
+        scheduleDateData.addIntProperty("schedule_thursday");
+        scheduleDateData.addIntProperty("schedule_friday");
+        scheduleDateData.addIntProperty("schedule_saturday");
+        scheduleDateData.addIntProperty("schedule_sunday");
         scheduleDateData.addStringProperty("schedule_frequency");
-        scheduleDateData.addBooleanProperty("is_cancelled");
+        scheduleDateData.addIntProperty("is_cancelled");
         scheduleDateData.addStringProperty("instructor_id");
         scheduleDateData.addStringProperty("instructor_name");
         scheduleDateData.addStringProperty("location_id");

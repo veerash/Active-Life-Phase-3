@@ -37,6 +37,7 @@ public class ActiveLifeApplication extends Application {
     public ApiRequest jApiRequestService;
     private static ActiveLifeApplication mInstance;
     public DbOperations dbOperations;
+    public static int SDK_INT = android.os.Build.VERSION.SDK_INT;
 
     @Override
     public void onCreate() {
