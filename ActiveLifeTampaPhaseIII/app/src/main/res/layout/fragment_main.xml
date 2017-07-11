@@ -18,9 +18,9 @@
             android:id="@+id/tv_schedule_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:layout_gravity="center"
             android:text="Schedule"
             android:textColor="@color/white"
             android:textSize="@dimen/twenty_sp" />
@@ -32,11 +32,11 @@
             android:layout_gravity="center"
             android:layout_marginRight="@dimen/five_dip"
             android:button="@drawable/filter"
+            android:checked="false"
+            android:paddingBottom="@dimen/five_sp"
             android:paddingLeft="@dimen/ten_sp"
             android:paddingRight="@dimen/ten_sp"
-            android:paddingTop="@dimen/five_sp"
-            android:paddingBottom="@dimen/five_sp"
-            android:checked="false" />
+            android:paddingTop="@dimen/five_sp" />
     </LinearLayout>
 
     <ScrollView
@@ -45,129 +45,152 @@
         android:layout_height="wrap_content"
         android:scrollbars="none"
         android:visibility="gone">
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
 
         <LinearLayout
+
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/ten_dip"
-            android:layout_weight="0.25"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.android.activelife.tampa.customviews.CachetProRegularTextView
-                android:id="@+id/section_label1"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/five_dip"
-                android:layout_marginTop="@dimen/ten_dip"
-                android:gravity="left|center_vertical"
-                android:text="Schedules"
-                android:textColor="@color/thick_green"
-                android:textSize="@dimen/twenty_sp" />
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/ten_dip"
+                android:orientation="vertical">
 
-            <Spinner
-                android:id="@+id/schedules_spinner"
-                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                <com.android.activelife.tampa.customviews.CachetProRegularTextView
+                    android:id="@+id/section_label0"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/five_dip"
+                    android:layout_marginTop="@dimen/ten_dip"
+                    android:gravity="left|center_vertical"
+                    android:text="Locations"
+                    android:textColor="@color/thick_green"
+                    android:textSize="@dimen/twenty_sp" />
+
+                <Spinner
+                    android:id="@+id/location_spinner"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/five_dip"
+                    android:layout_weight="1"
+                    android:padding="@dimen/twenty_dip" />
+
+                <com.android.activelife.tampa.customviews.CachetProRegularTextView
+                    android:id="@+id/section_label1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/five_dip"
+                    android:layout_marginTop="@dimen/ten_dip"
+                    android:gravity="left|center_vertical"
+                    android:text="Schedules"
+                    android:textColor="@color/thick_green"
+                    android:textSize="@dimen/twenty_sp" />
+
+                <Spinner
+                    android:id="@+id/schedules_spinner"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/five_dip"
+                    android:layout_weight="1"
+                    android:padding="@dimen/twenty_dip" />
+
+                <com.android.activelife.tampa.customviews.CachetProRegularTextView
+                    android:id="@+id/section_label2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/five_dip"
+                    android:layout_marginTop="@dimen/ten_dip"
+                    android:gravity="left|center_vertical"
+                    android:text="Classes"
+                    android:textColor="@color/thick_green"
+                    android:textSize="@dimen/twenty_sp" />
+
+                <Spinner
+                    android:id="@+id/classes_spinner"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/five_dip"
+                    android:layout_weight="1"
+                    android:padding="@dimen/twenty_dip" />
+
+                <com.android.activelife.tampa.customviews.CachetProRegularTextView
+                    android:id="@+id/section_label3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/five_dip"
+                    android:layout_marginTop="@dimen/ten_dip"
+                    android:gravity="left|center_vertical"
+                    android:text="Instructors"
+                    android:textColor="@color/thick_green"
+                    android:textSize="@dimen/twenty_sp" />
+
+                <Spinner
+                    android:id="@+id/instructors_spinner"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/five_dip"
+                    android:layout_weight="1"
+                    android:padding="@dimen/twenty_dip" />
+
+                <org.florescu.android.rangeseekbar.RangeSeekBar
+                    android:id="@+id/rangeSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ten_dip"
+                    android:layout_weight="1"
+                    rsb:absoluteMaxValue="24"
+                    rsb:absoluteMinValue="0"
+                    rsb:activateOnDefaultValues="true"
+                    rsb:activeColor="@color/DeepSkyBlue"
+                    rsb:barHeight="@dimen/ten_dip"
+                    rsb:textAboveThumbsColor="@android:color/holo_blue_light"
+                    rsb:thumbDisabled="@drawable/custom_range_slider_thumb"
+                    rsb:thumbNormal="@drawable/custom_range_slider_thumb"
+                    rsb:thumbPressed="@drawable/custom_range_slider_thumb"
+                    rsb:thumbShadow="true"
+                    rsb:thumbShadowBlur="1dp"
+                    rsb:thumbShadowColor="@color/primary_material_light"
+                    rsb:thumbShadowXOffset="1dp"
+                    rsb:thumbShadowYOffset="2dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/five_dip"
-                android:layout_weight="1"
-                android:padding="@dimen/twenty_dip" />
+                android:layout_height="match_parent"
+                android:gravity="top"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-            <com.android.activelife.tampa.customviews.CachetProRegularTextView
-                android:id="@+id/section_label2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/five_dip"
-                android:layout_marginTop="@dimen/ten_dip"
-                android:gravity="left|center_vertical"
-                android:text="Classes"
-                android:textColor="@color/thick_green"
-                android:textSize="@dimen/twenty_sp" />
+                <Button
+                    android:id="@+id/clear_filter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.5"
+                    android:background="@color/thick_green"
+                    android:text="Clear Filter"
+                    android:textColor="@android:color/white" />
 
-            <Spinner
-                android:id="@+id/classes_spinner"
-                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/five_dip"
-                android:layout_weight="1"
-                android:padding="@dimen/twenty_dip" />
-
-            <com.android.activelife.tampa.customviews.CachetProRegularTextView
-                android:id="@+id/section_label3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/five_dip"
-                android:layout_marginTop="@dimen/ten_dip"
-                android:gravity="left|center_vertical"
-                android:text="Instructors"
-                android:textColor="@color/thick_green"
-                android:textSize="@dimen/twenty_sp" />
-
-            <Spinner
-                android:id="@+id/instructors_spinner"
-                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/five_dip"
-                android:layout_weight="1"
-                android:padding="@dimen/twenty_dip" />
-
-            <org.florescu.android.rangeseekbar.RangeSeekBar
-                android:id="@+id/rangeSeekBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/ten_dip"
-                android:layout_weight="1"
-                rsb:absoluteMaxValue="24"
-                rsb:absoluteMinValue="0"
-                rsb:activateOnDefaultValues="true"
-                rsb:activeColor="@color/DeepSkyBlue"
-                rsb:barHeight="@dimen/ten_dip"
-                rsb:textAboveThumbsColor="@android:color/holo_blue_light"
-                rsb:thumbDisabled="@drawable/custom_range_slider_thumb"
-                rsb:thumbNormal="@drawable/custom_range_slider_thumb"
-                rsb:thumbPressed="@drawable/custom_range_slider_thumb"
-                rsb:thumbShadow="true"
-                rsb:thumbShadowBlur="1dp"
-                rsb:thumbShadowColor="@color/primary_material_light"
-                rsb:thumbShadowXOffset="1dp"
-                rsb:thumbShadowYOffset="2dp" />
-
+                <Button
+                    android:id="@+id/btn_apply_filter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.5"
+                    android:background="@color/light_gren"
+                    android:text="Apply Filter"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.75"
-            android:gravity="top"
-            android:orientation="vertical">
-            <Button
-                android:id="@+id/clear_filter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/thick_green"
-                android:text="Clear Filter"
-                android:textColor="@android:color/white" />
-            <Button
-                android:id="@+id/btn_apply_filter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/light_gren"
-                android:text="Apply Filter"
-                android:textColor="@android:color/white" />
-        </LinearLayout>
-    </LinearLayout>
     </ScrollView>
     <!-- https://android-arsenal.com/details/1/5087 for Horizontal calender-->
     <LinearLayout

@@ -1,0 +1,94 @@
+ //four dimens
+//            else if (schedule_id != null && class_id != null && instructor_id != null && starttime != null && endtime == null) {
+//                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+//                        qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime)));
+//            } else if (schedule_id != null && class_id != null && instructor_id != null && starttime == null && endtime != null) {
+//                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+//                        qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
+//            } else if (schedule_id != null && class_id != null && instructor_id == null && starttime != null && endtime != null) {
+//                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+//                        qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
+//            } else if (schedule_id != null && class_id == null && instructor_id != null && starttime != null && endtime != null) {
+//                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+//                        qb.and(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
+//            } else if (schedule_id == null && class_id != null && instructor_id != null && starttime != null && endtime != null) {
+//                qb.where(ScheduleDateDataDao.Properties.Class_id.eq(class_id),
+//                        qb.and(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
+//            }
+            //Three dimens
+//            else if (schedule_id != null && class_id != null && instructor_id != null && starttime == null && endtime == null) {
+//                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+//                        qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id)));
+//            } else if (schedule_id != null && class_id != null && instructor_id == null && starttime == null && endtime != null) {
+//                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+//                        qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
+//            } else if (schedule_id != null && class_id != null && instructor_id == null && starttime != null && endtime == null) {
+//                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+//                        qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime)));
+//            } else if (schedule_id != null && class_id == null && instructor_id != null && starttime != null && endtime == null) {
+//                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+//                        qb.and(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime)));
+//            } else if (schedule_id != null && class_id == null && instructor_id != null && starttime == null && endtime != null) {
+//                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+//                        qb.and(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
+//            } else if (schedule_id != null && class_id == null && instructor_id == null && starttime != null && endtime != null) {
+//                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+//                        qb.and(ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
+//            } else if (schedule_id == null && class_id == null && instructor_id != null && starttime != null && endtime != null) {
+//                qb.where(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id),
+//                        qb.and(ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
+//            } else if (schedule_id == null && class_id != null && instructor_id == null && starttime != null && endtime != null) {
+//                qb.where(ScheduleDateDataDao.Properties.Class_id.eq(class_id),
+//                        qb.and(ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
+//            } else if (schedule_id == null && class_id != null && instructor_id != null && starttime == null && endtime != null) {
+//                qb.where(ScheduleDateDataDao.Properties.Class_id.eq(class_id),
+//                        qb.and(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
+//            } else if (schedule_id == null && class_id != null && instructor_id != null && starttime != null && endtime == null) {
+//                qb.where(ScheduleDateDataDao.Properties.Class_id.eq(class_id),
+//                        qb.and(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime)));
+//            }
+            //two dimens
+//            else if (schedule_id != null && class_id != null && instructor_id == null && starttime == null && endtime == null) {
+//                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+//                        ScheduleDateDataDao.Properties.Class_id.eq(class_id));
+//            } else if (schedule_id != null && class_id == null && instructor_id != null && starttime == null && endtime == null) {
+//                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+//                        ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id));
+//            } else if (schedule_id != null && class_id == null && instructor_id == null && starttime != null && endtime == null) {
+//                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+//                        ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime));
+//            } else if (schedule_id != null && class_id == null && instructor_id == null && starttime == null && endtime != null) {
+//                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+//                        ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime));
+//            } else if (schedule_id == null && class_id != null && instructor_id != null && starttime == null && endtime == null) {
+//                qb.where(ScheduleDateDataDao.Properties.Class_id.eq(class_id),
+//                        ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id));
+//            } else if (schedule_id == null && class_id != null && instructor_id == null && starttime != null && endtime == null) {
+//                qb.where(ScheduleDateDataDao.Properties.Class_id.eq(class_id),
+//                        ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime));
+//            } else if (schedule_id == null && class_id != null && instructor_id == null && starttime == null && endtime != null) {
+//                qb.where(ScheduleDateDataDao.Properties.Class_id.eq(class_id),
+//                        ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime));
+//            } else if (schedule_id == null && class_id == null && instructor_id != null && starttime != null && endtime == null) {
+//                qb.where(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id),
+//                        ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime));
+//            } else if (schedule_id == null && class_id == null && instructor_id != null && starttime == null && endtime != null) {
+//                qb.where(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id),
+//                        ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime));
+//            } else if (schedule_id == null && class_id == null && instructor_id == null && starttime != null && endtime != null) {
+//                qb.where(
+//                        ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime));
+//            }
+
+            //one dimens
+//            else if (schedule_id != null && class_id == null && instructor_id == null && starttime == null && endtime == null) {
+//                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id));
+//            } else if (schedule_id == null && class_id != null && instructor_id == null && starttime == null && endtime == null) {
+//                qb.where(ScheduleDateDataDao.Properties.Class_id.eq(class_id));
+//            } else if (schedule_id == null && class_id == null && instructor_id != null && starttime == null && endtime == null) {
+//                qb.where(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id));
+//            } else if (schedule_id == null && class_id == null && instructor_id == null && starttime != null && endtime == null) {
+//                qb.where(ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime));
+//            } else if (schedule_id == null && class_id == null && instructor_id == null && starttime == null && endtime != null) {
+//                qb.where(ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime));
+//            }

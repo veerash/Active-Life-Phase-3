@@ -157,7 +157,7 @@ public class MemberDetailsFragment extends Fragment {
     public void setProgramDetails(final Bundle savedInstanceState) {
         View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_programs_donate, null);
         WebView webview = (WebView) child.findViewById(R.id.programs_donate_wv);
-        List<LocationData> data = ActiveLifeApplication.getInstance().setUpDb().getLocations();
+        List<LocationData> data = ActiveLifeApplication.getInstance().setUpDb().getLocation();
         WebSettings settings = webview.getSettings();
         settings.setJavaScriptEnabled(true);
         webview.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
@@ -182,7 +182,7 @@ public class MemberDetailsFragment extends Fragment {
         WebSettings settings = webview.getSettings();
         settings.setJavaScriptEnabled(true);
         webview.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
-        List<LocationData> data = ActiveLifeApplication.getInstance().setUpDb().getLocations();
+        List<LocationData> data = ActiveLifeApplication.getInstance().setUpDb().getLocation();
         if (data != null && data.size() > 0) {
             webview.setVisibility(View.VISIBLE);
             if (data.get(0).getLocation_donate_link() != null && data.get(0).getLocation_donate_link().length() > 0) {
@@ -206,7 +206,7 @@ public class MemberDetailsFragment extends Fragment {
         TextView ymcaAddress = (TextView) child.findViewById(R.id.member_address);
         TextView ymcaPhone = (TextView) child.findViewById(R.id.member_phone);
         TextView ymcaEmail = (TextView) child.findViewById(R.id.member_email);
-        List<LocationData> data = ActiveLifeApplication.getInstance().setUpDb().getLocations();
+        List<LocationData> data = ActiveLifeApplication.getInstance().setUpDb().getLocation();
         if (data != null && data.size() > 0) {
             ymcaName.setVisibility(View.VISIBLE);
             ymcaName.setText("" + data.get(0).getLocation_name());

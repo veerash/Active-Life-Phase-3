@@ -25,12 +25,30 @@ public class MyGenerator {
         addInstructorEntities(schema);
         addScheduleDataEntities(schema);
         addHoursDataEntities(schema);
-         addLocationEntities(schema);
+        addLocationEntities(schema);
         addDefaultLocationEntities(schema);
+        addLocationsEntities(schema);
+    }
+    private static Entity addLocationsEntities(final Schema schema) {
+        Entity locationData = schema.addEntity("LocationsData");
+        locationData.addIdProperty().primaryKey().autoincrement();
+        locationData.addStringProperty("location_id");
+        locationData.addStringProperty("location_name");
+        locationData.addStringProperty("location_address");
+        locationData.addStringProperty("location_city");
+        locationData.addStringProperty("location_state");
+        locationData.addStringProperty("location_zip");
+        locationData.addStringProperty("location_phone");
+        locationData.addStringProperty("location_email");
+        locationData.addStringProperty("location_program_link");
+        locationData.addStringProperty("location_donate_link");
+
+        return locationData;
     }
     private static Entity addLocationEntities(final Schema schema) {
         Entity locationData = schema.addEntity("LocationData");
         locationData.addIdProperty().primaryKey().autoincrement();
+        locationData.addIntProperty("postion");
         locationData.addStringProperty("location_id");
         locationData.addStringProperty("location_name");
         locationData.addStringProperty("location_address");

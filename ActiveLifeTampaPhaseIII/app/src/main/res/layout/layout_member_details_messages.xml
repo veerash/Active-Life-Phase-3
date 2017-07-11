@@ -21,6 +21,7 @@
             android:orientation="horizontal"
             android:layout_marginLeft="10sp"
             android:layout_marginRight="10sp"
+            android:visibility="gone"
             android:weightSum="2">
 
             <com.android.activelife.tampa.customviews.CachetProRegularRadioButton

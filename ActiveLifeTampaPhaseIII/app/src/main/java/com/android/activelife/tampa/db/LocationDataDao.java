@@ -23,16 +23,17 @@ public class LocationDataDao extends AbstractDao<LocationData, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Location_id = new Property(1, String.class, "location_id", false, "LOCATION_ID");
-        public final static Property Location_name = new Property(2, String.class, "location_name", false, "LOCATION_NAME");
-        public final static Property Location_address = new Property(3, String.class, "location_address", false, "LOCATION_ADDRESS");
-        public final static Property Location_city = new Property(4, String.class, "location_city", false, "LOCATION_CITY");
-        public final static Property Location_state = new Property(5, String.class, "location_state", false, "LOCATION_STATE");
-        public final static Property Location_zip = new Property(6, String.class, "location_zip", false, "LOCATION_ZIP");
-        public final static Property Location_phone = new Property(7, String.class, "location_phone", false, "LOCATION_PHONE");
-        public final static Property Location_email = new Property(8, String.class, "location_email", false, "LOCATION_EMAIL");
-        public final static Property Location_program_link = new Property(9, String.class, "location_program_link", false, "LOCATION_PROGRAM_LINK");
-        public final static Property Location_donate_link = new Property(10, String.class, "location_donate_link", false, "LOCATION_DONATE_LINK");
+        public final static Property Postion = new Property(1, Integer.class, "postion", false, "POSTION");
+        public final static Property Location_id = new Property(2, String.class, "location_id", false, "LOCATION_ID");
+        public final static Property Location_name = new Property(3, String.class, "location_name", false, "LOCATION_NAME");
+        public final static Property Location_address = new Property(4, String.class, "location_address", false, "LOCATION_ADDRESS");
+        public final static Property Location_city = new Property(5, String.class, "location_city", false, "LOCATION_CITY");
+        public final static Property Location_state = new Property(6, String.class, "location_state", false, "LOCATION_STATE");
+        public final static Property Location_zip = new Property(7, String.class, "location_zip", false, "LOCATION_ZIP");
+        public final static Property Location_phone = new Property(8, String.class, "location_phone", false, "LOCATION_PHONE");
+        public final static Property Location_email = new Property(9, String.class, "location_email", false, "LOCATION_EMAIL");
+        public final static Property Location_program_link = new Property(10, String.class, "location_program_link", false, "LOCATION_PROGRAM_LINK");
+        public final static Property Location_donate_link = new Property(11, String.class, "location_donate_link", false, "LOCATION_DONATE_LINK");
     }
 
 
@@ -49,16 +50,17 @@ public class LocationDataDao extends AbstractDao<LocationData, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"LOCATION_DATA\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
-                "\"LOCATION_ID\" TEXT," + // 1: location_id
-                "\"LOCATION_NAME\" TEXT," + // 2: location_name
-                "\"LOCATION_ADDRESS\" TEXT," + // 3: location_address
-                "\"LOCATION_CITY\" TEXT," + // 4: location_city
-                "\"LOCATION_STATE\" TEXT," + // 5: location_state
-                "\"LOCATION_ZIP\" TEXT," + // 6: location_zip
-                "\"LOCATION_PHONE\" TEXT," + // 7: location_phone
-                "\"LOCATION_EMAIL\" TEXT," + // 8: location_email
-                "\"LOCATION_PROGRAM_LINK\" TEXT," + // 9: location_program_link
-                "\"LOCATION_DONATE_LINK\" TEXT);"); // 10: location_donate_link
+                "\"POSTION\" INTEGER," + // 1: postion
+                "\"LOCATION_ID\" TEXT," + // 2: location_id
+                "\"LOCATION_NAME\" TEXT," + // 3: location_name
+                "\"LOCATION_ADDRESS\" TEXT," + // 4: location_address
+                "\"LOCATION_CITY\" TEXT," + // 5: location_city
+                "\"LOCATION_STATE\" TEXT," + // 6: location_state
+                "\"LOCATION_ZIP\" TEXT," + // 7: location_zip
+                "\"LOCATION_PHONE\" TEXT," + // 8: location_phone
+                "\"LOCATION_EMAIL\" TEXT," + // 9: location_email
+                "\"LOCATION_PROGRAM_LINK\" TEXT," + // 10: location_program_link
+                "\"LOCATION_DONATE_LINK\" TEXT);"); // 11: location_donate_link
     }
 
     /** Drops the underlying database table. */
@@ -76,54 +78,59 @@ public class LocationDataDao extends AbstractDao<LocationData, Long> {
             stmt.bindLong(1, id);
         }
  
+        Integer postion = entity.getPostion();
+        if (postion != null) {
+            stmt.bindLong(2, postion);
+        }
+ 
         String location_id = entity.getLocation_id();
         if (location_id != null) {
-            stmt.bindString(2, location_id);
+            stmt.bindString(3, location_id);
         }
  
         String location_name = entity.getLocation_name();
         if (location_name != null) {
-            stmt.bindString(3, location_name);
+            stmt.bindString(4, location_name);
         }
  
         String location_address = entity.getLocation_address();
         if (location_address != null) {
-            stmt.bindString(4, location_address);
+            stmt.bindString(5, location_address);
         }
  
         String location_city = entity.getLocation_city();
         if (location_city != null) {
-            stmt.bindString(5, location_city);
+            stmt.bindString(6, location_city);
         }
  
         String location_state = entity.getLocation_state();
         if (location_state != null) {
-            stmt.bindString(6, location_state);
+            stmt.bindString(7, location_state);
         }
  
         String location_zip = entity.getLocation_zip();
         if (location_zip != null) {
-            stmt.bindString(7, location_zip);
+            stmt.bindString(8, location_zip);
         }
  
         String location_phone = entity.getLocation_phone();
         if (location_phone != null) {
-            stmt.bindString(8, location_phone);
+            stmt.bindString(9, location_phone);
         }
  
         String location_email = entity.getLocation_email();
         if (location_email != null) {
-            stmt.bindString(9, location_email);
+            stmt.bindString(10, location_email);
         }
  
         String location_program_link = entity.getLocation_program_link();
         if (location_program_link != null) {
-            stmt.bindString(10, location_program_link);
+            stmt.bindString(11, location_program_link);
         }
  
         String location_donate_link = entity.getLocation_donate_link();
         if (location_donate_link != null) {
-            stmt.bindString(11, location_donate_link);
+            stmt.bindString(12, location_donate_link);
         }
     }
 
@@ -136,54 +143,59 @@ public class LocationDataDao extends AbstractDao<LocationData, Long> {
             stmt.bindLong(1, id);
         }
  
+        Integer postion = entity.getPostion();
+        if (postion != null) {
+            stmt.bindLong(2, postion);
+        }
+ 
         String location_id = entity.getLocation_id();
         if (location_id != null) {
-            stmt.bindString(2, location_id);
+            stmt.bindString(3, location_id);
         }
  
         String location_name = entity.getLocation_name();
         if (location_name != null) {
-            stmt.bindString(3, location_name);
+            stmt.bindString(4, location_name);
         }
  
         String location_address = entity.getLocation_address();
         if (location_address != null) {
-            stmt.bindString(4, location_address);
+            stmt.bindString(5, location_address);
         }
  
         String location_city = entity.getLocation_city();
         if (location_city != null) {
-            stmt.bindString(5, location_city);
+            stmt.bindString(6, location_city);
         }
  
         String location_state = entity.getLocation_state();
         if (location_state != null) {
-            stmt.bindString(6, location_state);
+            stmt.bindString(7, location_state);
         }
  
         String location_zip = entity.getLocation_zip();
         if (location_zip != null) {
-            stmt.bindString(7, location_zip);
+            stmt.bindString(8, location_zip);
         }
  
         String location_phone = entity.getLocation_phone();
         if (location_phone != null) {
-            stmt.bindString(8, location_phone);
+            stmt.bindString(9, location_phone);
         }
  
         String location_email = entity.getLocation_email();
         if (location_email != null) {
-            stmt.bindString(9, location_email);
+            stmt.bindString(10, location_email);
         }
  
         String location_program_link = entity.getLocation_program_link();
         if (location_program_link != null) {
-            stmt.bindString(10, location_program_link);
+            stmt.bindString(11, location_program_link);
         }
  
         String location_donate_link = entity.getLocation_donate_link();
         if (location_donate_link != null) {
-            stmt.bindString(11, location_donate_link);
+            stmt.bindString(12, location_donate_link);
         }
     }
 
@@ -196,16 +208,17 @@ public class LocationDataDao extends AbstractDao<LocationData, Long> {
     public LocationData readEntity(Cursor cursor, int offset) {
         LocationData entity = new LocationData( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // location_id
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // location_name
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // location_address
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // location_city
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // location_state
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // location_zip
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // location_phone
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // location_email
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // location_program_link
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10) // location_donate_link
+            cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1), // postion
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // location_id
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // location_name
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // location_address
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // location_city
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // location_state
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // location_zip
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // location_phone
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // location_email
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // location_program_link
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11) // location_donate_link
         );
         return entity;
     }
@@ -213,16 +226,17 @@ public class LocationDataDao extends AbstractDao<LocationData, Long> {
     @Override
     public void readEntity(Cursor cursor, LocationData entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setLocation_id(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setLocation_name(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setLocation_address(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setLocation_city(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setLocation_state(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setLocation_zip(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setLocation_phone(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setLocation_email(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setLocation_program_link(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setLocation_donate_link(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setPostion(cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1));
+        entity.setLocation_id(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setLocation_name(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setLocation_address(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setLocation_city(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setLocation_state(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setLocation_zip(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setLocation_phone(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setLocation_email(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setLocation_program_link(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setLocation_donate_link(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
      }
     
     @Override

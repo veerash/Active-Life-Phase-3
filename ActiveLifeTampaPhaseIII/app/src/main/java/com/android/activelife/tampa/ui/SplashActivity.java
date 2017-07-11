@@ -5,12 +5,15 @@ import android.os.Bundle;
 
 import com.android.activelife.tampa.R;
 import com.android.activelife.tampa.appcontroller.ActiveLifeApplication;
+import com.android.activelife.tampa.db.LocationsData;
 import com.android.activelife.tampa.services.request.ApiRequest;
+import com.android.activelife.tampa.services.response.LocationData.LocationDataResponse;
 import com.android.activelife.tampa.services.response.classdata.ClassDataResponse;
 import com.android.activelife.tampa.services.response.instructordata.InstructorDataResponse;
 import com.android.activelife.tampa.services.response.schedulesdata.SchedulesDataResponse;
 import com.android.activelife.tampa.util.Utilities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -38,6 +41,7 @@ public class SplashActivity extends BaseActivity {
 
         getAllClasses();
     }
+
 
     public void getAllClasses() {
         if (checkIfInternet(SplashActivity.this)) {

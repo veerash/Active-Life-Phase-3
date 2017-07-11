@@ -8,14 +8,13 @@ import org.greenrobot.greendao.annotation.*;
 // KEEP INCLUDES END
 
 /**
- * Entity mapped to table "LOCATION_DATA".
+ * Entity mapped to table "LOCATIONS_DATA".
  */
 @Entity
-public class LocationData {
+public class LocationsData {
 
     @Id(autoincrement = true)
     private Long id;
-    private Integer postion;
     private String location_id;
     private String location_name;
     private String location_address;
@@ -31,17 +30,16 @@ public class LocationData {
     // KEEP FIELDS END
 
     @Generated
-    public LocationData() {
+    public LocationsData() {
     }
 
-    public LocationData(Long id) {
+    public LocationsData(Long id) {
         this.id = id;
     }
 
     @Generated
-    public LocationData(Long id, Integer postion, String location_id, String location_name, String location_address, String location_city, String location_state, String location_zip, String location_phone, String location_email, String location_program_link, String location_donate_link) {
+    public LocationsData(Long id, String location_id, String location_name, String location_address, String location_city, String location_state, String location_zip, String location_phone, String location_email, String location_program_link, String location_donate_link) {
         this.id = id;
-        this.postion = postion;
         this.location_id = location_id;
         this.location_name = location_name;
         this.location_address = location_address;
@@ -60,14 +58,6 @@ public class LocationData {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getPostion() {
-        return postion;
-    }
-
-    public void setPostion(Integer postion) {
-        this.postion = postion;
     }
 
     public String getLocation_id() {
