@@ -27,7 +27,7 @@ public class CachetProBoldTextView extends TextView {
 
     private void init() {
         Typeface tf = Typeface.createFromAsset(getContext().getAssets(),
-                "fonts/CachetPro-Bold.otf");
+                "fonts/Verdana-Bold.ttf");
         setTypeface(tf);
 
     }

@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -64,7 +65,7 @@ public class SchedulesFragment extends Fragment {
     private String mParam2;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private LinearLayout mFilterLayout;
+    private ScrollView mFilterLayout;
     private LinearLayout mScheduleLayout;
     private CheckBox mFilterImageView;
     private Button mApplyButton;
@@ -76,7 +77,7 @@ public class SchedulesFragment extends Fragment {
     private ArrayList<ScheduleData> mScheduleDatas;
     private ArrayList<InstructorData> mInstructorDatas;
     private ArrayList<ClassData> mClassDatas;
-    private long startTime=000000,endTime=240000;
+    private long startTime=040000,endTime=230000;
     private RangeSeekBar mRangeSeekbar;
 
     public SchedulesFragment() {
@@ -106,7 +107,7 @@ public class SchedulesFragment extends Fragment {
         mClassDatas = new ArrayList<>();
         mRangeSeekbar= (RangeSeekBar) rootView.findViewById(R.id.rangeSeekBar);
         textView= (TextView) rootView.findViewById(R.id.section_label);
-        mFilterLayout = (LinearLayout) rootView.findViewById(R.id.filter_schedules);
+        mFilterLayout = (ScrollView) rootView.findViewById(R.id.filter_schedules);
         mScheduleLayout = (LinearLayout) rootView.findViewById(R.id.main_schedules);
         mSchedulesSpinner = (Spinner) rootView.findViewById(R.id.schedules_spinner);
         mClassSpinner = (Spinner) rootView.findViewById(R.id.classes_spinner);
@@ -129,7 +130,7 @@ public class SchedulesFragment extends Fragment {
                 }
             }
         });
-        mRangeSeekbar.setRangeValues(0, 24);
+        mRangeSeekbar.setRangeValues(4, 23);
         mRangeSeekbar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener() {
             @Override
             public void onRangeSeekBarValuesChanged(RangeSeekBar bar, Object minValue, Object maxValue) {

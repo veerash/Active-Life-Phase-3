@@ -27,7 +27,7 @@ public class CachetProRegularRadioButton extends RadioButton {
 
 	private void init() {
 			Typeface tf = Typeface.createFromAsset(getContext().getAssets(),
-					"fonts/CachetPro-Book.otf");
+					"fonts/Verdana.ttf");
 			setTypeface(tf);
 
 	}

@@ -34,12 +34,18 @@
             android:checked="false" />
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:id="@+id/filter_schedules"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:visibility="gone">
+    <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone">
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -108,15 +114,6 @@
                 android:layout_weight="1"
                 android:padding="@dimen/twenty_dip" />
 
-            <!--<SeekBar-->
-            <!--android:id="@+id/sbBatteryLevel"-->
-            <!--style="@style/CustomSeekBar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:enabled="false"-->
-            <!--android:max="100"-->
-            <!--android:progress="85"/>-->
             <org.florescu.android.rangeseekbar.RangeSeekBar
                 android:id="@+id/rangeSeekBar"
                 android:layout_width="match_parent"
@@ -137,29 +134,6 @@
                 rsb:thumbShadowColor="@color/primary_material_light"
                 rsb:thumbShadowXOffset="1dp"
                 rsb:thumbShadowYOffset="2dp" />
-            <!--<org.florescu.android.rangeseekbar.RangeSeekBar-->
-            <!--android:id="@+id/rangeSeekBar"-->
-            <!--app:valuesAboveThumbs="true"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="@dimen/ten_dip"-->
-            <!--android:layout_weight="1"-->
-            <!--rsb:absoluteMaxValue="24"-->
-            <!--rsb:absoluteMinValue="0"-->
-            <!--rsb:activateOnDefaultValues="true"-->
-            <!--rsb:activeColor="@color/DeepSkyBlue"-->
-            <!--rsb:barHeight="@dimen/ten_dip"-->
-            <!--rsb:textAboveThumbsColor="@android:color/holo_blue_light"-->
-            <!--rsb:thumbDisabled="@drawable/custom_range_slider_thumb"-->
-            <!--rsb:thumbNormal="@drawable/custom_range_slider_thumb"-->
-            <!--rsb:thumbPressed="@drawable/custom_range_slider_thumb"-->
-            <!--rsb:thumbShadow="true"-->
-            <!--rsb:thumbShadowBlur="1dp"-->
-            <!--rsb:thumbShadowColor="@color/primary_material_light"-->
-            <!--rsb:thumbShadowXOffset="1dp"-->
-            <!--rsb:step="1"-->
-            <!--rsb:valuesAboveThumbs="false"-->
-            <!--rsb:thumbShadowYOffset="2dp" />-->
 
         </LinearLayout>
 
@@ -169,7 +143,15 @@
             android:layout_weight="0.75"
             android:gravity="top"
             android:orientation="vertical">
-
+            <Button
+                android:id="@+id/clear_filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/thick_green"
+                android:text="Clear Filter"
+                android:textColor="@android:color/white" />
             <Button
                 android:id="@+id/btn_apply_filter"
                 android:layout_width="match_parent"
@@ -181,6 +163,7 @@
                 android:textColor="@android:color/white" />
         </LinearLayout>
     </LinearLayout>
+    </ScrollView>
     <!-- https://android-arsenal.com/details/1/5087 for Horizontal calender-->
     <LinearLayout
         android:id="@+id/main_schedules"
