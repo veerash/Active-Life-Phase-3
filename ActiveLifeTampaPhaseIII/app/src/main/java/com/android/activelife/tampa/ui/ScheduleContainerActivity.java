@@ -34,7 +34,7 @@ public class ScheduleContainerActivity extends BaseActivity {
         tvDesc = (TextView) findViewById(R.id.tv_desc);
         mScheduleId = getIntent().getIntExtra("schedule_id", 0);
         setTitle(getIntent().getStringExtra("schedule_name"));
-        ScheduleDateData dateData = ActiveLifeApplication.getInstance().setUpDb().getScheduleDateOfId("" + mScheduleId);
+        final ScheduleDateData dateData = ActiveLifeApplication.getInstance().setUpDb().getScheduleDateOfId("" + mScheduleId);
         tvEvent.setText("" + dateData.getClass_name());
         tvYmca.setText("" + dateData.getLocation_name());
         tvName.setText("" + dateData.getInstructor_name());
@@ -44,6 +44,26 @@ public class ScheduleContainerActivity extends BaseActivity {
         mAddToCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(dateData.getSchedule_frequency().equalsIgnoreCase("MONTHLY")){
+                    eventsAddedWeekly(
+                            dateData.getClass_name()
+                                    + "-"
+                                    + dateData.getSchedule_name()
+                                    + ","
+                                    + dateData.getInstructor_name(),
+                            dateData.getClass_desc(),
+                            Utils.getDatedStringFromString(dateData.getSchedule_start_date()),
+                            dateData.getSchedule_start_time(), dateData.getSchedule_end_time(),
+                            dateData.recSubType);
+                }else if(dateData.getSchedule_frequency().equalsIgnoreCase("WEEKLY")){
+
+                }else if(dateData.getSchedule_frequency().equalsIgnoreCase("YEARLY")){
+
+                }else if(dateData.getSchedule_frequency().equalsIgnoreCase("DAILY")){
+
+                }else{
+
+                }
 
             }
         });

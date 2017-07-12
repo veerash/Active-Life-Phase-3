@@ -66,6 +66,9 @@ public class ScheduleDateDataResponse {
     @SerializedName("is_cancelled")
     @Expose
     private Integer isCancelled;
+    @SerializedName("is_reservable")
+    @Expose
+    private Integer isReservable;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
@@ -244,7 +247,13 @@ public class ScheduleDateDataResponse {
     public void setIsCancelled(Integer isCancelled) {
         this.isCancelled = isCancelled;
     }
+    public Integer getIsReservable() {
+        return isReservable;
+    }
 
+    public void setIsReservable(Integer isReservable) {
+        this.isReservable = isReservable;
+    }
     public String getCreatedAt() {
         return createdAt;
     }

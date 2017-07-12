@@ -12,18 +12,26 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.activelife.tampa.R;
 import com.android.activelife.tampa.adpater.HoursSceduleListAdapter;
+import com.android.activelife.tampa.adpater.LocationsListAdapter;
 import com.android.activelife.tampa.adpater.MessagesListAdapter;
 import com.android.activelife.tampa.appcontroller.ActiveLifeApplication;
 import com.android.activelife.tampa.db.LocationData;
+import com.android.activelife.tampa.db.LocationsData;
+import com.android.activelife.tampa.db.MessageLocationData;
+import com.android.activelife.tampa.db.MessagesData;
 import com.android.activelife.tampa.services.request.ApiRequest;
 import com.android.activelife.tampa.services.response.messagesdata.MessagesDataResponse;
 import com.android.activelife.tampa.ui.MainActivity;
@@ -54,17 +62,25 @@ public class MemberDetailsFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private RadioGroup mDetailsRG;
     private ListView messagesList;
+    private TextView mNoMessages;
+    private LinearLayout mFilterLayout,mListLayout;
     private RadioButton mMessagessRB, mDonateRB, mHoursRB, mContactRB, mProgramsRB;
     private RelativeLayout mLayoutContainer;
     private ApiRequest mApiInterface;
     private int offset = 0;
-    private List<MessagesDataResponse> mMessagesDataResponseList;
+    private List<MessagesData> mMessagesDataResponseList;
+    private List<MessageLocationData> mMessageLocationDataResponseList;
     private Handler mHandler = new Handler();
     private ListView hoursList;
+    private Spinner mLocationSpinner;
+    private Button mApplyButton, mClearFilterButton;
+    private CheckBox mFilterImageView;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private List<LocationsData> mLocationDataResponsesList;
+    private String mLocationId;
 
 
     public MemberDetailsFragment() {
@@ -103,6 +119,8 @@ public class MemberDetailsFragment extends Fragment {
                              final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_member_details, container, false);
+        mMessagesDataResponseList = new ArrayList<>();
+        mMessageLocationDataResponseList = new ArrayList<>();
         mDetailsRG = (RadioGroup) view.findViewById(R.id.member_details_rg);
         mMessagessRB = (RadioButton) view.findViewById(R.id.messages);
         mDonateRB = (RadioButton) view.findViewById(R.id.donate);
@@ -199,7 +217,6 @@ public class MemberDetailsFragment extends Fragment {
     }
 
 
-
     public void setContactData(final Bundle savedInstanceState) {
         View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_contact, null);
         TextView ymcaName = (TextView) child.findViewById(R.id.member_name);
@@ -263,6 +280,74 @@ public class MemberDetailsFragment extends Fragment {
         View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_messages, null);
         setLayoutParams(child);
         messagesList = (ListView) child.findViewById(R.id.messages_list);
+        mNoMessages= (TextView) child.findViewById(R.id.no_messages);
+        mFilterImageView = (CheckBox) child.findViewById(R.id.img_schedule_filter);
+        mLocationSpinner = (Spinner) child.findViewById(R.id.location_spinner);
+        mFilterLayout = (LinearLayout) child.findViewById(R.id.spinner_layout);
+        mListLayout = (LinearLayout) child.findViewById(R.id.list_layout);
+        mApplyButton = (Button) child.findViewById(R.id.btn_apply_filter);
+        setLocationSpinnerData();
+        mClearFilterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mLocationSpinner.setSelection(0);
+                mMessagesDataResponseList=ActiveLifeApplication.getInstance().setUpDb().getMessages();
+                if(mMessagesDataResponseList!=null&&mMessagesDataResponseList.size()>0) {
+                    messagesList.setVisibility(View.VISIBLE);
+                    mNoMessages.setVisibility(View.GONE);
+                    messagesList.setAdapter(new MessagesListAdapter(getActivity(), mMessagesDataResponseList));
+                }else{
+                    messagesList.setVisibility(View.GONE);
+                    mNoMessages.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        mApplyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if ((mLocationId == null || mLocationId.length() == 0)) {
+                    Utilities.showToast(getActivity(), "Please select a branch to apply filter");
+                    mFilterImageView.setChecked(true);
+                } else {
+                    mFilterImageView.setChecked(false);
+                    ((MainActivity) getActivity()).showProgressDialog(getActivity());
+                    ArrayList<MessageLocationData> data = ActiveLifeApplication.getInstance().setUpDb().getMessageLocationsById(mLocationId);
+                    if (data != null && data.size() > 0) {
+                        mMessagesDataResponseList = new ArrayList<MessagesData>();
+                        mMessageLocationDataResponseList = new ArrayList<MessageLocationData>();
+                        mMessageLocationDataResponseList.addAll(data);
+                        for (int i = 0; i < data.size(); i++) {
+                            MessagesData dts = ActiveLifeApplication.getInstance().setUpDb().getMessagesById(data.get(i).getMessage_id());
+                            mMessagesDataResponseList.add(dts);
+                        }
+                    }
+
+                    if(mMessagesDataResponseList!=null&&mMessagesDataResponseList.size()>0) {
+                        messagesList.setVisibility(View.VISIBLE);
+                        mNoMessages.setVisibility(View.GONE);
+                        messagesList.setAdapter(new MessagesListAdapter(getActivity(), mMessagesDataResponseList));
+                    }else{
+                        messagesList.setVisibility(View.GONE);
+                        mNoMessages.setVisibility(View.VISIBLE);
+                    }
+                    ((MainActivity) getActivity()).hideProgressDialog(getActivity());
+                }
+            }
+        });
+
+        mFilterImageView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mFilterLayout.setVisibility(View.VISIBLE);
+                    mListLayout.setVisibility(View.GONE);
+                } else {
+                    mFilterLayout.setVisibility(View.GONE);
+                    mListLayout.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        mClearFilterButton = (Button) child.findViewById(R.id.clear_filter);
         mMessagesDataResponseList = new ArrayList<>();
         messagesList.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -292,19 +377,18 @@ public class MemberDetailsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent messsageIntent = new Intent(getActivity(), MessageDetailsActivity.class);
-                messsageIntent.putExtra("title", mMessagesDataResponseList.get(position).getTitle());
-                messsageIntent.putExtra("desc", mMessagesDataResponseList.get(position).getMessage());
+                messsageIntent.putExtra("title", mMessagesDataResponseList.get(position).getMessage_title());
+                messsageIntent.putExtra("desc", mMessagesDataResponseList.get(position).getMessage_msg());
                 String location = null;
-                for (int i = 0; i < mMessagesDataResponseList.get(position).getLocations().size(); i++) {
-                    if (location != null && location.length() > 0) {
-                        location = location + ", " + mMessagesDataResponseList.get(position).getLocations().get(i).getName();
-                    } else {
-                        location = mMessagesDataResponseList.get(position).getLocations().get(i).getName();
-                    }
-
+                LocationsData data = ActiveLifeApplication.getInstance().setUpDb().getLocationById(mLocationId);
+                if (location != null && location.length() > 0) {
+                    location = location + ", " + data.getLocation_name();
+                } else {
+                    location = data.getLocation_name();
                 }
+
                 messsageIntent.putExtra("location", location);
-                String dateTime = mMessagesDataResponseList.get(position).getSendAt();
+                String dateTime = mMessagesDataResponseList.get(position).getMessage_send_at();
                 messsageIntent.putExtra("date", Utils.getApplyiedDateType(dateTime, "yyyy-MM-dd'T'HH:mm:ss-HH:mm", "MMM dd, EEE"));
                 messsageIntent.putExtra("time", Utils.getApplyiedDateType(dateTime, "yyyy-MM-dd'T'HH:mm:ss-HH:mm", "hh:mm a"));
                 startActivity(messsageIntent);
@@ -312,6 +396,31 @@ public class MemberDetailsFragment extends Fragment {
             }
         });
         getMessagesList();
+    }
+
+    private void setLocationSpinnerData() {
+        mLocationDataResponsesList = new ArrayList<>();
+        LocationsData ld = new LocationsData();
+        ld.setLocation_id(null);
+        ld.setLocation_name("Choose Location");
+        mLocationDataResponsesList.add(0, ld);
+        mLocationDataResponsesList = ActiveLifeApplication.getInstance().setUpDb().getLocations();
+        mLocationSpinner.setAdapter(new LocationsListAdapter(getActivity(), mLocationDataResponsesList));
+        mLocationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
+                mLocationId = mLocationDataResponsesList.get(i).getLocation_id();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        List<LocationData> date = ActiveLifeApplication.getInstance().setUpDb().getLocation();
+        if (date != null && date.size() > 0) {
+            mLocationSpinner.setSelection(date.get(0).getPostion());
+        }
     }
 
     public void getMessagesList() {
@@ -322,9 +431,45 @@ public class MemberDetailsFragment extends Fragment {
             call.enqueue(new Callback<List<MessagesDataResponse>>() {
                 @Override
                 public void onResponse(Call<List<MessagesDataResponse>> call, Response<List<MessagesDataResponse>> response) {
-                    mMessagesDataResponseList.addAll(response.body());
+
+
                     if (response.isSuccessful()) {
-                        messagesList.setAdapter(new MessagesListAdapter(getActivity(), mMessagesDataResponseList));
+                        ActiveLifeApplication.getInstance().setUpDb().deleteMessageLocations();
+                        ActiveLifeApplication.getInstance().setUpDb().deleteMessages();
+                        for (int i = 0; i < response.body().size(); i++) {
+                            MessagesData data = new MessagesData();
+                            data.setMessage_id("" + response.body().get(i).getId());
+                            data.setMessage_msg("" + response.body().get(i).getMessage());
+                            data.setMessage_title("" + response.body().get(i).getTitle());
+                            data.setMessage_send_at("" + response.body().get(i).getSendAt());
+                            for (int j = 0; j < response.body().get(i).getLocations().size(); j++) {
+                                MessageLocationData msl = new MessageLocationData();
+                                msl.setMessage_id("" + response.body().get(i).getId());
+                                msl.setMessage_msg("" + response.body().get(i).getMessage());
+                                msl.setMessage_title("" + response.body().get(i).getTitle());
+                                msl.setMessage_send_at("" + response.body().get(i).getSendAt());
+                                msl.setLocation_id("" + response.body().get(i).getLocations().get(j).getId());
+                                msl.setLocation_name("" + response.body().get(i).getLocations().get(j).getName());
+                                msl.setLocation_address("" + response.body().get(i).getLocations().get(j).getAddress());
+                                msl.setLocation_city("" + response.body().get(i).getLocations().get(j).getCity());
+                                msl.setLocation_state("" + response.body().get(i).getLocations().get(j).getState());
+                                msl.setLocation_zip("" + response.body().get(i).getLocations().get(j).getZipCode());
+                                msl.setLocation_phone("" + response.body().get(i).getLocations().get(j).getPhone());
+                                msl.setLocation_email("" + response.body().get(i).getLocations().get(j).getEmail());
+                                mMessageLocationDataResponseList.add(msl);
+                            }
+                            mMessagesDataResponseList.add(data);
+                        }
+                        ActiveLifeApplication.getInstance().setUpDb().insertMessagesList(mMessagesDataResponseList);
+                        ActiveLifeApplication.getInstance().setUpDb().insertMessageLocationList(mMessageLocationDataResponseList);
+                        if(mMessagesDataResponseList!=null&&mMessagesDataResponseList.size()>0) {
+                            messagesList.setVisibility(View.VISIBLE);
+                            mNoMessages.setVisibility(View.GONE);
+                            messagesList.setAdapter(new MessagesListAdapter(getActivity(), mMessagesDataResponseList));
+                        }else{
+                            messagesList.setVisibility(View.GONE);
+                            mNoMessages.setVisibility(View.VISIBLE);
+                        }
                         ((MainActivity) getActivity()).hideProgressDialog(getActivity());
                     } else {
                         ((MainActivity) getActivity()).hideProgressDialog(getActivity());

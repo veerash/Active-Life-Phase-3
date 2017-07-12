@@ -36,6 +36,7 @@ public class ScheduleDateData {
     private Integer schedule_sunday;
     private String schedule_frequency;
     private Integer is_cancelled;
+    private Integer is_reservable;
     private String instructor_id;
     private String instructor_name;
     private String location_id;
@@ -53,7 +54,7 @@ public class ScheduleDateData {
     }
 
     @Generated
-    public ScheduleDateData(Long id, int schedule_id, String schedule_name, String class_id, String class_name, String class_desc, String schedule_type_id, String schedule_type, String schedule_start_date, String schedule_start_time, String schedule_end_time, Long schedule_start_time_long, Long schedule_end_time_long, Integer schedule_monday, Integer schedule_tuesday, Integer schedule_wednesday, Integer schedule_thursday, Integer schedule_friday, Integer schedule_saturday, Integer schedule_sunday, String schedule_frequency, Integer is_cancelled, String instructor_id, String instructor_name, String location_id, String location_name) {
+    public ScheduleDateData(Long id, int schedule_id, String schedule_name, String class_id, String class_name, String class_desc, String schedule_type_id, String schedule_type, String schedule_start_date, String schedule_start_time, String schedule_end_time, Long schedule_start_time_long, Long schedule_end_time_long, Integer schedule_monday, Integer schedule_tuesday, Integer schedule_wednesday, Integer schedule_thursday, Integer schedule_friday, Integer schedule_saturday, Integer schedule_sunday, String schedule_frequency, Integer is_cancelled, Integer is_reservable, String instructor_id, String instructor_name, String location_id, String location_name) {
         this.id = id;
         this.schedule_id = schedule_id;
         this.schedule_name = schedule_name;
@@ -76,6 +77,7 @@ public class ScheduleDateData {
         this.schedule_sunday = schedule_sunday;
         this.schedule_frequency = schedule_frequency;
         this.is_cancelled = is_cancelled;
+        this.is_reservable = is_reservable;
         this.instructor_id = instructor_id;
         this.instructor_name = instructor_name;
         this.location_id = location_id;
@@ -256,6 +258,14 @@ public class ScheduleDateData {
 
     public void setIs_cancelled(Integer is_cancelled) {
         this.is_cancelled = is_cancelled;
+    }
+
+    public Integer getIs_reservable() {
+        return is_reservable;
+    }
+
+    public void setIs_reservable(Integer is_reservable) {
+        this.is_reservable = is_reservable;
     }
 
     public String getInstructor_id() {

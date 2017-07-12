@@ -1,17 +1,17 @@
 package com.android.activelife.tampa.adpater;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.activelife.tampa.R;
-import com.android.activelife.tampa.db.ScheduleDateData;
-import com.android.activelife.tampa.services.response.messagesdata.MessagesDataResponse;
 import com.android.activelife.tampa.services.response.scheduledatedata.ScheduleDateDataResponse;
+import com.android.activelife.tampa.ui.MainActivity;
+import com.android.activelife.tampa.ui.ReserveActivity;
 import com.android.activelife.tampa.util.Utils;
 
 import java.text.DateFormat;
@@ -32,7 +32,7 @@ public class SchedulesDateListAdapter extends BaseAdapter {
 
     public SchedulesDateListAdapter(Context ctx, List<ScheduleDateDataResponse> mMessagesDataResponseList) {
         this.jContext = ctx;
-        this.mMessagesDataResponseList=mMessagesDataResponseList;
+        this.mMessagesDataResponseList = mMessagesDataResponseList;
     }
 
     @Override
@@ -51,46 +51,59 @@ public class SchedulesDateListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
 
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(jContext).inflate(R.layout.calender_date_list_row, parent, false);
-            holder.tvYmca=(TextView)convertView.findViewById(R.id.tv_ymca);
-            holder.tvHours=(TextView)convertView.findViewById(R.id.tv_hours);
-            holder.tvMins=(TextView)convertView.findViewById(R.id.tv_mins);
-            holder.tvName=(TextView)convertView.findViewById(R.id.tv_name);
-            holder.tvEvent=(TextView)convertView.findViewById(R.id.tv_event);
-            holder.reserveButton=(TextView)convertView.findViewById(R.id.reserve);
+            holder.tvYmca = (TextView) convertView.findViewById(R.id.tv_ymca);
+            holder.tvHours = (TextView) convertView.findViewById(R.id.tv_hours);
+            holder.tvMins = (TextView) convertView.findViewById(R.id.tv_mins);
+            holder.tvName = (TextView) convertView.findViewById(R.id.tv_name);
+            holder.tvEvent = (TextView) convertView.findViewById(R.id.tv_event);
+            holder.reserveButton = (TextView) convertView.findViewById(R.id.reserve);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.tvYmca.setText(""+mMessagesDataResponseList.get(position).getLocation().getName());
-        holder.tvHours.setText(Utils.getApplyiedDateType(""+mMessagesDataResponseList.get(position).getStartTime(),"HH:mm:ss","hh:mm a"));
+        holder.tvYmca.setText("" + mMessagesDataResponseList.get(position).getLocation().getName());
+        holder.tvHours.setText(Utils.getApplyiedDateType("" + mMessagesDataResponseList.get(position).getStartTime(), "HH:mm:ss", "hh:mm a"));
         DateFormat df = new SimpleDateFormat("HH:mm:ss");
-        Date startDate=null, endDate=null;
+        Date startDate = null, endDate = null;
         try {
-             startDate=df.parse(mMessagesDataResponseList.get(position).getStartTime());
+            startDate = df.parse(mMessagesDataResponseList.get(position).getStartTime());
         } catch (ParseException e) {
             e.printStackTrace();
         }
         try {
-            endDate=df.parse(mMessagesDataResponseList.get(position).getEndTime());
+            endDate = df.parse(mMessagesDataResponseList.get(position).getEndTime());
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        long duration  = endDate.getTime() - startDate.getTime();
+        long duration = endDate.getTime() - startDate.getTime();
 
         long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
-        holder.tvMins.setText(""+diffInMinutes +"Mins");
-        holder.tvEvent.setText(""+mMessagesDataResponseList.get(position).getGetClass().getName());
-        holder.tvName.setText(""+mMessagesDataResponseList.get(position).getInstructor().getName());
+        holder.tvMins.setText("" + diffInMinutes + "Mins");
+        holder.tvEvent.setText("" + mMessagesDataResponseList.get(position).getGetClass().getName());
+        holder.tvName.setText("" + mMessagesDataResponseList.get(position).getInstructor().getName());
+        holder.reserveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent reserveIntent = new Intent(jContext, ReserveActivity.class);
+                reserveIntent.putExtra("session_id",mMessagesDataResponseList.get(position).getId());
+                ((MainActivity)jContext).startActivityForResult(reserveIntent,1000);
+            }
+        });
+        if (mMessagesDataResponseList.get(position).getIsReservable() == 1) {
+            holder.reserveButton.setVisibility(View.VISIBLE);
+        } else {
+            holder.reserveButton.setVisibility(View.GONE);
+        }
         return convertView;
     }
 
     class ViewHolder {
-        TextView tvYmca,tvHours, tvMins, tvEvent, tvName, reserveButton;
+        TextView tvYmca, tvHours, tvMins, tvEvent, tvName, reserveButton;
     }
 }

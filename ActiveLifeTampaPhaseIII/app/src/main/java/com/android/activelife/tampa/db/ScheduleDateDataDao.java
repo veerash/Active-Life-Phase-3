@@ -44,10 +44,11 @@ public class ScheduleDateDataDao extends AbstractDao<ScheduleDateData, Long> {
         public final static Property Schedule_sunday = new Property(19, Integer.class, "schedule_sunday", false, "SCHEDULE_SUNDAY");
         public final static Property Schedule_frequency = new Property(20, String.class, "schedule_frequency", false, "SCHEDULE_FREQUENCY");
         public final static Property Is_cancelled = new Property(21, Integer.class, "is_cancelled", false, "IS_CANCELLED");
-        public final static Property Instructor_id = new Property(22, String.class, "instructor_id", false, "INSTRUCTOR_ID");
-        public final static Property Instructor_name = new Property(23, String.class, "instructor_name", false, "INSTRUCTOR_NAME");
-        public final static Property Location_id = new Property(24, String.class, "location_id", false, "LOCATION_ID");
-        public final static Property Location_name = new Property(25, String.class, "location_name", false, "LOCATION_NAME");
+        public final static Property Is_reservable = new Property(22, Integer.class, "is_reservable", false, "IS_RESERVABLE");
+        public final static Property Instructor_id = new Property(23, String.class, "instructor_id", false, "INSTRUCTOR_ID");
+        public final static Property Instructor_name = new Property(24, String.class, "instructor_name", false, "INSTRUCTOR_NAME");
+        public final static Property Location_id = new Property(25, String.class, "location_id", false, "LOCATION_ID");
+        public final static Property Location_name = new Property(26, String.class, "location_name", false, "LOCATION_NAME");
     }
 
 
@@ -85,10 +86,11 @@ public class ScheduleDateDataDao extends AbstractDao<ScheduleDateData, Long> {
                 "\"SCHEDULE_SUNDAY\" INTEGER," + // 19: schedule_sunday
                 "\"SCHEDULE_FREQUENCY\" TEXT," + // 20: schedule_frequency
                 "\"IS_CANCELLED\" INTEGER," + // 21: is_cancelled
-                "\"INSTRUCTOR_ID\" TEXT," + // 22: instructor_id
-                "\"INSTRUCTOR_NAME\" TEXT," + // 23: instructor_name
-                "\"LOCATION_ID\" TEXT," + // 24: location_id
-                "\"LOCATION_NAME\" TEXT);"); // 25: location_name
+                "\"IS_RESERVABLE\" INTEGER," + // 22: is_reservable
+                "\"INSTRUCTOR_ID\" TEXT," + // 23: instructor_id
+                "\"INSTRUCTOR_NAME\" TEXT," + // 24: instructor_name
+                "\"LOCATION_ID\" TEXT," + // 25: location_id
+                "\"LOCATION_NAME\" TEXT);"); // 26: location_name
     }
 
     /** Drops the underlying database table. */
@@ -207,24 +209,29 @@ public class ScheduleDateDataDao extends AbstractDao<ScheduleDateData, Long> {
             stmt.bindLong(22, is_cancelled);
         }
  
+        Integer is_reservable = entity.getIs_reservable();
+        if (is_reservable != null) {
+            stmt.bindLong(23, is_reservable);
+        }
+ 
         String instructor_id = entity.getInstructor_id();
         if (instructor_id != null) {
-            stmt.bindString(23, instructor_id);
+            stmt.bindString(24, instructor_id);
         }
  
         String instructor_name = entity.getInstructor_name();
         if (instructor_name != null) {
-            stmt.bindString(24, instructor_name);
+            stmt.bindString(25, instructor_name);
         }
  
         String location_id = entity.getLocation_id();
         if (location_id != null) {
-            stmt.bindString(25, location_id);
+            stmt.bindString(26, location_id);
         }
  
         String location_name = entity.getLocation_name();
         if (location_name != null) {
-            stmt.bindString(26, location_name);
+            stmt.bindString(27, location_name);
         }
     }
 
@@ -338,24 +345,29 @@ public class ScheduleDateDataDao extends AbstractDao<ScheduleDateData, Long> {
             stmt.bindLong(22, is_cancelled);
         }
  
+        Integer is_reservable = entity.getIs_reservable();
+        if (is_reservable != null) {
+            stmt.bindLong(23, is_reservable);
+        }
+ 
         String instructor_id = entity.getInstructor_id();
         if (instructor_id != null) {
-            stmt.bindString(23, instructor_id);
+            stmt.bindString(24, instructor_id);
         }
  
         String instructor_name = entity.getInstructor_name();
         if (instructor_name != null) {
-            stmt.bindString(24, instructor_name);
+            stmt.bindString(25, instructor_name);
         }
  
         String location_id = entity.getLocation_id();
         if (location_id != null) {
-            stmt.bindString(25, location_id);
+            stmt.bindString(26, location_id);
         }
  
         String location_name = entity.getLocation_name();
         if (location_name != null) {
-            stmt.bindString(26, location_name);
+            stmt.bindString(27, location_name);
         }
     }
 
@@ -389,10 +401,11 @@ public class ScheduleDateDataDao extends AbstractDao<ScheduleDateData, Long> {
             cursor.isNull(offset + 19) ? null : cursor.getInt(offset + 19), // schedule_sunday
             cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // schedule_frequency
             cursor.isNull(offset + 21) ? null : cursor.getInt(offset + 21), // is_cancelled
-            cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // instructor_id
-            cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // instructor_name
-            cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // location_id
-            cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25) // location_name
+            cursor.isNull(offset + 22) ? null : cursor.getInt(offset + 22), // is_reservable
+            cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // instructor_id
+            cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // instructor_name
+            cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25), // location_id
+            cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26) // location_name
         );
         return entity;
     }
@@ -421,10 +434,11 @@ public class ScheduleDateDataDao extends AbstractDao<ScheduleDateData, Long> {
         entity.setSchedule_sunday(cursor.isNull(offset + 19) ? null : cursor.getInt(offset + 19));
         entity.setSchedule_frequency(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
         entity.setIs_cancelled(cursor.isNull(offset + 21) ? null : cursor.getInt(offset + 21));
-        entity.setInstructor_id(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
-        entity.setInstructor_name(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
-        entity.setLocation_id(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
-        entity.setLocation_name(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
+        entity.setIs_reservable(cursor.isNull(offset + 22) ? null : cursor.getInt(offset + 22));
+        entity.setInstructor_id(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
+        entity.setInstructor_name(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
+        entity.setLocation_id(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
+        entity.setLocation_name(cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26));
      }
     
     @Override

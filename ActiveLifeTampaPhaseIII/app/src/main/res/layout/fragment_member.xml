@@ -1,24 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:name="com.android.activelife.tampa.fragments.MemberFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
+    android:orientation="vertical"
     android:padding="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context="com.android.activelife.tampa.fragments.MemberFragment"
     tools:listitem="@layout/fragment_member">
 
-    <ListView
-        android:id="@+id/members_list"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:divider="@color/statusBarColor"
-        android:dividerHeight="2sp"
-        android:listSelector="@android:color/transparent"
-        android:scrollbars="none"
-        android:layout_height="match_parent" />
-</RelativeLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/ten_sp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/add_member"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            app:srcCompat="@drawable/add_member_icon" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/close_add_member"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:visibility="gone"
+            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+    </LinearLayout>
+
+    <include
+        android:id="@+id/add_edit_member_layout"
+        layout="@layout/layout_add_edit_member_details"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/list_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/members_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:divider="@color/statusBarColor"
+            android:dividerHeight="2sp"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="none" />
+
+        <com.android.activelife.tampa.customviews.CachetProBoldTextView
+            android:id="@+id/no_messages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="No Members Available"
+            android:textSize="@dimen/sixteen_sp"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>

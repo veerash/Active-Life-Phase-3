@@ -5,23 +5,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.activelife.tampa.R;
 import com.android.activelife.tampa.adpater.MembersListAdapter;
 import com.android.activelife.tampa.appcontroller.ActiveLifeApplication;
+import com.android.activelife.tampa.db.MemberData;
 import com.android.activelife.tampa.services.request.ApiRequest;
-import com.android.activelife.tampa.services.response.instructordata.InstructorDataResponse;
-import com.android.activelife.tampa.ui.MainActivity;
-import com.android.activelife.tampa.util.Utilities;
 
-import org.json.JSONObject;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import java.util.ArrayList;
 
 /**
  * A fragment representing a list of Items.
@@ -38,6 +34,13 @@ public class MemberFragment extends Fragment {
     private String mParam2;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private ArrayList<MemberData> data;
+    private TextView mNoMessages;
+    private ImageView addDetails,closeDetails;
+    private View cardView;
+    private LinearLayout mListLayout;
+    private Button addButton;
+    TextView memberEditName, memberEditId;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -66,45 +69,63 @@ public class MemberFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_member, container, false);
-
+        data = new ArrayList<>();
+        addDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardView.setVisibility(View.VISIBLE);
+                closeDetails.setVisibility(View.VISIBLE);
+                mListLayout.setVisibility(View.GONE);
+            }
+        });
+        cardView = view.findViewById(R.id.add_edit_member_layout);
+        addDetails = (ImageView) view.findViewById(R.id.add_member);
+        closeDetails = (ImageView) view.findViewById(R.id.close_add_member);
+        mNoMessages = (TextView) view.findViewById(R.id.no_messages);
+        mListLayout = (LinearLayout) view.findViewById(R.id.list_layout);
         mMembersListView = (ListView) view.findViewById(R.id.members_list);
-        getInstructorsData();
+        addButton = (Button) cardView.findViewById(R.id.add_member);
+        memberEditId = (TextView) cardView.findViewById(R.id.member_id_edit_text);
+        memberEditName = (TextView) cardView.findViewById(R.id.member_name_edit_text);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (memberEditId.getText() == null || memberEditId.getText().length() == 0) {
+                    memberEditId.setError("Please enter id");
+                } else if (memberEditName.getText() == null || memberEditName.getText().length() == 0) {
+                    memberEditName.setError("Please enter name");
+                } else {
+                    memberEditId.setError(null);
+                    memberEditName.setError(null);
+                    ActiveLifeApplication.getInstance().setUpDb().insertOrReplaceMember(memberEditId.getText().toString(), memberEditName.getText().toString());
+                    setMembersData();
+                }
+            }
+        });
+        closeDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeDetails.setVisibility(View.GONE);
+                cardView.setVisibility(View.GONE);
+                mListLayout.setVisibility(View.VISIBLE);
+            }
+        });
+        setMembersData();
         return view;
     }
 
-    public void getInstructorsData() {
-        if (((MainActivity) getActivity()).checkIfInternet(getActivity())) {
-            mApiInterface = ActiveLifeApplication.getInstance()
-                    .getApiRequest();
-            Call<List<InstructorDataResponse>> call = mApiInterface.getInstructors();
-            call.enqueue(new Callback<List<InstructorDataResponse>>() {
-                @Override
-                public void onResponse(Call<List<InstructorDataResponse>> call, Response<List<InstructorDataResponse>> response) {
-                    ((MainActivity) getActivity()).hideProgressDialog(getActivity());
-                    if (response.isSuccessful()) {
-                        mMembersListView.setAdapter(new MembersListAdapter(getActivity(), response.body()));
-                    } else {
-                        if (response.errorBody() != null) {
-                            try {
-                                JSONObject jsonObject = new JSONObject(response.errorBody().string());
-                                Utilities.showToast(getActivity(), "" + jsonObject.getString("message"));
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-
-                        }
-
-
-                    }
-
-                }
-
-                @Override
-                public void onFailure(Call<List<InstructorDataResponse>> call, Throwable t) {
-
-                }
-            });
-            ((MainActivity) getActivity()).showProgressDialog(getActivity());
+    public void setMembersData() {
+        closeDetails.setVisibility(View.GONE);
+        cardView.setVisibility(View.GONE);
+        mListLayout.setVisibility(View.VISIBLE);
+        data = ActiveLifeApplication.getInstance().setUpDb().getMembers();
+        if (data != null && data.size() > 0) {
+            mMembersListView.setVisibility(View.VISIBLE);
+            mNoMessages.setVisibility(View.GONE);
+            mMembersListView.setAdapter(new MembersListAdapter(getActivity(), data,this));
+        } else {
+            mMembersListView.setVisibility(View.GONE);
+            mNoMessages.setVisibility(View.VISIBLE);
         }
     }
 

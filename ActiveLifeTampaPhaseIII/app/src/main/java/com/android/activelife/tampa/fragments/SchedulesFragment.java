@@ -131,9 +131,15 @@ public class SchedulesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mRangeSeekbar.setRangeValues(4,23);
+                mLocationSpinner.setSelection(0);
                 mSchedulesSpinner.setSelection(0);
                 mClassSpinner.setSelection(0);
                 mInstructorsSpinner.setSelection(0);
+                data=ActiveLifeApplication.getInstance().setUpDb().getScheduleDate();
+                mFilterImageView.setChecked(false);
+                if(data!=null&&data.size()>0){
+                    mSchedulesList.setAdapter(new SchedulesDateDbListAdapter(getActivity(),data));
+                }
             }
         });
 
@@ -167,10 +173,11 @@ public class SchedulesFragment extends Fragment {
                     Utilities.showToast(getActivity(), "Please select a category to apply filter");
                     mFilterImageView.setChecked(true);
                 } else {
-                    data = ActiveLifeApplication.getInstance().setUpDb().getScheduleDateOfId(mScheduleId, mClassId, mInstructorId, startTime, endTime);
+                    data = ActiveLifeApplication.getInstance().setUpDb().getScheduleDateOfId(mLocationId,mScheduleId, mClassId, mInstructorId, startTime, endTime);
                     if (data == null)
                         data = new ArrayList<ScheduleDateData>();
                     mSchedulesList.setAdapter(new SchedulesDateDbListAdapter(getActivity(), data));
+                    mFilterImageView.setChecked(false);
                 }
             }
         });
@@ -362,7 +369,8 @@ public class SchedulesFragment extends Fragment {
                             dateData.setSchedule_sunday(response.body().get(i).getSunday());
                             dateData.setSchedule_frequency(response.body().get(i).getFrequency());
                             dateData.setIs_cancelled(response.body().get(i).getIsCancelled());
-                            dateData.setInstructor_id("" + response.body().get(i).getInstructorId());
+                            dateData.setIs_cancelled(response.body().get(i).getIsCancelled());
+                            dateData.setIs_reservable(response.body().get(i).getIsReservable());
                             dateData.setInstructor_name(response.body().get(i).getInstructor().getName());
                             dateData.setLocation_id("" + response.body().get(i).getLocationId());
                             dateData.setLocation_name(response.body().get(i).getLocation().getName());
@@ -373,7 +381,7 @@ public class SchedulesFragment extends Fragment {
                         if ((mScheduleId == null || mScheduleId.length() == 0) && (mClassId == null || mClassId.length() == 0) && (mInstructorId == null || mInstructorId.length() == 0) && startTime == 000000 && endTime == 240000) {
                             mSchedulesList.setAdapter(new SchedulesDateListAdapter(getActivity(), response.body()));
                         } else {
-                            data = ActiveLifeApplication.getInstance().setUpDb().getScheduleDateOfId(mScheduleId, mClassId, mInstructorId, startTime, endTime);
+                            data = ActiveLifeApplication.getInstance().setUpDb().getScheduleDateOfId(mLocationId,mScheduleId, mClassId, mInstructorId, startTime, endTime);
                             if (data == null)
                                 data = new ArrayList<ScheduleDateData>();
                             mSchedulesList.setAdapter(new SchedulesDateDbListAdapter(getActivity(), data));
@@ -401,6 +409,20 @@ public class SchedulesFragment extends Fragment {
                 }
             });
             ((MainActivity) getActivity()).showProgressDialog(getActivity());
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case 1000:
+                if(resultCode==getActivity().RESULT_OK){
+                    DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+                    Date dt = new Date();
+                    getScheduleDateData(Utils.getApplyiedDateType(df.format(dt), "MM/dd/yyyy HH:mm:ss", "yyyy-MM-dd"));
+                }
+                break;
         }
     }
 }

@@ -12,6 +12,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.android.activelife.tampa.R;
+import com.android.activelife.tampa.db.MessagesData;
 import com.android.activelife.tampa.services.response.messagesdata.MessagesDataResponse;
 
 import java.util.List;
@@ -23,9 +24,9 @@ import java.util.List;
 public class MessagesListAdapter extends BaseAdapter {
 
     public Context jContext;
-    private List<MessagesDataResponse> mMessagesDataResponseList;
+    private List<MessagesData> mMessagesDataResponseList;
 
-    public MessagesListAdapter(Context ctx,List<MessagesDataResponse> mMessagesDataResponseList) {
+    public MessagesListAdapter(Context ctx,List<MessagesData> mMessagesDataResponseList) {
         this.jContext = ctx;
         this.mMessagesDataResponseList=mMessagesDataResponseList;
     }
@@ -58,8 +59,8 @@ public class MessagesListAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.messageLabel.setText(""+mMessagesDataResponseList.get(position).getTitle());
-        holder.messageDesc.setText(""+mMessagesDataResponseList.get(position).getMessage());
+        holder.messageLabel.setText(""+mMessagesDataResponseList.get(position).getMessage_title());
+        holder.messageDesc.setText(""+mMessagesDataResponseList.get(position).getMessage_msg());
         return convertView;
     }
 

@@ -18,9 +18,9 @@
             android:id="@+id/messages_rg"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginLeft="10sp"
             android:layout_marginRight="10sp"
+            android:orientation="horizontal"
             android:visibility="gone"
             android:weightSum="2">
 
@@ -53,13 +53,100 @@
 
         </RadioGroup>
 
-        <ListView
-            android:id="@+id/messages_list"
+        <CheckBox
+            android:id="@+id/img_schedule_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/five_dip"
+            android:button="@drawable/filter"
+            android:checked="false"
+            android:paddingBottom="@dimen/five_sp"
+            android:paddingLeft="@dimen/ten_sp"
+            android:paddingRight="@dimen/ten_sp"
+            android:paddingTop="@dimen/five_sp" />
+
+        <LinearLayout
+            android:id="@+id/spinner_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@color/statusBarColor"
-            android:dividerHeight="1sp"
-            android:listSelector="@android:color/transparent"
-            android:scrollbars="none" />
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/ten_dip"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+                android:id="@+id/section_label0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:text="Branch"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/twenty_sp" />
+
+            <Spinner
+                android:id="@+id/location_spinner"
+                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/five_dip"
+                android:layout_weight="1"
+                android:padding="@dimen/twenty_dip" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ten_sp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <Button
+                    android:id="@+id/clear_filter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.5"
+                    android:background="@color/thick_green"
+                    android:text="Clear Filter"
+                    android:textColor="@android:color/white" />
+
+                <Button
+                    android:id="@+id/btn_apply_filter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.5"
+                    android:background="@color/light_gren"
+                    android:text="Apply Filter"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/list_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/messages_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@color/statusBarColor"
+                android:dividerHeight="1sp"
+                android:listSelector="@android:color/transparent"
+                android:scrollbars="none" />
+
+            <com.android.activelife.tampa.customviews.CachetProBoldTextView
+                android:id="@+id/no_messages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:visibility="gone"
+                android:text="No Messages Available"
+                android:textSize="@dimen/sixteen_sp" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

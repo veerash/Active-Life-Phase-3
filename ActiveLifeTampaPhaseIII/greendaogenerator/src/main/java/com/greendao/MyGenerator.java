@@ -28,7 +28,48 @@ public class MyGenerator {
         addLocationEntities(schema);
         addDefaultLocationEntities(schema);
         addLocationsEntities(schema);
+        addMessagesEntities(schema);
+        addMemberEntities(schema);
+        addMessageLocationEntities(schema);
     }
+
+    private static Entity addMemberEntities(final Schema schema) {
+        Entity messageData = schema.addEntity("MemberData");
+        messageData.addStringProperty("member_id").primaryKey();
+        messageData.addStringProperty("member_name");
+        return messageData;
+    }
+
+    private static Entity addMessagesEntities(final Schema schema) {
+        Entity messageData = schema.addEntity("MessagesData");
+        messageData.addIdProperty().primaryKey().autoincrement();
+        messageData.addStringProperty("message_id");
+        messageData.addStringProperty("message_title");
+        messageData.addStringProperty("message_msg");
+        messageData.addStringProperty("message_send_at");
+
+
+        return messageData;
+    }
+
+    private static Entity addMessageLocationEntities(final Schema schema) {
+        Entity messageData = schema.addEntity("MessageLocationData");
+        messageData.addIdProperty().primaryKey().autoincrement();
+        messageData.addStringProperty("message_id");
+        messageData.addStringProperty("message_title");
+        messageData.addStringProperty("message_msg");
+        messageData.addStringProperty("message_send_at");
+        messageData.addStringProperty("location_id");
+        messageData.addStringProperty("location_name");
+        messageData.addStringProperty("location_address");
+        messageData.addStringProperty("location_city");
+        messageData.addStringProperty("location_state");
+        messageData.addStringProperty("location_zip");
+        messageData.addStringProperty("location_phone");
+        messageData.addStringProperty("location_email");
+        return messageData;
+    }
+
     private static Entity addLocationsEntities(final Schema schema) {
         Entity locationData = schema.addEntity("LocationsData");
         locationData.addIdProperty().primaryKey().autoincrement();
@@ -45,6 +86,7 @@ public class MyGenerator {
 
         return locationData;
     }
+
     private static Entity addLocationEntities(final Schema schema) {
         Entity locationData = schema.addEntity("LocationData");
         locationData.addIdProperty().primaryKey().autoincrement();
@@ -62,6 +104,7 @@ public class MyGenerator {
 
         return locationData;
     }
+
     private static Entity addDefaultLocationEntities(final Schema schema) {
         Entity locationData = schema.addEntity("DefaultLocationData");
         locationData.addIdProperty().primaryKey().autoincrement();
@@ -79,6 +122,7 @@ public class MyGenerator {
 
         return locationData;
     }
+
     private static Entity addClassesEntities(final Schema schema) {
         Entity classData = schema.addEntity("ClassData");
         classData.addIdProperty().primaryKey().autoincrement();
@@ -87,6 +131,7 @@ public class MyGenerator {
         classData.addStringProperty("class_description");
         return classData;
     }
+
     private static Entity addInstructorEntities(final Schema schema) {
         Entity instructorData = schema.addEntity("InstructorData");
         instructorData.addIdProperty().primaryKey().autoincrement();
@@ -100,8 +145,9 @@ public class MyGenerator {
         scheduleData.addIdProperty().primaryKey().autoincrement();
         scheduleData.addStringProperty("schedule_type_id");
         scheduleData.addStringProperty("schedule_type");
-        return  scheduleData;
+        return scheduleData;
     }
+
     private static Entity addHoursDataEntities(final Schema schema) {
         Entity hoursData = schema.addEntity("HoursData");
         hoursData.addIdProperty().primaryKey().autoincrement();
@@ -120,8 +166,9 @@ public class MyGenerator {
         hoursData.addStringProperty("hour_saturday_end_time");
         hoursData.addStringProperty("hour_sunday_start_time");
         hoursData.addStringProperty("hour_sunday_end_time");
-        return  hoursData;
+        return hoursData;
     }
+
     // This is use to describe the colums of your table
     private static Entity addScheduleDateDataEntities(final Schema schema) {
         Entity scheduleDateData = schema.addEntity("ScheduleDateData");
@@ -147,6 +194,7 @@ public class MyGenerator {
         scheduleDateData.addIntProperty("schedule_sunday");
         scheduleDateData.addStringProperty("schedule_frequency");
         scheduleDateData.addIntProperty("is_cancelled");
+        scheduleDateData.addIntProperty("is_reservable");
         scheduleDateData.addStringProperty("instructor_id");
         scheduleDateData.addStringProperty("instructor_name");
         scheduleDateData.addStringProperty("location_id");

@@ -66,7 +66,7 @@
                     android:layout_marginTop="@dimen/ten_dip"
                     android:gravity="left|center_vertical"
                     android:text="Locations"
-                    android:textColor="@color/thick_green"
+                    android:textColor="@color/gray"
                     android:textSize="@dimen/twenty_sp" />
 
                 <Spinner
@@ -85,8 +85,8 @@
                     android:layout_marginBottom="@dimen/five_dip"
                     android:layout_marginTop="@dimen/ten_dip"
                     android:gravity="left|center_vertical"
-                    android:text="Schedules"
-                    android:textColor="@color/thick_green"
+                    android:text="Type"
+                    android:textColor="@color/gray"
                     android:textSize="@dimen/twenty_sp" />
 
                 <Spinner
@@ -106,7 +106,7 @@
                     android:layout_marginTop="@dimen/ten_dip"
                     android:gravity="left|center_vertical"
                     android:text="Classes"
-                    android:textColor="@color/thick_green"
+                    android:textColor="@color/gray"
                     android:textSize="@dimen/twenty_sp" />
 
                 <Spinner
@@ -126,7 +126,7 @@
                     android:layout_marginTop="@dimen/ten_dip"
                     android:gravity="left|center_vertical"
                     android:text="Instructors"
-                    android:textColor="@color/thick_green"
+                    android:textColor="@color/gray"
                     android:textSize="@dimen/twenty_sp" />
 
                 <Spinner

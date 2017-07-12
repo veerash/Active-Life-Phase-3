@@ -1,34 +1,22 @@
 package com.android.activelife.tampa.services.request;
 
-import android.content.Context;
-import android.util.Log;
-
 import com.android.activelife.tampa.services.response.LocationData.LocationDataResponse;
+import com.android.activelife.tampa.services.response.ReserveScheduleData;
 import com.android.activelife.tampa.services.response.classdata.ClassDataResponse;
 import com.android.activelife.tampa.services.response.instructordata.InstructorDataResponse;
 import com.android.activelife.tampa.services.response.messagesdata.MessagesDataResponse;
 import com.android.activelife.tampa.services.response.scheduledatedata.ScheduleDateDataResponse;
 import com.android.activelife.tampa.services.response.schedulesdata.SchedulesDataResponse;
+import com.google.gson.JsonElement;
 
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-
-import static com.android.activelife.tampa.constants.StaticValuesConstants.BASE_URL;
 
 
 /**
@@ -77,5 +65,11 @@ public interface ApiRequest {
      **/
     @GET("messages/{offset}")
     Call<List<MessagesDataResponse>> getMessages(@Path("offset") int offset, @Query("location") int location);
+
+    /**
+     * Reserve Schedule API
+     **/
+    @PUT("reserve/{sessionID}/{date}")
+    Call<ReserveScheduleData> reserveSchedule(@Path("sessionID") String sessionID, @Path("date") String date, @Body JsonElement reserveSchedule);
 
 }

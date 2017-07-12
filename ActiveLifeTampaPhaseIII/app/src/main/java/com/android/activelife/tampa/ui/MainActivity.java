@@ -1,5 +1,6 @@
 package com.android.activelife.tampa.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -34,6 +35,7 @@ public class MainActivity extends BaseActivity {
      */
     private ViewPager mViewPager;
     private TabLayout tabLayout;
+    private SchedulesFragment fragment;
 
     private int[] tabIcons = {
             R.drawable.tab_icon_location,
@@ -102,7 +104,8 @@ public class MainActivity extends BaseActivity {
                 case 2:
                     return MemberDetailsFragment.newInstance(null, null);
                 case 3:
-                    return SchedulesFragment.newInstance(null, null);
+                    fragment =SchedulesFragment.newInstance(null, null);
+                    return fragment;
                 case 4:
                     return MemberFragment.newInstance(null, null);
                 default:
@@ -134,5 +137,13 @@ public class MainActivity extends BaseActivity {
             return null;
         }
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (fragment != null) {
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

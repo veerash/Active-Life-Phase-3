@@ -1,6 +1,7 @@
 package com.android.activelife.tampa.adpater;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import com.android.activelife.tampa.R;
 import com.android.activelife.tampa.db.ScheduleDateData;
+import com.android.activelife.tampa.ui.MainActivity;
+import com.android.activelife.tampa.ui.ReserveActivity;
 import com.android.activelife.tampa.util.Utils;
 
 import java.text.DateFormat;
@@ -49,7 +52,7 @@ public class SchedulesDateDbListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
 
         if (convertView == null) {
@@ -85,6 +88,19 @@ public class SchedulesDateDbListAdapter extends BaseAdapter {
         holder.tvMins.setText(""+diffInMinutes +"Mins");
         holder.tvEvent.setText(""+mMessagesDataResponseList.get(position).getClass_name());
         holder.tvName.setText(""+mMessagesDataResponseList.get(position).getInstructor_name());
+        holder.reserveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent reserveIntent = new Intent(jContext, ReserveActivity.class);
+                reserveIntent.putExtra("session_id",mMessagesDataResponseList.get(position).getSchedule_id());
+                ((MainActivity)jContext).startActivityForResult(reserveIntent,1000);
+            }
+        });
+        if (mMessagesDataResponseList.get(position).getIs_reservable() == 1) {
+            holder.reserveButton.setVisibility(View.VISIBLE);
+        } else {
+            holder.reserveButton.setVisibility(View.GONE);
+        }
         return convertView;
     }
 

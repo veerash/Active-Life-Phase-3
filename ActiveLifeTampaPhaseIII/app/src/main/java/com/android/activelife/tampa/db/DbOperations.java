@@ -32,6 +32,12 @@ public class DbOperations {
     private LocationData jLocationData;
     private DefaultLocationDataDao jDefaultLocationDataDao;
     private DefaultLocationData jDefaultLocationData;
+    private MemberDataDao jMemberDataDao;
+    private MemberData jMemberData;
+    private MessagesDataDao jMessagesDataDao;
+    private MessagesData jMessagesData;
+    private MessageLocationDataDao jMessageLocationDataDao;
+    private MessageLocationData jMessageLocationData;
 
     public void setupDB(Context ctx) {
         try {
@@ -47,6 +53,9 @@ public class DbOperations {
             jLocationsDataDao = daoSession.getLocationsDataDao();
             jDefaultLocationDataDao = daoSession.getDefaultLocationDataDao();
             jLocationDataDao = daoSession.getLocationDataDao();
+            jMemberDataDao = daoSession.getMemberDataDao();
+            jMessagesDataDao = daoSession.getMessagesDataDao();
+            jMessageLocationDataDao = daoSession.getMessageLocationDataDao();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -271,13 +280,13 @@ public class DbOperations {
                 qb.where(ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime));
             } else if (location_id == null && schedule_id == null && class_id == null && instructor_id == null && starttime != null && endtime == null) {
                 qb.where(ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime));
-            }else if (location_id == null && schedule_id == null && class_id == null && instructor_id != null && starttime == null && endtime == null) {
+            } else if (location_id == null && schedule_id == null && class_id == null && instructor_id != null && starttime == null && endtime == null) {
                 qb.where(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id));
-            }else if (location_id == null && schedule_id == null && class_id != null && instructor_id == null && starttime == null && endtime == null) {
+            } else if (location_id == null && schedule_id == null && class_id != null && instructor_id == null && starttime == null && endtime == null) {
                 qb.where(ScheduleDateDataDao.Properties.Class_id.eq(class_id));
-            }else if (location_id == null && schedule_id != null && class_id == null && instructor_id == null && starttime == null && endtime == null) {
+            } else if (location_id == null && schedule_id != null && class_id == null && instructor_id == null && starttime == null && endtime == null) {
                 qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id));
-            }else if (location_id != null && schedule_id == null && class_id == null && instructor_id == null && starttime == null && endtime == null) {
+            } else if (location_id != null && schedule_id == null && class_id == null && instructor_id == null && starttime == null && endtime == null) {
                 qb.where(ScheduleDateDataDao.Properties.Location_id.eq(location_id));
             }
             list = qb.list();
@@ -397,6 +406,17 @@ public class DbOperations {
         }
         return (ArrayList<LocationsData>) jLocationsDataDao
                 .queryBuilder().build().list();
+    }
+
+    public LocationsData getLocationById(String location_id) {
+        if (jLocationsDataDao == null) {
+            jLocationsDataDao = getDaoSession().getLocationsDataDao();
+
+        }
+        QueryBuilder<LocationsData> qb = jLocationsDataDao.queryBuilder();
+        qb.where(LocationsDataDao.Properties.Location_id
+                .eq(location_id));
+        return qb.build().list().get(0);
     }
 
     public void deleteLocations() {
@@ -579,6 +599,161 @@ public class DbOperations {
 
             }
             jHoursDataDao.deleteAll();
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void insertMessageDao(String message_id, String message_title, String message_msg, String message_send_at) {
+        try {
+            if (jMessagesDataDao == null) {
+                jMessagesDataDao = getDaoSession().getMessagesDataDao();
+            }
+            jMessagesData = new MessagesData(null, message_id, message_title, message_msg, message_send_at);
+            jMessagesDataDao.insert(jMessagesData);
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    public void insertMessagesList(List<MessagesData> messages) {
+        try {
+            if (jMessagesDataDao == null) {
+                jMessagesDataDao = getDaoSession().getMessagesDataDao();
+            }
+            jMessagesDataDao.insertInTx(messages);
+        } catch (Exception e) {
+
+        }
+
+    }
+
+
+    public ArrayList<MessagesData> getMessages() {
+        if (jMessagesDataDao == null) {
+            jMessagesDataDao = getDaoSession().getMessagesDataDao();
+        }
+        return (ArrayList<MessagesData>) jMessagesDataDao
+                .queryBuilder().build().list();
+    }
+    public MessagesData getMessagesById(String message_id) {
+        if (jMessagesDataDao == null) {
+            jMessagesDataDao = getDaoSession().getMessagesDataDao();
+        }
+        QueryBuilder<MessagesData> qb = jMessagesDataDao.queryBuilder();
+        qb.where(MessagesDataDao.Properties.Message_id.eq(message_id));
+        return qb.build().list().get(0);
+    }
+
+    public void deleteMessages() {
+        try {
+            if (jMessagesDataDao == null) {
+                jMessagesDataDao = getDaoSession().getMessagesDataDao();
+            }
+            jMessagesDataDao.deleteAll();
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void insertMessageLocation(String message_id, String message_title, String message_msg, String message_send_at, String location_id, String location_name, String location_address, String location_city, String location_state, String location_zip, String location_phone, String location_email) {
+
+        try {
+            if (jMessageLocationDataDao == null) {
+                jMessageLocationDataDao = getDaoSession().getMessageLocationDataDao();
+            }
+            jMessageLocationData = new MessageLocationData(null, message_id, message_title, message_msg, message_send_at, location_id, location_name, location_address, location_city, location_state, location_zip, location_phone, location_email);
+            jMessageLocationDataDao.insert(jMessageLocationData);
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    public void insertMessageLocationList(List<MessageLocationData> messages) {
+        try {
+            if (jMessageLocationDataDao == null) {
+                jMessageLocationDataDao = getDaoSession().getMessageLocationDataDao();
+            }
+            jMessageLocationDataDao.insertInTx(messages);
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    public ArrayList<MessageLocationData> getMessageLocations() {
+        if (jMessageLocationDataDao == null) {
+            jMessageLocationDataDao = getDaoSession().getMessageLocationDataDao();
+        }
+        return (ArrayList<MessageLocationData>) jMessageLocationDataDao
+                .queryBuilder().build().list();
+    }
+
+    public ArrayList<MessageLocationData> getMessageLocationsById(String location_id) {
+        if (jMessageLocationDataDao == null) {
+            jMessageLocationDataDao = getDaoSession().getMessageLocationDataDao();
+        }
+        QueryBuilder<MessageLocationData> qb = jMessageLocationDataDao.queryBuilder();
+        qb.where(MessageLocationDataDao.Properties.Location_id.eq(location_id));
+        return (ArrayList<MessageLocationData>) qb.build().list();
+    }
+
+    public void deleteMessageLocations() {
+        try {
+            if (jMessageLocationDataDao == null) {
+                jMessageLocationDataDao = getDaoSession().getMessageLocationDataDao();
+            }
+            jMessageLocationDataDao.deleteAll();
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void insertOrReplaceMember(String member_id, String member_name) {
+
+        try {
+            if (jMemberDataDao == null) {
+                jMemberDataDao = getDaoSession().getMemberDataDao();
+            }
+            jMemberData = new MemberData(member_id, member_name);
+            jMemberDataDao.insertOrReplaceInTx(jMemberData);
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    public ArrayList<MemberData> getMembers() {
+        if (jMemberDataDao == null) {
+            jMemberDataDao = getDaoSession().getMemberDataDao();
+        }
+        return (ArrayList<MemberData>) jMemberDataDao
+                .queryBuilder().build().list();
+    }
+
+    public void deleteMemberDataById(String member_id) {
+        try {
+            if (jMemberDataDao == null) {
+                jMemberDataDao = getDaoSession().getMemberDataDao();
+            }
+            jMemberDataDao
+                    .queryBuilder()
+                    .where(MemberDataDao.Properties.Member_id
+                            .eq(member_id)).buildDelete()
+                    .executeDeleteWithoutDetachingEntities();
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void deleteMembers() {
+        try {
+            if (jMemberDataDao == null) {
+                jMemberDataDao = getDaoSession().getMemberDataDao();
+            }
+            jMemberDataDao.deleteAll();
         } catch (Exception e) {
 
         }
