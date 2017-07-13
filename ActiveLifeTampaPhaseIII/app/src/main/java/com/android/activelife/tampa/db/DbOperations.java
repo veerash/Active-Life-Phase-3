@@ -70,13 +70,13 @@ public class DbOperations {
         return daoSession;
     }
 
-    public void insertSchedulesDate(int schedule_id, String schedule_name, String class_id, String class_name, String class_desc, String schedule_type_id, String schedule_type, String schedule_start_date, String schedule_start_time, String schedule_end_time, Long schedule_start_time_long, Long schedule_end_time_long, int schedule_monday, int schedule_tuesday, int schedule_wednesday, int schedule_thursday, int schedule_friday, int schedule_saturday, int schedule_sunday, String schedule_frequency, int is_cancelled, String instructor_id, String instructor_name, String location_id, String location_name) {
+    public void insertSchedulesDate(int schedule_id, String schedule_name, String class_id, String class_name, String class_desc, String schedule_type_id, String schedule_type, String schedule_start_date, String schedule_start_time, String schedule_end_time, Long schedule_start_time_long, Long schedule_end_time_long, int schedule_monday, int schedule_tuesday, int schedule_wednesday, int schedule_thursday, int schedule_friday, int schedule_saturday, int schedule_sunday, String schedule_frequency, int is_cancelled, int is_reservable, String instructor_id, String instructor_name, String location_id, String location_name) {
         try {
             if (jScheduleDateDataDao == null) {
                 jScheduleDateDataDao = getDaoSession().getScheduleDateDataDao();
 
             }
-            jScheduleDateData = new ScheduleDateData(null, schedule_id, schedule_name, class_id, class_name, class_desc, schedule_type_id, schedule_type, schedule_start_date, schedule_start_time, schedule_end_time, schedule_start_time_long, schedule_end_time_long, schedule_monday, schedule_tuesday, schedule_wednesday, schedule_thursday, schedule_friday, schedule_saturday, schedule_sunday, schedule_frequency, is_cancelled, instructor_id, instructor_name, location_id, location_name);
+            jScheduleDateData = new ScheduleDateData(null, schedule_id, schedule_name, class_id, class_name, class_desc, schedule_type_id, schedule_type, schedule_start_date, schedule_start_time, schedule_end_time, schedule_start_time_long, schedule_end_time_long, schedule_monday, schedule_tuesday, schedule_wednesday, schedule_thursday, schedule_friday, schedule_saturday, schedule_sunday, schedule_frequency, is_cancelled, is_reservable, instructor_id, instructor_name, location_id, location_name);
             jScheduleDateDataDao.insert(jScheduleDateData);
         } catch (Exception e) {
 
@@ -637,6 +637,7 @@ public class DbOperations {
         return (ArrayList<MessagesData>) jMessagesDataDao
                 .queryBuilder().build().list();
     }
+
     public MessagesData getMessagesById(String message_id) {
         if (jMessagesDataDao == null) {
             jMessagesDataDao = getDaoSession().getMessagesDataDao();

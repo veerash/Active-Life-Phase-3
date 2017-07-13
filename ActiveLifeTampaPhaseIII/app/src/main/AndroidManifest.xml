@@ -3,6 +3,8 @@
     package="com.android.activelife.tampa">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -33,11 +35,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.ScheduleContainerActivity"
-            android:label="BOB SIERRA NORTH TAMPA FAMILY YMCA"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.MessageDetailsActivity"
-            android:label="BOB SIERRA NORTH TAMPA FAMILY YMCA"
             android:screenOrientation="portrait" />
         <activity android:name=".ui.ReserveActivity"
             android:label="Reserve"

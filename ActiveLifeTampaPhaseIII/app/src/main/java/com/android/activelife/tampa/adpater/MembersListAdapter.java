@@ -69,7 +69,9 @@ public class MembersListAdapter extends BaseAdapter {
             holder.memberName = (TextView) convertView.findViewById(R.id.member_name);
             holder.memmberBarCodeId = (TextView) convertView.findViewById(R.id.member_id);
             holder.memberDetailsLayout = (LinearLayout) convertView.findViewById(R.id.membership_details);
+            holder.cardDetailsLayout = (LinearLayout) convertView.findViewById(R.id.card_details_layout);
             holder.barCodeImage = (ImageView) convertView.findViewById(R.id.bar_code_image);
+            holder.closeCradLayout= (ImageView) convertView.findViewById(R.id.back_button);
             holder.updateDetails = (ImageView) convertView.findViewById(R.id.edit_member);
             holder.cardView = convertView.findViewById(R.id.add_edit_member_layout);
             holder.addButton = (Button) holder.cardView.findViewById(R.id.add_member);
@@ -80,6 +82,7 @@ public class MembersListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.memberId.setText("" + instructorDataResponse.get(position).getMember_name());
+        holder.memberName.setText("" + instructorDataResponse.get(position).getMember_name());
         holder.memberEditId.setText("" + instructorDataResponse.get(position).getMember_id());
         holder.memberEditName.setText("" + instructorDataResponse.get(position).getMember_name());
         String barCode = instructorDataResponse.get(position).getMember_id();
@@ -139,12 +142,13 @@ public class MembersListAdapter extends BaseAdapter {
                                 if (item.getTitle().equals("Edit")) {
                                     holder.memberDetailsLayout.setVisibility(View.GONE);
                                     holder.memberId.setVisibility(View.GONE);
-                                    holder.cardView.setVisibility(View.VISIBLE);
+                                    holder.cardDetailsLayout.setVisibility(View.VISIBLE);
                                     holder.addButton.setText("Update");
                                 } else {
                                     holder.addButton.setText("Add");
                                     ActiveLifeApplication.getInstance().setUpDb().deleteMemberDataById(instructorDataResponse.get(position).getMember_id());
                                     popup.dismiss();
+                                    fragment.setMembersData();
                                 }
                                 return true;
                             }
@@ -158,7 +162,7 @@ public class MembersListAdapter extends BaseAdapter {
             public void onClick(View view) {
                 holder.memberDetailsLayout.setVisibility(View.VISIBLE);
                 holder.memberId.setVisibility(View.GONE);
-                holder.cardView.setVisibility(View.GONE);
+                holder.cardDetailsLayout.setVisibility(View.GONE);
             }
         });
         holder.memberDetailsLayout.setOnClickListener(new View.OnClickListener() {
@@ -166,15 +170,15 @@ public class MembersListAdapter extends BaseAdapter {
             public void onClick(View view) {
                 holder.memberDetailsLayout.setVisibility(View.GONE);
                 holder.memberId.setVisibility(View.VISIBLE);
-                holder.cardView.setVisibility(View.GONE);
+                holder.cardDetailsLayout.setVisibility(View.GONE);
             }
         });
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        holder.closeCradLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 holder.memberDetailsLayout.setVisibility(View.VISIBLE);
                 holder.memberId.setVisibility(View.GONE);
-                holder.cardView.setVisibility(View.GONE);
+                holder.cardDetailsLayout.setVisibility(View.GONE);
             }
         });
 
@@ -200,8 +204,8 @@ public class MembersListAdapter extends BaseAdapter {
 
     class ViewHolder {
         TextView memberName, memberEditName, memberId, memberEditId, memmberBarCodeId;
-        LinearLayout memberDetailsLayout;
-        ImageView updateDetails, barCodeImage;
+        LinearLayout memberDetailsLayout, cardDetailsLayout;
+        ImageView updateDetails, barCodeImage, closeCradLayout;
         Button addButton;
         View cardView;
 

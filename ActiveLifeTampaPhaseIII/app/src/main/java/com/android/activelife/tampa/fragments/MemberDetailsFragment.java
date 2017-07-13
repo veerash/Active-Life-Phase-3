@@ -286,6 +286,7 @@ public class MemberDetailsFragment extends Fragment {
         mFilterLayout = (LinearLayout) child.findViewById(R.id.spinner_layout);
         mListLayout = (LinearLayout) child.findViewById(R.id.list_layout);
         mApplyButton = (Button) child.findViewById(R.id.btn_apply_filter);
+        mClearFilterButton = (Button) child.findViewById(R.id.clear_filter);
         setLocationSpinnerData();
         mClearFilterButton.setOnClickListener(new View.OnClickListener() {
             @Override

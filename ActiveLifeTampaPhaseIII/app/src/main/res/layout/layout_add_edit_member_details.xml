@@ -28,12 +28,17 @@
 
             <EditText
                 android:id="@+id/member_name_edit_text"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:background="@drawable/hours_rb_inactive"
                 android:inputType="textPersonName"
-                android:text="Name"
+                android:paddingBottom="@dimen/two_dip"
+                android:paddingLeft="@dimen/ten_sp"
+                android:paddingRight="@dimen/ten_sp"
+                android:paddingTop="@dimen/ten_sp"
                 android:textColor="@android:color/black" />
 
             <com.android.activelife.tampa.customviews.CachetProMediumTextView
@@ -50,13 +55,17 @@
 
             <EditText
                 android:id="@+id/member_id_edit_text"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
+
                 android:background="@drawable/hours_rb_inactive"
                 android:inputType="textPersonName"
-                android:text="257962"
+                android:paddingBottom="@dimen/two_dip"
+                android:paddingLeft="@dimen/ten_sp"
+                android:paddingRight="@dimen/ten_sp"
+                android:paddingTop="@dimen/ten_sp"
                 android:textColor="@android:color/black" />
 
         </LinearLayout>

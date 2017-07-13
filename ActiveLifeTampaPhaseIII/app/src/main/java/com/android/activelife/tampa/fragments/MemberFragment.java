@@ -70,14 +70,7 @@ public class MemberFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_member, container, false);
         data = new ArrayList<>();
-        addDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cardView.setVisibility(View.VISIBLE);
-                closeDetails.setVisibility(View.VISIBLE);
-                mListLayout.setVisibility(View.GONE);
-            }
-        });
+
         cardView = view.findViewById(R.id.add_edit_member_layout);
         addDetails = (ImageView) view.findViewById(R.id.add_member);
         closeDetails = (ImageView) view.findViewById(R.id.close_add_member);
@@ -87,6 +80,14 @@ public class MemberFragment extends Fragment {
         addButton = (Button) cardView.findViewById(R.id.add_member);
         memberEditId = (TextView) cardView.findViewById(R.id.member_id_edit_text);
         memberEditName = (TextView) cardView.findViewById(R.id.member_name_edit_text);
+        addDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardView.setVisibility(View.VISIBLE);
+                closeDetails.setVisibility(View.VISIBLE);
+                mListLayout.setVisibility(View.GONE);
+            }
+        });
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

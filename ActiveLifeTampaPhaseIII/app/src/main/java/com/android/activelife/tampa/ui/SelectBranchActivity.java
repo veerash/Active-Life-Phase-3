@@ -52,6 +52,24 @@ public class SelectBranchActivity extends BaseActivity {
                     hideProgressDialog(SelectBranchActivity.this);
                     if (response.isSuccessful()) {
                         mLocationDataResponsesList = response.body();
+                        ArrayList<LocationsData> datas=new ArrayList<LocationsData>();
+                        for (int k = 0; k < mLocationDataResponsesList.size(); k++) {
+                            LocationsData ld=new LocationsData();
+                            ld.setLocation_id(""+mLocationDataResponsesList.get(k).getId());
+                            ld.setLocation_address(""+mLocationDataResponsesList.get(k).getAddress());
+                            ld.setLocation_city(""+mLocationDataResponsesList.get(k).getCity());
+                            ld.setLocation_donate_link(""+mLocationDataResponsesList.get(k).getDonationLink());
+                            ld.setLocation_email(""+mLocationDataResponsesList.get(k).getEmail());
+                            ld.setLocation_name(""+mLocationDataResponsesList.get(k).getName());
+                            ld.setLocation_phone(""+mLocationDataResponsesList.get(k).getPhone());
+                            ld.setLocation_program_link(""+mLocationDataResponsesList.get(k).getProgramLink());
+                            ld.setLocation_state(""+mLocationDataResponsesList.get(k).getState());
+                            ld.setLocation_zip(""+mLocationDataResponsesList.get(k).getZipCode());
+                            datas.add(ld);
+
+                        }
+                        ActiveLifeApplication.getInstance().setUpDb().deleteLocations();
+                        ActiveLifeApplication.getInstance().setUpDb().insertLocations(datas);
                         mSelectBranchListView.setAdapter(new SelectBranchListAdapter(SelectBranchActivity.this, mLocationDataResponsesList));
                         mSelectBranchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
@@ -79,24 +97,7 @@ public class SelectBranchActivity extends BaseActivity {
                                     String sunEndTime = times.get7().get(0).getEndTime();
                                     ActiveLifeApplication.getInstance().setUpDb().insertHoursDao(name, monStartTime, monEndTime, tueStartTime, tueEndTime, wedStartTime, wedEndTime, thuStartTime, thuEndTime, friStartTime, friEndTime, satStartTime, satEndTime, sunStartTime, sunEndTime);
                                 }
-                                ArrayList<LocationsData> datas=new ArrayList<LocationsData>();
-                                for (int k = 0; k < mLocationDataResponsesList.size(); k++) {
-                                    LocationsData ld=new LocationsData();
-                                    ld.setLocation_id(""+mLocationDataResponsesList.get(i).getId());
-                                    ld.setLocation_address(""+mLocationDataResponsesList.get(i).getAddress());
-                                    ld.setLocation_city(""+mLocationDataResponsesList.get(i).getCity());
-                                    ld.setLocation_donate_link(""+mLocationDataResponsesList.get(i).getDonationLink());
-                                    ld.setLocation_email(""+mLocationDataResponsesList.get(i).getEmail());
-                                    ld.setLocation_name(""+mLocationDataResponsesList.get(i).getName());
-                                    ld.setLocation_phone(""+mLocationDataResponsesList.get(i).getPhone());
-                                    ld.setLocation_program_link(""+mLocationDataResponsesList.get(i).getProgramLink());
-                                    ld.setLocation_state(""+mLocationDataResponsesList.get(i).getState());
-                                    ld.setLocation_zip(""+mLocationDataResponsesList.get(i).getZipCode());
-                                    datas.add(ld);
 
-                                }
-                                ActiveLifeApplication.getInstance().setUpDb().deleteLocations();
-                                ActiveLifeApplication.getInstance().setUpDb().insertLocations(datas);
                                 startActivity(mainIntent);
                                 ActiveLifeApplication.getInstance().setUpDb().deleteDefaultLocations();
                                 ActiveLifeApplication.getInstance().setUpDb().insertDefaultLocation(i,""+mLocationDataResponsesList.get(i).getId(),mLocationDataResponsesList.get(i).getName(), mLocationDataResponsesList.get(i).getAddress(),mLocationDataResponsesList.get(i).getCity(),mLocationDataResponsesList.get(i).getState(),mLocationDataResponsesList.get(i).getZipCode(),mLocationDataResponsesList.get(i).getPhone(),mLocationDataResponsesList.get(i).getEmail(),mLocationDataResponsesList.get(i).getProgramLink(),mLocationDataResponsesList.get(i).getDonationLink());
