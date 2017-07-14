@@ -21,6 +21,7 @@ import com.android.activelife.tampa.R;
 import com.android.activelife.tampa.adpater.ClassesListAdapter;
 import com.android.activelife.tampa.adpater.InstructorsListAdapter;
 import com.android.activelife.tampa.adpater.LocationsListAdapter;
+import com.android.activelife.tampa.adpater.MessagesListAdapter;
 import com.android.activelife.tampa.adpater.SchedulesDateDbListAdapter;
 import com.android.activelife.tampa.adpater.SchedulesDateListAdapter;
 import com.android.activelife.tampa.adpater.SchedulesListAdapter;
@@ -85,6 +86,7 @@ public class SchedulesFragment extends Fragment {
     private ArrayList<ClassData> mClassDatas;
     private long startTime=040000,endTime=230000;
     private RangeSeekBar mRangeSeekbar;
+    private TextView mNoMessages;
 
     public SchedulesFragment() {
     }
@@ -112,6 +114,7 @@ public class SchedulesFragment extends Fragment {
         mScheduleDatas = new ArrayList<>();
         mInstructorDatas = new ArrayList<>();
         mClassDatas = new ArrayList<>();
+        mNoMessages= (TextView) rootView.findViewById(R.id.no_messages);
         mRangeSeekbar = (RangeSeekBar) rootView.findViewById(R.id.rangeSeekBar);
         textView = (TextView) rootView.findViewById(R.id.section_label);
         mFilterLayout = (ScrollView) rootView.findViewById(R.id.filter_schedules);
@@ -124,6 +127,7 @@ public class SchedulesFragment extends Fragment {
         mApplyButton = (Button) rootView.findViewById(R.id.btn_apply_filter);
         mClearFilterButton= (Button) rootView.findViewById(R.id.clear_filter);
         mSchedulesList = (ListView) rootView.findViewById(R.id.schedules_list);
+        textView = (TextView) rootView.findViewById(R.id.section_label);
         mScheduleDatas.addAll(ActiveLifeApplication.getInstance().setUpDb().getSchedules());
         mClassDatas.addAll(ActiveLifeApplication.getInstance().setUpDb().getClasses());
         mInstructorDatas.addAll(ActiveLifeApplication.getInstance().setUpDb().getInstructors());
@@ -138,7 +142,12 @@ public class SchedulesFragment extends Fragment {
                 data=ActiveLifeApplication.getInstance().setUpDb().getScheduleDate();
                 mFilterImageView.setChecked(false);
                 if(data!=null&&data.size()>0){
+                    mSchedulesList.setVisibility(View.VISIBLE);
+                    mNoMessages.setVisibility(View.GONE);
                     mSchedulesList.setAdapter(new SchedulesDateDbListAdapter(getActivity(),data));
+                }else{
+                    mSchedulesList.setVisibility(View.GONE);
+                    mNoMessages.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -176,7 +185,14 @@ public class SchedulesFragment extends Fragment {
                     data = ActiveLifeApplication.getInstance().setUpDb().getScheduleDateOfId(mLocationId,mScheduleId, mClassId, mInstructorId, startTime, endTime);
                     if (data == null)
                         data = new ArrayList<ScheduleDateData>();
-                    mSchedulesList.setAdapter(new SchedulesDateDbListAdapter(getActivity(), data));
+                    if(data!=null&&data.size()>0){
+                        mSchedulesList.setVisibility(View.VISIBLE);
+                        mNoMessages.setVisibility(View.GONE);
+                        mSchedulesList.setAdapter(new SchedulesDateDbListAdapter(getActivity(),data));
+                    }else{
+                        mSchedulesList.setVisibility(View.GONE);
+                        mNoMessages.setVisibility(View.VISIBLE);
+                    }
                     mFilterImageView.setChecked(false);
                 }
             }
@@ -184,7 +200,7 @@ public class SchedulesFragment extends Fragment {
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         Date dt = new Date();
         textView.setText("" + Utils.getApplyiedDateType(df.format(dt), "MM/dd/yyyy HH:mm:ss", "EEEE MMM dd"));
-        getScheduleDateData(Utils.getApplyiedDateType(df.format(dt), "MM/dd/yyyy HH:mm:ss", "yyyy-MM-dd"));
+
         setLocationSpinnerData();
         setScheduleSpinnerData();
         setClassSpinnerData();
@@ -211,8 +227,8 @@ public class SchedulesFragment extends Fragment {
 //                    .startDate(startDate.getTime())
 //                    .endDate(endDate.getTime())
 //                    .build();
-        textView = (TextView) rootView.findViewById(R.id.section_label);
 
+        getScheduleDateData(Utils.getApplyiedDateType(df.format(dt), "MM/dd/yyyy HH:mm:ss", "yyyy-MM-dd"));
         HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(rootView, R.id.calendarView)
                 .startDate(startDate.getTime())
                 .endDate(endDate.getTime())
@@ -378,13 +394,20 @@ public class SchedulesFragment extends Fragment {
 
                         }
                         ActiveLifeApplication.getInstance().setUpDb().insertSchedulesDateList(data);
-                        if ((mScheduleId == null || mScheduleId.length() == 0) && (mClassId == null || mClassId.length() == 0) && (mInstructorId == null || mInstructorId.length() == 0) && startTime == 000000 && endTime == 240000) {
+                        if ((mLocationId == null || mLocationId.length() == 0) &&(mScheduleId == null || mScheduleId.length() == 0) && (mClassId == null || mClassId.length() == 0) && (mInstructorId == null || mInstructorId.length() == 0) && startTime == 000000 && endTime == 240000) {
                             mSchedulesList.setAdapter(new SchedulesDateListAdapter(getActivity(), response.body()));
                         } else {
                             data = ActiveLifeApplication.getInstance().setUpDb().getScheduleDateOfId(mLocationId,mScheduleId, mClassId, mInstructorId, startTime, endTime);
                             if (data == null)
                                 data = new ArrayList<ScheduleDateData>();
-                            mSchedulesList.setAdapter(new SchedulesDateDbListAdapter(getActivity(), data));
+                            if(data!=null&&data.size()>0){
+                                mSchedulesList.setVisibility(View.VISIBLE);
+                                mNoMessages.setVisibility(View.GONE);
+                                mSchedulesList.setAdapter(new SchedulesDateDbListAdapter(getActivity(),data));
+                            }else{
+                                mSchedulesList.setVisibility(View.GONE);
+                                mNoMessages.setVisibility(View.VISIBLE);
+                            }
                         }
                         ((MainActivity) getActivity()).hideProgressDialog(getActivity());
                     } else {

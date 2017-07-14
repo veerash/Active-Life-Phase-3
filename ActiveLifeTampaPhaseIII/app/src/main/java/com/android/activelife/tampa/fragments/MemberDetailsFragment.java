@@ -63,7 +63,8 @@ public class MemberDetailsFragment extends Fragment {
     private RadioGroup mDetailsRG;
     private ListView messagesList;
     private TextView mNoMessages;
-    private LinearLayout mFilterLayout,mListLayout;
+    private LinearLayout mFilterLayout;
+    private RelativeLayout mListLayout;
     private RadioButton mMessagessRB, mDonateRB, mHoursRB, mContactRB, mProgramsRB;
     private RelativeLayout mLayoutContainer;
     private ApiRequest mApiInterface;
@@ -280,11 +281,11 @@ public class MemberDetailsFragment extends Fragment {
         View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_messages, null);
         setLayoutParams(child);
         messagesList = (ListView) child.findViewById(R.id.messages_list);
-        mNoMessages= (TextView) child.findViewById(R.id.no_messages);
+        mNoMessages = (TextView) child.findViewById(R.id.no_messages);
         mFilterImageView = (CheckBox) child.findViewById(R.id.img_schedule_filter);
         mLocationSpinner = (Spinner) child.findViewById(R.id.location_spinner);
         mFilterLayout = (LinearLayout) child.findViewById(R.id.spinner_layout);
-        mListLayout = (LinearLayout) child.findViewById(R.id.list_layout);
+        mListLayout = (RelativeLayout) child.findViewById(R.id.list_layout);
         mApplyButton = (Button) child.findViewById(R.id.btn_apply_filter);
         mClearFilterButton = (Button) child.findViewById(R.id.clear_filter);
         setLocationSpinnerData();
@@ -292,12 +293,12 @@ public class MemberDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mLocationSpinner.setSelection(0);
-                mMessagesDataResponseList=ActiveLifeApplication.getInstance().setUpDb().getMessages();
-                if(mMessagesDataResponseList!=null&&mMessagesDataResponseList.size()>0) {
+                mMessagesDataResponseList = ActiveLifeApplication.getInstance().setUpDb().getMessages();
+                if (mMessagesDataResponseList != null && mMessagesDataResponseList.size() > 0) {
                     messagesList.setVisibility(View.VISIBLE);
                     mNoMessages.setVisibility(View.GONE);
                     messagesList.setAdapter(new MessagesListAdapter(getActivity(), mMessagesDataResponseList));
-                }else{
+                } else {
                     messagesList.setVisibility(View.GONE);
                     mNoMessages.setVisibility(View.VISIBLE);
                 }
@@ -323,11 +324,11 @@ public class MemberDetailsFragment extends Fragment {
                         }
                     }
 
-                    if(mMessagesDataResponseList!=null&&mMessagesDataResponseList.size()>0) {
+                    if (mMessagesDataResponseList != null && mMessagesDataResponseList.size() > 0) {
                         messagesList.setVisibility(View.VISIBLE);
                         mNoMessages.setVisibility(View.GONE);
                         messagesList.setAdapter(new MessagesListAdapter(getActivity(), mMessagesDataResponseList));
-                    }else{
+                    } else {
                         messagesList.setVisibility(View.GONE);
                         mNoMessages.setVisibility(View.VISIBLE);
                     }
@@ -463,11 +464,11 @@ public class MemberDetailsFragment extends Fragment {
                         }
                         ActiveLifeApplication.getInstance().setUpDb().insertMessagesList(mMessagesDataResponseList);
                         ActiveLifeApplication.getInstance().setUpDb().insertMessageLocationList(mMessageLocationDataResponseList);
-                        if(mMessagesDataResponseList!=null&&mMessagesDataResponseList.size()>0) {
+                        if (mMessagesDataResponseList != null && mMessagesDataResponseList.size() > 0) {
                             messagesList.setVisibility(View.VISIBLE);
                             mNoMessages.setVisibility(View.GONE);
                             messagesList.setAdapter(new MessagesListAdapter(getActivity(), mMessagesDataResponseList));
-                        }else{
+                        } else {
                             messagesList.setVisibility(View.GONE);
                             mNoMessages.setVisibility(View.VISIBLE);
                         }

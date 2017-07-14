@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.activelife.tampa.R;
@@ -38,7 +39,7 @@ public class MemberFragment extends Fragment {
     private TextView mNoMessages;
     private ImageView addDetails,closeDetails;
     private View cardView;
-    private LinearLayout mListLayout;
+    private RelativeLayout mListLayout;
     private Button addButton;
     TextView memberEditName, memberEditId;
 
@@ -75,7 +76,7 @@ public class MemberFragment extends Fragment {
         addDetails = (ImageView) view.findViewById(R.id.add_member);
         closeDetails = (ImageView) view.findViewById(R.id.close_add_member);
         mNoMessages = (TextView) view.findViewById(R.id.no_messages);
-        mListLayout = (LinearLayout) view.findViewById(R.id.list_layout);
+        mListLayout = (RelativeLayout) view.findViewById(R.id.list_layout);
         mMembersListView = (ListView) view.findViewById(R.id.members_list);
         addButton = (Button) cardView.findViewById(R.id.add_member);
         memberEditId = (TextView) cardView.findViewById(R.id.member_id_edit_text);
