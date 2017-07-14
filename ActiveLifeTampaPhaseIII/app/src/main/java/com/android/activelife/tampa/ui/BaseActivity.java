@@ -1,12 +1,9 @@
 package com.android.activelife.tampa.ui;
 
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Events;
@@ -16,15 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.android.activelife.tampa.R;
-import com.android.activelife.tampa.appcontroller.ActiveLifeApplication;
 import com.android.activelife.tampa.util.InternetConnectivity;
 import com.android.activelife.tampa.util.Utilities;
-import com.android.activelife.tampa.util.Utils;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 /**
  * Created by vsatrasala on 6/29/2017.
@@ -49,14 +41,22 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void showProgressDialog(Context ctx) {
-        if (!getProgressDialog(ctx).isShowing()) {
-            mProgressDialog.show();
+        try {
+            if (!getProgressDialog(ctx).isShowing()) {
+                mProgressDialog.show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     public void hideProgressDialog(Context ctx) {
-        if (getProgressDialog(ctx).isShowing()) {
-            mProgressDialog.dismiss();
+        try {
+            if (getProgressDialog(ctx).isShowing()) {
+                mProgressDialog.dismiss();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -81,7 +81,7 @@ public class BaseActivity extends AppCompatActivity {
 
 
     public void addEvent(String remainderTitle, String remainderInfo,
-                                   Date startTime, long duration, String scheduleId, String locationName,String frequency) {
+                         Date startTime, long duration, String scheduleId, String locationName, String frequency) {
 //        ContentValues values = new ContentValues();
 //        values.put(Events._ID, scheduleId);
 //        values.put(Events.DTSTART, startTime.getTime());
@@ -114,7 +114,7 @@ public class BaseActivity extends AppCompatActivity {
         intent.putExtra(Events.TITLE, remainderTitle);
         intent.putExtra(Events.DESCRIPTION, remainderInfo);
         intent.putExtra(Events.EVENT_LOCATION, locationName);
-        intent.putExtra(Events.RRULE, "FREQ="+frequency);
+        intent.putExtra(Events.RRULE, "FREQ=" + frequency);
 
         startActivity(intent);
     }

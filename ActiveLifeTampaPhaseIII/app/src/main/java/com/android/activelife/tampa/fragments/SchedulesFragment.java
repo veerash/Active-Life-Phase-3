@@ -134,11 +134,16 @@ public class SchedulesFragment extends Fragment {
         mClearFilterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 mRangeSeekbar.setRangeValues(4,23);
                 mLocationSpinner.setSelection(0);
                 mSchedulesSpinner.setSelection(0);
                 mClassSpinner.setSelection(0);
                 mInstructorsSpinner.setSelection(0);
+                mLocationId=null;
+                mScheduleId=null;
+                mClassId=null;
+                mInstructorId=null;
                 data=ActiveLifeApplication.getInstance().setUpDb().getScheduleDate();
                 mFilterImageView.setChecked(false);
                 if(data!=null&&data.size()>0){
@@ -223,12 +228,6 @@ public class SchedulesFragment extends Fragment {
         startDate.add(Calendar.MONTH, -1);
 
 
-//            HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(rootView, R.id.calendarView)
-//                    .startDate(startDate.getTime())
-//                    .endDate(endDate.getTime())
-//                    .build();
-
-        getScheduleDateData(Utils.getApplyiedDateType(df.format(dt), "MM/dd/yyyy HH:mm:ss", "yyyy-MM-dd"));
         HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(rootView, R.id.calendarView)
                 .startDate(startDate.getTime())
                 .endDate(endDate.getTime())
@@ -259,7 +258,7 @@ public class SchedulesFragment extends Fragment {
                 return true;
             }
         });
-
+        getScheduleDateData(Utils.getApplyiedDateType(df.format(dt), "MM/dd/yyyy HH:mm:ss", "yyyy-MM-dd"));
         return rootView;
     }
 
@@ -325,8 +324,9 @@ public class SchedulesFragment extends Fragment {
         LocationsData ld = new LocationsData();
         ld.setLocation_id(null);
         ld.setLocation_name("Choose Location");
-        mLocationDataResponsesList.add(0, ld);
+
         mLocationDataResponsesList = ActiveLifeApplication.getInstance().setUpDb().getLocations();
+        mLocationDataResponsesList.add(0, ld);
         mLocationSpinner.setAdapter(new LocationsListAdapter(getActivity(), mLocationDataResponsesList));
         mLocationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -342,6 +342,7 @@ public class SchedulesFragment extends Fragment {
         List<LocationData> date = ActiveLifeApplication.getInstance().setUpDb().getLocation();
         if (date != null && date.size() > 0) {
             mLocationSpinner.setSelection(date.get(0).getPostion());
+            mLocationId=date.get(0).getLocation_id();
         }
     }
 
@@ -356,6 +357,7 @@ public class SchedulesFragment extends Fragment {
 
                     if (response.isSuccessful()) {
                         ActiveLifeApplication.getInstance().setUpDb().deleteScheduleDate();
+                        data=new ArrayList<ScheduleDateData>();
                         for (int i = 0; i < response.body().size(); i++) {
                             String startTime = response.body().get(i).getStartTime();
                             String endTime = response.body().get(i).getEndTime();
@@ -394,7 +396,7 @@ public class SchedulesFragment extends Fragment {
 
                         }
                         ActiveLifeApplication.getInstance().setUpDb().insertSchedulesDateList(data);
-                        if ((mLocationId == null || mLocationId.length() == 0) &&(mScheduleId == null || mScheduleId.length() == 0) && (mClassId == null || mClassId.length() == 0) && (mInstructorId == null || mInstructorId.length() == 0) && startTime == 000000 && endTime == 240000) {
+                        if ((mLocationId == null || mLocationId.length() == 0) &&(mScheduleId == null || mScheduleId.length() == 0) && (mClassId == null || mClassId.length() == 0) && (mInstructorId == null || mInstructorId.length() == 0) && startTime == 040000 && endTime == 230000) {
                             mSchedulesList.setAdapter(new SchedulesDateListAdapter(getActivity(), response.body()));
                         } else {
                             data = ActiveLifeApplication.getInstance().setUpDb().getScheduleDateOfId(mLocationId,mScheduleId, mClassId, mInstructorId, startTime, endTime);

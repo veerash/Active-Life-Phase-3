@@ -293,6 +293,7 @@ public class MemberDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mLocationSpinner.setSelection(0);
+                mLocationId=null;
                 mMessagesDataResponseList = ActiveLifeApplication.getInstance().setUpDb().getMessages();
                 if (mMessagesDataResponseList != null && mMessagesDataResponseList.size() > 0) {
                     messagesList.setVisibility(View.VISIBLE);
@@ -404,8 +405,9 @@ public class MemberDetailsFragment extends Fragment {
         mLocationDataResponsesList = new ArrayList<>();
         LocationsData ld = new LocationsData();
         ld.setLocation_id(null);
-        ld.setLocation_name("Choose Location");
+
         mLocationDataResponsesList.add(0, ld);
+        ld.setLocation_name("Choose Location");
         mLocationDataResponsesList = ActiveLifeApplication.getInstance().setUpDb().getLocations();
         mLocationSpinner.setAdapter(new LocationsListAdapter(getActivity(), mLocationDataResponsesList));
         mLocationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -422,6 +424,7 @@ public class MemberDetailsFragment extends Fragment {
         List<LocationData> date = ActiveLifeApplication.getInstance().setUpDb().getLocation();
         if (date != null && date.size() > 0) {
             mLocationSpinner.setSelection(date.get(0).getPostion());
+            mLocationId=date.get(0).getLocation_id();
         }
     }
 
