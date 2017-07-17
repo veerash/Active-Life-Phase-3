@@ -84,7 +84,7 @@ public class SchedulesDateListAdapter extends BaseAdapter {
         long duration = endDate.getTime() - startDate.getTime();
 
         long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
-        holder.tvMins.setText("" + diffInMinutes + "Mins");
+        holder.tvMins.setText("" + diffInMinutes + " Mins");
         holder.tvEvent.setText("" + mMessagesDataResponseList.get(position).getGetClass().getName());
         holder.tvName.setText("" + mMessagesDataResponseList.get(position).getInstructor().getName());
         holder.reserveButton.setOnClickListener(new View.OnClickListener() {
