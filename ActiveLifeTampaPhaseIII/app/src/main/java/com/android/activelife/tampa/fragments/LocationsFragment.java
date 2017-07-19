@@ -4,6 +4,9 @@ package com.android.activelife.tampa.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.android.activelife.tampa.R;
+import com.android.activelife.tampa.adpater.LocationSelectAdapter;
 import com.android.activelife.tampa.adpater.SelectBranchListAdapter;
 import com.android.activelife.tampa.appcontroller.ActiveLifeApplication;
 import com.android.activelife.tampa.services.request.ApiRequest;
@@ -38,7 +42,7 @@ public class LocationsFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private ListView mSelectBranchListView;
+    private RecyclerView mSelectBranchListView;
     private ApiRequest mApiInterface;
     private List<LocationDataResponse> mLocationDataResponsesList;
     // TODO: Rename and change types of parameters
@@ -82,7 +86,12 @@ public class LocationsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_locations, container, false);
-        mSelectBranchListView = (ListView) view.findViewById(R.id.select_branch_list);
+        mSelectBranchListView = (RecyclerView) view.findViewById(R.id.select_branch_list);
+        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+        mSelectBranchListView.setLayoutManager(manager);
+        DividerItemDecoration item = new DividerItemDecoration(getActivity(), manager.getOrientation());
+        item.setDrawable(getResources().getDrawable(R.drawable.divider_select_branch));
+        mSelectBranchListView.addItemDecoration(item);
         getAllLocationsData();
         return view;
     }
@@ -98,46 +107,7 @@ public class LocationsFragment extends Fragment {
                     ((MainActivity) getActivity()).hideProgressDialog(getActivity());
                     if (response.isSuccessful()) {
                         mLocationDataResponsesList = response.body();
-                        mSelectBranchListView.setAdapter(new SelectBranchListAdapter(getActivity(), mLocationDataResponsesList));
-                        mSelectBranchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-                                mainIntent.putExtra("title", mLocationDataResponsesList.get(i).getName());
-                                ActiveLifeApplication.getInstance().setUpDb().deleteHours();
-                                for (int j = 0; j < mLocationDataResponsesList.get(i).getHours().size(); j++) {
-                                    Hour object = mLocationDataResponsesList.get(i).getHours().get(j);
-                                    String name = object.getName();
-                                    Times times = object.getTimes();
-                                    String monStartTime = times.get1().get(0).getStartTime();
-                                    String monEndTime = times.get1().get(0).getEndTime();
-                                    String tueStartTime = times.get2().get(0).getStartTime();
-                                    String tueEndTime = times.get2().get(0).getEndTime();
-                                    String wedStartTime = times.get3().get(0).getStartTime();
-                                    String wedEndTime = times.get3().get(0).getEndTime();
-                                    String thuStartTime = times.get4().get(0).getStartTime();
-                                    String thuEndTime = times.get4().get(0).getEndTime();
-                                    String friStartTime = times.get5().get(0).getStartTime();
-                                    String friEndTime = times.get5().get(0).getEndTime();
-                                    String satStartTime = times.get6().get(0).getStartTime();
-                                    String satEndTime = times.get6().get(0).getEndTime();
-                                    String sunStartTime = times.get7().get(0).getStartTime();
-                                    String sunEndTime = times.get7().get(0).getEndTime();
-                                    ActiveLifeApplication.getInstance().setUpDb().insertHoursDao(name, monStartTime, monEndTime, tueStartTime, tueEndTime, wedStartTime, wedEndTime, thuStartTime, thuEndTime, friStartTime, friEndTime, satStartTime, satEndTime, sunStartTime, sunEndTime);
-                                }
-                                startActivity(mainIntent);
-                                ActiveLifeApplication.getInstance().setUpDb().deleteDefaultLocations();
-                                ActiveLifeApplication.getInstance().setUpDb().insertDefaultLocation(i,""+mLocationDataResponsesList.get(i).getId(),mLocationDataResponsesList.get(i).getName(), mLocationDataResponsesList.get(i).getAddress(),mLocationDataResponsesList.get(i).getCity(),mLocationDataResponsesList.get(i).getState(),mLocationDataResponsesList.get(i).getZipCode(),mLocationDataResponsesList.get(i).getPhone(),mLocationDataResponsesList.get(i).getEmail(),mLocationDataResponsesList.get(i).getProgramLink(),mLocationDataResponsesList.get(i).getDonationLink());
-                                ActiveLifeApplication.getInstance().setUpDb().deleteLocation();
-                                ActiveLifeApplication.getInstance().setUpDb().insertLocation(i,"" + mLocationDataResponsesList.get(i).getId(), mLocationDataResponsesList.get(i).getName(), mLocationDataResponsesList.get(i).getAddress(), mLocationDataResponsesList.get(i).getCity(), mLocationDataResponsesList.get(i).getState(), mLocationDataResponsesList.get(i).getZipCode(), mLocationDataResponsesList.get(i).getPhone(), mLocationDataResponsesList.get(i).getEmail(), mLocationDataResponsesList.get(i).getProgramLink(), mLocationDataResponsesList.get(i).getDonationLink());
-                                Utilities.getSharedPrefernceData().storeIntValueIntoSharedPreference(getActivity().getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_ID, mLocationDataResponsesList.get(i).getId());
-                                Utilities.getSharedPrefernceData().storeValueIntoSharedPreference(getActivity().getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_NAME, mLocationDataResponsesList.get(i).getName());
-                                Utilities.getSharedPrefernceData().storeValueIntoSharedPreference(getActivity().getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_PROGRAM_LINK, mLocationDataResponsesList.get(i).getProgramLink());
-                                Utilities.getSharedPrefernceData().storeValueIntoSharedPreference(getActivity().getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_DONATE_LINK, mLocationDataResponsesList.get(i).getDonationLink());
-
-                                getActivity().finish();
-                            }
-                        });
+                        mSelectBranchListView.setAdapter(new LocationSelectAdapter(getActivity(), mLocationDataResponsesList));
                     } else {
                         if (response.errorBody() != null) {
                             try {

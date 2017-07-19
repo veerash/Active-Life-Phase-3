@@ -58,12 +58,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:layout_marginRight="@dimen/five_dip"
             android:button="@drawable/filter_messages"
             android:checked="false"
             android:paddingBottom="@dimen/five_sp"
             android:paddingLeft="@dimen/ten_sp"
-            android:paddingRight="@dimen/ten_sp"
+            android:paddingRight="@dimen/five_sp"
             android:paddingTop="@dimen/five_sp" />
 
         <LinearLayout
@@ -99,7 +98,7 @@
                 android:orientation="horizontal"
                 android:weightSum="1">
 
-                <Button
+                 <com.android.activelife.tampa.customviews.CachetProRegularButton
                     android:id="@+id/clear_filter"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -110,7 +109,7 @@
                     android:text="Clear Filter"
                     android:textColor="@android:color/white" />
 
-                <Button
+                 <com.android.activelife.tampa.customviews.CachetProRegularButton
                     android:id="@+id/btn_apply_filter"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

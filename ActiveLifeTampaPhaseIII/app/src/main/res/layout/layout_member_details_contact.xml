@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:gravity="center_horizontal"
+    android:gravity="left"
     android:orientation="vertical"
     android:padding="@dimen/activity_vertical_margin">
 
@@ -11,11 +11,11 @@
         android:id="@+id/member_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_vertical_margin"
-        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/ten_sp"
+        android:layout_marginRight="@dimen/ten_sp"
         android:gravity="center"
+        android:layout_gravity="center"
         android:textColor="@color/grey_text"
         android:textSize="@dimen/member_contact_name" />
 
@@ -23,13 +23,12 @@
         android:id="@+id/member_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_vertical_margin"
         android:drawableLeft="@drawable/member_details_contact_address"
         android:drawablePadding="10sp"
-        android:gravity="center|bottom"
         android:textColor="@color/grey_text"
         android:textSize="@dimen/member_contact" />
 
@@ -37,27 +36,27 @@
         android:id="@+id/member_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_vertical_margin"
         android:drawableLeft="@drawable/member_details_contact_phone"
         android:drawablePadding="10sp"
-        android:gravity="center"
+        android:autoLink="phone"
         android:textColor="@color/grey_text"
+        android:textColorLink="@color/grey_text"
         android:textSize="@dimen/member_contact" />
 
     <com.android.activelife.tampa.customviews.CachetProRegularTextView
         android:id="@+id/member_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_vertical_margin"
         android:drawableLeft="@drawable/member_details_contact_email"
         android:drawablePadding="10sp"
-        android:gravity="center"
+        android:autoLink="email"
         android:textColor="@color/grey_text"
+        android:textColorLink="@color/grey_text"
         android:textSize="@dimen/member_contact" />
 </LinearLayout>

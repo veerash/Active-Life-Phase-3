@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -248,12 +250,19 @@ public class MemberDetailsFragment extends Fragment {
             if (data.get(0).getLocation_phone() != null && data.get(0).getLocation_phone().length() > 0) {
                 ymcaPhone.setVisibility(View.VISIBLE);
                 ymcaPhone.setText(data.get(0).getLocation_phone());
+                Linkify.addLinks(ymcaPhone, Linkify.PHONE_NUMBERS);
+//                ymcaPhone.setAutoLinkMask(Linkify.PHONE_NUMBERS);
+//
+//                ymcaPhone.setLinksClickable(true);
+//
+//                ymcaPhone.setMovementMethod(LinkMovementMethod.getInstance());
             } else {
                 ymcaPhone.setVisibility(View.GONE);
             }
             if (data.get(0).getLocation_email() != null && data.get(0).getLocation_email().length() > 0) {
                 ymcaEmail.setVisibility(View.VISIBLE);
                 ymcaEmail.setText(data.get(0).getLocation_email());
+                Linkify.addLinks(ymcaEmail, Linkify.EMAIL_ADDRESSES);
             } else {
                 ymcaEmail.setVisibility(View.GONE);
             }

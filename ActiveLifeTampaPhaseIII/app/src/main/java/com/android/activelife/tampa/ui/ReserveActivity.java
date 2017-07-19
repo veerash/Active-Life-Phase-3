@@ -1,6 +1,9 @@
 package com.android.activelife.tampa.ui;
 
+import android.app.ActionBar;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +14,7 @@ import com.android.activelife.tampa.appcontroller.ActiveLifeApplication;
 import com.android.activelife.tampa.services.request.ApiRequest;
 import com.android.activelife.tampa.services.request.ReserveSchedule;
 import com.android.activelife.tampa.services.response.ReserveScheduleData;
+import com.android.activelife.tampa.util.TypefaceSpan;
 import com.android.activelife.tampa.util.Utilities;
 import com.android.activelife.tampa.util.Utils;
 import com.google.gson.Gson;
@@ -39,6 +43,11 @@ public class ReserveActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        SpannableString s = new SpannableString("Reserve");
+        s.setSpan(new TypefaceSpan(this, "Verdana.ttf"), 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+       setTitle(s);
         mNameEditText = (EditText) findViewById(R.id.et_name);
         mEmailEditText = (EditText) findViewById(R.id.et_email);
         mReserveButon = (Button) findViewById(R.id.btn_submit);

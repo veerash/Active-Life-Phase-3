@@ -137,27 +137,57 @@
                 android:paddingRight="@dimen/ten_dip"
                 android:paddingTop="@dimen/ten_dip" />
 
-            <org.florescu.android.rangeseekbar.RangeSeekBar
-                android:id="@+id/rangeSeekBar"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/ten_dip"
-                android:layout_weight="1"
-                rsb:absoluteMaxValue="24"
-                rsb:absoluteMinValue="0"
-                rsb:activateOnDefaultValues="true"
-                rsb:activeColor="@color/DeepSkyBlue"
-                rsb:barHeight="@dimen/ten_dip"
-                rsb:textAboveThumbsColor="@android:color/holo_blue_light"
-                rsb:thumbDisabled="@drawable/custom_range_slider_thumb"
-                rsb:thumbNormal="@drawable/custom_range_slider_thumb"
-                rsb:thumbPressed="@drawable/custom_range_slider_thumb"
-                rsb:thumbShadow="true"
-                rsb:thumbShadowBlur="1dp"
-                rsb:thumbShadowColor="@color/primary_material_light"
-                rsb:thumbShadowXOffset="1dp"
-                rsb:thumbShadowYOffset="2dp" />
+                android:gravity="center_vertical"
+                android:paddingTop="@dimen/ten_sp"
+                android:paddingBottom="@dimen/ten_sp"
+                android:orientation="horizontal">
 
+                <com.android.activelife.tampa.customviews.CachetProRegularTextView
+                    android:id="@+id/left_thumb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|left"
+                    android:layout_marginRight="@dimen/ten_sp"
+                    android:text="04:00 AM"
+                    android:textColor="@color/thick_green"
+                    android:textSize="@dimen/twelve_sp" />
+
+                <org.florescu.android.rangeseekbar.RangeSeekBar
+                    android:id="@+id/rangeSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    rsb:showLabels="false"
+                    rsb:absoluteMaxValue="24"
+                    rsb:absoluteMinValue="0"
+                    rsb:activateOnDefaultValues="true"
+                    rsb:activeColor="@color/DeepSkyBlue"
+                    rsb:barHeight="@dimen/ten_dip"
+                    rsb:textAboveThumbsColor="@android:color/white"
+                    rsb:thumbDisabled="@drawable/custom_range_slider_thumb"
+                    rsb:thumbNormal="@drawable/custom_range_slider_thumb"
+                    rsb:thumbPressed="@drawable/custom_range_slider_thumb"
+                    rsb:thumbShadow="true"
+                    rsb:thumbShadowBlur="1dp"
+                    rsb:thumbShadowColor="@color/primary_material_light"
+                    rsb:thumbShadowXOffset="1dp"
+                    rsb:thumbShadowYOffset="2dp"
+                    rsb:valuesAboveThumbs="false" />
+
+                <com.android.activelife.tampa.customviews.CachetProRegularTextView
+                    android:id="@+id/right_thumb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="@dimen/ten_sp"
+                    android:text="11:00 PM"
+                    android:textColor="@color/thick_green"
+                    android:textSize="@dimen/twelve_sp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -167,7 +197,7 @@
                 android:orientation="horizontal"
                 android:weightSum="1">
 
-                <Button
+                <com.android.activelife.tampa.customviews.CachetProRegularButton
                     android:id="@+id/clear_filter"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -178,7 +208,7 @@
                     android:text="Clear Filter"
                     android:textColor="@android:color/white" />
 
-                <Button
+                <com.android.activelife.tampa.customviews.CachetProRegularButton
                     android:id="@+id/btn_apply_filter"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -222,14 +252,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ListView
+            <!--<ListView-->
+            <!--android:id="@+id/schedules_list"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:divider="@android:color/transparent"-->
+            <!--android:dividerHeight="10dp"-->
+            <!--android:listSelector="@android:color/transparent"-->
+            <!--android:scrollbars="none"></ListView>-->
+            <android.support.v7.widget.RecyclerView
                 android:id="@+id/schedules_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:divider="@android:color/transparent"
-                android:dividerHeight="10dp"
-                android:listSelector="@android:color/transparent"
-                android:scrollbars="none"></ListView>
+                android:layout_marginBottom="@dimen/margin_top_bottom"
+                android:scrollbars="none" />
 
             <com.android.activelife.tampa.customviews.CachetProBoldTextView
                 android:id="@+id/no_messages"

@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +15,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,13 +23,11 @@ import com.android.activelife.tampa.R;
 import com.android.activelife.tampa.adpater.ClassesListAdapter;
 import com.android.activelife.tampa.adpater.InstructorsListAdapter;
 import com.android.activelife.tampa.adpater.LocationsListAdapter;
-import com.android.activelife.tampa.adpater.MessagesListAdapter;
-import com.android.activelife.tampa.adpater.SchedulesDateDbListAdapter;
-import com.android.activelife.tampa.adpater.SchedulesDateListAdapter;
+import com.android.activelife.tampa.adpater.ScheduesDataDBRecyclerAdapter;
+import com.android.activelife.tampa.adpater.ScheduesDataRecyclerAdapter;
 import com.android.activelife.tampa.adpater.SchedulesListAdapter;
 import com.android.activelife.tampa.appcontroller.ActiveLifeApplication;
 import com.android.activelife.tampa.db.ClassData;
-import com.android.activelife.tampa.db.DefaultLocationData;
 import com.android.activelife.tampa.db.InstructorData;
 import com.android.activelife.tampa.db.LocationData;
 import com.android.activelife.tampa.db.LocationsData;
@@ -36,7 +36,6 @@ import com.android.activelife.tampa.db.ScheduleDateData;
 import com.android.activelife.tampa.services.request.ApiRequest;
 import com.android.activelife.tampa.services.response.scheduledatedata.ScheduleDateDataResponse;
 import com.android.activelife.tampa.ui.MainActivity;
-import com.android.activelife.tampa.ui.ScheduleContainerActivity;
 import com.android.activelife.tampa.util.Utilities;
 import com.android.activelife.tampa.util.Utils;
 
@@ -75,7 +74,7 @@ public class SchedulesFragment extends Fragment {
     private LinearLayout mScheduleLayout;
     private CheckBox mFilterImageView;
     private Button mApplyButton, mClearFilterButton;
-    private ListView mSchedulesList;
+    private RecyclerView mSchedulesList;
     private ApiRequest mApiInterface;
     private List<ScheduleDateData> data;
     private List<LocationsData> mLocationDataResponsesList;
@@ -86,7 +85,7 @@ public class SchedulesFragment extends Fragment {
     private ArrayList<ClassData> mClassDatas;
     private long startTime=040000,endTime=230000;
     private RangeSeekBar mRangeSeekbar;
-    private TextView mNoMessages;
+    private TextView mNoMessages, mRightThumb, mLeftThumb;
 
     public SchedulesFragment() {
     }
@@ -117,6 +116,8 @@ public class SchedulesFragment extends Fragment {
         mNoMessages= (TextView) rootView.findViewById(R.id.no_messages);
         mRangeSeekbar = (RangeSeekBar) rootView.findViewById(R.id.rangeSeekBar);
         textView = (TextView) rootView.findViewById(R.id.section_label);
+        mRightThumb = (TextView) rootView.findViewById(R.id.right_thumb);
+        mLeftThumb = (TextView) rootView.findViewById(R.id.left_thumb);
         mFilterLayout = (ScrollView) rootView.findViewById(R.id.filter_schedules);
         mScheduleLayout = (LinearLayout) rootView.findViewById(R.id.main_schedules);
         mLocationSpinner = (Spinner) rootView.findViewById(R.id.location_spinner);
@@ -126,7 +127,12 @@ public class SchedulesFragment extends Fragment {
         mFilterImageView = (CheckBox) rootView.findViewById(R.id.img_schedule_filter);
         mApplyButton = (Button) rootView.findViewById(R.id.btn_apply_filter);
         mClearFilterButton= (Button) rootView.findViewById(R.id.clear_filter);
-        mSchedulesList = (ListView) rootView.findViewById(R.id.schedules_list);
+        mSchedulesList = (RecyclerView) rootView.findViewById(R.id.schedules_list);
+        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+        mSchedulesList.setLayoutManager(manager);
+        DividerItemDecoration item = new DividerItemDecoration(getActivity(), manager.getOrientation());
+        item.setDrawable(getResources().getDrawable(R.drawable.divider));
+        mSchedulesList.addItemDecoration(item);
         textView = (TextView) rootView.findViewById(R.id.section_label);
         mScheduleDatas.addAll(ActiveLifeApplication.getInstance().setUpDb().getSchedules());
         mClassDatas.addAll(ActiveLifeApplication.getInstance().setUpDb().getClasses());
@@ -149,7 +155,7 @@ public class SchedulesFragment extends Fragment {
                 if(data!=null&&data.size()>0){
                     mSchedulesList.setVisibility(View.VISIBLE);
                     mNoMessages.setVisibility(View.GONE);
-                    mSchedulesList.setAdapter(new SchedulesDateDbListAdapter(getActivity(),data));
+                    mSchedulesList.setAdapter(new ScheduesDataDBRecyclerAdapter(getActivity(),data));
                 }else{
                     mSchedulesList.setVisibility(View.GONE);
                     mNoMessages.setVisibility(View.VISIBLE);
@@ -173,9 +179,41 @@ public class SchedulesFragment extends Fragment {
         mRangeSeekbar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener() {
             @Override
             public void onRangeSeekBarValuesChanged(RangeSeekBar bar, Object minValue, Object maxValue) {
+                int minValues=Integer.parseInt(minValue.toString());
+                int maxValues=Integer.parseInt(maxValue.toString());
                 startTime = Long.parseLong(minValue.toString() + "0000");
                 endTime = Long.parseLong(maxValue.toString() + "0000");
 
+                if(minValues<12){
+                    if(minValues<10){
+                        mLeftThumb.setText("0"+minValues + ":00 AM");
+                    }else {
+                        mLeftThumb.setText(minValues + ":00 AM");
+                    }
+                }else{
+                    int localValue=(minValues-12);
+                    if(localValue<10){
+                        mLeftThumb.setText("0"+localValue + ":00 PM");
+                    }else {
+                        mLeftThumb.setText(localValue + ":00 PM");
+                    }
+                }
+                if(maxValues<12){
+                    if(maxValues<10){
+                        mRightThumb.setText("0"+maxValues + ":00 AM");
+                    }else {
+                        mRightThumb.setText(maxValues+":00 AM");
+                    }
+
+                }else{
+                    int localValue=(maxValues-12);
+                    if(localValue<10){
+                        mRightThumb.setText("0"+localValue + ":00 PM");
+                    }else {
+                        mRightThumb.setText((maxValues-12)+":00 PM");
+                    }
+
+                }
 
             }
         });
@@ -193,7 +231,7 @@ public class SchedulesFragment extends Fragment {
                     if(data!=null&&data.size()>0){
                         mSchedulesList.setVisibility(View.VISIBLE);
                         mNoMessages.setVisibility(View.GONE);
-                        mSchedulesList.setAdapter(new SchedulesDateDbListAdapter(getActivity(),data));
+                        mSchedulesList.setAdapter(new ScheduesDataDBRecyclerAdapter(getActivity(),data));
                     }else{
                         mSchedulesList.setVisibility(View.GONE);
                         mNoMessages.setVisibility(View.VISIBLE);
@@ -210,15 +248,6 @@ public class SchedulesFragment extends Fragment {
         setScheduleSpinnerData();
         setClassSpinnerData();
         setInstructorSpinnerData();
-        mSchedulesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent scheduleDetailIntent = new Intent(getActivity(), ScheduleContainerActivity.class);
-                scheduleDetailIntent.putExtra("schedule_id", data.get(position).getSchedule_id());
-                scheduleDetailIntent.putExtra("schedule_name", data.get(position).getSchedule_name());
-                startActivity(scheduleDetailIntent);
-            }
-        });
         /** end after 1 month from now */
         Calendar endDate = Calendar.getInstance();
         endDate.add(Calendar.MONTH, 1);
@@ -397,7 +426,7 @@ public class SchedulesFragment extends Fragment {
                         }
                         ActiveLifeApplication.getInstance().setUpDb().insertSchedulesDateList(data);
                         if ((mLocationId == null || mLocationId.length() == 0) &&(mScheduleId == null || mScheduleId.length() == 0) && (mClassId == null || mClassId.length() == 0) && (mInstructorId == null || mInstructorId.length() == 0) && startTime == 040000 && endTime == 230000) {
-                            mSchedulesList.setAdapter(new SchedulesDateListAdapter(getActivity(), response.body()));
+                            mSchedulesList.setAdapter(new ScheduesDataRecyclerAdapter(getActivity(), response.body()));
                         } else {
                             data = ActiveLifeApplication.getInstance().setUpDb().getScheduleDateOfId(mLocationId,mScheduleId, mClassId, mInstructorId, startTime, endTime);
                             if (data == null)
@@ -405,7 +434,7 @@ public class SchedulesFragment extends Fragment {
                             if(data!=null&&data.size()>0){
                                 mSchedulesList.setVisibility(View.VISIBLE);
                                 mNoMessages.setVisibility(View.GONE);
-                                mSchedulesList.setAdapter(new SchedulesDateDbListAdapter(getActivity(),data));
+                                mSchedulesList.setAdapter(new ScheduesDataDBRecyclerAdapter(getActivity(),data));
                             }else{
                                 mSchedulesList.setVisibility(View.GONE);
                                 mNoMessages.setVisibility(View.VISIBLE);

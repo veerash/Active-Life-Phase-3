@@ -2,6 +2,9 @@ package com.android.activelife.tampa.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +33,7 @@ public class MemberFragment extends Fragment {
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
-    private ListView mMembersListView;
+    private RecyclerView mMembersListView;
     private String mParam1;
     private String mParam2;
     private static final String ARG_PARAM1 = "param1";
@@ -77,10 +80,15 @@ public class MemberFragment extends Fragment {
         closeDetails = (ImageView) view.findViewById(R.id.close_add_member);
         mNoMessages = (TextView) view.findViewById(R.id.no_messages);
         mListLayout = (RelativeLayout) view.findViewById(R.id.list_layout);
-        mMembersListView = (ListView) view.findViewById(R.id.members_list);
+        mMembersListView = (RecyclerView) view.findViewById(R.id.members_list);
         addButton = (Button) cardView.findViewById(R.id.add_member);
         memberEditId = (TextView) cardView.findViewById(R.id.member_id_edit_text);
         memberEditName = (TextView) cardView.findViewById(R.id.member_name_edit_text);
+        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+        mMembersListView.setLayoutManager(manager);
+        DividerItemDecoration item = new DividerItemDecoration(getActivity(), manager.getOrientation());
+        item.setDrawable(getResources().getDrawable(R.drawable.divider_members));
+        mMembersListView.addItemDecoration(item);
         addDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

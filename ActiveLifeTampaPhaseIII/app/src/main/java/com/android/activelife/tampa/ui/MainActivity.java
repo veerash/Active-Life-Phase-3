@@ -1,5 +1,6 @@
 package com.android.activelife.tampa.ui;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -9,6 +10,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
 
 import com.android.activelife.tampa.R;
 import com.android.activelife.tampa.fragments.LocationsFragment;
@@ -16,6 +19,7 @@ import com.android.activelife.tampa.fragments.MemberDetailsFragment;
 import com.android.activelife.tampa.fragments.MemberFragment;
 import com.android.activelife.tampa.fragments.MemberSettingsFragment;
 import com.android.activelife.tampa.fragments.SchedulesFragment;
+import com.android.activelife.tampa.util.TypefaceSpan;
 import com.android.activelife.tampa.util.Utilities;
 
 public class MainActivity extends BaseActivity {
@@ -52,7 +56,12 @@ public class MainActivity extends BaseActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("" + Utilities.getSharedPrefernceData().retreiveValueFromSharedPreference(getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_NAME));
+        SpannableString s = new SpannableString("" + Utilities.getSharedPrefernceData().retreiveValueFromSharedPreference(getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_NAME));
+        s.setSpan(new TypefaceSpan(this, "Verdana.ttf"), 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        setTitle(s);
+//        setTitle("" + Utilities.getSharedPrefernceData().retreiveValueFromSharedPreference(getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_NAME));
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         jSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());

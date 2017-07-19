@@ -3,6 +3,7 @@ package com.android.activelife.tampa.adpater;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -31,7 +32,7 @@ import java.util.List;
  * Created by vsatrasala on 2/11/2017.
  */
 
-public class MembersListAdapter extends BaseAdapter {
+public class MembersListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public Context jContext;
     private List<MemberData> instructorDataResponse;
@@ -44,53 +45,40 @@ public class MembersListAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
+    public int getItemCount() {
         return instructorDataResponse.size();
     }
 
-    @Override
-    public Object getItem(int i) {
-        return null;
-    }
 
     @Override
     public long getItemId(int i) {
         return 0;
     }
+    // Replace the contents of a view (invoked by the layout manager)
+// Replace the contents of a view (invoked by the layout manager)
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                      int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_row_members, parent, false);
+        // set the view's size, margins, paddings and layout parameters
+        ViewHolder vh = new ViewHolder(v);
+
+        return vh;
+//        }
+    }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        final ViewHolder holder;
-
-        if (convertView == null) {
-            holder = new ViewHolder();
-            convertView = LayoutInflater.from(jContext).inflate(R.layout.list_row_members, parent, false);
-            holder.memberId = (TextView) convertView.findViewById(R.id.id);
-            holder.memberName = (TextView) convertView.findViewById(R.id.member_name);
-            holder.memmberBarCodeId = (TextView) convertView.findViewById(R.id.member_id);
-            holder.memberDetailsLayout = (LinearLayout) convertView.findViewById(R.id.membership_details);
-            holder.cardDetailsLayout = (LinearLayout) convertView.findViewById(R.id.card_details_layout);
-            holder.barCodeImage = (ImageView) convertView.findViewById(R.id.bar_code_image);
-            holder.closeCradLayout= (ImageView) convertView.findViewById(R.id.back_button);
-            holder.updateDetails = (ImageView) convertView.findViewById(R.id.edit_member);
-            holder.cardView = convertView.findViewById(R.id.add_edit_member_layout);
-            holder.addButton = (Button) holder.cardView.findViewById(R.id.add_member);
-            holder.memberEditId = (TextView) holder.cardView.findViewById(R.id.member_id_edit_text);
-            holder.memberEditName = (TextView) holder.cardView.findViewById(R.id.member_name_edit_text);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
-        holder.memberId.setText("" + instructorDataResponse.get(position).getMember_name());
-        holder.memberName.setText("" + instructorDataResponse.get(position).getMember_name());
-        holder.memberEditId.setText("" + instructorDataResponse.get(position).getMember_id());
-        holder.memberEditName.setText("" + instructorDataResponse.get(position).getMember_name());
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+        ((ViewHolder) holder).memberId.setText("" + instructorDataResponse.get(position).getMember_name());
+        ((ViewHolder) holder).memberName.setText("" + instructorDataResponse.get(position).getMember_name());
+        ((ViewHolder) holder).memberEditId.setText("" + instructorDataResponse.get(position).getMember_id());
+        ((ViewHolder) holder).memberEditName.setText("" + instructorDataResponse.get(position).getMember_name());
         String barCode = instructorDataResponse.get(position).getMember_id();
         String astrticksBarcode = "*" + barCode + "*";
         Typeface typeface = Typeface.createFromAsset(jContext.getAssets(),
                 "fonts/IDAutomationHC39M_FREE.otf");
-        holder.memmberBarCodeId.setTypeface(typeface);
-        holder.memmberBarCodeId.setText(astrticksBarcode);
+        ((ViewHolder) holder).memmberBarCodeId.setTypeface(typeface);
+        ((ViewHolder) holder).memmberBarCodeId.setText(astrticksBarcode);
         String sizeofQRCode = "300x300";
         String url = "https://chart.googleapis.com/chart?chs=" + sizeofQRCode
                 + "&cht=qr&chl=" + URLEncoder.encode(barCode);
@@ -100,7 +88,7 @@ public class MembersListAdapter extends BaseAdapter {
                     .showStubImage(R.drawable.chart).cacheOnDisc()
                     .build();
             ImageLoader imageLoader = ImageLoader.getInstance();
-            imageLoader.displayImage(url, holder.barCodeImage, options, new ImageLoadingListener() {
+            imageLoader.displayImage(url, ((ViewHolder) holder).barCodeImage, options, new ImageLoadingListener() {
                 @Override
                 public void onLoadingStarted(String imageUri, View view) {
 
@@ -122,7 +110,7 @@ public class MembersListAdapter extends BaseAdapter {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        holder.updateDetails
+        ((ViewHolder) holder).updateDetails
                 .setOnClickListener(new View.OnClickListener() {
 
                     @Override
@@ -140,12 +128,12 @@ public class MembersListAdapter extends BaseAdapter {
                         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                             public boolean onMenuItemClick(MenuItem item) {
                                 if (item.getTitle().equals("Edit")) {
-                                    holder.memberDetailsLayout.setVisibility(View.GONE);
-                                    holder.memberId.setVisibility(View.GONE);
-                                    holder.cardDetailsLayout.setVisibility(View.VISIBLE);
-                                    holder.addButton.setText("Update");
+                                    ((ViewHolder) holder).memberDetailsLayout.setVisibility(View.GONE);
+                                    ((ViewHolder) holder).memberId.setVisibility(View.GONE);
+                                    ((ViewHolder) holder).cardDetailsLayout.setVisibility(View.VISIBLE);
+                                    ((ViewHolder) holder).addButton.setText("Update");
                                 } else {
-                                    holder.addButton.setText("Add");
+                                    ((ViewHolder) holder).addButton.setText("Add");
                                     ActiveLifeApplication.getInstance().setUpDb().deleteMemberDataById(instructorDataResponse.get(position).getMember_id());
                                     popup.dismiss();
                                     fragment.setMembersData();
@@ -157,58 +145,68 @@ public class MembersListAdapter extends BaseAdapter {
                         popup.show();
                     }
                 });
-        holder.memberId.setOnClickListener(new View.OnClickListener() {
+        ((ViewHolder) holder).memberId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.memberDetailsLayout.setVisibility(View.VISIBLE);
-                holder.memberId.setVisibility(View.GONE);
-                holder.cardDetailsLayout.setVisibility(View.GONE);
+                ((ViewHolder) holder).memberDetailsLayout.setVisibility(View.VISIBLE);
+                ((ViewHolder) holder).memberId.setVisibility(View.GONE);
+                ((ViewHolder) holder).cardDetailsLayout.setVisibility(View.GONE);
             }
         });
-        holder.memberDetailsLayout.setOnClickListener(new View.OnClickListener() {
+        ((ViewHolder) holder).memberDetailsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.memberDetailsLayout.setVisibility(View.GONE);
-                holder.memberId.setVisibility(View.VISIBLE);
-                holder.cardDetailsLayout.setVisibility(View.GONE);
+                ((ViewHolder) holder).memberDetailsLayout.setVisibility(View.GONE);
+                ((ViewHolder) holder).memberId.setVisibility(View.VISIBLE);
+                ((ViewHolder) holder).cardDetailsLayout.setVisibility(View.GONE);
             }
         });
-        holder.closeCradLayout.setOnClickListener(new View.OnClickListener() {
+        ((ViewHolder) holder).closeCradLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.memberDetailsLayout.setVisibility(View.VISIBLE);
-                holder.memberId.setVisibility(View.GONE);
-                holder.cardDetailsLayout.setVisibility(View.GONE);
+                ((ViewHolder) holder).memberDetailsLayout.setVisibility(View.VISIBLE);
+                ((ViewHolder) holder).memberId.setVisibility(View.GONE);
+                ((ViewHolder) holder).cardDetailsLayout.setVisibility(View.GONE);
             }
         });
 
-        holder.addButton.setOnClickListener(new View.OnClickListener() {
+        ((ViewHolder) holder).addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(holder.memberEditId.getText()==null||holder.memberEditId.getText().length()==0){
-                    holder.memberEditId.setError("Please enter id");
-                }else if(holder.memberEditName.getText()==null||holder.memberEditName.getText().length()==0){
-                    holder.memberEditName.setError("Please enter name");
+                if(((ViewHolder) holder).memberEditId.getText()==null||((ViewHolder) holder).memberEditId.getText().length()==0){
+                    ((ViewHolder) holder).memberEditId.setError("Please enter id");
+                }else if(((ViewHolder) holder).memberEditName.getText()==null||((ViewHolder) holder).memberEditName.getText().length()==0){
+                    ((ViewHolder) holder).memberEditName.setError("Please enter name");
                 }else {
-                    holder.memberEditId.setError(null);
-                    holder.memberEditName.setError(null);
-                    ActiveLifeApplication.getInstance().setUpDb().insertOrReplaceMember(holder.memberEditId.getText().toString(), holder.memberEditName.getText().toString());
+                    ((ViewHolder) holder).memberEditId.setError(null);
+                    ((ViewHolder) holder).memberEditName.setError(null);
+                    ActiveLifeApplication.getInstance().setUpDb().insertOrReplaceMember(((ViewHolder) holder).memberEditId.getText().toString(), ((ViewHolder) holder).memberEditName.getText().toString());
                     fragment.setMembersData();
                 }
             }
         });
-
-        return convertView;
     }
-
-
-    class ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView memberName, memberEditName, memberId, memberEditId, memmberBarCodeId;
         LinearLayout memberDetailsLayout, cardDetailsLayout;
         ImageView updateDetails, barCodeImage, closeCradLayout;
         Button addButton;
         View cardView;
-
+        public ViewHolder(View convertView) {
+            super(convertView);
+            memberId = (TextView) convertView.findViewById(R.id.id);
+            memberName = (TextView) convertView.findViewById(R.id.member_name);
+            memmberBarCodeId = (TextView) convertView.findViewById(R.id.member_id);
+            memberDetailsLayout = (LinearLayout) convertView.findViewById(R.id.membership_details);
+            cardDetailsLayout = (LinearLayout) convertView.findViewById(R.id.card_details_layout);
+            barCodeImage = (ImageView) convertView.findViewById(R.id.bar_code_image);
+            closeCradLayout= (ImageView) convertView.findViewById(R.id.back_button);
+            updateDetails = (ImageView) convertView.findViewById(R.id.edit_member);
+            cardView = convertView.findViewById(R.id.add_edit_member_layout);
+            addButton = (Button) cardView.findViewById(R.id.add_member);
+            memberEditId = (TextView) cardView.findViewById(R.id.member_id_edit_text);
+            memberEditName = (TextView) cardView.findViewById(R.id.member_name_edit_text);
+        }
     }
 
 }

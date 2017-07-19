@@ -1,6 +1,9 @@
 package com.android.activelife.tampa.ui;
 
+import android.app.ActionBar;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -8,6 +11,7 @@ import android.widget.TextView;
 import com.android.activelife.tampa.R;
 import com.android.activelife.tampa.appcontroller.ActiveLifeApplication;
 import com.android.activelife.tampa.db.ScheduleDateData;
+import com.android.activelife.tampa.util.TypefaceSpan;
 import com.android.activelife.tampa.util.Utils;
 
 import java.text.DateFormat;
@@ -36,7 +40,12 @@ public class ScheduleContainerActivity extends BaseActivity {
         tvEvent = (TextView) findViewById(R.id.tv_event);
         tvDesc = (TextView) findViewById(R.id.tv_desc);
         mScheduleId = getIntent().getIntExtra("schedule_id", 0);
-        setTitle(getIntent().getStringExtra("schedule_name"));
+        SpannableString s = new SpannableString(getIntent().getStringExtra("schedule_name"));
+        s.setSpan(new TypefaceSpan(this, "Verdana.ttf"), 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        setTitle(s);
+//        setTitle(getIntent().getStringExtra("schedule_name"));
         final ScheduleDateData dateData = ActiveLifeApplication.getInstance().setUpDb().getScheduleDateOfId("" + mScheduleId);
         tvEvent.setText("" + dateData.getClass_name());
         tvYmca.setText("" + dateData.getLocation_name());

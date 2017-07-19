@@ -67,7 +67,7 @@
             android:textColor="@android:color/black"
             android:textSize="@dimen/sixteen_sp" />
 
-        <Button
+        <com.android.activelife.tampa.customviews.CachetProRegularButton
             android:id="@+id/btn_submit"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

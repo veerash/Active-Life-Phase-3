@@ -2,6 +2,8 @@ package com.android.activelife.tampa.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -14,6 +16,7 @@ import com.android.activelife.tampa.services.request.ApiRequest;
 import com.android.activelife.tampa.services.response.LocationData.Hour;
 import com.android.activelife.tampa.services.response.LocationData.LocationDataResponse;
 import com.android.activelife.tampa.services.response.LocationData.Times;
+import com.android.activelife.tampa.util.TypefaceSpan;
 import com.android.activelife.tampa.util.Utilities;
 
 import org.json.JSONObject;
@@ -37,6 +40,10 @@ public class SelectBranchActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_branch);
         mSelectBranchListView = (ListView) findViewById(R.id.select_branch_list);
+        SpannableString s = new SpannableString("Find Your Y");
+        s.setSpan(new TypefaceSpan(this, "Verdana.ttf"), 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        setTitle(s);
         getAllLocationsData();
 
     }
@@ -52,19 +59,19 @@ public class SelectBranchActivity extends BaseActivity {
                     hideProgressDialog(SelectBranchActivity.this);
                     if (response.isSuccessful()) {
                         mLocationDataResponsesList = response.body();
-                        ArrayList<LocationsData> datas=new ArrayList<LocationsData>();
+                        ArrayList<LocationsData> datas = new ArrayList<LocationsData>();
                         for (int k = 0; k < mLocationDataResponsesList.size(); k++) {
-                            LocationsData ld=new LocationsData();
-                            ld.setLocation_id(""+mLocationDataResponsesList.get(k).getId());
-                            ld.setLocation_address(""+mLocationDataResponsesList.get(k).getAddress());
-                            ld.setLocation_city(""+mLocationDataResponsesList.get(k).getCity());
-                            ld.setLocation_donate_link(""+mLocationDataResponsesList.get(k).getDonationLink());
-                            ld.setLocation_email(""+mLocationDataResponsesList.get(k).getEmail());
-                            ld.setLocation_name(""+mLocationDataResponsesList.get(k).getName());
-                            ld.setLocation_phone(""+mLocationDataResponsesList.get(k).getPhone());
-                            ld.setLocation_program_link(""+mLocationDataResponsesList.get(k).getProgramLink());
-                            ld.setLocation_state(""+mLocationDataResponsesList.get(k).getState());
-                            ld.setLocation_zip(""+mLocationDataResponsesList.get(k).getZipCode());
+                            LocationsData ld = new LocationsData();
+                            ld.setLocation_id("" + mLocationDataResponsesList.get(k).getId());
+                            ld.setLocation_address("" + mLocationDataResponsesList.get(k).getAddress());
+                            ld.setLocation_city("" + mLocationDataResponsesList.get(k).getCity());
+                            ld.setLocation_donate_link("" + mLocationDataResponsesList.get(k).getDonationLink());
+                            ld.setLocation_email("" + mLocationDataResponsesList.get(k).getEmail());
+                            ld.setLocation_name("" + mLocationDataResponsesList.get(k).getName());
+                            ld.setLocation_phone("" + mLocationDataResponsesList.get(k).getPhone());
+                            ld.setLocation_program_link("" + mLocationDataResponsesList.get(k).getProgramLink());
+                            ld.setLocation_state("" + mLocationDataResponsesList.get(k).getState());
+                            ld.setLocation_zip("" + mLocationDataResponsesList.get(k).getZipCode());
                             datas.add(ld);
 
                         }
@@ -100,9 +107,9 @@ public class SelectBranchActivity extends BaseActivity {
 
                                 startActivity(mainIntent);
                                 ActiveLifeApplication.getInstance().setUpDb().deleteDefaultLocations();
-                                ActiveLifeApplication.getInstance().setUpDb().insertDefaultLocation(i,""+mLocationDataResponsesList.get(i).getId(),mLocationDataResponsesList.get(i).getName(), mLocationDataResponsesList.get(i).getAddress(),mLocationDataResponsesList.get(i).getCity(),mLocationDataResponsesList.get(i).getState(),mLocationDataResponsesList.get(i).getZipCode(),mLocationDataResponsesList.get(i).getPhone(),mLocationDataResponsesList.get(i).getEmail(),mLocationDataResponsesList.get(i).getProgramLink(),mLocationDataResponsesList.get(i).getDonationLink());
+                                ActiveLifeApplication.getInstance().setUpDb().insertDefaultLocation(i, "" + mLocationDataResponsesList.get(i).getId(), mLocationDataResponsesList.get(i).getName(), mLocationDataResponsesList.get(i).getAddress(), mLocationDataResponsesList.get(i).getCity(), mLocationDataResponsesList.get(i).getState(), mLocationDataResponsesList.get(i).getZipCode(), mLocationDataResponsesList.get(i).getPhone(), mLocationDataResponsesList.get(i).getEmail(), mLocationDataResponsesList.get(i).getProgramLink(), mLocationDataResponsesList.get(i).getDonationLink());
                                 ActiveLifeApplication.getInstance().setUpDb().deleteLocation();
-                                ActiveLifeApplication.getInstance().setUpDb().insertLocation(i,""+mLocationDataResponsesList.get(i).getId(),mLocationDataResponsesList.get(i).getName(), mLocationDataResponsesList.get(i).getAddress(),mLocationDataResponsesList.get(i).getCity(),mLocationDataResponsesList.get(i).getState(),mLocationDataResponsesList.get(i).getZipCode(),mLocationDataResponsesList.get(i).getPhone(),mLocationDataResponsesList.get(i).getEmail(),mLocationDataResponsesList.get(i).getProgramLink(),mLocationDataResponsesList.get(i).getDonationLink());
+                                ActiveLifeApplication.getInstance().setUpDb().insertLocation(i, "" + mLocationDataResponsesList.get(i).getId(), mLocationDataResponsesList.get(i).getName(), mLocationDataResponsesList.get(i).getAddress(), mLocationDataResponsesList.get(i).getCity(), mLocationDataResponsesList.get(i).getState(), mLocationDataResponsesList.get(i).getZipCode(), mLocationDataResponsesList.get(i).getPhone(), mLocationDataResponsesList.get(i).getEmail(), mLocationDataResponsesList.get(i).getProgramLink(), mLocationDataResponsesList.get(i).getDonationLink());
                                 Utilities.getSharedPrefernceData().storeValueIntoSharedPreference(getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_NAME, mLocationDataResponsesList.get(i).getName());
                                 Utilities.getSharedPrefernceData().storeIntValueIntoSharedPreference(getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_ID, mLocationDataResponsesList.get(i).getId());
                                 Utilities.getSharedPrefernceData().storeValueIntoSharedPreference(getApplicationContext(), Utilities.getSharedPrefernceData().APP_DEFAULT_LOCATION_PROGRAM_LINK, mLocationDataResponsesList.get(i).getProgramLink());
