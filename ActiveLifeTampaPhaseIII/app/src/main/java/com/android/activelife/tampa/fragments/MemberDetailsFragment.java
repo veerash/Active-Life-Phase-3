@@ -244,6 +244,7 @@ public class MemberDetailsFragment extends Fragment {
             if (address != null && address.length() > 0) {
                 ymcaAddress.setVisibility(View.VISIBLE);
                 ymcaAddress.setText(address);
+                Linkify.addLinks(ymcaAddress,Linkify.MAP_ADDRESSES);
             } else {
                 ymcaAddress.setVisibility(View.GONE);
             }

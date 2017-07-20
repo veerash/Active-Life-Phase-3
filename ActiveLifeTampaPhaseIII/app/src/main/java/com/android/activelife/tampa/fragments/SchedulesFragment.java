@@ -265,7 +265,7 @@ public class SchedulesFragment extends Fragment {
                 .dayNumberFormat("dd")
                 .textColor(Color.LTGRAY, Color.BLACK)
                 .selectedDateBackground(Color.TRANSPARENT)  // Background color of the selected date cell.
-                .selectorColor(Color.RED)   // Color of the selection indicator bar (default to colorAccent).
+                .selectorColor(Color.parseColor("#0a63ab"))   // Color of the selection indicator bar (default to colorAccent).
                 .build();
 
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
