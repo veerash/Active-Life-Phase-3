@@ -30,10 +30,12 @@ import java.util.concurrent.TimeUnit;
 public class ScheduesDataDBRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public Context jContext;
     private List<ScheduleDateData> mMessagesDataResponseList;
+    private String date;
 
-    public ScheduesDataDBRecyclerAdapter(Context ctx, List<ScheduleDateData> mMessagesDataResponseList) {
+    public ScheduesDataDBRecyclerAdapter(Context ctx, List<ScheduleDateData> mMessagesDataResponseList,String date) {
         this.jContext = ctx;
         this.mMessagesDataResponseList = mMessagesDataResponseList;
+        this.date=date;
     }
 
     @Override
@@ -83,7 +85,8 @@ public class ScheduesDataDBRecyclerAdapter extends RecyclerView.Adapter<Recycler
             @Override
             public void onClick(View v) {
                 Intent reserveIntent = new Intent(jContext, ReserveActivity.class);
-                reserveIntent.putExtra("session_id",mMessagesDataResponseList.get(position).getSchedule_id());
+                reserveIntent.putExtra("date",date);
+                reserveIntent.putExtra("session_id",""+mMessagesDataResponseList.get(position).getSchedule_id());
                 ((MainActivity)jContext).startActivityForResult(reserveIntent,1000);
             }
         });

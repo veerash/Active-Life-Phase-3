@@ -30,10 +30,12 @@ import java.util.concurrent.TimeUnit;
 public class ScheduesDataRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public Context jContext;
     private List<ScheduleDateDataResponse> mMessagesDataResponseList;
+    private String date;
 
-    public ScheduesDataRecyclerAdapter(Context ctx, List<ScheduleDateDataResponse> mMessagesDataResponseList) {
+    public ScheduesDataRecyclerAdapter(Context ctx, List<ScheduleDateDataResponse> mMessagesDataResponseList,String date) {
         this.jContext = ctx;
         this.mMessagesDataResponseList = mMessagesDataResponseList;
+        this.date=date;
     }
 
     @Override
@@ -83,7 +85,8 @@ public class ScheduesDataRecyclerAdapter extends RecyclerView.Adapter<RecyclerVi
             @Override
             public void onClick(View v) {
                 Intent reserveIntent = new Intent(jContext, ReserveActivity.class);
-                reserveIntent.putExtra("session_id",mMessagesDataResponseList.get(position).getId());
+                reserveIntent.putExtra("session_id",""+mMessagesDataResponseList.get(position).getId());
+                reserveIntent.putExtra("date",date);
                 ((MainActivity)jContext).startActivityForResult(reserveIntent,1000);
             }
         });
@@ -96,7 +99,7 @@ public class ScheduesDataRecyclerAdapter extends RecyclerView.Adapter<RecyclerVi
             @Override
             public void onClick(View v) {
                 Intent scheduleDetailIntent = new Intent(jContext, ScheduleContainerActivity.class);
-                scheduleDetailIntent.putExtra("schedule_id", mMessagesDataResponseList.get(position).getSchedule().getId());
+                scheduleDetailIntent.putExtra("schedule_id", mMessagesDataResponseList.get(position).getId());
                 scheduleDetailIntent.putExtra("schedule_name", mMessagesDataResponseList.get(position).getSchedule().getName());
                 jContext.startActivity(scheduleDetailIntent);
             }

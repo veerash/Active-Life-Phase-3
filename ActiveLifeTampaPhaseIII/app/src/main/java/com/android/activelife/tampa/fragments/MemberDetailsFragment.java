@@ -1,10 +1,15 @@
 package com.android.activelife.tampa.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.UnderlineSpan;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -219,7 +224,7 @@ public class MemberDetailsFragment extends Fragment {
         setLayoutParams(child);
     }
 
-
+    String address;
     public void setContactData(final Bundle savedInstanceState) {
         View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_contact, null);
         TextView ymcaName = (TextView) child.findViewById(R.id.member_name);
@@ -230,7 +235,7 @@ public class MemberDetailsFragment extends Fragment {
         if (data != null && data.size() > 0) {
             ymcaName.setVisibility(View.VISIBLE);
             ymcaName.setText("" + data.get(0).getLocation_name());
-            String address = data.get(0).getLocation_address();
+            address = data.get(0).getLocation_address();
             if (address != null && address.length() > 0) {
                 address = address + "\n " + data.get(0).getLocation_city() + " - " + data.get(0).getLocation_zip();
             } else {
@@ -243,8 +248,21 @@ public class MemberDetailsFragment extends Fragment {
             }
             if (address != null && address.length() > 0) {
                 ymcaAddress.setVisibility(View.VISIBLE);
-                ymcaAddress.setText(address);
-                Linkify.addLinks(ymcaAddress,Linkify.MAP_ADDRESSES);
+//                ymcaAddress.setText(address);
+//                Linkify.addLinks(ymcaAddress,Linkify.ALL);
+                SpannableString towedToAddress = new SpannableString(address);
+                towedToAddress.setSpan(new UnderlineSpan(), 0,towedToAddress.length(), 0);
+                towedToAddress.setSpan(new ForegroundColorSpan(Color.parseColor("#575759")), 0, towedToAddress.length(), 0);
+                ymcaAddress.setText(towedToAddress);
+                ymcaAddress.setClickable(true);
+                ymcaAddress.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent searchAddress = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q="+address));
+                        startActivity(searchAddress);
+                    }
+                });
+
             } else {
                 ymcaAddress.setVisibility(View.GONE);
             }

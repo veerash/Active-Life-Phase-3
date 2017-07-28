@@ -86,6 +86,7 @@ public class SchedulesFragment extends Fragment {
     private long startTime=040000,endTime=230000;
     private RangeSeekBar mRangeSeekbar;
     private TextView mNoMessages, mRightThumb, mLeftThumb;
+    private String shceduleDate;
 
     public SchedulesFragment() {
     }
@@ -155,7 +156,7 @@ public class SchedulesFragment extends Fragment {
                 if(data!=null&&data.size()>0){
                     mSchedulesList.setVisibility(View.VISIBLE);
                     mNoMessages.setVisibility(View.GONE);
-                    mSchedulesList.setAdapter(new ScheduesDataDBRecyclerAdapter(getActivity(),data));
+                    mSchedulesList.setAdapter(new ScheduesDataDBRecyclerAdapter(getActivity(),data,shceduleDate));
                 }else{
                     mSchedulesList.setVisibility(View.GONE);
                     mNoMessages.setVisibility(View.VISIBLE);
@@ -231,7 +232,7 @@ public class SchedulesFragment extends Fragment {
                     if(data!=null&&data.size()>0){
                         mSchedulesList.setVisibility(View.VISIBLE);
                         mNoMessages.setVisibility(View.GONE);
-                        mSchedulesList.setAdapter(new ScheduesDataDBRecyclerAdapter(getActivity(),data));
+                        mSchedulesList.setAdapter(new ScheduesDataDBRecyclerAdapter(getActivity(),data,shceduleDate));
                     }else{
                         mSchedulesList.setVisibility(View.GONE);
                         mNoMessages.setVisibility(View.VISIBLE);
@@ -273,7 +274,8 @@ public class SchedulesFragment extends Fragment {
             public void onDateSelected(Date date, int position) {
                 DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
                 textView.setText("" + Utils.getApplyiedDateType(df.format(date), "MM/dd/yyyy HH:mm:ss", "EEEE MMM dd"));
-                getScheduleDateData(Utils.getApplyiedDateType(df.format(date), "MM/dd/yyyy HH:mm:ss", "yyyy-MM-dd"));
+                shceduleDate=Utils.getApplyiedDateType(df.format(date), "MM/dd/yyyy HH:mm:ss", "yyyy-MM-dd");
+                getScheduleDateData(shceduleDate);
             }
 
             @Override
@@ -287,7 +289,8 @@ public class SchedulesFragment extends Fragment {
                 return true;
             }
         });
-        getScheduleDateData(Utils.getApplyiedDateType(df.format(dt), "MM/dd/yyyy HH:mm:ss", "yyyy-MM-dd"));
+        shceduleDate=Utils.getApplyiedDateType(df.format(dt), "MM/dd/yyyy HH:mm:ss", "yyyy-MM-dd");
+        getScheduleDateData(shceduleDate);
         return rootView;
     }
 
@@ -370,7 +373,7 @@ public class SchedulesFragment extends Fragment {
         });
         List<LocationData> date = ActiveLifeApplication.getInstance().setUpDb().getLocation();
         if (date != null && date.size() > 0) {
-            mLocationSpinner.setSelection(date.get(0).getPostion());
+            mLocationSpinner.setSelection(date.get(0).getPostion()+1);
             mLocationId=date.get(0).getLocation_id();
         }
     }
@@ -426,7 +429,7 @@ public class SchedulesFragment extends Fragment {
                         }
                         ActiveLifeApplication.getInstance().setUpDb().insertSchedulesDateList(data);
                         if ((mLocationId == null || mLocationId.length() == 0) &&(mScheduleId == null || mScheduleId.length() == 0) && (mClassId == null || mClassId.length() == 0) && (mInstructorId == null || mInstructorId.length() == 0) && startTime == 040000 && endTime == 230000) {
-                            mSchedulesList.setAdapter(new ScheduesDataRecyclerAdapter(getActivity(), response.body()));
+                            mSchedulesList.setAdapter(new ScheduesDataRecyclerAdapter(getActivity(), response.body(),shceduleDate));
                         } else {
                             data = ActiveLifeApplication.getInstance().setUpDb().getScheduleDateOfId(mLocationId,mScheduleId, mClassId, mInstructorId, startTime, endTime);
                             if (data == null)
@@ -434,7 +437,7 @@ public class SchedulesFragment extends Fragment {
                             if(data!=null&&data.size()>0){
                                 mSchedulesList.setVisibility(View.VISIBLE);
                                 mNoMessages.setVisibility(View.GONE);
-                                mSchedulesList.setAdapter(new ScheduesDataDBRecyclerAdapter(getActivity(),data));
+                                mSchedulesList.setAdapter(new ScheduesDataDBRecyclerAdapter(getActivity(),data,shceduleDate));
                             }else{
                                 mSchedulesList.setVisibility(View.GONE);
                                 mNoMessages.setVisibility(View.VISIBLE);

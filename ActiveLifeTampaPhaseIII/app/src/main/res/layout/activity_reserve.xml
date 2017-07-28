@@ -38,7 +38,8 @@
             android:paddingRight="10dp"
             android:paddingTop="5dp"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/sixteen_sp" />
+            android:textSize="@dimen/sixteen_sp"
+            android:textCursorDrawable="@null"/>
 
         <com.android.activelife.tampa.customviews.CachetProMediumTextView
             android:id="@+id/textView"
@@ -64,6 +65,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="5dp"
+            android:textCursorDrawable="@null"
             android:textColor="@android:color/black"
             android:textSize="@dimen/sixteen_sp" />
 

@@ -77,8 +77,7 @@ public class ReserveActivity extends BaseActivity {
 
     public void getScheduleDateData() {
         if (checkIfInternet(ReserveActivity.this)) {
-            DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-            Date dt = new Date();
+
             ReserveSchedule request = new ReserveSchedule();
             request.setName(mNameEditText.getText().toString());
             request.setEmail(mEmailEditText.getText().toString());
@@ -86,7 +85,9 @@ public class ReserveActivity extends BaseActivity {
             JsonElement json = gson.toJsonTree(request);
             mApiInterface = ActiveLifeApplication.getInstance()
                     .getApiRequest();
-            Call<ReserveScheduleData> call = mApiInterface.reserveSchedule(getIntent().getStringExtra("session_id"), Utils.getApplyiedDateType(df.format(dt), "MM/dd/yyyy HH:mm:ss", "yyyy-MM-dd"), json);
+            String sessionId=getIntent().getExtras().getString("session_id");
+            String date=getIntent().getExtras().getString("date");
+            Call<ReserveScheduleData> call = mApiInterface.reserveSchedule(sessionId, date, json);
             call.enqueue(new Callback<ReserveScheduleData>() {
                 @Override
                 public void onResponse(Call<ReserveScheduleData> call, Response<ReserveScheduleData> response) {
