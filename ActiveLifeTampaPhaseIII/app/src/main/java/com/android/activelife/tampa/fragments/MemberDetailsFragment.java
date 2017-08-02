@@ -32,6 +32,7 @@ import android.widget.TextView;
 
 import com.android.activelife.tampa.R;
 import com.android.activelife.tampa.adpater.HoursSceduleListAdapter;
+import com.android.activelife.tampa.adpater.LocationListAdapter;
 import com.android.activelife.tampa.adpater.LocationsListAdapter;
 import com.android.activelife.tampa.adpater.MessagesListAdapter;
 import com.android.activelife.tampa.appcontroller.ActiveLifeApplication;
@@ -434,10 +435,11 @@ public class MemberDetailsFragment extends Fragment {
         LocationsData ld = new LocationsData();
         ld.setLocation_id(null);
 
+
+        mLocationDataResponsesList = ActiveLifeApplication.getInstance().setUpDb().getLocations();
         mLocationDataResponsesList.add(0, ld);
         ld.setLocation_name("Choose Location");
-        mLocationDataResponsesList = ActiveLifeApplication.getInstance().setUpDb().getLocations();
-        mLocationSpinner.setAdapter(new LocationsListAdapter(getActivity(), mLocationDataResponsesList));
+        mLocationSpinner.setAdapter(new LocationListAdapter(getActivity(), mLocationDataResponsesList));
         mLocationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {

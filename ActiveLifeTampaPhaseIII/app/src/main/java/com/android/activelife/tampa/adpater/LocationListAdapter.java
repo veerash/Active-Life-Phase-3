@@ -9,22 +9,20 @@ import android.widget.TextView;
 
 import com.android.activelife.tampa.R;
 import com.android.activelife.tampa.db.LocationsData;
-import com.android.activelife.tampa.db.ScheduleData;
 import com.android.activelife.tampa.services.response.LocationData.LocationDataResponse;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by vsatrasala on 2/11/2017.
  */
 
-public class LocationsListAdapter extends BaseAdapter {
+public class LocationListAdapter extends BaseAdapter {
 
     public Context jContext;
-    private List<LocationDataResponse> locationDataResponsesList;
+    private List<LocationsData> locationDataResponsesList;
 
-    public LocationsListAdapter(Context ctx, List<LocationDataResponse> locationDataResponsesList) {
+    public LocationListAdapter(Context ctx, List<LocationsData> locationDataResponsesList) {
         this.jContext = ctx;
         this.locationDataResponsesList=locationDataResponsesList;
     }
@@ -56,7 +54,7 @@ public class LocationsListAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.locationName.setText(""+locationDataResponsesList.get(position).getName());
+        holder.locationName.setText(""+locationDataResponsesList.get(position).getLocation_name());
         return convertView;
     }
 

@@ -73,7 +73,7 @@ public class MainActivity extends BaseActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
         setupTabIcons();
-        tabLayout.getTabAt(3).select();
+        tabLayout.getTabAt(2).select();
     }
 
     @Override
@@ -84,10 +84,10 @@ public class MainActivity extends BaseActivity {
 
     private void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(tabIcons[0]);
-        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
-        tabLayout.getTabAt(2).setIcon(tabIcons[2]);
+        tabLayout.getTabAt(1).setIcon(tabIcons[2]);
+        tabLayout.getTabAt(2).setIcon(tabIcons[3]);
         tabLayout.getTabAt(3).setIcon(tabIcons[3]);
-        tabLayout.getTabAt(4).setIcon(tabIcons[4]);
+//        tabLayout.getTabAt(4).setIcon(tabIcons[4]);
     }
 
 
@@ -108,14 +108,14 @@ public class MainActivity extends BaseActivity {
             switch (position) {
                 case 0:
                     return LocationsFragment.newInstance(null, null);
+//                case 1:
+//                    return MemberSettingsFragment.newInstance(null, null);
                 case 1:
-                    return MemberSettingsFragment.newInstance(null, null);
-                case 2:
                     return MemberDetailsFragment.newInstance(null, null);
-                case 3:
+                case 2:
                     fragment =SchedulesFragment.newInstance(null, null);
                     return fragment;
-                case 4:
+                case 3:
                     return MemberFragment.newInstance(null, null);
                 default:
                     return SchedulesFragment.newInstance(null, null);
@@ -126,7 +126,7 @@ public class MainActivity extends BaseActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 5;
+            return 4;
         }
 
         @Override
