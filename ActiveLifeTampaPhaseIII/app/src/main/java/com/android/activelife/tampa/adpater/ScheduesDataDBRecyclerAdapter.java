@@ -100,6 +100,7 @@ public class ScheduesDataDBRecyclerAdapter extends RecyclerView.Adapter<Recycler
             public void onClick(View v) {
                 Intent scheduleDetailIntent = new Intent(jContext, ScheduleContainerActivity.class);
                 scheduleDetailIntent.putExtra("schedule_id", mMessagesDataResponseList.get(position).getSchedule_id());
+                scheduleDetailIntent.putExtra("date",date);
                 scheduleDetailIntent.putExtra("schedule_name", mMessagesDataResponseList.get(position).getSchedule_name());
                 jContext.startActivity(scheduleDetailIntent);
             }

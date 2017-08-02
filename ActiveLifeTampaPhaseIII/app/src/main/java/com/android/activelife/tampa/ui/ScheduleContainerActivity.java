@@ -52,7 +52,18 @@ public class ScheduleContainerActivity extends BaseActivity {
         tvName.setText("" + dateData.getInstructor_name());
         tvDesc.setText("" + dateData.getClass_desc());
         tvHours.setText(Utils.getApplyiedDateType(dateData.getSchedule_start_time(), "HH:mm:ss", "hh:mm a") + " - " + Utils.getApplyiedDateType(dateData.getSchedule_end_time(), "HH:mm:ss", "hh:mm a"));
-        tvDate.setText("" + Utils.getApplyiedDateType(dateData.getSchedule_start_date(), "yyyy-mm-dd HH:mm:ss", "dd MMMM"));
+        String date=getIntent().getExtras().getString("date");
+             date=   Utils.getApplyiedDateType(date, "yyyy-MM-dd", "MMMM dd");
+        if(date.contains("01")||date.contains("21")||date.contains("31")){
+            date =date+"st";
+        }else if(date.contains("02")||date.contains("22")){
+            date =date+"nd";
+        }else if(date.contains("03")||date.contains("23")){
+            date =date+"rd";
+        }else{
+            date =date +"th";
+        }
+        tvDate.setText("" +date );
         DateFormat df = new SimpleDateFormat("HH:mm:ss");
         Date startDate = null, endDate = null;
         try {
@@ -68,8 +79,8 @@ public class ScheduleContainerActivity extends BaseActivity {
         mAddToCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String endtime = dateData.getSchedule_end_time() + " " + Utils.getApplyiedDateType(dateData.getSchedule_start_date(), "yyyy-mm-dd HH:mm:ss", "MMMM dd, yyyy");
-                String starttime = dateData.getSchedule_start_time() + " " + Utils.getApplyiedDateType(dateData.getSchedule_start_date(), "yyyy-mm-dd HH:mm:ss", "MMMM dd, yyyy");
+                String endtime = dateData.getSchedule_end_time() + " " + Utils.getApplyiedDateType(dateData.getSchedule_start_date(), "yyyy-MM-dd HH:mm:ss", "MMMM dd, yyyy");
+                String starttime = dateData.getSchedule_start_time() + " " + Utils.getApplyiedDateType(dateData.getSchedule_start_date(), "yyyy-MM-dd HH:mm:ss", "MMMM dd, yyyy");
                 Date d1 = Utils.getDatescheduleDetailsFromString(endtime);
                 Date d = Utils.getDatescheduleDetailsFromString(starttime);
                 long duration = d1.getTime() - d.getTime();

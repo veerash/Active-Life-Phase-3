@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.android.activelife.tampa.R;
 import com.android.activelife.tampa.adpater.ClassesListAdapter;
 import com.android.activelife.tampa.adpater.InstructorsListAdapter;
+import com.android.activelife.tampa.adpater.LocationListAdapter;
 import com.android.activelife.tampa.adpater.LocationsListAdapter;
 import com.android.activelife.tampa.adpater.ScheduesDataDBRecyclerAdapter;
 import com.android.activelife.tampa.adpater.ScheduesDataRecyclerAdapter;
@@ -359,7 +360,7 @@ public class SchedulesFragment extends Fragment {
 
         mLocationDataResponsesList = ActiveLifeApplication.getInstance().setUpDb().getLocations();
         mLocationDataResponsesList.add(0, ld);
-        mLocationSpinner.setAdapter(new LocationsListAdapter(getActivity(), mLocationDataResponsesList));
+        mLocationSpinner.setAdapter(new LocationListAdapter(getActivity(), mLocationDataResponsesList));
         mLocationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {

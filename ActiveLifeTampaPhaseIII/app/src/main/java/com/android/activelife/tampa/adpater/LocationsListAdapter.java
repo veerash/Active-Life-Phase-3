@@ -22,9 +22,9 @@ import java.util.List;
 public class LocationsListAdapter extends BaseAdapter {
 
     public Context jContext;
-    private List<LocationsData> locationDataResponsesList;
+    private List<LocationDataResponse> locationDataResponsesList;
 
-    public LocationsListAdapter(Context ctx, List<LocationsData> locationDataResponsesList) {
+    public LocationsListAdapter(Context ctx, List<LocationDataResponse> locationDataResponsesList) {
         this.jContext = ctx;
         this.locationDataResponsesList=locationDataResponsesList;
     }
@@ -56,7 +56,7 @@ public class LocationsListAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.locationName.setText(""+locationDataResponsesList.get(position).getLocation_name());
+        holder.locationName.setText(""+locationDataResponsesList.get(position).getName());
         return convertView;
     }
 
