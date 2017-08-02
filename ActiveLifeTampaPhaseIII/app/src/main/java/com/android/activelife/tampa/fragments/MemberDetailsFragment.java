@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ForegroundColorSpan;
@@ -80,7 +82,7 @@ public class MemberDetailsFragment extends Fragment {
     private List<MessagesData> mMessagesDataResponseList;
     private List<MessageLocationData> mMessageLocationDataResponseList;
     private Handler mHandler = new Handler();
-    private ListView hoursList;
+    private RecyclerView hoursList;
     private Spinner mLocationSpinner;
     private Button mApplyButton, mClearFilterButton;
     private CheckBox mFilterImageView;
@@ -301,7 +303,8 @@ public class MemberDetailsFragment extends Fragment {
     public void setHoursList(final Bundle savedInstanceState) {
         View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_hours, null);
         setLayoutParams(child);
-        hoursList = (ListView) child.findViewById(R.id.hours_list);
+        hoursList = (RecyclerView) child.findViewById(R.id.hours_list);
+        hoursList.setLayoutManager(new LinearLayoutManager(getActivity()));
         hoursList.setAdapter(new HoursSceduleListAdapter(getActivity(), ActiveLifeApplication.getInstance().setUpDb().getHours()));
 
     }
@@ -554,7 +557,7 @@ public class MemberDetailsFragment extends Fragment {
     public void setLayoutParams(View child) {
         mLayoutContainer.removeAllViews();
         mLayoutContainer.addView(child);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         child.setLayoutParams(params);
     }
 }
