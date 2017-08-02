@@ -1,5 +1,6 @@
 package com.android.activelife.tampa.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -8,10 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -40,7 +40,7 @@ public class MemberFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private ArrayList<MemberData> data;
     private TextView mNoMessages;
-    private ImageView addDetails,closeDetails;
+    private ImageView addDetails, closeDetails;
     private View cardView;
     private RelativeLayout mListLayout;
     private Button addButton;
@@ -118,6 +118,8 @@ public class MemberFragment extends Fragment {
                 closeDetails.setVisibility(View.GONE);
                 cardView.setVisibility(View.GONE);
                 mListLayout.setVisibility(View.VISIBLE);
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(memberEditName.getWindowToken(), 0);
             }
         });
         setMembersData();
@@ -132,7 +134,7 @@ public class MemberFragment extends Fragment {
         if (data != null && data.size() > 0) {
             mMembersListView.setVisibility(View.VISIBLE);
             mNoMessages.setVisibility(View.GONE);
-            mMembersListView.setAdapter(new MembersListAdapter(getActivity(), data,this));
+            mMembersListView.setAdapter(new MembersListAdapter(getActivity(), data, this));
         } else {
             mMembersListView.setVisibility(View.GONE);
             mNoMessages.setVisibility(View.VISIBLE);

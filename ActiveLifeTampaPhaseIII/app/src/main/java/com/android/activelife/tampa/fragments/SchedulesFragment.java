@@ -262,7 +262,7 @@ public class SchedulesFragment extends Fragment {
                 .startDate(startDate.getTime())
                 .endDate(endDate.getTime())
                 .datesNumberOnScreen(5)
-                .dayFormat("EEE")     // WeekDay text format
+                .dayNameFormat("EEE")     // WeekDay text format
                 .dayNumberFormat("dd")
                 .textColor(Color.LTGRAY, Color.BLACK)
                 .selectedDateBackground(Color.TRANSPARENT)  // Background color of the selected date cell.

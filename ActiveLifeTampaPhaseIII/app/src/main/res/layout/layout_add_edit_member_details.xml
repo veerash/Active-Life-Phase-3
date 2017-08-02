@@ -45,6 +45,9 @@
                 android:paddingLeft="@dimen/ten_sp"
                 android:paddingRight="@dimen/ten_sp"
                 android:paddingTop="@dimen/ten_sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:maxLength="30"
                 android:textColor="@android:color/black"
                 android:textCursorDrawable="@null" />
 
@@ -72,6 +75,9 @@
                 android:paddingLeft="@dimen/ten_sp"
                 android:paddingRight="@dimen/ten_sp"
                 android:paddingTop="@dimen/ten_sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:maxLength="30"
                 android:textColor="@android:color/black"
                 android:textCursorDrawable="@null" />
 
