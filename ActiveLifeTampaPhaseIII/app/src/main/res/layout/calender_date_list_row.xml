@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="@dimen/ten_dip">
 
-    <com.android.activelife.tampa.customviews.CachetProMediumTextView
+    <com.android.activelife.customviews.CachetProMediumTextView
         android:id="@+id/tv_ymca"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
             android:clickable="false"
             android:padding="@dimen/two_dip">
 
-            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+            <com.android.activelife.customviews.CachetProRegularTextView
                 android:id="@+id/tv_hours"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
                 android:clickable="false"
                 android:textSize="@dimen/sixteen_sp" />
 
-            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+            <com.android.activelife.customviews.CachetProRegularTextView
                 android:id="@+id/tv_mins"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
             android:orientation="vertical"
             android:padding="@dimen/two_dip">
 
-            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+            <com.android.activelife.customviews.CachetProRegularTextView
                 android:id="@+id/tv_event"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                 android:clickable="false"
                 android:textSize="@dimen/sixteen_sp" />
 
-            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+            <com.android.activelife.customviews.CachetProRegularTextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
 
         </LinearLayout>
 
-        <com.android.activelife.tampa.customviews.CachetProRegularTextView
+        <com.android.activelife.customviews.CachetProRegularTextView
             android:id="@+id/reserve"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

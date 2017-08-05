@@ -19,7 +19,7 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:orientation="vertical">
 
-        <com.android.activelife.tampa.customviews.CachetProMediumTextView
+        <com.android.activelife.customviews.CachetProMediumTextView
             android:id="@+id/message_heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
             android:textColor="@color/grey_text"
             android:textSize="15sp" />
 
-        <com.android.activelife.tampa.customviews.CachetProRegularTextView
+        <com.android.activelife.customviews.CachetProRegularTextView
             android:id="@+id/message_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

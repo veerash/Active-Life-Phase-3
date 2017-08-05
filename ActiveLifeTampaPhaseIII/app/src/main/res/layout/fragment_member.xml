@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:name="com.android.activelife.tampa.fragments.MemberFragment"
+    android:name="com.android.activelife.fragments.MemberFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
     android:padding="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="com.android.activelife.tampa.fragments.MemberFragment"
+    tools:context="com.android.activelife.fragments.MemberFragment"
     tools:listitem="@layout/fragment_member">
 
     <LinearLayout
@@ -61,7 +61,7 @@
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:scrollbars="none" />
 
-        <com.android.activelife.tampa.customviews.CachetProBoldTextView
+        <com.android.activelife.customviews.CachetProBoldTextView
             android:id="@+id/no_messages"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

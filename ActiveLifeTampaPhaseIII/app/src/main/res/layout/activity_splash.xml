@@ -7,10 +7,10 @@
     android:layout_height="fill_parent"
     android:background="@drawable/splash_bg"
     android:padding="@dimen/splash_padding"
-    tools:context="com.android.activelife.tampa.ui.SplashActivity">
+    tools:context="com.android.activelife.ui.SplashActivity">
 
 
-    <com.android.activelife.tampa.customviews.CachetProMediumTextView
+    <com.android.activelife.customviews.CachetProMediumTextView
         android:text="@string/splash_header"
         android:textColor="@android:color/white"
         android:textSize="@dimen/splash_text_header_size"
@@ -29,7 +29,7 @@
         android:layout_marginBottom="@dimen/splash_padding"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:id="@+id/splash_icon" />
-    <com.android.activelife.tampa.customviews.CachetProRegularTextView
+    <com.android.activelife.customviews.CachetProRegularTextView
         android:text="@string/splash_footer"
         android:textColor="@android:color/white"
         android:textSize="@dimen/splash_text_footer_size"

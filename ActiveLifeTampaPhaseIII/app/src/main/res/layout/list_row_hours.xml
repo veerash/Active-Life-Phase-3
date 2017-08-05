@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.android.activelife.tampa.customviews.CachetProBoldTextView
+    <com.android.activelife.customviews.CachetProBoldTextView
         android:id="@+id/hours_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             android:orientation="horizontal"
             android:weightSum="2">
 
-            <com.android.activelife.tampa.customviews.CachetProMediumTextView
+            <com.android.activelife.customviews.CachetProMediumTextView
                 android:id="@+id/hours_one"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
                 android:textColor="@color/grey_text"
                 android:textSize="15sp" />
 
-            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+            <com.android.activelife.customviews.CachetProRegularTextView
                 android:id="@+id/hours_one_ti"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
             android:orientation="horizontal"
             android:weightSum="2">
 
-            <com.android.activelife.tampa.customviews.CachetProMediumTextView
+            <com.android.activelife.customviews.CachetProMediumTextView
                 android:id="@+id/hours_two"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                 android:textColor="@color/grey_text"
                 android:textSize="15sp" />
 
-            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+            <com.android.activelife.customviews.CachetProRegularTextView
                 android:id="@+id/hours_two_ti"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
             android:orientation="horizontal"
             android:weightSum="2">
 
-            <com.android.activelife.tampa.customviews.CachetProMediumTextView
+            <com.android.activelife.customviews.CachetProMediumTextView
                 android:id="@+id/hours_three"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
                 android:textColor="@color/grey_text"
                 android:textSize="15sp" />
 
-            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+            <com.android.activelife.customviews.CachetProRegularTextView
                 android:id="@+id/hours_three_ti"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
             android:orientation="horizontal"
             android:weightSum="2">
 
-            <com.android.activelife.tampa.customviews.CachetProMediumTextView
+            <com.android.activelife.customviews.CachetProMediumTextView
                 android:id="@+id/hours_four"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -143,7 +143,7 @@
 
                 android:textSize="15sp" />
 
-            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+            <com.android.activelife.customviews.CachetProRegularTextView
                 android:id="@+id/hours_four_ti"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -173,7 +173,7 @@
             android:orientation="horizontal"
             android:weightSum="2">
 
-            <com.android.activelife.tampa.customviews.CachetProMediumTextView
+            <com.android.activelife.customviews.CachetProMediumTextView
                 android:id="@+id/hours_five"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -184,7 +184,7 @@
                 android:textColor="@color/grey_text"
                 android:textSize="15sp" />
 
-            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+            <com.android.activelife.customviews.CachetProRegularTextView
                 android:id="@+id/hours_five_ti"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -204,7 +204,7 @@
             android:orientation="horizontal"
             android:weightSum="2">
 
-            <com.android.activelife.tampa.customviews.CachetProMediumTextView
+            <com.android.activelife.customviews.CachetProMediumTextView
                 android:id="@+id/hours_six"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -215,7 +215,7 @@
                 android:textColor="@color/grey_text"
                 android:textSize="15sp" />
 
-            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+            <com.android.activelife.customviews.CachetProRegularTextView
                 android:id="@+id/hours_six_ti"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -245,7 +245,7 @@
             android:orientation="horizontal"
             android:weightSum="2">
 
-            <com.android.activelife.tampa.customviews.CachetProMediumTextView
+            <com.android.activelife.customviews.CachetProMediumTextView
                 android:id="@+id/hours_seven"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -256,7 +256,7 @@
                 android:textColor="@color/grey_text"
                 android:textSize="15sp" />
 
-            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+            <com.android.activelife.customviews.CachetProRegularTextView
                 android:id="@+id/hours_seven_ti"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:padding="@dimen/ten_sp">
 
-    <com.android.activelife.tampa.customviews.CachetProRegularTextView
+    <com.android.activelife.customviews.CachetProRegularTextView
         android:id="@+id/list_row_select_branch_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

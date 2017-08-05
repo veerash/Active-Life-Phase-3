@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.android.activelife.tampa.customviews.CachetProBoldTextView
+            <com.android.activelife.customviews.CachetProBoldTextView
                 android:id="@+id/tv_event"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
                 android:textSize="@dimen/twenty_sp"
                 android:textStyle="bold" />
 
-            <com.android.activelife.tampa.customviews.CachetProMediumTextView
+            <com.android.activelife.customviews.CachetProMediumTextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+            <com.android.activelife.customviews.CachetProRegularTextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/sixteen_sp" />
 
-            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+            <com.android.activelife.customviews.CachetProRegularTextView
                 android:id="@+id/tv_start_end_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/sixteen_sp" />
 
-            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+            <com.android.activelife.customviews.CachetProRegularTextView
                 android:id="@+id/tv_ymca"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
         android:layout_weight="1"
         android:padding="@dimen/activity_horizontal_margin">
 
-        <com.android.activelife.tampa.customviews.CachetProRegularTextView
+        <com.android.activelife.customviews.CachetProRegularTextView
             android:id="@+id/tv_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

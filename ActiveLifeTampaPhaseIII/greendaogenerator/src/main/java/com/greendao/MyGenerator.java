@@ -7,7 +7,7 @@ import org.greenrobot.greendao.generator.Schema;
 
 public class MyGenerator {
     public static void main(String[] args) {
-        Schema schema = new Schema(1, "com.android.activelife.tampa.db"); // Your app package name and the (.db) is the folder where the DAO files will be generated into.
+        Schema schema = new Schema(1, "com.android.activelife.db"); // Your app package name and the (.db) is the folder where the DAO files will be generated into.
         schema.enableKeepSectionsByDefault();
 
         addTables(schema);

@@ -4,17 +4,53 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.and.activelife.tampa"
+        applicationId "com.and.activelife"
         minSdkVersion 15
         targetSdkVersion 21
         versionCode 3
         versionName "1.0.2"
+
+    }
+    signingConfigs {
+        release {
+            storeFile rootProject.file('activelife.jks')
+            keyAlias 'activelifealias'
+            keyPassword 'activelifeapp'
+            storePassword 'activelifeapp'
+        }
+        tampa {
+            storeFile rootProject.file('activelife.jks')
+            keyAlias 'activelifealias'
+            keyPassword 'activelifeapp'
+            storePassword 'activelifeapp'
+        }
+        bouldervalley {
+            storeFile rootProject.file('activelife.jks')
+            keyAlias 'activelifealias'
+            keyPassword 'activelifeapp'
+            storePassword 'activelifeapp'
+        }
     }
     buildTypes {
         release {
+            buildConfigField "String", "BASE_URL", "\"http://tampa.consoria.com/api/\""
             minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+        tampa {
+            buildConfigField "String", "BASE_URL", "\"http://tampa.consoria.com/api/\""
+            applicationIdSuffix '.tampa'
+            minifyEnabled false
+            signingConfig signingConfigs.tampa
+        }
+        bouldervalley {
+            buildConfigField "String", "BASE_URL", "\"http://tampa.consoria.com/api/\""
+            applicationIdSuffix '.bouldervalley'
+            minifyEnabled false
+            signingConfig signingConfigs.bouldervalley
         }
     }
+
 }
 
 dependencies {

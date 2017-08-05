@@ -6,7 +6,7 @@
     android:id="@+id/main_content"
     android:padding="@dimen/padding_select_branch_text_size">
 
-    <com.android.activelife.tampa.customviews.CachetProRegularTextView
+    <com.android.activelife.customviews.CachetProRegularTextView
         android:id="@+id/list_row_select_branch_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

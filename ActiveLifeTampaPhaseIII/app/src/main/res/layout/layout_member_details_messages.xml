@@ -24,7 +24,7 @@
             android:visibility="gone"
             android:weightSum="2">
 
-            <com.android.activelife.tampa.customviews.CachetProRegularRadioButton
+            <com.android.activelife.customviews.CachetProRegularRadioButton
                 android:id="@+id/branch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
                 android:text="Branch"
                 android:textColor="@drawable/hours_rb_text_selecto0r" />
 
-            <com.android.activelife.tampa.customviews.CachetProRegularRadioButton
+            <com.android.activelife.customviews.CachetProRegularRadioButton
                 android:id="@+id/assosciation"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
             android:orientation="vertical"
             android:visibility="gone">
 
-            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+            <com.android.activelife.customviews.CachetProRegularTextView
                 android:id="@+id/section_label0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
                 android:orientation="horizontal"
                 android:weightSum="1">
 
-                 <com.android.activelife.tampa.customviews.CachetProRegularButton
+                 <com.android.activelife.customviews.CachetProRegularButton
                     android:id="@+id/clear_filter"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
                     android:text="Clear Filter"
                     android:textColor="@android:color/white" />
 
-                 <com.android.activelife.tampa.customviews.CachetProRegularButton
+                 <com.android.activelife.customviews.CachetProRegularButton
                     android:id="@+id/btn_apply_filter"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -137,7 +137,7 @@
                 android:listSelector="@android:color/transparent"
                 android:scrollbars="none" />
 
-            <com.android.activelife.tampa.customviews.CachetProBoldTextView
+            <com.android.activelife.customviews.CachetProBoldTextView
                 android:id="@+id/no_messages"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

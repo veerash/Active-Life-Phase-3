@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context="com.android.activelife.tampa.fragments.MemberDetailsFragment">
+    tools:context="com.android.activelife.fragments.MemberDetailsFragment">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     android:layout_width="match_parent"
@@ -22,7 +22,7 @@
         android:orientation="horizontal"
         android:weightSum="5">
 
-        <com.android.activelife.tampa.customviews.CachetProRegularRadioButton
+        <com.android.activelife.customviews.CachetProRegularRadioButton
             android:id="@+id/messages"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/ten_sp" />
 
-        <com.android.activelife.tampa.customviews.CachetProRegularRadioButton
+        <com.android.activelife.customviews.CachetProRegularRadioButton
             android:id="@+id/donate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/ten_sp" />
 
-        <com.android.activelife.tampa.customviews.CachetProRegularRadioButton
+        <com.android.activelife.customviews.CachetProRegularRadioButton
             android:id="@+id/hours"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/ten_sp" />
 
-        <com.android.activelife.tampa.customviews.CachetProRegularRadioButton
+        <com.android.activelife.customviews.CachetProRegularRadioButton
             android:id="@+id/contact"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/ten_sp" />
 
-        <com.android.activelife.tampa.customviews.CachetProRegularRadioButton
+        <com.android.activelife.customviews.CachetProRegularRadioButton
             android:id="@+id/programs"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

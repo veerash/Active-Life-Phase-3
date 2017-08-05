@@ -5,7 +5,7 @@
     android:background="@android:color/white"
     android:orientation="vertical"
     android:padding="@dimen/activity_horizontal_margin"
-    tools:context="com.android.activelife.tampa.fragments.MemberSettingsFragment">
+    tools:context="com.android.activelife.fragments.MemberSettingsFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin">
 
-        <com.android.activelife.tampa.customviews.CachetProMediumTextView
+        <com.android.activelife.customviews.CachetProMediumTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/default_location"
@@ -42,7 +42,7 @@
                 android:entries="@array/locations" />
         </LinearLayout>
 
-        <com.android.activelife.tampa.customviews.CachetProMediumTextView
+        <com.android.activelife.customviews.CachetProMediumTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
@@ -58,7 +58,7 @@
             android:orientation="horizontal">
 
 
-            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+            <com.android.activelife.customviews.CachetProRegularTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -80,7 +80,7 @@
             android:orientation="horizontal">
 
 
-            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+            <com.android.activelife.customviews.CachetProRegularTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -102,7 +102,7 @@
             android:orientation="horizontal">
 
 
-            <com.android.activelife.tampa.customviews.CachetProRegularTextView
+            <com.android.activelife.customviews.CachetProRegularTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context="com.android.activelife.tampa.ui.SelectBranchActivity">
+    tools:context="com.android.activelife.ui.SelectBranchActivity">
 
     <ListView
         android:id="@+id/select_branch_list"
