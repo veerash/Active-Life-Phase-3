@@ -24,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
+            android:visibility="gone"
             app:srcCompat="@drawable/add_member_icon" />
 
         <ImageView
@@ -55,20 +56,23 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/members_list"
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:scrollbars="none" />
 
         <com.android.activelife.tampa.customviews.CachetProBoldTextView
             android:id="@+id/no_messages"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="No Members Available"
+            android:text="Add Member"
+            android:textColor="@android:color/white"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:background="@color/light_green"
             android:textSize="@dimen/sixteen_sp"
-            android:visibility="gone" />
+            android:visibility="visible" />
     </RelativeLayout>
 </LinearLayout>

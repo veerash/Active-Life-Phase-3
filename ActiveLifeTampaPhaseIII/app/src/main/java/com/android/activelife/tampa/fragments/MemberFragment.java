@@ -97,6 +97,14 @@ public class MemberFragment extends Fragment {
                 mListLayout.setVisibility(View.GONE);
             }
         });
+        mNoMessages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cardView.setVisibility(View.VISIBLE);
+                closeDetails.setVisibility(View.VISIBLE);
+                mListLayout.setVisibility(View.GONE);
+            }
+        });
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,6 +116,8 @@ public class MemberFragment extends Fragment {
                     memberEditId.setError(null);
                     memberEditName.setError(null);
                     ActiveLifeApplication.getInstance().setUpDb().insertOrReplaceMember(memberEditId.getText().toString(), memberEditName.getText().toString());
+                    memberEditId.setText("");
+                    memberEditName.setText("");
                     setMembersData();
                 }
             }
@@ -132,10 +142,17 @@ public class MemberFragment extends Fragment {
         mListLayout.setVisibility(View.VISIBLE);
         data = ActiveLifeApplication.getInstance().setUpDb().getMembers();
         if (data != null && data.size() > 0) {
+            RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            rlp.addRule(RelativeLayout.BELOW, mMembersListView.getId());
+            rlp.setMargins(0, 10, 0, 0);
+            mNoMessages.setLayoutParams(rlp);
             mMembersListView.setVisibility(View.VISIBLE);
-            mNoMessages.setVisibility(View.GONE);
+            mNoMessages.setVisibility(View.VISIBLE);
             mMembersListView.setAdapter(new MembersListAdapter(getActivity(), data, this));
         } else {
+            RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            rlp.addRule(RelativeLayout.CENTER_IN_PARENT);
+            mNoMessages.setLayoutParams(rlp);
             mMembersListView.setVisibility(View.GONE);
             mNoMessages.setVisibility(View.VISIBLE);
         }

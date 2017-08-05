@@ -88,21 +88,63 @@ public class SelectBranchActivity extends BaseActivity {
                                     Hour object = mLocationDataResponsesList.get(i).getHours().get(j);
                                     String name = object.getName();
                                     Times times = object.getTimes();
-                                    String monStartTime = times.get1().get(0).getStartTime();
-                                    String monEndTime = times.get1().get(0).getEndTime();
-                                    String tueStartTime = times.get2().get(0).getStartTime();
-                                    String tueEndTime = times.get2().get(0).getEndTime();
-                                    String wedStartTime = times.get3().get(0).getStartTime();
-                                    String wedEndTime = times.get3().get(0).getEndTime();
-                                    String thuStartTime = times.get4().get(0).getStartTime();
-                                    String thuEndTime = times.get4().get(0).getEndTime();
-                                    String friStartTime = times.get5().get(0).getStartTime();
-                                    String friEndTime = times.get5().get(0).getEndTime();
-                                    String satStartTime = times.get6().get(0).getStartTime();
-                                    String satEndTime = times.get6().get(0).getEndTime();
-                                    String sunStartTime = times.get7().get(0).getStartTime();
-                                    String sunEndTime = times.get7().get(0).getEndTime();
-                                    ActiveLifeApplication.getInstance().setUpDb().insertHoursDao(name, monStartTime, monEndTime, tueStartTime, tueEndTime, wedStartTime, wedEndTime, thuStartTime, thuEndTime, friStartTime, friEndTime, satStartTime, satEndTime, sunStartTime, sunEndTime);
+                                    String monStartTime = null;
+                                    List<com.android.activelife.tampa.services.response.LocationData._1> mondayList = times.get1();
+                                    for (int mon = 0; mon < mondayList.size(); mon++) {
+                                        if (monStartTime != null && monStartTime.length() > 0)
+                                            monStartTime = monStartTime+"\n"+mondayList.get(mon).getStartTime() + " - " + mondayList.get(mon).getEndTime();
+                                        else
+                                            monStartTime = mondayList.get(mon).getStartTime() + " - " + mondayList.get(mon).getEndTime();
+                                    }
+                                    String tueStartTime = null;
+                                    List<com.android.activelife.tampa.services.response.LocationData._2> tuesdayList = times.get2();
+                                    for (int tue = 0; tue < tuesdayList.size(); tue++) {
+                                        if (tueStartTime != null && tueStartTime.length() > 0)
+                                            tueStartTime = tueStartTime+"\n"+tuesdayList.get(tue).getStartTime() + " - " + tuesdayList.get(tue).getEndTime();
+                                        else
+                                            tueStartTime = tuesdayList.get(tue).getStartTime() + " - " + tuesdayList.get(tue).getEndTime();
+                                    }
+                                    String wedStartTime = null;
+                                    List<com.android.activelife.tampa.services.response.LocationData._3> wednesdayList = times.get3();
+                                    for (int wed = 0; wed < wednesdayList.size(); wed++) {
+                                        if (wedStartTime != null && wedStartTime.length() > 0)
+                                            wedStartTime = wedStartTime+"\n"+wednesdayList.get(wed).getStartTime() + " - " + wednesdayList.get(wed).getEndTime();
+                                        else
+                                            wedStartTime = wednesdayList.get(wed).getStartTime() + " - " + wednesdayList.get(wed).getEndTime();
+                                    }
+                                    String thuStartTime = null;
+                                    List<com.android.activelife.tampa.services.response.LocationData._4> thursdayList = times.get4();
+                                    for (int thu = 0; thu < thursdayList.size(); thu++) {
+                                        if (thuStartTime != null && thuStartTime.length() > 0)
+                                            thuStartTime = thuStartTime+"\n"+thursdayList.get(thu).getStartTime() + " - " + thursdayList.get(thu).getEndTime();
+                                        else
+                                            thuStartTime = thursdayList.get(thu).getStartTime() + " - " + thursdayList.get(thu).getEndTime();
+                                    }
+                                    String friStartTime = null;
+                                    List<com.android.activelife.tampa.services.response.LocationData._5> fridayList = times.get5();
+                                    for (int fri = 0; fri < fridayList.size(); fri++) {
+                                        if (friStartTime != null && friStartTime.length() > 0)
+                                            friStartTime = friStartTime+"\n"+fridayList.get(fri).getStartTime() + " - " + fridayList.get(fri).getEndTime();
+                                        else
+                                            friStartTime = fridayList.get(fri).getStartTime() + " - " + fridayList.get(fri).getEndTime();
+                                    }
+                                    String satStartTime = null;
+                                    List<com.android.activelife.tampa.services.response.LocationData._6> saturdayList = times.get6();
+                                    for (int sat = 0; sat < saturdayList.size(); sat++) {
+                                        if (satStartTime != null && satStartTime.length() > 0)
+                                            satStartTime = satStartTime+"\n"+saturdayList.get(sat).getStartTime() + " - " + saturdayList.get(sat).getEndTime();
+                                        else
+                                            satStartTime = saturdayList.get(sat).getStartTime() + " - " + saturdayList.get(sat).getEndTime();
+                                    }
+                                    String sunStartTime = null;
+                                    List<com.android.activelife.tampa.services.response.LocationData._7> sundayList = times.get7();
+                                    for (int sun = 0; sun < sundayList.size(); sun++) {
+                                        if (sunStartTime != null && sunStartTime.length() > 0)
+                                            sunStartTime = sunStartTime+"\n"+sundayList.get(sun).getStartTime() + " - " + sundayList.get(sun).getEndTime();
+                                        else
+                                            sunStartTime = sundayList.get(sun).getStartTime() + " - " + sundayList.get(sun).getEndTime();
+                                    }
+                                    ActiveLifeApplication.getInstance().setUpDb().insertHoursDao(name, monStartTime, null, tueStartTime, null, wedStartTime, null, thuStartTime, null, friStartTime, null, satStartTime, null, sunStartTime, null);
                                 }
 
                                 startActivity(mainIntent);

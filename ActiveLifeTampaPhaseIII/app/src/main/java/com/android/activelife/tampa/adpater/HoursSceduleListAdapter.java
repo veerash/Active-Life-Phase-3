@@ -53,39 +53,40 @@ public class HoursSceduleListAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         ((ViewHolder) holder).hoursTile.setText("" + mHoursDataArrayList.get(position).getHours_name());
-        ((ViewHolder) holder).hoursOneLayout.setVisibility(View.VISIBLE);
-        ((ViewHolder) holder).hoursOneTitle.setText("Monday");
-        ((ViewHolder) holder).hoursOne.setText("" + mHoursDataArrayList.get(position).getHour_monday_start_time() + " - " + mHoursDataArrayList.get(position).getHour_monday_end_time());
-        ((ViewHolder) holder).hoursTwoTitle.setText("Tuesday");
-        ((ViewHolder) holder).hoursTwo.setText("" + mHoursDataArrayList.get(position).getHour_tuesday_start_time() + " - " + mHoursDataArrayList.get(position).getHour_tuesday_end_time());
-        ((ViewHolder) holder).hoursTwoLayout.setVisibility(View.VISIBLE);
-        ((ViewHolder) holder).hoursThreeTitle.setText("Wednesday");
-        ((ViewHolder) holder).hoursThree.setText("" + mHoursDataArrayList.get(position).getHour_wednesday_start_time() + " - " + mHoursDataArrayList.get(position).getHour_wednesday_end_time());
-        ((ViewHolder) holder).hoursFourTtile.setText("Thursday");
-        ((ViewHolder) holder).hoursFour.setText("" + mHoursDataArrayList.get(position).getHour_thursday_start_time() + " - " + mHoursDataArrayList.get(position).getHour_thursday_end_time());
-        ((ViewHolder) holder).hoursThreeLayout.setVisibility(View.VISIBLE);
-        ((ViewHolder) holder).hourFiveTitle.setText("Friday");
-        ((ViewHolder) holder).hourFive.setText("" + mHoursDataArrayList.get(position).getHour_friday_start_time() + " - " + mHoursDataArrayList.get(position).getHour_friday_end_time());
-        ((ViewHolder) holder).hourSixTitle.setText("Saturday");
-        ((ViewHolder) holder).hourSix.setText("" + mHoursDataArrayList.get(position).getHour_saturday_start_time() + " - " + mHoursDataArrayList.get(position).getHour_saturday_end_time());
-        ((ViewHolder) holder).hoursFourLayout.setVisibility(View.VISIBLE);
-        ((ViewHolder) holder).hourSevenTitle.setText("Sunday");
-        ((ViewHolder) holder).hourSeven.setText("" + mHoursDataArrayList.get(position).getHour_sunday_start_time() + " - " + mHoursDataArrayList.get(position).getHour_sunday_end_time());
+//        ((ViewHolder) holder).hoursOneLayout.setVisibility(View.VISIBLE);
+//        ((ViewHolder) holder).hoursOneTitle.setText("Monday");
+        ((ViewHolder) holder).hoursOne.setText("" + mHoursDataArrayList.get(position).getHour_monday_start_time() );
+//        ((ViewHolder) holder).hoursTwoTitle.setText("Tuesday");
+        ((ViewHolder) holder).hoursTwo.setText("" + mHoursDataArrayList.get(position).getHour_tuesday_start_time() );
+//        ((ViewHolder) holder).hoursTwoLayout.setVisibility(View.VISIBLE);
+//        ((ViewHolder) holder).hoursThreeTitle.setText("Wednesday");
+        ((ViewHolder) holder).hoursThree.setText("" + mHoursDataArrayList.get(position).getHour_wednesday_start_time() );
+//        ((ViewHolder) holder).hoursFourTtile.setText("Thursday");
+        ((ViewHolder) holder).hoursFour.setText("" + mHoursDataArrayList.get(position).getHour_thursday_start_time() );
+//        ((ViewHolder) holder).hoursThreeLayout.setVisibility(View.VISIBLE);
+//        ((ViewHolder) holder).hourFiveTitle.setText("Friday");
+        ((ViewHolder) holder).hourFive.setText("" + mHoursDataArrayList.get(position).getHour_friday_start_time() );
+//        ((ViewHolder) holder).hourSixTitle.setText("Saturday");
+        ((ViewHolder) holder).hourSix.setText("" + mHoursDataArrayList.get(position).getHour_saturday_start_time());
+//        ((ViewHolder) holder).hoursFourLayout.setVisibility(View.VISIBLE);
+//        ((ViewHolder) holder).hourSevenTitle.setText("Sunday");
+        ((ViewHolder) holder).hourSeven.setText("" + mHoursDataArrayList.get(position).getHour_sunday_start_time() );
 //        ((ViewHolder) holder).hourNineTitle.setText("Sunday");
 //        ((ViewHolder) holder).hourNine.setText("" + mHoursDataArrayList.get(position).getHour_sunday_start_time() + " - " + mHoursDataArrayList.get(position).getHour_sunday_end_time());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView hoursTile, hoursOneTitle, hoursOne, hoursTwoTitle, hoursTwo, hoursThreeTitle, hoursThree, hoursFourTtile, hoursFour, hourFiveTitle, hourFive, hourSixTitle, hourSix, hourSevenTitle, hourSeven, hourEightTitle, hourEight, hourNineTitle,hourNine;
-        private LinearLayout hoursOneLayout, hoursTwoLayout, hoursThreeLayout, hoursFourLayout;
+        private TextView hoursTile, hoursOneTitle, hoursOne, hoursTwoTitle, hoursTwo, hoursThreeTitle, hoursThree, hoursFourTtile, hoursFour, hourFiveTitle, hourFive, hourSixTitle, hourSix, hourSevenTitle, hourSeven;
+//        hourEightTitle, hourEight, hourNineTitle,hourNine;
+//        private LinearLayout hoursOneLayout, hoursTwoLayout, hoursThreeLayout, hoursFourLayout;
 
         public ViewHolder(View convertView) {
             super(convertView);
             hoursTile = (TextView) convertView.findViewById(R.id.hours_title);
-            hoursOneLayout = (LinearLayout) convertView.findViewById(R.id.hour_one_layout);
-            hoursTwoLayout = (LinearLayout) convertView.findViewById(R.id.hour_two_layout);
-            hoursThreeLayout = (LinearLayout) convertView.findViewById(R.id.hour_three_layout);
-            hoursFourLayout = (LinearLayout) convertView.findViewById(R.id.hour_four_layout);
+//            hoursOneLayout = (LinearLayout) convertView.findViewById(R.id.hour_one_layout);
+//            hoursTwoLayout = (LinearLayout) convertView.findViewById(R.id.hour_two_layout);
+//            hoursThreeLayout = (LinearLayout) convertView.findViewById(R.id.hour_three_layout);
+//            hoursFourLayout = (LinearLayout) convertView.findViewById(R.id.hour_four_layout);
             hoursOneTitle = (TextView) convertView.findViewById(R.id.hours_one);
             hoursOne = (TextView) convertView.findViewById(R.id.hours_one_ti);
             hoursTwoTitle = (TextView) convertView.findViewById(R.id.hours_two);
@@ -100,8 +101,8 @@ public class HoursSceduleListAdapter extends RecyclerView.Adapter<RecyclerView.V
             hourSix = (TextView) convertView.findViewById(R.id.hours_six_ti);
             hourSevenTitle = (TextView) convertView.findViewById(R.id.hours_seven);
             hourSeven = (TextView) convertView.findViewById(R.id.hours_seven_ti);
-            hourNineTitle = (TextView) convertView.findViewById(R.id.hours_nine);
-            hourNine = (TextView) convertView.findViewById(R.id.hours_nine_ti);
+//            hourNineTitle = (TextView) convertView.findViewById(R.id.hours_nine);
+//            hourNine = (TextView) convertView.findViewById(R.id.hours_nine_ti);
         }
     }
 
