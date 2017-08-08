@@ -725,7 +725,21 @@ public class DbOperations {
         }
 
     }
+    public void updateMember(String oldMemberid,String member_id, String member_name) {
 
+        try {
+            if (jMemberDataDao == null) {
+                jMemberDataDao = getDaoSession().getMemberDataDao();
+            }
+//            jMemberData = new MemberData(member_id, member_name);
+//            jMemberDataDao.insertOrReplaceInTx(jMemberData);
+            deleteMemberDataById(oldMemberid);
+            insertOrReplaceMember(member_id,member_name);
+        } catch (Exception e) {
+
+        }
+
+    }
     public ArrayList<MemberData> getMembers() {
         if (jMemberDataDao == null) {
             jMemberDataDao = getDaoSession().getMemberDataDao();

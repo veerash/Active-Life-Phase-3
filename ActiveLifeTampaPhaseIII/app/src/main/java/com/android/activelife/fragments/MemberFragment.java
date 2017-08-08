@@ -22,6 +22,7 @@ import com.android.activelife.db.MemberData;
 import com.android.activelife.services.request.ApiRequest;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * A fragment representing a list of Items.
@@ -141,6 +142,7 @@ public class MemberFragment extends Fragment {
         cardView.setVisibility(View.GONE);
         mListLayout.setVisibility(View.VISIBLE);
         data = ActiveLifeApplication.getInstance().setUpDb().getMembers();
+        Collections.reverse(data);
         if (data != null && data.size() > 0) {
             RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             rlp.addRule(RelativeLayout.BELOW, mMembersListView.getId());

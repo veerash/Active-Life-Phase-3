@@ -180,7 +180,7 @@ public class MembersListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 }else {
                     ((ViewHolder) holder).memberEditId.setError(null);
                     ((ViewHolder) holder).memberEditName.setError(null);
-                    ActiveLifeApplication.getInstance().setUpDb().insertOrReplaceMember(((ViewHolder) holder).memberEditId.getText().toString(), ((ViewHolder) holder).memberEditName.getText().toString());
+                    ActiveLifeApplication.getInstance().setUpDb().updateMember(instructorDataResponse.get(position).getMember_id(),((ViewHolder) holder).memberEditId.getText().toString(), ((ViewHolder) holder).memberEditName.getText().toString());
                     fragment.setMembersData();
                 }
             }
