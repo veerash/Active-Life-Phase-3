@@ -290,8 +290,8 @@ public class SchedulesFragment extends Fragment {
                 return true;
             }
         });
-        shceduleDate=Utils.getApplyiedDateType(df.format(dt), "MM/dd/yyyy HH:mm:ss", "yyyy-MM-dd");
-        getScheduleDateData(shceduleDate);
+//        shceduleDate=Utils.getApplyiedDateType(df.format(dt), "MM/dd/yyyy HH:mm:ss", "yyyy-MM-dd");
+//        getScheduleDateData(shceduleDate);
         return rootView;
     }
 
@@ -420,8 +420,8 @@ public class SchedulesFragment extends Fragment {
                             dateData.setSchedule_sunday(response.body().get(i).getSunday());
                             dateData.setSchedule_frequency(response.body().get(i).getFrequency());
                             dateData.setIs_cancelled(response.body().get(i).getIsCancelled());
-                            dateData.setIs_cancelled(response.body().get(i).getIsCancelled());
                             dateData.setIs_reservable(response.body().get(i).getIsReservable());
+                            dateData.setInstructor_id("" + response.body().get(i).getInstructor().getId());
                             dateData.setInstructor_name(response.body().get(i).getInstructor().getName());
                             dateData.setLocation_id("" + response.body().get(i).getLocationId());
                             dateData.setLocation_name(response.body().get(i).getLocation().getName());

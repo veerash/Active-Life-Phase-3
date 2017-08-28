@@ -114,71 +114,71 @@ public class DbOperations {
             QueryBuilder<ScheduleDateData> qb = jScheduleDateDataDao.queryBuilder();
             List<ScheduleDateData> list = new ArrayList<>();
             if (location_id != null && schedule_id != null && class_id != null && instructor_id != null && starttime != null && endtime != null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Location_id.eq(location_id), ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
             }
             // five dimens
             else if (location_id != null && schedule_id != null && class_id != null && instructor_id != null && starttime != null && endtime == null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Location_id.eq(location_id), ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime)));
             } else if (location_id != null && schedule_id != null && class_id != null && instructor_id != null && starttime == null && endtime != null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Location_id.eq(location_id), ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
             } else if (location_id != null && schedule_id != null && class_id != null && instructor_id == null && starttime != null && endtime != null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Location_id.eq(location_id), ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
             } else if (location_id != null && schedule_id != null && class_id == null && instructor_id != null && starttime != null && endtime != null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Location_id.eq(location_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
             } else if (location_id != null && schedule_id == null && class_id != null && instructor_id != null && starttime != null && endtime != null) {
                 qb.where(ScheduleDateDataDao.Properties.Location_id.eq(location_id),
                         qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
             } else if (location_id == null && schedule_id != null && class_id != null && instructor_id != null && starttime != null && endtime != null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
             }
             // four dimens
             else if (location_id != null && schedule_id != null && class_id != null && instructor_id != null && starttime == null && endtime == null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Location_id.eq(location_id), ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id)));
             } else if (location_id != null && schedule_id != null && class_id != null && instructor_id == null && starttime != null && endtime == null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Location_id.eq(location_id), ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime)));
             } else if (location_id != null && schedule_id != null && class_id == null && instructor_id != null && starttime != null && endtime == null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Location_id.eq(location_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime)));
             } else if (location_id != null && schedule_id == null && class_id != null && instructor_id != null && starttime != null && endtime == null) {
                 qb.where(ScheduleDateDataDao.Properties.Location_id.eq(location_id),
                         qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime)));
             } else if (location_id == null && schedule_id != null && class_id != null && instructor_id != null && starttime != null && endtime == null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime)));
             } else if (location_id != null && schedule_id != null && class_id != null && instructor_id == null && starttime == null && endtime != null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Location_id.eq(location_id), ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
             } else if (location_id != null && schedule_id != null && class_id == null && instructor_id != null && starttime == null && endtime != null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Location_id.eq(location_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
             } else if (location_id != null && schedule_id == null && class_id != null && instructor_id != null && starttime == null && endtime != null) {
                 qb.where(ScheduleDateDataDao.Properties.Location_id.eq(location_id),
                         qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
             } else if (location_id == null && schedule_id != null && class_id != null && instructor_id != null && starttime != null && endtime != null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
             } else if (location_id != null && schedule_id != null && class_id == null && instructor_id == null && starttime != null && endtime != null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Location_id.eq(location_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
             } else if (location_id != null && schedule_id == null && class_id != null && instructor_id == null && starttime != null && endtime != null) {
                 qb.where(ScheduleDateDataDao.Properties.Location_id.eq(location_id),
                         qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
             } else if (location_id == null && schedule_id != null && class_id != null && instructor_id == null && starttime != null && endtime != null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
             } else if (location_id != null && schedule_id == null && class_id == null && instructor_id != null && starttime != null && endtime != null) {
                 qb.where(ScheduleDateDataDao.Properties.Location_id.eq(location_id),
                         qb.and(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
             } else if (location_id == null && schedule_id != null && class_id == null && instructor_id != null && starttime != null && endtime != null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
             } else if (location_id == null && schedule_id == null && class_id != null && instructor_id != null && starttime != null && endtime != null) {
                 qb.where(ScheduleDateDataDao.Properties.Class_id.eq(class_id),
@@ -186,10 +186,10 @@ public class DbOperations {
             }
             //three dimens
             else if (location_id != null && schedule_id != null && class_id != null && instructor_id == null && starttime == null && endtime == null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Location_id.eq(location_id), ScheduleDateDataDao.Properties.Class_id.eq(class_id)));
             } else if (location_id != null && schedule_id != null && class_id == null && instructor_id == null && starttime == null && endtime != null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Location_id.eq(location_id), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
             } else if (location_id != null && schedule_id == null && class_id == null && instructor_id == null && starttime != null && endtime != null) {
                 qb.where(ScheduleDateDataDao.Properties.Location_id.eq(location_id),
@@ -198,13 +198,13 @@ public class DbOperations {
                 qb.where(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id),
                         qb.and(ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
             } else if (location_id != null && schedule_id != null && class_id == null && instructor_id == null && starttime != null && endtime == null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Location_id.eq(location_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime)));
             } else if (location_id != null && schedule_id == null && class_id != null && instructor_id != null && starttime == null && endtime == null) {
                 qb.where(ScheduleDateDataDao.Properties.Location_id.eq(location_id),
                         qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id)));
             } else if (location_id != null && schedule_id != null && class_id == null && instructor_id != null && starttime == null && endtime == null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Location_id.eq(location_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id)));
             } else if (location_id != null && schedule_id == null && class_id != null && instructor_id == null && starttime != null && endtime == null) {
                 qb.where(ScheduleDateDataDao.Properties.Location_id.eq(location_id),
@@ -219,22 +219,22 @@ public class DbOperations {
                 qb.where(ScheduleDateDataDao.Properties.Location_id.eq(location_id),
                         qb.and(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
             } else if (location_id == null && schedule_id != null && class_id != null && instructor_id == null && starttime != null && endtime == null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime)));
             } else if (location_id == null && schedule_id != null && class_id == null && instructor_id != null && starttime != null && endtime == null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime)));
             } else if (location_id == null && schedule_id != null && class_id == null && instructor_id == null && starttime != null && endtime != null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
             } else if (location_id == null && schedule_id != null && class_id != null && instructor_id != null && starttime == null && endtime == null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id)));
             } else if (location_id == null && schedule_id != null && class_id != null && instructor_id == null && starttime == null && endtime != null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Schedule_start_time_long.ge(starttime)));
             } else if (location_id == null && schedule_id != null && class_id == null && instructor_id != null && starttime == null && endtime != null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id),
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id),
                         qb.and(ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime)));
             } else if (location_id == null && schedule_id == null && class_id != null && instructor_id != null && starttime != null && endtime == null) {
                 qb.where(ScheduleDateDataDao.Properties.Class_id.eq(class_id),
@@ -245,7 +245,7 @@ public class DbOperations {
             }
             // two dimens
             else if (location_id != null && schedule_id != null && class_id == null && instructor_id == null && starttime == null && endtime == null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id), ScheduleDateDataDao.Properties.Location_id.eq(location_id));
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id), ScheduleDateDataDao.Properties.Location_id.eq(location_id));
             } else if (location_id != null && schedule_id == null && class_id == null && instructor_id == null && starttime == null && endtime != null) {
                 qb.where(ScheduleDateDataDao.Properties.Location_id.eq(location_id), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime));
             } else if (location_id != null && schedule_id == null && class_id == null && instructor_id == null && starttime != null && endtime == null) {
@@ -255,13 +255,13 @@ public class DbOperations {
             } else if (location_id != null && schedule_id == null && class_id != null && instructor_id == null && starttime == null && endtime == null) {
                 qb.where(ScheduleDateDataDao.Properties.Location_id.eq(location_id), ScheduleDateDataDao.Properties.Class_id.eq(class_id));
             } else if (location_id == null && schedule_id != null && class_id != null && instructor_id == null && starttime == null && endtime == null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id), ScheduleDateDataDao.Properties.Class_id.eq(class_id));
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id), ScheduleDateDataDao.Properties.Class_id.eq(class_id));
             } else if (location_id == null && schedule_id != null && class_id == null && instructor_id != null && starttime == null && endtime == null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id));
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id));
             } else if (location_id == null && schedule_id == null && class_id == null && instructor_id == null && starttime == null && endtime != null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime));
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id), ScheduleDateDataDao.Properties.Schedule_end_time_long.le(endtime));
             } else if (location_id == null && schedule_id == null && class_id == null && instructor_id == null && starttime != null && endtime == null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id), ScheduleDateDataDao.Properties.Schedule_start_time.ge(starttime));
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id), ScheduleDateDataDao.Properties.Schedule_start_time.ge(starttime));
             } else if (location_id == null && schedule_id == null && class_id != null && instructor_id != null && starttime == null && endtime == null) {
                 qb.where(ScheduleDateDataDao.Properties.Class_id.eq(class_id), ScheduleDateDataDao.Properties.Instructor_id.eq(instructor_id));
             } else if (location_id == null && schedule_id == null && class_id != null && instructor_id == null && starttime != null && endtime == null) {
@@ -285,7 +285,7 @@ public class DbOperations {
             } else if (location_id == null && schedule_id == null && class_id != null && instructor_id == null && starttime == null && endtime == null) {
                 qb.where(ScheduleDateDataDao.Properties.Class_id.eq(class_id));
             } else if (location_id == null && schedule_id != null && class_id == null && instructor_id == null && starttime == null && endtime == null) {
-                qb.where(ScheduleDateDataDao.Properties.Schedule_id.eq(schedule_id));
+                qb.where(ScheduleDateDataDao.Properties.Schedule_type_id.eq(schedule_id));
             } else if (location_id != null && schedule_id == null && class_id == null && instructor_id == null && starttime == null && endtime == null) {
                 qb.where(ScheduleDateDataDao.Properties.Location_id.eq(location_id));
             }

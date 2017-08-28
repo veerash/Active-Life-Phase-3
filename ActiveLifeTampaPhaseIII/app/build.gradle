@@ -36,10 +36,12 @@ android {
         debug {
             buildConfigField "String", "BASE_URL", "\"http://tampa.consoria.com/api/\""
             minifyEnabled false
+            debuggable true
         }
         release {
             buildConfigField "String", "BASE_URL", "\"http://tampa.consoria.com/api/\""
             minifyEnabled false
+            debuggable true
             signingConfig signingConfigs.release
         }
 //        tampa {
