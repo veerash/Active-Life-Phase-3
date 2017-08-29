@@ -87,6 +87,17 @@ public class ScheduleDateDataResponse {
     @SerializedName("schedule")
     @Expose
     private Schedule schedule;
+    @SerializedName("room")
+    @Expose
+    private Room room;
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
 
     public Integer getId() {
         return id;

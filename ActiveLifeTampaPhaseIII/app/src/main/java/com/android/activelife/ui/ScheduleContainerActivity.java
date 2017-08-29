@@ -48,7 +48,11 @@ public class ScheduleContainerActivity extends BaseActivity {
 //        setTitle(getIntent().getStringExtra("schedule_name"));
         final ScheduleDateData dateData = ActiveLifeApplication.getInstance().setUpDb().getScheduleDateOfId("" + mScheduleId);
         tvEvent.setText("" + dateData.getClass_name());
-        tvYmca.setText("" + dateData.getLocation_name());
+        String yMCAname = dateData.getLocation_name();
+        if (yMCAname.contains(";")) {
+            yMCAname = yMCAname.replaceAll(";","");
+        }
+        tvYmca.setText("" +yMCAname) ;
         tvName.setText("" + dateData.getInstructor_name());
         tvDesc.setText("" + dateData.getClass_desc());
         tvHours.setText(Utils.getApplyiedDateType(dateData.getSchedule_start_time(), "HH:mm:ss", "hh:mm a") + " - " + Utils.getApplyiedDateType(dateData.getSchedule_end_time(), "HH:mm:ss", "hh:mm a"));

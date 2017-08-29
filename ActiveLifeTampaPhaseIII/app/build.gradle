@@ -70,8 +70,8 @@ android {
 //            signingConfig signingConfigs.release
 //        }
         tampa {
-            versionName '1.0.3'
-            versionCode 4
+            versionName '1.0.4'
+            versionCode 5
             buildConfigField "String", "BASE_URL", "\"http://tampa.consoria.com/api/\""
             applicationIdSuffix '.tampa'
             signingConfig signingConfigs.tampa
