@@ -424,7 +424,6 @@ public class SchedulesFragment extends Fragment {
                             dateData.setInstructor_id("" + response.body().get(i).getInstructor().getId());
                             dateData.setInstructor_name(response.body().get(i).getInstructor().getName());
                             dateData.setLocation_id("" + response.body().get(i).getLocationId());
-                            dateData.setLocation_name(response.body().get(i).getLocation().getName());
                             if(response.body().get(i).getRoom()!=null&&response.body().get(i).getRoom().getName()!=null){
                                 dateData.setLocation_name( response.body().get(i).getLocation().getName()+"; in "+response.body().get(i).getRoom().getName());
                             }else{{
