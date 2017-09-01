@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:scrollbars="none"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,7 +57,6 @@
                 android:id="@+id/section_label0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/five_dip"
                 android:gravity="left|center_vertical"
                 android:text="Locations"
                 android:textColor="@color/gray"
@@ -77,7 +76,6 @@
                 android:id="@+id/section_label1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/five_dip"
                 android:layout_marginTop="@dimen/ten_dip"
                 android:gravity="left|center_vertical"
                 android:text="Type"
@@ -98,7 +96,6 @@
                 android:id="@+id/section_label2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/five_dip"
                 android:layout_marginTop="@dimen/ten_dip"
                 android:gravity="left|center_vertical"
                 android:text="Classes"
@@ -120,7 +117,6 @@
                 android:id="@+id/section_label3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/five_dip"
                 android:layout_marginTop="@dimen/ten_dip"
                 android:gravity="left|center_vertical"
                 android:text="Instructors"
@@ -141,7 +137,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:paddingTop="@dimen/ten_sp"
+                android:paddingTop="@dimen/five_sp"
                 android:paddingBottom="@dimen/ten_sp"
                 android:orientation="horizontal">
 
@@ -192,7 +188,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/ten_sp"
                 android:gravity="top"
                 android:orientation="horizontal"
                 android:weightSum="1">
