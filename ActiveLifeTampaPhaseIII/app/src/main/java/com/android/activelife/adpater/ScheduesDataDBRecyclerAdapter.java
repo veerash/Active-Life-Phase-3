@@ -32,10 +32,10 @@ public class ScheduesDataDBRecyclerAdapter extends RecyclerView.Adapter<Recycler
     private List<ScheduleDateData> mMessagesDataResponseList;
     private String date;
 
-    public ScheduesDataDBRecyclerAdapter(Context ctx, List<ScheduleDateData> mMessagesDataResponseList,String date) {
+    public ScheduesDataDBRecyclerAdapter(Context ctx, List<ScheduleDateData> mMessagesDataResponseList, String date) {
         this.jContext = ctx;
         this.mMessagesDataResponseList = mMessagesDataResponseList;
-        this.date=date;
+        this.date = date;
     }
 
     @Override
@@ -60,34 +60,37 @@ public class ScheduesDataDBRecyclerAdapter extends RecyclerView.Adapter<Recycler
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-
-        ((ViewHolder) holder).tvYmca.setText(""+mMessagesDataResponseList.get(position).getLocation_name());
-        ((ViewHolder) holder).tvHours.setText(Utils.getApplyiedDateType(""+mMessagesDataResponseList.get(position).getSchedule_start_time(),"HH:mm:ss","hh:mm a"));
+        String yMCAname = mMessagesDataResponseList.get(position).getLocation_name();
+        if (yMCAname.contains(";")) {
+            yMCAname = yMCAname.substring(0, yMCAname.indexOf(";"));
+        }
+        ((ViewHolder) holder).tvYmca.setText("" + yMCAname);
+        ((ViewHolder) holder).tvHours.setText(Utils.getApplyiedDateType("" + mMessagesDataResponseList.get(position).getSchedule_start_time(), "HH:mm:ss", "hh:mm a"));
         DateFormat df = new SimpleDateFormat("HH:mm:ss");
-        Date startDate=null, endDate=null;
+        Date startDate = null, endDate = null;
         try {
-            startDate=df.parse(mMessagesDataResponseList.get(position).getSchedule_start_time());
+            startDate = df.parse(mMessagesDataResponseList.get(position).getSchedule_start_time());
         } catch (ParseException e) {
             e.printStackTrace();
         }
         try {
-            endDate=df.parse(mMessagesDataResponseList.get(position).getSchedule_end_time());
+            endDate = df.parse(mMessagesDataResponseList.get(position).getSchedule_end_time());
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        long duration  = endDate.getTime() - startDate.getTime();
+        long duration = endDate.getTime() - startDate.getTime();
 
         long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
-        ((ViewHolder) holder).tvMins.setText(""+diffInMinutes +" Mins");
-        ((ViewHolder) holder).tvEvent.setText(""+mMessagesDataResponseList.get(position).getClass_name());
-        ((ViewHolder) holder).tvName.setText(""+mMessagesDataResponseList.get(position).getInstructor_name());
+        ((ViewHolder) holder).tvMins.setText("" + diffInMinutes + " Mins");
+        ((ViewHolder) holder).tvEvent.setText("" + mMessagesDataResponseList.get(position).getClass_name());
+        ((ViewHolder) holder).tvName.setText("" + mMessagesDataResponseList.get(position).getInstructor_name());
         ((ViewHolder) holder).reserveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent reserveIntent = new Intent(jContext, ReserveActivity.class);
-                reserveIntent.putExtra("date",date);
-                reserveIntent.putExtra("session_id",""+mMessagesDataResponseList.get(position).getSchedule_id());
-                ((MainActivity)jContext).startActivityForResult(reserveIntent,1000);
+                reserveIntent.putExtra("date", date);
+                reserveIntent.putExtra("session_id", "" + mMessagesDataResponseList.get(position).getSchedule_id());
+                ((MainActivity) jContext).startActivityForResult(reserveIntent, 1000);
             }
         });
         if (mMessagesDataResponseList.get(position).getIs_reservable() == 1) {
@@ -100,7 +103,7 @@ public class ScheduesDataDBRecyclerAdapter extends RecyclerView.Adapter<Recycler
             public void onClick(View v) {
                 Intent scheduleDetailIntent = new Intent(jContext, ScheduleContainerActivity.class);
                 scheduleDetailIntent.putExtra("schedule_id", mMessagesDataResponseList.get(position).getSchedule_id());
-                scheduleDetailIntent.putExtra("date",date);
+                scheduleDetailIntent.putExtra("date", date);
                 scheduleDetailIntent.putExtra("schedule_name", mMessagesDataResponseList.get(position).getSchedule_name());
                 jContext.startActivity(scheduleDetailIntent);
             }
@@ -126,7 +129,7 @@ public class ScheduesDataDBRecyclerAdapter extends RecyclerView.Adapter<Recycler
             tvName = (TextView) convertView.findViewById(R.id.tv_name);
             tvEvent = (TextView) convertView.findViewById(R.id.tv_event);
             reserveButton = (TextView) convertView.findViewById(R.id.reserve);
-            mainLayout =(LinearLayout)convertView.findViewById(R.id.main_content);
+            mainLayout = (LinearLayout) convertView.findViewById(R.id.main_content);
         }
     }
 
