@@ -37,7 +37,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public ProgressDialog getProgressDialog(Context ctx) {
-        if (mProgressDialog == null) {
+        if (mProgressDialog == null&&ctx!=null) {
             mProgressDialog = new ProgressDialog(ctx);
             mProgressDialog.setCanceledOnTouchOutside(false);
             mProgressDialog.setMessage(getResources().getString(R.string.please_wait));
@@ -57,7 +57,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public void hideProgressDialog(Context ctx) {
         try {
-            if (getProgressDialog(ctx).isShowing()) {
+            if (ctx!=null&&getProgressDialog(ctx).isShowing()) {
                 mProgressDialog.dismiss();
             }
         } catch (Exception e) {
