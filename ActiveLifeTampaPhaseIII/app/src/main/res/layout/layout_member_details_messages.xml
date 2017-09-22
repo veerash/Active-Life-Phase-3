@@ -63,7 +63,8 @@
             android:paddingBottom="@dimen/five_sp"
             android:paddingLeft="@dimen/ten_sp"
             android:paddingRight="@dimen/five_sp"
-            android:paddingTop="@dimen/five_sp" />
+            android:paddingTop="@dimen/five_sp"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:id="@+id/spinner_layout"
@@ -128,7 +129,7 @@
             android:layout_height="fill_parent"
             android:orientation="vertical">
 
-            <ListView
+            <android.support.v7.widget.RecyclerView
                 android:id="@+id/messages_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

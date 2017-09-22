@@ -1,6 +1,5 @@
 package com.android.activelife.ui;
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -18,12 +17,12 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 public class ScheduleContainerActivity extends BaseActivity {
     private TextView tvYmca, tvHours, tvDate, tvEvent, tvName, tvDesc;
     private int mScheduleId;
     private ImageView mAddToCalendar;
+    String scheduleDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,24 +49,25 @@ public class ScheduleContainerActivity extends BaseActivity {
         tvEvent.setText("" + dateData.getClass_name());
         String yMCAname = dateData.getLocation_name();
         if (yMCAname.contains(";")) {
-            yMCAname = yMCAname.replaceAll(";","");
+            yMCAname = yMCAname.replaceAll(";", "");
         }
-        tvYmca.setText("" +yMCAname) ;
+        tvYmca.setText("" + yMCAname);
         tvName.setText("" + dateData.getInstructor_name());
         tvDesc.setText("" + dateData.getClass_desc());
         tvHours.setText(Utils.getApplyiedDateType(dateData.getSchedule_start_time(), "HH:mm:ss", "hh:mm a") + " - " + Utils.getApplyiedDateType(dateData.getSchedule_end_time(), "HH:mm:ss", "hh:mm a"));
-        String date=getIntent().getExtras().getString("date");
-             date=   Utils.getApplyiedDateType(date, "yyyy-MM-dd", "MMMM dd");
-        if(date.contains("01")||date.contains("21")||date.contains("31")){
-            date =date+"st";
-        }else if(date.contains("02")||date.contains("22")){
-            date =date+"nd";
-        }else if(date.contains("03")||date.contains("23")){
-            date =date+"rd";
-        }else{
-            date =date +"th";
+        String date = getIntent().getExtras().getString("date");
+        scheduleDate = date;
+        date = Utils.getApplyiedDateType(date, "yyyy-MM-dd", "MMMM dd");
+        if (date.contains("01") || date.contains("21") || date.contains("31")) {
+            date = date + "st";
+        } else if (date.contains("02") || date.contains("22")) {
+            date = date + "nd";
+        } else if (date.contains("03") || date.contains("23")) {
+            date = date + "rd";
+        } else {
+            date = date + "th";
         }
-        tvDate.setText("" +date );
+        tvDate.setText("" + date);
         DateFormat df = new SimpleDateFormat("HH:mm:ss");
         Date startDate = null, endDate = null;
         try {
@@ -83,8 +83,8 @@ public class ScheduleContainerActivity extends BaseActivity {
         mAddToCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String endtime = dateData.getSchedule_end_time() + " " + Utils.getApplyiedDateType(dateData.getSchedule_start_date(), "yyyy-MM-dd HH:mm:ss", "MMMM dd, yyyy");
-                String starttime = dateData.getSchedule_start_time() + " " + Utils.getApplyiedDateType(dateData.getSchedule_start_date(), "yyyy-MM-dd HH:mm:ss", "MMMM dd, yyyy");
+                String endtime = dateData.getSchedule_end_time() + " " + Utils.getApplyiedDateType(scheduleDate, "yyyy-MM-dd", "MMMM dd, yyyy");
+                String starttime = dateData.getSchedule_start_time() + " " + Utils.getApplyiedDateType(scheduleDate, "yyyy-MM-dd", "MMMM dd, yyyy");
                 Date d1 = Utils.getDatescheduleDetailsFromString(endtime);
                 Date d = Utils.getDatescheduleDetailsFromString(starttime);
                 long duration = d1.getTime() - d.getTime();
@@ -98,9 +98,9 @@ public class ScheduleContainerActivity extends BaseActivity {
 //                            + "-"
 //                            + dateData.getSchedule_type(), dateData.getClass_desc(), d, duration, "" + dateData.getSchedule_id(), dateData.getLocation_name(), dateData.getSchedule_frequency());
 //                } else if (dateData.getSchedule_frequency().equalsIgnoreCase("DAILY")) {
-                    addEvent(dateData.getClass_name()
-                            + "-"
-                            + dateData.getSchedule_type(), dateData.getClass_desc(), d, duration, "" + dateData.getSchedule_id(), dateData.getLocation_name(), dateData.getSchedule_frequency());
+                addEvent(dateData.getClass_name()
+                        + "-"
+                        + dateData.getSchedule_type(), dateData.getClass_desc(), d, duration, "" + dateData.getSchedule_id(), dateData.getLocation_name(), dateData.getSchedule_frequency());
 //                }
 
             }

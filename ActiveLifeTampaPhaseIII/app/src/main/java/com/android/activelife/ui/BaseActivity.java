@@ -119,7 +119,7 @@ public class BaseActivity extends AppCompatActivity {
         intent.putExtra(Events.TITLE, remainderTitle);
         intent.putExtra(Events.DESCRIPTION, remainderInfo);
         intent.putExtra(Events.EVENT_LOCATION, locationName);
-        intent.putExtra(Events.RRULE, "FREQ=" + frequency);
+//        intent.putExtra(Events.RRULE, "FREQ=" + frequency);
 
         startActivity(intent);
     }

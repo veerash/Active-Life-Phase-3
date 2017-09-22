@@ -81,7 +81,7 @@
             android:layout_marginTop="@dimen/margin_bottom_top_bottom"
             android:background="@drawable/reserve_button_bg"
             android:gravity="center"
-            android:text="Make Reserve"
+            android:text="Make Reservation"
             android:textColor="@color/white"
             android:textSize="@dimen/sixteen_sp" />
         </LinearLayout>

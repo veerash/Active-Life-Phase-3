@@ -19,6 +19,9 @@ public class MessagesDataResponse {
     @SerializedName("send_at")
     @Expose
     private String sendAt;
+    @SerializedName("message_date")
+    @Expose
+    private String messageDate;
     @SerializedName("locations")
     @Expose
     private List<Location> locations = null;
@@ -54,7 +57,13 @@ public class MessagesDataResponse {
     public void setSendAt(String sendAt) {
         this.sendAt = sendAt;
     }
+    public String getMessageDate() {
+        return messageDate;
+    }
 
+    public void setMessageDate(String messageDate) {
+        this.messageDate = messageDate;
+    }
     public List<Location> getLocations() {
         return locations;
     }

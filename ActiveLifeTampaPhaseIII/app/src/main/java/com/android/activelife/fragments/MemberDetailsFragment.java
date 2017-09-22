@@ -38,6 +38,7 @@ import com.android.activelife.adpater.LocationListAdapter;
 import com.android.activelife.adpater.LocationsListAdapter;
 import com.android.activelife.adpater.MessagesListAdapter;
 import com.android.activelife.appcontroller.ActiveLifeApplication;
+import com.android.activelife.customviews.SimpleDividerItemDecoration;
 import com.android.activelife.db.LocationData;
 import com.android.activelife.db.LocationsData;
 import com.android.activelife.db.MessageLocationData;
@@ -71,7 +72,7 @@ public class MemberDetailsFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private RadioGroup mDetailsRG;
-    private ListView messagesList;
+    private RecyclerView messagesList;
     private TextView mNoMessages;
     private LinearLayout mFilterLayout;
     private RelativeLayout mListLayout;
@@ -312,7 +313,8 @@ public class MemberDetailsFragment extends Fragment {
     public void setMessagesList(final Bundle savedInstanceState) {
         View child = getLayoutInflater(savedInstanceState).inflate(R.layout.layout_member_details_messages, null);
         setLayoutParams(child);
-        messagesList = (ListView) child.findViewById(R.id.messages_list);
+        messagesList = (RecyclerView) child.findViewById(R.id.messages_list);
+        messagesList.setLayoutManager(new LinearLayoutManager(getActivity()));
         mNoMessages = (TextView) child.findViewById(R.id.no_messages);
         mFilterImageView = (CheckBox) child.findViewById(R.id.img_schedule_filter);
         mLocationSpinner = (Spinner) child.findViewById(R.id.location_spinner);
@@ -321,6 +323,7 @@ public class MemberDetailsFragment extends Fragment {
         mApplyButton = (Button) child.findViewById(R.id.btn_apply_filter);
         mClearFilterButton = (Button) child.findViewById(R.id.clear_filter);
         setLocationSpinnerData();
+        messagesList.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
         mClearFilterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -330,7 +333,7 @@ public class MemberDetailsFragment extends Fragment {
                 if (mMessagesDataResponseList != null && mMessagesDataResponseList.size() > 0) {
                     messagesList.setVisibility(View.VISIBLE);
                     mNoMessages.setVisibility(View.GONE);
-                    messagesList.setAdapter(new MessagesListAdapter(getActivity(), mMessagesDataResponseList));
+                    messagesList.setAdapter(new MessagesListAdapter(getActivity(), mMessagesDataResponseList,mLocationId));
                 } else {
                     messagesList.setVisibility(View.GONE);
                     mNoMessages.setVisibility(View.VISIBLE);
@@ -360,7 +363,7 @@ public class MemberDetailsFragment extends Fragment {
                     if (mMessagesDataResponseList != null && mMessagesDataResponseList.size() > 0) {
                         messagesList.setVisibility(View.VISIBLE);
                         mNoMessages.setVisibility(View.GONE);
-                        messagesList.setAdapter(new MessagesListAdapter(getActivity(), mMessagesDataResponseList));
+                        messagesList.setAdapter(new MessagesListAdapter(getActivity(), mMessagesDataResponseList,mLocationId));
                     } else {
                         messagesList.setVisibility(View.GONE);
                         mNoMessages.setVisibility(View.VISIBLE);
@@ -384,52 +387,30 @@ public class MemberDetailsFragment extends Fragment {
         });
         mClearFilterButton = (Button) child.findViewById(R.id.clear_filter);
         mMessagesDataResponseList = new ArrayList<>();
-        messagesList.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (totalItemCount != 0) {
-                    if ((firstVisibleItem + visibleItemCount + 1) > (totalItemCount - 2)) {
-
-                        int remaining = totalItemCount % 20;
-                        Log.i("remaining: ", ": " + remaining);
-                        if (remaining == 0) {
-                            offset = totalItemCount;
-                            mHandler.removeCallbacks(sendUpdatesToUI);
-                            mHandler.postDelayed(sendUpdatesToUI, 1000 * 2);
-                        }
-                    } else {
-                        mHandler.removeCallbacks(sendUpdatesToUI);
-                    }
-                }
-            }
-        });
-        messagesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent messsageIntent = new Intent(getActivity(), MessageDetailsActivity.class);
-                messsageIntent.putExtra("title", mMessagesDataResponseList.get(position).getMessage_title());
-                messsageIntent.putExtra("desc", mMessagesDataResponseList.get(position).getMessage_msg());
-                String location = null;
-                LocationsData data = ActiveLifeApplication.getInstance().setUpDb().getLocationById(mLocationId);
-                if (location != null && location.length() > 0) {
-                    location = location + ", " + data.getLocation_name();
-                } else {
-                    location = data.getLocation_name();
-                }
-
-                messsageIntent.putExtra("location", location);
-                String dateTime = mMessagesDataResponseList.get(position).getMessage_send_at();
-                messsageIntent.putExtra("date", Utils.getApplyiedDateType(dateTime, "yyyy-MM-dd'T'HH:mm:ss-HH:mm", "MMM dd, EEE"));
-                messsageIntent.putExtra("time", Utils.getApplyiedDateType(dateTime, "yyyy-MM-dd'T'HH:mm:ss-HH:mm", "hh:mm a"));
-                startActivity(messsageIntent);
-
-            }
-        });
+//        messagesList.setOnScrollListener(new AbsListView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(AbsListView view, int scrollState) {
+//
+//            }
+//
+//            @Override
+//            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+//                if (totalItemCount != 0) {
+//                    if ((firstVisibleItem + visibleItemCount + 1) > (totalItemCount - 2)) {
+//
+//                        int remaining = totalItemCount % 20;
+//                        Log.i("remaining: ", ": " + remaining);
+//                        if (remaining == 0) {
+//                            offset = totalItemCount;
+//                            mHandler.removeCallbacks(sendUpdatesToUI);
+//                            mHandler.postDelayed(sendUpdatesToUI, 1000 * 2);
+//                        }
+//                    } else {
+//                        mHandler.removeCallbacks(sendUpdatesToUI);
+//                    }
+//                }
+//            }
+//        });
         getMessagesList();
     }
 
@@ -479,13 +460,13 @@ public class MemberDetailsFragment extends Fragment {
                             data.setMessage_id("" + response.body().get(i).getId());
                             data.setMessage_msg("" + response.body().get(i).getMessage());
                             data.setMessage_title("" + response.body().get(i).getTitle());
-                            data.setMessage_send_at("" + response.body().get(i).getSendAt());
+                            data.setMessage_send_at("" + response.body().get(i).getMessageDate());
                             for (int j = 0; j < response.body().get(i).getLocations().size(); j++) {
                                 MessageLocationData msl = new MessageLocationData();
                                 msl.setMessage_id("" + response.body().get(i).getId());
                                 msl.setMessage_msg("" + response.body().get(i).getMessage());
                                 msl.setMessage_title("" + response.body().get(i).getTitle());
-                                msl.setMessage_send_at("" + response.body().get(i).getSendAt());
+                                msl.setMessage_send_at("" + response.body().get(i).getMessageDate());
                                 msl.setLocation_id("" + response.body().get(i).getLocations().get(j).getId());
                                 msl.setLocation_name("" + response.body().get(i).getLocations().get(j).getName());
                                 msl.setLocation_address("" + response.body().get(i).getLocations().get(j).getAddress());
@@ -503,13 +484,15 @@ public class MemberDetailsFragment extends Fragment {
                         if (mMessagesDataResponseList != null && mMessagesDataResponseList.size() > 0) {
                             messagesList.setVisibility(View.VISIBLE);
                             mNoMessages.setVisibility(View.GONE);
-                            messagesList.setAdapter(new MessagesListAdapter(getActivity(), mMessagesDataResponseList));
+                            messagesList.setAdapter(new MessagesListAdapter(getActivity(), mMessagesDataResponseList,mLocationId));
                         } else {
                             messagesList.setVisibility(View.GONE);
                             mNoMessages.setVisibility(View.VISIBLE);
                         }
                         ((MainActivity) getActivity()).hideProgressDialog(getActivity());
                     } else {
+                        messagesList.setVisibility(View.GONE);
+                        mNoMessages.setVisibility(View.VISIBLE);
                         ((MainActivity) getActivity()).hideProgressDialog(getActivity());
                         if (response.errorBody() != null) {
                             try {
@@ -528,6 +511,8 @@ public class MemberDetailsFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<List<MessagesDataResponse>> call, Throwable t) {
+                    messagesList.setVisibility(View.GONE);
+                    mNoMessages.setVisibility(View.VISIBLE);
                     ((MainActivity) getActivity()).hideProgressDialog(getActivity());
 
                 }
